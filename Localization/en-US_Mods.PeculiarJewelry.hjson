@@ -1,0 +1,6 @@
+Items: {
+	MinorJewel: {
+		DisplayName: Minor Jewel
+		Tooltip: ""
+	}
+}
