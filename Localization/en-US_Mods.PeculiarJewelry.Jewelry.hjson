@@ -1,0 +1,7 @@
+TierPrefixes: {
+	Natural: Natural
+	Mutated: Mutated
+	Mythical: Mythical
+	Celestial: Celestial
+	Stellar: Stellar
+}

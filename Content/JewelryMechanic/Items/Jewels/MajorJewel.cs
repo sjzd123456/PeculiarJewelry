@@ -5,14 +5,14 @@ using Terraria.ID;
 
 namespace PeculiarJewelry.Content.JewelryMechanic.Items.Jewels;
 
-public class MinorJewel : Jewel
+public class MajorJewel : Jewel
 {
-    protected override Type InfoType => typeof(MinorJewelInfo);
+    protected override Type InfoType => typeof(MajorJewelInfo);
 
     public sealed override void Defaults()
     {
-        Item.width = 24;
-        Item.height = 22;
+        Item.width = 42;
+        Item.height = 40;
         Item.rare = ItemRarityID.Green;
         Item.maxStack = 1;
     }

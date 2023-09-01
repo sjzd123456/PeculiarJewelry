@@ -1,0 +1,9 @@
+MinorJewel: {
+	DisplayName: Minor Jewel
+	Tooltip: ""
+}
+
+MajorJewel: {
+	DisplayName: Major Jewel
+	Tooltip: ""
+}

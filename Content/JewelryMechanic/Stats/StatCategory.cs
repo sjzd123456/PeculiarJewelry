@@ -1,4 +1,4 @@
-﻿namespace PeculiarJewelry.Content.JewelryMechanic;
+﻿namespace PeculiarJewelry.Content.JewelryMechanic.Stats;
 
 internal enum StatCategory
 {
@@ -11,7 +11,7 @@ internal enum StatCategory
     /// Life regeneration.
     /// </summary>
     Renewal,
-    
+
     /// <summary>
     /// Defense.
     /// </summary>
@@ -26,7 +26,7 @@ internal enum StatCategory
     /// Critical strike chance.
     /// </summary>
     Exactitude,
-    
+
     /// <summary>
     /// Critical strike damage.
     /// </summary>
@@ -113,7 +113,7 @@ internal enum StatCategory
     /// SUMMON CLASS.
     /// </summary>
     Turbulance,
-    
+
     /// <summary>
     /// All damage.
     /// GENERIC CLASS.
@@ -124,5 +124,10 @@ internal enum StatCategory
     /// Defense piercing.
     /// GENERIC CLASS.
     /// </summary>
-    Absolution
+    Absolution,
+
+    /// <summary>
+    /// Solely used as a bookend, i.e. Main.rand.Next(Max).
+    /// </summary>
+    Max
 }

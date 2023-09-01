@@ -5,7 +5,7 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace PeculiarJewelry.Content.JewelryMechanic;
+namespace PeculiarJewelry.Content.JewelryMechanic.Globals;
 
 internal class JewelGlobalItem : GlobalItem
 {
@@ -20,7 +20,7 @@ internal class JewelGlobalItem : GlobalItem
     {
         if (source is EntitySource_TileBreak tileBreak && GemOres.Contains(Main.tile[tileBreak.TileCoords].TileType))
         {
-            if (Main.rand.NextBool(1))
+            if (Main.rand.NextBool(60))
             {
                 item.SetDefaults(ModContent.ItemType<MinorJewel>());
                 return;
