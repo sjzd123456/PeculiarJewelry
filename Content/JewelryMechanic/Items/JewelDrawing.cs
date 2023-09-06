@@ -1,10 +1,7 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using PeculiarJewelry.Content.JewelryMechanic.Stats;
+﻿using PeculiarJewelry.Content.JewelryMechanic.Stats;
 using ReLogic.Content;
-using Terraria;
 
-namespace PeculiarJewelry.Content.JewelryMechanic;
+namespace PeculiarJewelry.Content.JewelryMechanic.Items;
 
 public static class JewelDrawing
 {

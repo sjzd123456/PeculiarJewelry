@@ -1,7 +1,5 @@
 using PeculiarJewelry.Content.JewelryMechanic.Stats;
 using System;
-using Terraria;
-using Terraria.ID;
 
 namespace PeculiarJewelry.Content.JewelryMechanic.Items.Jewels;
 

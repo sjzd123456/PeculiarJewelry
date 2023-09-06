@@ -1,6 +1,6 @@
 ﻿namespace PeculiarJewelry.Content.JewelryMechanic.Stats;
 
-internal enum StatCategory
+public enum StatType
 {
     /// <summary>
     /// Max health.
@@ -20,7 +20,7 @@ internal enum StatCategory
     /// <summary>
     /// Damage reduction.
     /// </summary>
-    Tenaticy,
+    Tenacity,
 
     /// <summary>
     /// Critical strike chance.
@@ -109,10 +109,10 @@ internal enum StatCategory
     Abundance,
 
     /// <summary>
-    /// Knockback.
+    /// Minion behaviour speed.
     /// SUMMON CLASS.
     /// </summary>
-    Turbulance,
+    Legion,
 
     /// <summary>
     /// All damage.
@@ -130,4 +130,9 @@ internal enum StatCategory
     /// Solely used as a bookend, i.e. Main.rand.Next(Max).
     /// </summary>
     Max
+}
+
+public static class StatTypeLocalization
+{
+    public static string Localize(this StatType type) => Language.GetTextValue("Mods.PeculiarJewelry.Jewelry.StatTypes." + type);
 }

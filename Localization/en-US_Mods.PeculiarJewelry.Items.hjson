@@ -1,9 +1,11 @@
 MinorJewel: {
 	DisplayName: Minor Jewel
+	Prefix: Minor
 	Tooltip: ""
 }
 
 MajorJewel: {
 	DisplayName: Major Jewel
+	Prefix: Major
 	Tooltip: ""
 }

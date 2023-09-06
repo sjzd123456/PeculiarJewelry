@@ -1,9 +1,4 @@
-﻿using PeculiarJewelry.Content.JewelryMechanic.Items.Jewels;
-using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader;
-
-namespace PeculiarJewelry.Content.JewelryMechanic.Globals;
+﻿namespace PeculiarJewelry.Content.JewelryMechanic.Globals;
 
 internal class JewelsInChestSystem : ModSystem
 {
@@ -14,7 +9,7 @@ internal class JewelsInChestSystem : ModSystem
             var chest = Main.chest[i];
 
             if (chest is not null && Main.tile[chest.x, chest.y].TileType < TileID.Count)
-                chest.AddItemToShop(new Item(ModContent.ItemType<MinorJewel>()));
+                chest.AddItemToShop(new Item(JewelryCommon.MajorMinorType()));
         }
     }
 }

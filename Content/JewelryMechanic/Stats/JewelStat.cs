@@ -4,16 +4,25 @@ namespace PeculiarJewelry.Content.JewelryMechanic.Stats;
 
 public class JewelStat
 {
-    public readonly StatCategory Type;
+    public static JewelStat Random => new((StatType)Main.rand.Next((int)StatType.Max));
 
-    public int upgrades;
+    public readonly StatType Type;
+    public readonly float Strength;
 
-    public JewelStat(StatCategory category)
+    public JewelStat(StatType category)
     {
         Type = category;
-
-        upgrades = 0;
+        Strength = JewelryCommon.StatStrengthRange();
     }
 
-    public JewelStatEffect Get() => JewelStatEffect.StatByCategory[Type];
+    public void Apply(Player player) => JewelStatEffect.StatsByType[Type].Apply(player, Strength);
+
+    public JewelStatEffect Get() => JewelStatEffect.StatsByType[Type];
+    public LocalizedText GetName() => JewelStatEffect.StatsByType[Type].DisplayName;
+
+    public LocalizedText GetDescription()
+    {
+        var stat = JewelStatEffect.StatsByType[Type];
+        return stat.Description.WithFormatArgs(stat.GetEffectValue(Strength).ToString("#0.##"));
+    }
 }

@@ -1,9 +1,6 @@
 ﻿using PeculiarJewelry.Content.JewelryMechanic.Items.Jewels;
 using System.Linq;
-using Terraria;
 using Terraria.DataStructures;
-using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace PeculiarJewelry.Content.JewelryMechanic.Globals;
 
@@ -22,7 +19,7 @@ internal class JewelGlobalItem : GlobalItem
         {
             if (Main.rand.NextBool(60))
             {
-                item.SetDefaults(ModContent.ItemType<MinorJewel>());
+                item.SetDefaults(JewelryCommon.MajorMinorType());
                 return;
             }
         }

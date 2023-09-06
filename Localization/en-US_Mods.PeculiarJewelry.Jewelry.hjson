@@ -1,7 +1,131 @@
+Jewel: Jewel
+Main: Main
+Sub: Sub
+
 TierPrefixes: {
 	Natural: Natural
 	Mutated: Mutated
 	Mythical: Mythical
 	Celestial: Celestial
 	Stellar: Stellar
+}
+
+StatExclusivities: {
+	Melee: Exclusive to [c/990000:melee]
+	Ranged: Exclusive to [c/ff6600:ranged]
+	Magic: Exclusive to [c/0066ff:magic]
+	Summon: Exclusive to [c/fed558:summon]
+	Generic: Exclusive to [c/ffffcc:generic]
+}
+
+StatTypes: {
+	Vigor: {
+		DisplayName: Vigor
+		Description: "{0} additional max health"
+	}
+
+	Renewal: {
+		DisplayName: Renewal
+		Description: "{0}% increased life regeneration"
+	}
+
+	Permenance: {
+		DisplayName: Permenance
+		Description: +{0} defense
+	}
+
+	Tenacity: {
+		DisplayName: Tenacity
+		Description: "{0}% increased damage resistance"
+	}
+
+	Exactitude: {
+		DisplayName: Exactitude
+		Description: "{0}% increased critical strike chance"
+	}
+
+	Exploitation: {
+		DisplayName: Exploitation
+		Description: "{0}% increased critical strike damage"
+	}
+
+	Celerity: {
+		DisplayName: Celerity
+		Description: "{0} increased movement velocity"
+	}
+
+	Dexterity: {
+		DisplayName: Dexterity
+		Description: "{0} increased movement acceleration"
+	}
+
+	Might: {
+		DisplayName: Might
+		Description: "{0}% increased melee damage"
+	}
+
+	Gigantism: {
+		DisplayName: Gigantism
+		Description: "{0}% increased melee weapon size"
+	}
+
+	Frenzy: {
+		DisplayName: Frenzy
+		Description: "{0}% decreased use time"
+	}
+
+	Precision: {
+		DisplayName: Precision
+		Description: "{0}% increased ranged damage"
+	}
+
+	Preservation: {
+		DisplayName: Preservation
+		Description: "{0}% decreased ammo consumption chance"
+	}
+
+	Tension: {
+		DisplayName: Tension
+		Description: "{0}% increased projectile velocity"
+	}
+
+	Willpower: {
+		DisplayName: Willpower
+		Description: "{0}% increased magic damage"
+	}
+
+	Arcane: {
+		DisplayName: Arcane
+		Description: "{0}% increased maximum mana"
+	}
+
+	Resurgence: {
+		DisplayName: Resurgence
+		Description: "{0} increased mana regeneration"
+	}
+
+	Order: {
+		DisplayName: Order
+		Description: "{0}% increased summon damage"
+	}
+
+	Abundance: {
+		DisplayName: Abundance
+		Description: "{0}% increased max minions"
+	}
+
+	Turbulance: {
+		DisplayName: Turbulance
+		Description: "{0}% increased knockback"
+	}
+
+	Potency: {
+		DisplayName: Potency
+		Description: "{0}% increased all damage"
+	}
+
+	Absolution: {
+		DisplayName: Absolution
+		Description: "{0}% increased defense piercing"
+	}
 }

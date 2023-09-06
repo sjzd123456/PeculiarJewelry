@@ -1,11 +1,9 @@
-﻿using Terraria;
-
-namespace PeculiarJewelry.Content.JewelryMechanic.Stats;
+﻿namespace PeculiarJewelry.Content.JewelryMechanic.Stats;
 
 internal class MajorJewelInfo : JewelInfo
 {
-    public override void Setup()
+    internal override void InternalSetup()
     {
-        Major = new JewelStat((StatCategory)Main.rand.Next((int)StatCategory.Max));
+        SubStats = new System.Collections.Generic.List<JewelStat>(4);
     }
 }

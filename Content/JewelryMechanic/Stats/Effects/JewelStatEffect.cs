@@ -1,20 +1,28 @@
 ﻿using System.Collections.Generic;
-using Terraria;
-using Terraria.ModLoader;
 
 namespace PeculiarJewelry.Content.JewelryMechanic.Stats.Effects;
 
-internal abstract class JewelStatEffect : ModType
+public abstract class JewelStatEffect : ModType
 {
-    public static Dictionary<StatCategory, JewelStatEffect> StatByCategory = new();
+    public static readonly Dictionary<StatType, JewelStatEffect> StatsByType = new();
 
-    public abstract StatCategory Category { get; }
+    public abstract StatType Type { get; }
+    public abstract Color Color { get; }
+
+    public virtual StatExclusivity Exclusivity => StatExclusivity.None;
+
+    public LocalizedText DisplayName { get; protected set; }
+    public LocalizedText Description { get; protected set; }
 
     protected sealed override void Register()
     {
         ModTypeLookup<JewelStatEffect>.Register(this);
-        StatByCategory.Add(Category, this);
+        StatsByType.Add(Type, this);
+
+        DisplayName = Language.GetText("Mods.PeculiarJewelry.Jewelry.StatTypes." + Type + ".DisplayName");
+        Description = Language.GetText("Mods.PeculiarJewelry.Jewelry.StatTypes." + Type + ".Description");
     }
 
-    public abstract void Apply(Player player);
+    public abstract void Apply(Player player, float strength);
+    public abstract float GetEffectValue(float multiplier);
 }
