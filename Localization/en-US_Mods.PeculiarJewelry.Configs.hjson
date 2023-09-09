@@ -132,4 +132,14 @@ JewelryStatConfig: {
 		Label: Permenance Strength
 		Tooltip: ""
 	}
+
+	PowerScaleStepCount: {
+		Label: Power Scale Step Count
+		Tooltip: ""
+	}
+
+	GlobalPowerScaleMinimum: {
+		Label: Global Power Scale Minimum
+		Tooltip: ""
+	}
 }

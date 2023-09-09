@@ -5,7 +5,7 @@ internal class ExactitudeStat : JewelStatEffect
     public override StatType Type => StatType.Exactitude;
     public override Color Color => Color.Yellow;
 
-    public override void Apply(Player player, float strength)
+    public override void Apply(Player player, float strength, Item item)
     {
     }
 

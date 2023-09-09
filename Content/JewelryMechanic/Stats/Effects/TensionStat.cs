@@ -7,7 +7,7 @@ internal class TensionStat : JewelStatEffect
 
     public override StatExclusivity Exclusivity => StatExclusivity.Ranged;
 
-    public override void Apply(Player player, float strength)
+    public override void Apply(Player player, float strength, Item item)
     {
     }
 

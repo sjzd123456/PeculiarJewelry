@@ -7,7 +7,7 @@ internal class GigantismStat : JewelStatEffect
 
     public override StatExclusivity Exclusivity => StatExclusivity.Melee;
 
-    public override void Apply(Player player, float strength)
+    public override void Apply(Player player, float strength, Item item)
     {
     }
 

@@ -7,7 +7,7 @@ internal class OrderStat : JewelStatEffect
 
     public override StatExclusivity Exclusivity => StatExclusivity.Summon;
 
-    public override void Apply(Player player, float strength)
+    public override void Apply(Player player, float strength, Item item)
     {
     }
 

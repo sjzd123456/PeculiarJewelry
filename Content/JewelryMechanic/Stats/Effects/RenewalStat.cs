@@ -5,7 +5,7 @@ internal class RenewalStat : JewelStatEffect
     public override StatType Type => StatType.Renewal;
     public override Color Color => Color.LightPink;
 
-    public override void Apply(Player player, float strength)
+    public override void Apply(Player player, float strength, Item item)
     {
     }
 

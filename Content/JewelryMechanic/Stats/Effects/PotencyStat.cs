@@ -3,11 +3,11 @@
 internal class PotencyStat : JewelStatEffect
 {
     public override StatType Type => StatType.Potency;
-    public override Color Color => Color.White;
+    public override Color Color => new(201, 201, 201);
 
     public override StatExclusivity Exclusivity => StatExclusivity.Generic;
 
-    public override void Apply(Player player, float strength)
+    public override void Apply(Player player, float strength, Item item)
     {
     }
 

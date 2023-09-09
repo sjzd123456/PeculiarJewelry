@@ -23,6 +23,6 @@ public abstract class JewelStatEffect : ModType
         Description = Language.GetText("Mods.PeculiarJewelry.Jewelry.StatTypes." + Type + ".Description");
     }
 
-    public abstract void Apply(Player player, float strength);
+    public abstract void Apply(Player player, float strength, Item item);
     public abstract float GetEffectValue(float multiplier);
 }

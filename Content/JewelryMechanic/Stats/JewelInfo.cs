@@ -16,7 +16,7 @@ public abstract class JewelInfo
 
     public void Setup(JewelTier tier)
     {
-        this.tier = tier;
+        this.tier = tier;// (JewelTier)Main.rand.Next((int)JewelTier.Mutated0, (int)JewelTier.Stellar2 + 1);
 
         Major = JewelStat.Random;
 
@@ -28,38 +28,70 @@ public abstract class JewelInfo
         RollSubstats();
     }
 
+    internal void SetupFromIO(JewelStat major)
+    {
+        Major = major;
+        InternalSetup();
+    }
+
     public void RollSubstats()
     {
         exclusivity = Major.Get().Exclusivity;
 
-        for (int i = 0; i < SubStats.Capacity; i++)
+        List<StatType> takenTypes = new() { Major.Get().Type };
+
+        int spawnStats = 4; //Different tiers start with different sub stats
+
+        if (tier == JewelTier.Natural)
+            spawnStats = 0;
+        else if (tier < JewelTier.Mythical0)
+            spawnStats = 1;
+        else if (tier < JewelTier.Celestial0)
+            spawnStats = 2;
+        else if (tier < JewelTier.Stellar0)
+            spawnStats = 3;
+
+        for (int i = 0; i < spawnStats; i++)
         {
-            if (exclusivity == StatExclusivity.None)
-                SubStats.Add(JewelStat.Random);
-            else
+            if (i < SubStats.Capacity) //Fill slots
             {
                 SubStats.Add(JewelStat.Random);
 
-                while (SubStats[i].Get().Exclusivity != exclusivity && SubStats[i].Get().Exclusivity != StatExclusivity.None)
+                while ((SubStats[i].Get().Exclusivity != exclusivity && SubStats[i].Get().Exclusivity != StatExclusivity.None) || takenTypes.Contains(SubStats[i].Get().Type))
                     SubStats[i] = JewelStat.Random;
+
+                takenTypes.Add(SubStats[i].Get().Type);
+
+                if (exclusivity == StatExclusivity.None)
+                    exclusivity = SubStats[i].Get().Exclusivity;
+            }
+            else
+            {
+                int adjI = i - SubStats.Capacity;
+                SubStats[adjI].Strength++;
             }
         }
     }
 
-    public void ApplyTo(Player player)
+    public void ApplyTo(Player player, Item item)
     {
-        Major.Apply(player);
+        Major.Apply(player, item);
 
-        foreach (var item in SubStats)
-            item.Apply(player);
+        foreach (var subStat in SubStats)
+            subStat.Apply(player, item);
     }
 
     public string[] SubStatTooltips()
     {
-        string[] tooltip = new string[SubStats.Count];
+        string[] tooltip = new string[SubStats.Capacity];
 
-        for (int i = 0; i < SubStats.Count; ++i)
-            tooltip[i] = SubStats[i].GetDescription().Value;
+        for (int i = 0; i < SubStats.Capacity; ++i)
+        {
+            if (i < SubStats.Count)
+                tooltip[i] = SubStats[i].GetDescription();
+            else
+                tooltip[i] = "-";
+        }
 
         return tooltip;
     }
@@ -86,9 +118,9 @@ public abstract class JewelInfo
         Celestial2,
         Celestial3,
         Celestial4,
+        Stellar0,
         Stellar1,
         Stellar2,
-        Stellar3,
     }
 
     public int GetDisplayTier()

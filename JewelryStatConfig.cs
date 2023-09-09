@@ -12,13 +12,13 @@ public class JewelryStatConfig : ModConfig
     [DefaultValue(0.33f)]
     public float ChanceForMajor { get; set; }
 
-    [DefaultValue(0.15f)]
-    [Range(0f, 1f)]
-    public float GlobalPowerScaleSteps { get; set; }
+    [DefaultValue(3)]
+    [Range(0, 10)]
+    public int PowerScaleStepCount { get; set; }
 
-    [DefaultValue(1f)]
-    [Range(0.25f, 2f)]
-    public float GlobalPowerScale { get; set; }
+    [DefaultValue(0.7f)]
+    [Range(0.1f, 1)]
+    public float GlobalPowerScaleMinimum { get; set; }
 
     [Header("Mods.PeculiarJewelry.Config.StatConfigHeader")]
     [DefaultValue(3)]

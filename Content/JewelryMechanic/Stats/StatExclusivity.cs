@@ -1,6 +1,6 @@
 ﻿namespace PeculiarJewelry.Content.JewelryMechanic.Stats;
 
-public enum StatExclusivity
+public enum StatExclusivity : byte
 {
     None,
     Melee,

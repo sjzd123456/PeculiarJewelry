@@ -5,7 +5,9 @@ internal class ResurgenceStat : JewelStatEffect
     public override StatType Type => StatType.Resurgence;
     public override Color Color => Color.LavenderBlush;
 
-    public override void Apply(Player player, float strength)
+    public override StatExclusivity Exclusivity => StatExclusivity.Magic;
+
+    public override void Apply(Player player, float strength, Item item)
     {
     }
 

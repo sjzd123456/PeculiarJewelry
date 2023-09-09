@@ -7,12 +7,15 @@ internal class JewelryCommon
     public static JewelryStatConfig Config => ModContent.GetInstance<JewelryStatConfig>();
 
     public static int MajorMinorType() => Main.rand.NextFloat() <= Config.ChanceForMajor ? ModContent.ItemType<MajorJewel>() : ModContent.ItemType<MinorJewel>();
+
     public static float StatStrengthRange()
     {
-        float result = Config.GlobalPowerScale - (Config.GlobalPowerScaleSteps * Main.rand.Next(3));
+        if (Config.GlobalPowerScaleMinimum == 1 || Config.PowerScaleStepCount == 1)
+            return 1;
 
-        if (result < 0)
-            return 0;
+        float factor = Main.rand.Next(Config.PowerScaleStepCount) / (float)(Config.PowerScaleStepCount - 1);
+        float result = MathHelper.Lerp(Config.GlobalPowerScaleMinimum, 1, factor);
+
         return result;
     }
 }

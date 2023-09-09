@@ -7,7 +7,8 @@ public class JewelStat
     public static JewelStat Random => new((StatType)Main.rand.Next((int)StatType.Max));
 
     public readonly StatType Type;
-    public readonly float Strength;
+
+    public float Strength;
 
     public JewelStat(StatType category)
     {
@@ -15,14 +16,22 @@ public class JewelStat
         Strength = JewelryCommon.StatStrengthRange();
     }
 
-    public void Apply(Player player) => JewelStatEffect.StatsByType[Type].Apply(player, Strength);
+    public void Apply(Player player, Item item) => JewelStatEffect.StatsByType[Type].Apply(player, Strength, item);
 
     public JewelStatEffect Get() => JewelStatEffect.StatsByType[Type];
     public LocalizedText GetName() => JewelStatEffect.StatsByType[Type].DisplayName;
 
-    public LocalizedText GetDescription()
+    public string GetDescription()
     {
         var stat = JewelStatEffect.StatsByType[Type];
-        return stat.Description.WithFormatArgs(stat.GetEffectValue(Strength).ToString("#0.##"));
+        string stars = " ";
+
+        if (Strength > 1)
+        {
+            for (int i = 0; i < Strength - 1; ++i)
+                stars += "⋆";
+        }
+
+        return stat.Description.WithFormatArgs(stat.GetEffectValue(Strength).ToString("#0.##")).Value + stars;
     }
 }

@@ -9,3 +9,13 @@ MajorJewel: {
 	Prefix: Major
 	Tooltip: ""
 }
+
+BasicRing: {
+	DisplayName: Basic Ring
+	Tooltip: ""
+}
+
+BasicJewelry: {
+	DisplayName: Basic Jewelry
+	Tooltip: ""
+}

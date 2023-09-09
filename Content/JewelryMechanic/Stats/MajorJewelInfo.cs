@@ -1,9 +1,20 @@
-﻿namespace PeculiarJewelry.Content.JewelryMechanic.Stats;
+﻿using PeculiarJewelry.Content.JewelryMechanic.Stats.Triggers;
+using System;
+using System.Linq;
+
+namespace PeculiarJewelry.Content.JewelryMechanic.Stats;
 
 internal class MajorJewelInfo : JewelInfo
 {
+    TriggerEffect effect;
+
     internal override void InternalSetup()
     {
         SubStats = new System.Collections.Generic.List<JewelStat>(4);
+
+        effect = Activator.CreateInstance(Main.rand.Next(ModContent.GetContent<TriggerEffect>().ToList()).GetType()) as TriggerEffect;
     }
+
+    public void InstantTrigger(TriggerContext context, Player player, JewelTier tier) => effect.InstantTrigger(context, player, tier);
+    public void ConstantTrigger(Player player, JewelTier tier) => effect.ConstantTrigger(player, tier);
 }
