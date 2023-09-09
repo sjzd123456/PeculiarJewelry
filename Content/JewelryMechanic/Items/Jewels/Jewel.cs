@@ -93,12 +93,7 @@ public abstract class Jewel : ModItem
         return false;
     }
 
-    public override void SaveData(TagCompound tag)
-    {
-        TagCompound infoCompound = new();
-        info.SaveTo(infoCompound);
-        tag.Add("info", infoCompound);
-    }
+    public override void SaveData(TagCompound tag) => tag.Add("info", info.SaveAs());
 
     public override void LoadData(TagCompound tag)
     {

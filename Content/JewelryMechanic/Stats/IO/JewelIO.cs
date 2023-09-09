@@ -5,21 +5,26 @@ namespace PeculiarJewelry.Content.JewelryMechanic.Stats.IO;
 
 internal static class JewelIO
 {
-    public static void SaveTo(this JewelInfo info, TagCompound tag) => SaveInfo(info, tag);
+    public static TagCompound SaveAs(this JewelInfo info) => SaveInfo(info);
 
-    private static void SaveInfo(JewelInfo info, TagCompound tag)
+    private static TagCompound SaveInfo(JewelInfo info)
     {
-        //Misc info
-        tag.Add("infoType", info.GetType().AssemblyQualifiedName);
-        tag.Add("infoTier", (byte)info.tier);
-        tag.Add("infoExclusivity", (byte)info.exclusivity);
-        tag.Add("infoCuts", (byte)info.cuts);
+        TagCompound tag = new()
+        {
+            //Misc info
+            { "infoType", info.GetType().AssemblyQualifiedName },
+            { "infoTier", (byte)info.tier },
+            { "infoExclusivity", (byte)info.exclusivity },
+            { "infoCuts", (byte)info.cuts },
 
-        //Stats
-        tag.Add("infoMajor", info.Major.SaveAs());
+            //Stats
+            { "infoMajor", info.Major.SaveAs() }
+        };
 
         for (int i = 0; i < info.SubStats.Count; i++)
             tag.Add("infoSub" + i, info.SubStats[i].SaveAs());
+
+        return tag;
     }
 
     public static JewelInfo LoadInfo(TagCompound tag)
@@ -49,7 +54,7 @@ internal static class JewelIO
         TagCompound tag = new()
         {
             { "statType", (byte)stat.Type },
-            { "statStrength", (Half)stat.Strength }
+            { "statStrength", stat.Strength }
         };
         return tag;
     }
@@ -58,7 +63,7 @@ internal static class JewelIO
     {
         JewelStat stat = new((StatType)tag.GetByte("statType"))
         {
-            Strength = (float)tag.Get<Half>("statStrength")
+            Strength = tag.GetFloat("statStrength")
         };
         return stat;
     }

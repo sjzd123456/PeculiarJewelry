@@ -1,7 +1,8 @@
 ﻿using PeculiarJewelry.Content.JewelryMechanic.Items.Jewels;
 using PeculiarJewelry.Content.JewelryMechanic.Stats;
+using PeculiarJewelry.Content.JewelryMechanic.Stats.IO;
 using System.Collections.Generic;
-using System.ComponentModel;
+using Terraria.ModLoader.IO;
 
 namespace PeculiarJewelry.Content.JewelryMechanic.Items.JewelryItems;
 
@@ -54,6 +55,28 @@ class BasicJewelry : ModItem
             player.HeldItem.TurnToAir();
 
             return;
+        }
+    }
+
+    public override void SaveData(TagCompound tag)
+    {
+        tag.Add("jewelryJewelCount", (byte)info.Count);
+
+        for (int i = 0; i < info.Count; ++i)
+        {
+            JewelInfo item = info[i];
+            tag.Add("jewelryInfo" + i, item.SaveAs());
+        }
+    }
+
+    public override void LoadData(TagCompound tag)
+    {
+        byte count = tag.GetByte("jewelryJewelCount");
+
+        for (int i = 0; i < count; ++i)
+        {
+            JewelInfo newInfo = JewelIO.LoadInfo(tag.GetCompound("jewelryInfo" + i));
+            info.Add(newInfo);
         }
     }
 }
