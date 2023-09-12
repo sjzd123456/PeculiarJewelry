@@ -1,19 +1,18 @@
 ﻿namespace PeculiarJewelry.Content.JewelryMechanic.Stats.Triggers.TriggerEffects;
 
-internal class HealTrigger : TriggerEffect
+internal class ManaTrigger : TriggerEffect
 {
     public override TriggerType Type => TriggerType.InstantOther;
-    public override bool NeedsCooldown => true;
 
     protected override void InternalInstantOtherEffect(TriggerContext context, Player player, float coefficient, JewelInfo.JewelTier tier)
     {
-        int hp = (int)TooltipArgument(coefficient, tier);
+        int mana = (int)TooltipArgument(coefficient, tier);
 
-        if (player.statLife + hp > player.statLifeMax2)
-            hp = player.statLife + hp - player.statLifeMax2;
+        if (player.statMana + mana > player.statManaMax2)
+            mana = player.statMana + mana - player.statManaMax2;
 
-        player.Heal(hp);
-        player.AddBuff(CooldownBuffType, CooldownTime(tier));
+        player.ManaEffect(mana);
+        player.statMana += mana;
     }
 
     public override float TooltipArgument(float coefficient, JewelInfo.JewelTier tier) => 20 * coefficient;

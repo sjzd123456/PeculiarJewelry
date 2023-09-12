@@ -1,0 +1,11 @@
+Buffs: {
+	HealTriggerBuff: {
+		DisplayName: Heal Trigger Buff
+		Description: Mods.PeculiarJewelry.Buffs.HealTriggerBuff.Description
+	}
+
+	ImmuneFrameTriggerBuff: {
+		DisplayName: Immune Frame Trigger Buff
+		Description: Mods.PeculiarJewelry.Buffs.ImmuneFrameTriggerBuff.Description
+	}
+}

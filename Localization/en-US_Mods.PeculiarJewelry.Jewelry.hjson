@@ -5,6 +5,7 @@ Sub: Sub
 TierTooltip: Tier {0} Jewel
 CutsRemaining: " cuts remaining"
 HoldShift: Hold shift to see stats
+ChanceTo: "{0}% chance to "
 
 TierPrefixes: {
 	Natural: Natural
@@ -45,4 +46,14 @@ TriggerContexts: {
 	WhenHitWithinPast5Seconds: When hit in the past 5 seconds:
 }
 
-TriggerEffects.HealTrigger: Heal {0} health.
+TriggerEffects: {
+	HealTrigger: heal {0} health.
+
+	HealTriggerBuff: {
+		BuffName: Jewel Lifesteal Cooldown
+		BuffDescription: Can't trigger lifesteal!
+	}
+
+	ManaTrigger: heal {0} mana.
+	ImmuneFrameTrigger: gain {0} immune frames.
+}

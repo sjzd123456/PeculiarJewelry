@@ -6,7 +6,7 @@ namespace PeculiarJewelry.Content.JewelryMechanic.Stats;
 
 internal class MajorJewelInfo : JewelInfo
 {
-    TriggerEffect effect;
+    internal TriggerEffect effect;
 
     internal override void InternalSetup()
     {
@@ -15,6 +15,8 @@ internal class MajorJewelInfo : JewelInfo
         effect = Activator.CreateInstance(Main.rand.Next(ModContent.GetContent<TriggerEffect>().ToList()).GetType()) as TriggerEffect;
     }
 
-    public void InstantTrigger(TriggerContext context, Player player, JewelTier tier) => effect.InstantTrigger(context, player, tier);
-    public void ConstantTrigger(Player player, JewelTier tier) => effect.ConstantTrigger(player, tier);
+    public void InstantTrigger(TriggerContext context, Player player) => effect.InstantTrigger(context, player, tier);
+    public void ConstantTrigger(Player player) => effect.ConstantTrigger(player, tier);
+
+    public string EffectTooltip() => effect.Tooltip(tier);
 }

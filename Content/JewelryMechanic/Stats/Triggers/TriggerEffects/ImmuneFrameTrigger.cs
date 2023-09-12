@@ -1,20 +1,19 @@
 ﻿namespace PeculiarJewelry.Content.JewelryMechanic.Stats.Triggers.TriggerEffects;
 
-internal class HealTrigger : TriggerEffect
+internal class ImmuneFrameTrigger : TriggerEffect
 {
     public override TriggerType Type => TriggerType.InstantOther;
     public override bool NeedsCooldown => true;
 
     protected override void InternalInstantOtherEffect(TriggerContext context, Player player, float coefficient, JewelInfo.JewelTier tier)
     {
-        int hp = (int)TooltipArgument(coefficient, tier);
-
-        if (player.statLife + hp > player.statLifeMax2)
-            hp = player.statLife + hp - player.statLifeMax2;
-
-        player.Heal(hp);
+        int time = (int)TooltipArgument(coefficient, tier);
+        player.AddImmuneTime(ImmunityCooldownID.General, time);
+        player.AddImmuneTime(ImmunityCooldownID.Bosses, time);
+        player.immuneNoBlink = false;
+        player.immune = true;
         player.AddBuff(CooldownBuffType, CooldownTime(tier));
     }
 
-    public override float TooltipArgument(float coefficient, JewelInfo.JewelTier tier) => 20 * coefficient;
+    public override float TooltipArgument(float coefficient, JewelInfo.JewelTier tier) => 30 * coefficient;
 }

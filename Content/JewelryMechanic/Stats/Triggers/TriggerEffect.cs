@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace PeculiarJewelry.Content.JewelryMechanic.Stats.Triggers;
 
@@ -29,42 +30,63 @@ internal abstract class TriggerEffect : ModType
     };
 
     public abstract TriggerType Type { get; }
+    public virtual bool NeedsCooldown => false;
+
+    public int CooldownBuffType => !NeedsCooldown ? throw new FieldAccessException($"{GetType().Name} has no buff!") 
+        : ModLoader.GetMod("PeculiarJewelry").Find<ModBuff>(GetType().Name + "Buff").Type;
 
     public TriggerContext Context { get; protected set; }
 
     public TriggerEffect()
     {
-        Context = (TriggerContext)Main.rand.Next((int)TriggerContext.Max);
+        Context = TriggerContext.OnHitEnemy;// (TriggerContext)Main.rand.Next((int)TriggerContext.Max);
     }
 
-    protected override void Register() => ModTypeLookup<TriggerEffect>.Register(this);
+    protected sealed override void Register()
+    {
+        ModTypeLookup<TriggerEffect>.Register(this);
+
+        if (NeedsCooldown)
+        {
+            string key = "Mods.PeculiarJewelry.Jewelry.TriggerEffects." + GetType().Name + "Buff.";
+            Mod.AddContent(new TriggerCooldownBuff(GetType().Name + "Buff", Language.GetText(key + "BuffName"), Language.GetText(key + "BuffDescription")));
+        } 
+    }
+
+    internal void ForceSetContext(TriggerContext context) => Context = context;
+
+    public static int CooldownTime(JewelInfo.JewelTier tier) => (int)Math.Pow(2, 1 - ((float)tier / 10));
 
     public void InstantTrigger(TriggerContext context, Player player, JewelInfo.JewelTier tier)
     {
-        int tierInt = (int)tier;
+        if (NeedsCooldown && player.HasBuff(CooldownBuffType))
+            return;
 
         if (Type == TriggerType.InstantOther)
         {
-            if ((tierInt + 1) / (float)(tierInt + 3) > Main.rand.NextFloat())
+            if (ReportChance(tier) > Main.rand.NextFloat())
             {
                 float coefficient = ConditionCoefficients[context];
-                InternalInstantOtherEffect(context, player, coefficient);
+                InternalInstantOtherEffect(context, player, coefficient, tier);
             }
         }
-        else
-        {
-            if (tierInt / (float)(tierInt + 1) > Main.rand.NextFloat())
-            {
-                float coefficient = ConditionCoefficients[context];
-                InternalInstantOtherEffect(context, player, coefficient);
-            }
-        }
+        //else
+        //{
+        //    if (tierInt / (float)(tierInt + 1) > Main.rand.NextFloat())
+        //    {
+        //        float coefficient = ConditionCoefficients[context];
+        //        InternalInstantOtherEffect(context, player, coefficient);
+        //    }
+        //}
     }
 
-    protected virtual void InternalInstantOtherEffect(TriggerContext context, Player player, float coefficient) { }
+    protected virtual void InternalInstantOtherEffect(TriggerContext context, Player player, float coefficient, JewelInfo.JewelTier tier) { }
 
     public void ConstantTrigger(Player player, JewelInfo.JewelTier tier)
     {
+        if (NeedsCooldown && player.HasBuff(CooldownBuffType))
+            return;
+
         if (ConstantConditionMet(Context, player, tier))
         {
             float coefficient = ConditionCoefficients[Context];
@@ -75,13 +97,24 @@ internal abstract class TriggerEffect : ModType
     protected virtual bool ConstantConditionMet(TriggerContext context, Player player, JewelInfo.JewelTier tier) => false;
     protected virtual void InternalConditionalEffect(TriggerContext context, Player player, float coefficient) { }
 
-    public string Tooltip(TriggerContext context, JewelInfo.JewelTier tier)
+    public virtual string Tooltip(JewelInfo.JewelTier tier)
     {
-        float coefficient = ConditionCoefficients[context];
-        string condition = Language.GetText("Mods.PeculiarJewelry.Jewelry.TriggerContexts." + context).Value;
+        float coefficient = ConditionCoefficients[Context];
+        string condition = Language.GetText("Mods.PeculiarJewelry.Jewelry.TriggerContexts." + Context).Value;
+        string chance = Language.GetText("Mods.PeculiarJewelry.Jewelry.ChanceTo").WithFormatArgs((ReportChance(tier) * 100).ToString("#0.##")).Value;
         string effect = Language.GetText("Mods.PeculiarJewelry.Jewelry.TriggerEffects." + GetType().Name).WithFormatArgs(TooltipArgument(coefficient, tier)).Value;
-        return condition + " " + effect;
+        return condition + " " + chance + effect;
     }
 
-    public abstract string TooltipArgument(float coefficient, JewelInfo.JewelTier tier);
+    private float ReportChance(JewelInfo.JewelTier jewelTier)
+    {
+        int tier = (int)jewelTier;
+
+        if (Type == TriggerType.InstantOther)
+            return (tier + 1f) / (tier + 3f);
+        return tier / (tier + 1f);
+    }
+
+    public virtual string TooltipArgumentFormat(float coefficient, JewelInfo.JewelTier tier) => TooltipArgument(coefficient, tier).ToString("#0.##");
+    public abstract float TooltipArgument(float coefficient, JewelInfo.JewelTier tier);
 }

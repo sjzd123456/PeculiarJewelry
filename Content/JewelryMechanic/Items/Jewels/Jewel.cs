@@ -54,6 +54,9 @@ public abstract class Jewel : ModItem
             tooltips.Add(new TooltipLine(modItem.Mod, "JewelName", name) { OverrideColor = info.Major.Get().Color });
         }
 
+        if (info is MajorJewelInfo majorJewelInfo)
+            tooltips.Add(new TooltipLine(modItem.Mod, "TriggerEffect", majorJewelInfo.EffectTooltip()));
+
         if (displayAsJewel || PeculiarJewelry.ShiftDown)
         {
             tooltips.Add(new TooltipLine(modItem.Mod, "MajorStat", "+" + info.Major.GetDescription()) { OverrideColor = info.Major.Get().Color });

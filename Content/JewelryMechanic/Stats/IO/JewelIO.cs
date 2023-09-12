@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PeculiarJewelry.Content.JewelryMechanic.Stats.Triggers;
+using System;
 using Terraria.ModLoader.IO;
 
 namespace PeculiarJewelry.Content.JewelryMechanic.Stats.IO;
@@ -21,6 +22,13 @@ internal static class JewelIO
             { "infoMajor", info.Major.SaveAs() }
         };
 
+        if (info is MajorJewelInfo)
+        {
+            TriggerEffect effect = (info as MajorJewelInfo).effect;
+            tag.Add("infoTriggerType", effect.GetType().AssemblyQualifiedName);
+            tag.Add("infoTriggerContext", (byte)effect.Context);
+        }
+
         for (int i = 0; i < info.SubStats.Count; i++)
             tag.Add("infoSub" + i, info.SubStats[i].SaveAs());
 
@@ -36,6 +44,13 @@ internal static class JewelIO
         info.exclusivity = (StatExclusivity)tag.GetByte("infoExclusivity");
         info.cuts = tag.GetByte("infoCuts");
         info.SetupFromIO(LoadStat(tag.GetCompound("infoMajor")));
+
+        if (info is MajorJewelInfo major && tag.ContainsKey("infoTriggerType"))
+        {
+            major.effect = Activator.CreateInstance(Type.GetType(tag.GetString("infoTriggerType"))) as TriggerEffect;
+            byte context = tag.GetByte("infoTriggerContext");
+            major.effect.ForceSetContext((TriggerContext)context);
+        }
 
         for (int i = 0; i < info.SubStats.Count; i++)
         {
@@ -65,6 +80,7 @@ internal static class JewelIO
         {
             Strength = tag.GetFloat("statStrength")
         };
+
         return stat;
     }
 }

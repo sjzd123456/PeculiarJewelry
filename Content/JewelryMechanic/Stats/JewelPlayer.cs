@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using PeculiarJewelry.Content.JewelryMechanic.Stats.Triggers;
+using System.Collections.Generic;
 
 namespace PeculiarJewelry.Content.JewelryMechanic.Stats;
 
@@ -14,6 +15,18 @@ internal class JewelPlayer : ModPlayer
     public override void PostUpdateEquips()
     {
         foreach (var item in majorInfo)
-            item.ConstantTrigger(Player, item.tier);
+            item.ConstantTrigger(Player);
+    }
+
+    public override void OnHurt(Player.HurtInfo info)
+    {
+        foreach (var item in majorInfo)
+            item.InstantTrigger(TriggerContext.OnTakeDamage, Player);
+    }
+
+    public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+    {
+        foreach (var item in majorInfo)
+            item.InstantTrigger(TriggerContext.OnHitEnemy, Player);
     }
 }
