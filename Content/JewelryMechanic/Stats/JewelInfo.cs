@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace PeculiarJewelry.Content.JewelryMechanic.Stats;
 
-public abstract class JewelInfo
+public abstract partial class JewelInfo
 {
     public JewelStat Major { get; protected set; }
     public List<JewelStat> SubStats { get; protected set; } = null;
@@ -11,6 +11,7 @@ public abstract class JewelInfo
     public JewelTier tier = JewelTier.Natural;
     public StatExclusivity exclusivity = StatExclusivity.None;
     public int cuts = 0;
+    public int successfulCuts = 0;
 
     public virtual int MaxCuts => 20 + (int)tier;
 
@@ -52,24 +53,27 @@ public abstract class JewelInfo
             spawnStats = 3;
 
         for (int i = 0; i < spawnStats; i++)
+            AddSubStat(takenTypes, i);
+    }
+
+    private void AddSubStat(List<StatType> takenTypes, int index)
+    {
+        if (index < SubStats.Capacity) //Fill slots
         {
-            if (i < SubStats.Capacity) //Fill slots
-            {
-                SubStats.Add(JewelStat.Random);
+            SubStats.Add(JewelStat.Random);
 
-                while ((SubStats[i].Get().Exclusivity != exclusivity && SubStats[i].Get().Exclusivity != StatExclusivity.None) || takenTypes.Contains(SubStats[i].Get().Type))
-                    SubStats[i] = JewelStat.Random;
+            while ((SubStats[index].Get().Exclusivity != exclusivity && SubStats[index].Get().Exclusivity != StatExclusivity.None) || takenTypes.Contains(SubStats[index].Get().Type))
+                SubStats[index] = JewelStat.Random;
 
-                takenTypes.Add(SubStats[i].Get().Type);
+            takenTypes.Add(SubStats[index].Get().Type);
 
-                if (exclusivity == StatExclusivity.None)
-                    exclusivity = SubStats[i].Get().Exclusivity;
-            }
-            else
-            {
-                int adjI = i - SubStats.Capacity;
-                SubStats[adjI].Strength++;
-            }
+            if (exclusivity == StatExclusivity.None)
+                exclusivity = SubStats[index].Get().Exclusivity;
+        }
+        else
+        {
+            int adjI = index - SubStats.Capacity;
+            SubStats[adjI].Strength++;
         }
     }
 
@@ -98,31 +102,6 @@ public abstract class JewelInfo
 
     internal virtual void InternalSetup() { }
 
-    public enum JewelTier : byte
-    {
-        Natural,
-        Mutated0,
-        Mutated1,
-        Mutated2,
-        Mutated3,
-        Mutated4,
-        Mutated5,
-        Mythical0,
-        Mythical1,
-        Mythical2,
-        Mythical3,
-        Mythical4,
-        Mythical5,
-        Celestial0,
-        Celestial1,
-        Celestial2,
-        Celestial3,
-        Celestial4,
-        Stellar0,
-        Stellar1,
-        Stellar2,
-    }
-
     public int GetDisplayTier()
     {
         return tier switch
@@ -146,5 +125,36 @@ public abstract class JewelInfo
             3 => Language.GetTextValue(key + "Celestial"),
             _ => Language.GetTextValue(key + "Stellar")
         };
+    }
+
+    internal void TryAddCut(float chance)
+    {
+        cuts++;
+
+        if (Main.rand.NextFloat() < chance)
+            SuccessfulCut();
+    }
+
+    internal void SuccessfulCut()
+    {
+        successfulCuts++;
+        Main.NewText($"Cuts: {cuts}/{MaxCuts}");
+
+        Major.Strength += 1f;
+
+        if (successfulCuts % 4 == 0)
+        {
+            if (SubStats.Count == SubStats.Capacity)
+                Main.rand.Next(SubStats).Strength += 1f;
+            else
+            {
+                List<StatType> takenTypes = new() { Major.Type };
+
+                foreach (var item in SubStats)
+                    takenTypes.Add(item.Type);
+
+                AddSubStat(takenTypes, SubStats.Count);
+            }
+        }
     }
 }

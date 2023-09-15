@@ -19,3 +19,8 @@ BasicJewelry: {
 	DisplayName: Basic Jewelry
 	Tooltip: ""
 }
+
+SparklyDust: {
+	DisplayName: Sparkly Dust
+	Tooltip: ""
+}

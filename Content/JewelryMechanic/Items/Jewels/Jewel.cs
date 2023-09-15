@@ -18,7 +18,7 @@ public abstract class Jewel : ModItem
     public sealed override void SetDefaults()
     {
         info = Activator.CreateInstance(InfoType) as JewelInfo;
-        info.Setup(JewelInfo.JewelTier.Natural); //Info is tier 0 by default 
+        info.Setup(JewelTier.Natural); //Info is tier 0 by default 
 
         Defaults();
     }

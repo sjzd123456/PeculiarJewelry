@@ -4,7 +4,7 @@ internal class ManaTrigger : TriggerEffect
 {
     public override TriggerType Type => TriggerType.InstantOther;
 
-    protected override void InternalInstantOtherEffect(TriggerContext context, Player player, float coefficient, JewelInfo.JewelTier tier)
+    protected override void InternalInstantOtherEffect(TriggerContext context, Player player, float coefficient, JewelTier tier)
     {
         int mana = (int)TooltipArgument(coefficient, tier);
 
@@ -15,5 +15,5 @@ internal class ManaTrigger : TriggerEffect
         player.statMana += mana;
     }
 
-    public override float TooltipArgument(float coefficient, JewelInfo.JewelTier tier) => 20 * coefficient;
+    public override float TooltipArgument(float coefficient, JewelTier tier) => 20 * coefficient;
 }

@@ -17,6 +17,7 @@ internal static class JewelIO
             { "infoTier", (byte)info.tier },
             { "infoExclusivity", (byte)info.exclusivity },
             { "infoCuts", (byte)info.cuts },
+            { "infoSuccessfulCuts", (byte)info.successfulCuts },
 
             //Stats
             { "infoMajor", info.Major.SaveAs() }
@@ -40,9 +41,10 @@ internal static class JewelIO
         string type = tag.GetString("infoType");
         JewelInfo info = Activator.CreateInstance(Type.GetType(type)) as JewelInfo;
 
-        info.tier = (JewelInfo.JewelTier)tag.GetByte("infoTier");
+        info.tier = (JewelTier)tag.GetByte("infoTier");
         info.exclusivity = (StatExclusivity)tag.GetByte("infoExclusivity");
         info.cuts = tag.GetByte("infoCuts");
+        info.successfulCuts = tag.GetByte("infoSuccessfulCuts");
         info.SetupFromIO(LoadStat(tag.GetCompound("infoMajor")));
 
         if (info is MajorJewelInfo major && tag.ContainsKey("infoTriggerType"))

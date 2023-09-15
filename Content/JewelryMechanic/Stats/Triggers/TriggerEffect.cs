@@ -55,9 +55,9 @@ internal abstract class TriggerEffect : ModType
 
     internal void ForceSetContext(TriggerContext context) => Context = context;
 
-    public static int CooldownTime(JewelInfo.JewelTier tier) => (int)Math.Pow(2, 1 - ((float)tier / 10));
+    public static int CooldownTime(JewelTier tier) => (int)Math.Pow(2, 1 - ((float)tier / 10));
 
-    public void InstantTrigger(TriggerContext context, Player player, JewelInfo.JewelTier tier)
+    public void InstantTrigger(TriggerContext context, Player player, JewelTier tier)
     {
         if (NeedsCooldown && player.HasBuff(CooldownBuffType))
             return;
@@ -80,9 +80,9 @@ internal abstract class TriggerEffect : ModType
         //}
     }
 
-    protected virtual void InternalInstantOtherEffect(TriggerContext context, Player player, float coefficient, JewelInfo.JewelTier tier) { }
+    protected virtual void InternalInstantOtherEffect(TriggerContext context, Player player, float coefficient, JewelTier tier) { }
 
-    public void ConstantTrigger(Player player, JewelInfo.JewelTier tier)
+    public void ConstantTrigger(Player player, JewelTier tier)
     {
         if (NeedsCooldown && player.HasBuff(CooldownBuffType))
             return;
@@ -94,10 +94,10 @@ internal abstract class TriggerEffect : ModType
         }
     }
 
-    protected virtual bool ConstantConditionMet(TriggerContext context, Player player, JewelInfo.JewelTier tier) => false;
+    protected virtual bool ConstantConditionMet(TriggerContext context, Player player, JewelTier tier) => false;
     protected virtual void InternalConditionalEffect(TriggerContext context, Player player, float coefficient) { }
 
-    public virtual string Tooltip(JewelInfo.JewelTier tier)
+    public virtual string Tooltip(JewelTier tier)
     {
         float coefficient = ConditionCoefficients[Context];
         string condition = Language.GetText("Mods.PeculiarJewelry.Jewelry.TriggerContexts." + Context).Value;
@@ -106,7 +106,7 @@ internal abstract class TriggerEffect : ModType
         return condition + " " + chance + effect;
     }
 
-    private float ReportChance(JewelInfo.JewelTier jewelTier)
+    private float ReportChance(JewelTier jewelTier)
     {
         int tier = (int)jewelTier;
 
@@ -115,6 +115,6 @@ internal abstract class TriggerEffect : ModType
         return tier / (tier + 1f);
     }
 
-    public virtual string TooltipArgumentFormat(float coefficient, JewelInfo.JewelTier tier) => TooltipArgument(coefficient, tier).ToString("#0.##");
-    public abstract float TooltipArgument(float coefficient, JewelInfo.JewelTier tier);
+    public virtual string TooltipArgumentFormat(float coefficient, JewelTier tier) => TooltipArgument(coefficient, tier).ToString("#0.##");
+    public abstract float TooltipArgument(float coefficient, JewelTier tier);
 }
