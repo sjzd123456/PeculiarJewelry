@@ -1,3 +1,4 @@
 displayName = Peculiar Jewelry
 author = GabeHasWon
 version = 0.1
+modReferences = BossChecklist

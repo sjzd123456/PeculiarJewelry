@@ -9,6 +9,7 @@ public class JewelryStatConfig : ModConfig
 
     public override ConfigScope Mode => ConfigScope.ClientSide;
 
+    [ReloadRequired]
     [DefaultValue(0.33f)]
     public float ChanceForMajor { get; set; }
 

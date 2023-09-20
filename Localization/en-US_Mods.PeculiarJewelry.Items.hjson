@@ -24,3 +24,8 @@ SparklyDust: {
 	DisplayName: Sparkly Dust
 	Tooltip: ""
 }
+
+BagOfShinies: {
+	DisplayName: Bag Of Shinies
+	Tooltip: ""
+}

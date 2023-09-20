@@ -1,8 +1,10 @@
+using PeculiarJewelry.Content.JewelryMechanic.NPCs;
 using PeculiarJewelry.Content.JewelryMechanic.Stats;
 using PeculiarJewelry.Content.JewelryMechanic.Stats.IO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.GameInput;
 using Terraria.ModLoader.IO;
@@ -24,6 +26,17 @@ public abstract class Jewel : ModItem
     }
 
     public abstract void Defaults();
+
+    public override void OnSpawn(IEntitySource source)
+    {
+        if (source is EntitySource_Loot loot && loot.Entity is NPC npc && npc.boss)
+        {
+            JewelTier tier = (JewelTier)BossLootGlobal.GetBossTier(npc);
+            info.Setup(tier);
+        }
+        else if (source is EntitySource_ItemOpen open && open.ItemType == ModContent.ItemType<BagOfShinies>())
+            info.Setup(open.Player.GetModPlayer<StupidIdiotItemLootWorkaroundPlayer>().storedTier);
+    }
 
     public sealed override void ModifyTooltips(List<TooltipLine> tooltips) => JewelInfoTooltips(tooltips, info, this);
 
