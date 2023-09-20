@@ -30,11 +30,8 @@ public abstract class Jewel : ModItem
     public override void OnSpawn(IEntitySource source)
     {
         if (source is EntitySource_Loot loot && loot.Entity is NPC npc && npc.boss)
-        {
-            JewelTier tier = (JewelTier)BossLootGlobal.GetBossTier(npc);
-            info.Setup(tier);
-        }
-        else if (source is EntitySource_ItemOpen open && open.ItemType == ModContent.ItemType<BagOfShinies>())
+            info.Setup(BossLootGlobal.GetBossTier(npc));
+        else if (source is EntitySource_ItemOpen open && (open.ItemType == ModContent.ItemType<BagOfShinies>() || open.ItemType == ModContent.ItemType<AncientCoffer>()))
             info.Setup(open.Player.GetModPlayer<StupidIdiotItemLootWorkaroundPlayer>().storedTier);
     }
 
@@ -55,7 +52,7 @@ public abstract class Jewel : ModItem
         if (displayAsJewel)
         {
             var name = tooltips.First(x => x.Name == "ItemName");
-            name.Text = Localize("Items." + modItem.Name + ".Prefix") + " " + info.GetTierText() + " " + Localize("Jewelry.Jewel") + " of " + info.Major.GetName().Value;
+            name.Text = Localize("Items." + modItem.Name + ".Prefix") + " " + info.tier.Localize() + " " + Localize("Jewelry.Jewel") + " of " + info.Major.GetName().Value;
             name.OverrideColor = info.Major.Get().Color;
 
             tooltips.Add(new TooltipLine(modItem.Mod, "JewelTier", Language.GetText("Mods.PeculiarJewelry.Jewelry.TierTooltip").WithFormatArgs((int)info.tier).Value));
@@ -63,7 +60,7 @@ public abstract class Jewel : ModItem
         else
         {
             string major = info is MajorJewelInfo ? nameof(MajorJewel) : nameof(MinorJewel);
-            string name = Localize("Items." + major + ".Prefix") + " " + info.GetTierText() + " " + Localize("Jewelry.Jewel") + " of " + info.Major.GetName().Value;
+            string name = Localize("Items." + major + ".Prefix") + " " + info.tier.Localize() + " " + Localize("Jewelry.Jewel") + " of " + info.Major.GetName().Value;
             tooltips.Add(new TooltipLine(modItem.Mod, "JewelName", name) { OverrideColor = info.Major.Get().Color });
         }
 

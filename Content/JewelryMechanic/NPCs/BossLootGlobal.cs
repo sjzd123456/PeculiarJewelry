@@ -1,27 +1,53 @@
 ﻿using PeculiarJewelry.Content.JewelryMechanic.Items;
+using PeculiarJewelry.Content.JewelryMechanic.Stats;
 using System.Collections.Generic;
 using System.Linq;
 using Terraria.GameContent.ItemDropRules;
+using Terraria.ModLoader.IO;
 
 namespace PeculiarJewelry.Content.JewelryMechanic.NPCs;
 
 internal class BossLootGlobal : GlobalNPC
 {
-    public static int GetBossTier(NPC npc)
+    public static ref JewelTier HighestBeatenTier => ref ModContent.GetInstance<TierStorage>().highestBeatenTier;
+
+    public static JewelTier GetBossTier(NPC npc)
     {
         Mod checklist = ModLoader.GetMod("BossChecklist");
         Dictionary<string, Dictionary<string, object>> dict = (Dictionary<string, Dictionary<string, object>>)checklist.Call("GetBossInfoDictionary", ModLoader.GetMod("PeculiarJewelry"), "0.0.0.0");
-        var index = dict.Keys.First(x => (dict[x]["npcIDs"] as List<int>).Contains(npc.type));
+        var index = dict.Keys.FirstOrDefault(x => (dict[x]["npcIDs"] as List<int>).Contains(npc.type));
+
+        if (index is null)
+            return JewelTier.Invalid;
+
         float progression = (float)dict[index]["progression"];
 
         if (progression == (int)progression)
-            return (int)progression;
+            return (JewelTier)progression;
         else
-            return Main.rand.NextFloat() < progression % 1 ? (int)progression + 1 : (int)progression;
+            return (JewelTier)(Main.rand.NextFloat() < progression % 1 ? progression + 1 : progression);
     }
 
-    public override void ModifyGlobalLoot(GlobalLoot globalLoot)
+    public override void ModifyGlobalLoot(GlobalLoot globalLoot) => globalLoot.Add(ItemDropRule.ByCondition(new Conditions.LegacyHack_IsABoss(), ModContent.ItemType<BagOfShinies>()));
+
+    public override void OnKill(NPC npc)
     {
-        globalLoot.Add(ItemDropRule.ByCondition(new Conditions.LegacyHack_IsABoss(), ModContent.ItemType<BagOfShinies>()));
+        if (npc.boss)
+        {
+            JewelTier tier = GetBossTier(npc);
+
+            if (tier == JewelTier.Invalid)
+                return;
+
+            HighestBeatenTier = tier;
+        }
+    }
+
+    private class TierStorage : ModSystem
+    {
+        internal JewelTier highestBeatenTier = JewelTier.Natural;
+
+        public override void SaveWorldData(TagCompound tag) => tag.Add("worldTier", (byte)highestBeatenTier);
+        public override void LoadWorldData(TagCompound tag) => highestBeatenTier = (JewelTier)tag.GetByte("worldTier");
     }
 }

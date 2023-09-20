@@ -22,10 +22,25 @@ BasicJewelry: {
 
 SparklyDust: {
 	DisplayName: Sparkly Dust
-	Tooltip: ""
+	Tooltip: "'So shiny!'"
 }
 
 BagOfShinies: {
-	DisplayName: Bag Of Shinies
-	Tooltip: ""
+	DisplayName: Bag O' Shinies
+	Tooltip: Contains many goods, including jewels
+	Contains: Contains a {0} jewel
+}
+
+AncientCoffer: {
+	DisplayName: Ancient Coffer
+	Tooltip:
+		'''
+		Contains many goods, including jewels
+		Irreperably damaged when placed, place wisely!
+		'''
+}
+
+BrokenAncientCoffer: {
+	DisplayName: Broken Ancient Coffer
+	Tooltip: "'Decoration from a time now passed'"
 }
