@@ -1,4 +1,5 @@
 ﻿using PeculiarJewelry.Content.JewelryMechanic.Stats.Effects;
+using Terraria;
 
 namespace PeculiarJewelry.Content.JewelryMechanic.Stats;
 
@@ -17,19 +18,24 @@ public class JewelStat
     }
 
     public void Apply(Player player, Item item) => JewelStatEffect.StatsByType[Type].Apply(player, Strength, item);
+    public float GetEffectValue(float add = 0f) => JewelStatEffect.StatsByType[Type].GetEffectValue(Strength + add);
 
     public JewelStatEffect Get() => JewelStatEffect.StatsByType[Type];
     public LocalizedText GetName() => JewelStatEffect.StatsByType[Type].DisplayName;
 
-    public string GetDescription()
+    public string GetDescription(bool showStars = true)
     {
         var stat = JewelStatEffect.StatsByType[Type];
         string stars = " ";
 
-        if (Strength > 1)
+        if (showStars)
         {
-            for (int i = 0; i < Strength - 1; ++i)
-                stars += "⋆";
+
+            if (Strength > 1)
+            {
+                for (int i = 1; i < Strength - 1; ++i)
+                    stars += "⋆";
+            }
         }
 
         return stat.Description.WithFormatArgs(stat.GetEffectValue(Strength).ToString("#0.##")).Value + stars;

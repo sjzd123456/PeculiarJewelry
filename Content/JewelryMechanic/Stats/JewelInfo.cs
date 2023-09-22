@@ -110,17 +110,17 @@ public abstract partial class JewelInfo
             SuccessfulCut();
     }
 
-    internal void SuccessfulCut()
+    internal void SuccessfulCut(bool noAdd = false)
     {
         successfulCuts++;
-        Main.NewText($"Cuts: {cuts}/{MaxCuts}");
 
-        Major.Strength += 1f;
+        if (!noAdd)
+            Major.Strength += JewelryCommon.StatStrengthRange();
 
         if (successfulCuts % 4 == 0)
         {
             if (SubStats.Count == SubStats.Capacity)
-                Main.rand.Next(SubStats).Strength += 1f;
+                Main.rand.Next(SubStats).Strength += JewelryCommon.StatStrengthRange();
             else
             {
                 List<StatType> takenTypes = new() { Major.Type };

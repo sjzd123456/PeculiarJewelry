@@ -33,3 +33,5 @@ NPCs: {
 		}
 	}
 }
+
+Projectiles.StellarJadeProjectile.DisplayName: Stellar Jade Projectile

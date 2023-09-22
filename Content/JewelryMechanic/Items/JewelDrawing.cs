@@ -8,7 +8,7 @@ public static class JewelDrawing
 {
     public static void DrawJewel(Asset<Texture2D> tex, Vector2 position, Vector2 origin, Color color, float rotation, float scale, int frameWidth, int frameHeight, JewelInfo info)
     {
-        float cutAmount = MathF.Floor(info.cuts / (float)info.MaxCuts / 5f * 25);
+        float cutAmount = MathF.Floor(info.successfulCuts / (float)info.MaxCuts / 5f * 25);
 
         if (cutAmount == 5)
             cutAmount--;

@@ -54,7 +54,7 @@ internal static class JewelIO
             major.effect.ForceSetContext((TriggerContext)context);
         }
 
-        for (int i = 0; i < info.SubStats.Count; i++)
+        for (int i = 0; i < info.SubStats.Capacity; i++)
         {
             if (tag.TryGet("infoSub" + i, out TagCompound sub))
                 info.SubStats.Add(LoadStat(sub));

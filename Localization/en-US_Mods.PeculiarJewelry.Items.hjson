@@ -44,3 +44,32 @@ BrokenAncientCoffer: {
 	DisplayName: Broken Ancient Coffer
 	Tooltip: "'Decoration from a time now passed'"
 }
+
+StellarJade: {
+	DisplayName: Stellar Jade
+	Tooltip:
+		'''
+		Guarantees one attempt to cut a jewel
+		Consumed on use
+		'An otherworldy, glimmering beauty'
+		'''
+}
+
+CursedDollar: {
+	DisplayName: Cursed Dollar
+	Tooltip:
+		'''
+		Sets the chance of any jewel cut attempt to 50/50
+		Consumed on use
+		'Carries an aura of both death and life'
+		'''
+}
+
+DoubleLayeredLens: {
+	DisplayName: Double Layered Lens
+	Tooltip:
+		'''
+		Slightly increases chance for a jewel cut attempt to succeed
+		Consumed on use
+		'''
+}

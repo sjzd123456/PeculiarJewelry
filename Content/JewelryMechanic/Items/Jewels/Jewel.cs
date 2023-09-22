@@ -17,6 +17,13 @@ public abstract class Jewel : ModItem
 
     public JewelInfo info;
 
+    //public override ModItem Clone(Item newEntity)
+    //{
+    //    ModItem clone = base.Clone(newEntity);
+    //    Jewel jewelClone = clone as Jewel;
+    //    return clone;
+    //}
+
     public sealed override void SetDefaults()
     {
         info = Activator.CreateInstance(InfoType) as JewelInfo;
@@ -53,6 +60,10 @@ public abstract class Jewel : ModItem
         {
             var name = tooltips.First(x => x.Name == "ItemName");
             name.Text = Localize("Items." + modItem.Name + ".Prefix") + " " + info.tier.Localize() + " " + Localize("Jewelry.Jewel") + " of " + info.Major.GetName().Value;
+
+            if (info.Major.Strength > 1)
+                name.Text += $" +{(int)info.Major.Strength}";
+
             name.OverrideColor = info.Major.Get().Color;
 
             tooltips.Add(new TooltipLine(modItem.Mod, "JewelTier", Language.GetText("Mods.PeculiarJewelry.Jewelry.TierTooltip").WithFormatArgs((int)info.tier).Value));
@@ -69,7 +80,7 @@ public abstract class Jewel : ModItem
 
         if (displayAsJewel || PeculiarJewelry.ShiftDown)
         {
-            tooltips.Add(new TooltipLine(modItem.Mod, "MajorStat", "+" + info.Major.GetDescription()) { OverrideColor = info.Major.Get().Color });
+            tooltips.Add(new TooltipLine(modItem.Mod, "MajorStat", "+" + info.Major.GetDescription(false)) { OverrideColor = info.Major.Get().Color });
 
             var subStatTooltips = info.SubStatTooltips();
 
