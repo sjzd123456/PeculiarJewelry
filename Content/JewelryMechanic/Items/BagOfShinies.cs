@@ -1,7 +1,5 @@
-﻿using PeculiarJewelry;
-using PeculiarJewelry.Content.JewelryMechanic;
-using PeculiarJewelry.Content.JewelryMechanic.Items;
-using PeculiarJewelry.Content.JewelryMechanic.Items.Jewels;
+﻿using PeculiarJewelry.Content.JewelryMechanic.Items.Jewels;
+using PeculiarJewelry.Content.JewelryMechanic.Items.JewelSupport;
 using PeculiarJewelry.Content.JewelryMechanic.Misc;
 using PeculiarJewelry.Content.JewelryMechanic.NPCs;
 using PeculiarJewelry.Content.JewelryMechanic.Stats;
@@ -86,7 +84,14 @@ public class BagOfShinies : ModItem
 
     private static IItemDropRule SupportItemDrops(int chance)
     {
-        return ItemDropRule.OneFromOptions(chance);
+        const int TotalRules = 3;
+
+        chance /= TotalRules;
+
+        var options = ItemDropRule.OneFromOptions(chance, ModContent.ItemType<IrradiatedPearl>(), ModContent.ItemType<CursedDollar>());
+        var scales = options.OnFailedRoll(ItemDropRule.ByCondition(new TierCutoffCondition(7), ModContent.ItemType<GoldenCarpScales>(), chance));
+        scales.OnFailedRoll(ItemDropRule.ByCondition(new TierCutoffCondition(13), ModContent.ItemType<CelestialEye>(), chance));
+        return options;
     }
 
     public override void OnSpawn(IEntitySource source)

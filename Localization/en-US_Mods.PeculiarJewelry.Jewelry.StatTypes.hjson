@@ -90,7 +90,7 @@ Order: {
 
 Abundance: {
 	DisplayName: Abundance
-	Description: "{0}% max minions"
+	Description: "{0} max minions"
 }
 
 Legion: {

@@ -1,10 +1,8 @@
 using PeculiarJewelry.Content.JewelryMechanic.Misc;
-using PeculiarJewelry.Content.JewelryMechanic.Stats;
-using System.Collections.Generic;
 
 namespace PeculiarJewelry.Content.JewelryMechanic.Items.JewelSupport;
 
-public class CursedDollar : JewelSupportItem
+public class ResonantEcho : ModItem
 {
     public override void SetDefaults()
     {
@@ -12,11 +10,5 @@ public class CursedDollar : JewelSupportItem
         Item.value = Item.sellPrice(silver: 3);
         Item.Size = new(24, 28);
         Item.maxStack = Item.CommonMaxStack;
-    }
-
-    public override bool HardOverrideJewelCutChance(JewelInfo info, out float chance)
-    {
-        chance = 0.5f;
-        return true;
     }
 }

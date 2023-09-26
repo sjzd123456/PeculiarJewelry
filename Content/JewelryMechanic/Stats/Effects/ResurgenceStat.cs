@@ -7,9 +7,6 @@ internal class ResurgenceStat : JewelStatEffect
 
     public override StatExclusivity Exclusivity => StatExclusivity.Magic;
 
-    public override void Apply(Player player, float strength, Item item)
-    {
-    }
-
+    public override void Apply(Player player, float strength, Item item) => player.manaRegen += (int)GetEffectValue(strength);
     public override float GetEffectValue(float multiplier) => PeculiarJewelry.StatConfig.ResurgenceStrength * multiplier;
 }

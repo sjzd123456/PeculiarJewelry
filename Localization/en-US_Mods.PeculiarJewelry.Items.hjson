@@ -73,3 +73,23 @@ DoubleLayeredLens: {
 		Consumed on use
 		'''
 }
+
+CelestialEye: {
+	DisplayName: Celestial Eye
+	Tooltip: ""
+}
+
+GoldenCarpScales: {
+	DisplayName: Golden Carp Scales
+	Tooltip: ""
+}
+
+IrradiatedPearl: {
+	DisplayName: Irradiated Pearl
+	Tooltip: ""
+}
+
+ResonantEcho: {
+	DisplayName: Resonant Echo
+	Tooltip: ""
+}

@@ -1,5 +1,7 @@
 using PeculiarJewelry.Content.JewelryMechanic.Misc;
+using PeculiarJewelry.Content.JewelryMechanic.Stats;
 using System;
+using System.Collections.Generic;
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.GameContent;
@@ -13,6 +15,7 @@ public class StellarJade : JewelSupportItem
         Item.rare = ModContent.RarityType<JewelRarity>();
         Item.value = Item.sellPrice(silver: 3);
         Item.Size = new(28, 22);
+        Item.maxStack = Item.CommonMaxStack;
     }
 
     public override void Update(ref float gravity, ref float maxFallSpeed)
@@ -26,9 +29,9 @@ public class StellarJade : JewelSupportItem
         }
     }
 
-    public override bool HardOverrideJewelCutChance(out float chance)
+    public override bool HardOverrideJewelCutChance(JewelInfo info, out float chance)
     {
-        chance = 1;
+        chance = 1f;
         return true;
     }
 }

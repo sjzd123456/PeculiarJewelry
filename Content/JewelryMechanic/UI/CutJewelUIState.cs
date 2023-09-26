@@ -2,22 +2,13 @@
 using PeculiarJewelry.Content.JewelryMechanic.Items.Jewels;
 using PeculiarJewelry.Content.JewelryMechanic.Items.JewelSupport;
 using PeculiarJewelry.Content.JewelryMechanic.Stats;
-using PeculiarJewelry.Content.JewelryMechanic.Stats.IO;
-using ReLogic.Content;
-using ReLogic.Graphics;
-using Steamworks;
 using System;
 using System.Collections.Generic;
-using System.Drawing.Drawing2D;
 using System.Linq;
-using System.Reflection;
-using System.Runtime.CompilerServices;
 using Terraria.Audio;
-using Terraria.Chat;
 using Terraria.GameContent;
 using Terraria.GameContent.UI.Elements;
 using Terraria.UI;
-using Terraria.UI.Chat;
 
 namespace PeculiarJewelry.Content.JewelryMechanic.UI;
 
@@ -35,25 +26,73 @@ internal class CutJewelUIState : UIState
     private bool _hoveringAnvil = false;
 
     // Info stuff
-    private UIText _priceText = null;
-    private UIText _dustPriceText = null;
-    private UIText _chanceText = null;
+    private UIText _infoText = null;
+    private string _dustPriceText = null;
+    private string _chanceText = null;
+    private string _statusText = string.Empty;
 
     public override void Update(GameTime gameTime)
     {
         _storedItem = _cutSlot.Item;
         _hasJewel = _storedItem.ModItem is Jewel;
         ResetStatPanelWith(_storedItem);
+        UpdateInfo();
+    }
+
+    private void UpdateInfo(string status = null)
+    {
+        static string HighlightStat(int value, int cutoff)
+        {
+            string white = "FFFFFF";
+            string red = "FF0000";
+            return $"[c/{(value >= cutoff ? white : red)}:{value}]";
+        }
 
         string noJewel = "(No jewel selected)";
         float price = _hasJewel ? JewelCutCoinPrice(JewelItem.info) : 0;
-        _priceText.SetText(price == 0 ? noJewel : GetPriceText((int)price));
+        int goldCoins = (int)(Utils.CoinsCount(out bool _, Main.LocalPlayer.inventory) / Item.buyPrice(0, 1, 0, 0));
+        int endCoins = Utils.CoinsSplit((long)price)[2];
+        string coinPrice = !_hasJewel ? noJewel : HighlightStat(goldCoins, endCoins) + "/" + endCoins + $" gold [i:{ItemID.GoldCoin}]";
 
-        float dustPrice = _hasJewel ? JewelCutDustPrice(JewelItem.info) : 0;
-        _dustPriceText.SetText(price == 0 ? "" : dustPrice.ToString() + $"[i:{ModContent.ItemType<SparklyDust>()}]");
+        int dustPriceNum = _hasJewel ? JewelCutDustPrice(JewelItem.info) : 0;
+        string dustPriceText = HighlightStat(Main.LocalPlayer.CountItem(ModContent.ItemType<SparklyDust>()), dustPriceNum);
+        string dustPrice = !_hasJewel ? "" : dustPriceText + "/" + dustPriceNum.ToString() + $" dust [i:{ModContent.ItemType<SparklyDust>()}]";
 
         float chance = _hasJewel ? JewelCutChance(JewelItem.info, _supportItems) : -1;
-        _chanceText.SetText(chance == -1 ? "" : Math.Min(chance * 100, 100).ToString("#0.##") + "% success chance");
+        float chanceAmount = Math.Min(chance * 100, 100);
+
+        bool thresholdCut = _hasJewel && (JewelItem.info.cuts - 7) % 9 == 0;
+        string echoCost = "";
+
+        if (thresholdCut)
+        {
+            int itemID = JewelItem.info.cuts switch 
+            {
+                7 => ModContent.ItemType<ResonantEcho>(),
+                _ => throw new ArgumentException("Uh oh! You aren't in a threshold but you are somehow."),
+            };
+            echoCost = $"0/2 [i:{itemID}] ({Lang.GetItemName(itemID)})";
+        }
+
+        string hex;
+
+        if (chanceAmount > 80)
+            hex = "00FF00";
+        else if (chanceAmount > 40)
+            hex = "FFFF00";
+        else if (chanceAmount > 0)
+            hex = "FF0000";
+        else
+            hex = "000000";
+
+        string cutChance = chance == -1 ? "" : $"[c/{hex}: {chanceAmount:#0.##}]% success chance";
+
+        if (!_hasJewel)
+            _statusText = string.Empty;
+        else if (status is not null)
+            _statusText = status;
+
+        _infoText.SetText(coinPrice + "\n" + dustPrice + "\n" + cutChance + "\n" + echoCost + "\n" + _statusText);
     }
 
     private static int JewelCutCoinPrice(JewelInfo info) => Item.buyPrice(0, 1) * ((int)info.tier + info.successfulCuts + 1);
@@ -63,13 +102,22 @@ internal class CutJewelUIState : UIState
     {
         float baseChance = 1f - (info.successfulCuts * 0.05f);
         float baseOverrideChance = -1;
+        Dictionary<int, int> itemCountsById = new();
+
+        foreach (var item in support)
+        {
+            if (itemCountsById.ContainsKey(item.Item.type))
+                itemCountsById[item.Item.type]++;
+            else
+                itemCountsById.Add(item.Item.type, 1);
+        }
 
         foreach (var item in support)
         {
             if (item.Item.ModItem is not JewelSupportItem supportItem)
                 continue;
 
-            if (supportItem.HardOverrideJewelCutChance(out float newChance))
+            if (supportItem.HardOverrideJewelCutChance(info, out float newChance))
             {
                 if (baseOverrideChance == -1 || newChance > baseOverrideChance)
                     baseOverrideChance = newChance;
@@ -88,18 +136,24 @@ internal class CutJewelUIState : UIState
             if (item.Item.ModItem is not JewelSupportItem supportItem)
                 continue;
 
-            baseChance = (item.Item.ModItem as JewelSupportItem).ModifyJewelCutChance(baseChance);
+            baseChance = (item.Item.ModItem as JewelSupportItem).ModifyJewelCutChance(info, baseChance);
         }
 
         if (!onlyCheck)
             ClearSupportItems(support);
+
         return baseChance;
     }
 
     private static void ClearSupportItems(ItemSlotUI[] support)
     {
         foreach (var item in support)
-            item.Item.TurnToAir();
+        {
+            item.Item.stack--;
+
+            if (item.Item.stack <= 0)
+                item.Item.TurnToAir();
+        }
     }
 
     public override void OnInitialize()
@@ -164,7 +218,7 @@ internal class CutJewelUIState : UIState
 
         if (width != -1)
             _statPanel.Width = StyleDimension.FromPixels(width);
-        _statPanel.Height = StyleDimension.FromPixels(Math.Max(_statPanel.Children.Count(), 2) * 22);
+        _statPanel.Height = StyleDimension.FromPixels(Math.Max(_statPanel.Children.Count(), 2) * 22 + 6);
     }
 
     private string TextModification(TooltipLine text, JewelInfo info, out Color? overrideColor)
@@ -183,12 +237,20 @@ internal class CutJewelUIState : UIState
         if (!_hoveringAnvil)
             return text.Text;
 
-        static string Replacement(string text)
+        static string Replacement(string text, out bool invalidText)
         {
+            invalidText = false;
+
             int plus = text.IndexOf('+') + 1;
             int percent = text.IndexOf('%', plus);
             int space = text.IndexOf(' ', plus);
             int end = percent;
+
+            if (percent < 0 || space < 0 || Math.Abs(percent - space) <= 0)
+            {
+                invalidText = true;
+                return text;
+            }
 
             if ((space < percent && space != 0) || percent < 0)
                 end = space;
@@ -212,7 +274,7 @@ internal class CutJewelUIState : UIState
         {
             overrideColor = Color.Yellow;
 
-            string replacement = Replacement(text.Text);
+            string replacement = Replacement(text.Text, out bool _);
             float current = info.Major.GetEffectValue(PeculiarJewelry.StatConfig.GlobalPowerScaleMinimum);
             return text.Text.Replace(replacement, "[c/ffa500:" + current.ToString("#0.##") + " - " + info.Major.GetEffectValue(1f).ToString("#0.##") + "]");
         }
@@ -222,7 +284,11 @@ internal class CutJewelUIState : UIState
             overrideColor = Color.LightBlue;
 
             int statID = int.Parse(text.Name[^1].ToString());
-            string replacement = Replacement(text.Text);
+            string replacement = Replacement(text.Text, out bool invalidText);
+
+            if (invalidText )
+                return text.Text;
+
             float current = info.SubStats[statID].GetEffectValue(PeculiarJewelry.StatConfig.GlobalPowerScaleMinimum);
             return text.Text.Replace(replacement, "[c/ffa500:" + current.ToString("#0.##") + " - " + info.SubStats[statID].GetEffectValue(1f).ToString("#0.##") + "]");
         }
@@ -233,35 +299,19 @@ internal class CutJewelUIState : UIState
     {
         UIPanel infoPanel = new() // Main back panel
         {
-            Width = StyleDimension.FromPixels(200),
-            Height = StyleDimension.FromPixels(CutPanelHeight),
-            Left = StyleDimension.FromPixelsAndPercent(-364, 0.5f),
+            Width = StyleDimension.FromPixels(240),
+            Height = StyleDimension.FromPixels(CutPanelHeight + 30),
+            Left = StyleDimension.FromPixelsAndPercent(-404, 0.5f),
             Top = StyleDimension.FromPercent(0.25f),
         };
         Append(infoPanel);
 
-        _priceText = new(string.Empty)
+        _infoText = new(string.Empty)
         {
-            IsWrapped = true,
+            IsWrapped = false,
             Width = StyleDimension.Fill
         };
-        infoPanel.Append(_priceText);
-
-        _dustPriceText = new(string.Empty)
-        {
-            IsWrapped = true,
-            Width = StyleDimension.Fill,
-            Top = StyleDimension.FromPixels(26)
-        };
-        infoPanel.Append(_dustPriceText);
-
-        _chanceText = new(string.Empty)
-        {
-            IsWrapped = true,
-            Width = StyleDimension.Fill,
-            Top = StyleDimension.FromPixels(52)
-        };
-        infoPanel.Append(_chanceText);
+        infoPanel.Append(_infoText);
     }
 
     private void SetCutPanel()
@@ -336,14 +386,17 @@ internal class CutJewelUIState : UIState
 
     private bool CanInputSupportItem(Item item, ItemSlotUI self)
     {
+        if (JewelItem is null)
+            return false;
+
         if (item.ModItem is not JewelSupportItem && !item.IsAir && item == Main.mouseItem)
             return false;
 
         foreach (var slot in _supportItems)
             if (!slot.Item.IsAir && item.type == slot.Item.type)
                 return false;
-
-        return true;
+        
+        return item.ModItem is not JewelSupportItem support || support.CanBePlacedInSupportSlot(JewelItem.info);
     }
 
     private void SetDialoguePanel()
@@ -370,34 +423,43 @@ internal class CutJewelUIState : UIState
     private void TryCutJewel(UIMouseEvent evt, UIElement listeningElement)
     {
         if (!_hasJewel)
+        {
+            UpdateInfo("[c/ff0000:Missing] jewel!");
             return; // No jewel stored
+        }
 
         JewelInfo info = (_storedItem.ModItem as Jewel).info;
 
         if (info.cuts >= info.MaxCuts)
+        {
+            UpdateInfo("[c/ff0000:Jewel cannot be cut] any\nfurther!");
             return; // Too many cuts
+        }
 
+        int coinPrice = JewelCutCoinPrice(info);
+        if (Utils.CoinsCount(out bool overflow, Main.LocalPlayer.inventory) < coinPrice || overflow)
+        {
+            UpdateInfo("Not enough [c/ff0000:coins]!");
+            return;
+        }
+
+        int dustPrice = JewelCutDustPrice(info);
+        if (Main.LocalPlayer.CountItem(ModContent.ItemType<SparklyDust>()) < dustPrice)
+        {
+            UpdateInfo($"Not enough [i:{ModContent.ItemType<SparklyDust>()}] [c/ff0000:Dust]!");
+            return;
+        }
+
+        for (int i = 0; i < dustPrice; ++i)
+            Main.LocalPlayer.ConsumeItem(ModContent.ItemType<SparklyDust>(), true);
+
+        Main.LocalPlayer.BuyItem(coinPrice);
         SoundEngine.PlaySound(SoundID.NPCHit4, Main.LocalPlayer.Center);
-        info.TryAddCut(JewelCutChance(info, _supportItems, false));
-    }
+        bool success = info.TryAddCut(JewelCutChance(info, _supportItems, false));
 
-    private static string GetPriceText(long rawCost)
-    {
-        string result = string.Empty;
-        int[] coins = Utils.CoinsSplit(rawCost);
-
-        if (coins[3] > 0)
-            result += $"{coins[3]} platinum[i:{ItemID.PlatinumCoin}]";
-
-        if (coins[2] > 0)
-            result += $"{coins[2]} gold[i:{ItemID.GoldCoin}]";
-
-        if (coins[1] > 0)
-            result += $"{coins[1]} silver[i:{ItemID.SilverCoin}]";
-
-        if (coins[0] > 0)
-            result += $"{coins[0]} copper[i:{ItemID.CopperCoin}]";
-
-        return result;
+        if (success)
+            UpdateInfo("Cut [c/00FF00:successful!]");
+        else
+            UpdateInfo("Cut [c/FF0000:failed.]");
     }
 }

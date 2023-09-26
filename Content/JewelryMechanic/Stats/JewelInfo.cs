@@ -5,6 +5,10 @@ namespace PeculiarJewelry.Content.JewelryMechanic.Stats;
 
 public abstract partial class JewelInfo
 {
+    public virtual int MaxCuts => 20 + (int)tier;
+
+    public int RemainingCuts => MaxCuts - cuts;
+
     public JewelStat Major { get; protected set; }
     public List<JewelStat> SubStats { get; protected set; } = null;
 
@@ -12,8 +16,6 @@ public abstract partial class JewelInfo
     public StatExclusivity exclusivity = StatExclusivity.None;
     public int cuts = 0;
     public int successfulCuts = 0;
-
-    public virtual int MaxCuts => 20 + (int)tier;
 
     public void Setup(JewelTier tier)
     {
@@ -102,12 +104,16 @@ public abstract partial class JewelInfo
 
     internal virtual void InternalSetup() { }
 
-    internal void TryAddCut(float chance)
+    internal bool TryAddCut(float chance)
     {
         cuts++;
 
         if (Main.rand.NextFloat() < chance)
+        {
             SuccessfulCut();
+            return true;
+        }
+        return false;
     }
 
     internal void SuccessfulCut(bool noAdd = false)

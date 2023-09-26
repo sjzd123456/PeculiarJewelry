@@ -3,23 +3,16 @@ using PeculiarJewelry.Content.JewelryMechanic.Stats;
 
 namespace PeculiarJewelry.Content.JewelryMechanic.Items.JewelSupport;
 
-public class DoubleLayeredLens : JewelSupportItem
+public class IrradiatedPearl : JewelSupportItem
 {
     public override void SetDefaults()
     {
         Item.rare = ModContent.RarityType<JewelRarity>();
-        Item.value = Item.sellPrice(silver: 3);
-        Item.Size = new(24, 28);
+        Item.value = Item.sellPrice(gold: 5);
+        Item.Size = new(30, 32);
+        Item.maxStack = Item.CommonMaxStack;
     }
 
-    public override void AddRecipes()
-    {
-        CreateRecipe()
-            .AddIngredient(ItemID.IronBar, 3)
-            .AddIngredient(ItemID.Lens, 2)
-            .AddTile(TileID.Anvils)
-            .Register();
-    }
-
+    public override bool CanBePlacedInSupportSlot(JewelInfo info) => info.cuts >= 8;
     public override float ModifyJewelCutChance(JewelInfo info, float baseChance) => baseChance + 0.05f;
 }
