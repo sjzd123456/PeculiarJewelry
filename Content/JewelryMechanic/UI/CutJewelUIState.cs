@@ -1,18 +1,20 @@
 ﻿using PeculiarJewelry.Content.JewelryMechanic.Items;
 using PeculiarJewelry.Content.JewelryMechanic.Items.Jewels;
 using PeculiarJewelry.Content.JewelryMechanic.Items.JewelSupport;
+using PeculiarJewelry.Content.JewelryMechanic.Items.RadiantEchoes;
 using PeculiarJewelry.Content.JewelryMechanic.Stats;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.GameContent.UI.Elements;
 using Terraria.UI;
 
 namespace PeculiarJewelry.Content.JewelryMechanic.UI;
 
-internal class CutJewelUIState : UIState
+internal class CutJewelUIState : UIState, IClosableUIState
 {
     private const int CutPanelHeight = 180;
 
@@ -27,8 +29,6 @@ internal class CutJewelUIState : UIState
 
     // Info stuff
     private UIText _infoText = null;
-    private string _dustPriceText = null;
-    private string _chanceText = null;
     private string _statusText = string.Empty;
 
     public override void Update(GameTime gameTime)
@@ -58,20 +58,20 @@ internal class CutJewelUIState : UIState
         string dustPriceText = HighlightStat(Main.LocalPlayer.CountItem(ModContent.ItemType<SparklyDust>()), dustPriceNum);
         string dustPrice = !_hasJewel ? "" : dustPriceText + "/" + dustPriceNum.ToString() + $" dust [i:{ModContent.ItemType<SparklyDust>()}]";
 
-        float chance = _hasJewel ? JewelCutChance(JewelItem.info, _supportItems) : -1;
+        float delta = -1;
+        float chance = _hasJewel ? JewelCutChance(JewelItem.info, _supportItems, out delta) : -1;
         float chanceAmount = Math.Min(chance * 100, 100);
 
-        bool thresholdCut = _hasJewel && (JewelItem.info.cuts - 7) % 9 == 0;
+        if (delta == -1)
+            delta = chanceAmount;
+
+        bool thresholdCut = _hasJewel && JewelItem.info.InThresholdCut();
         string echoCost = "";
 
         if (thresholdCut)
         {
-            int itemID = JewelItem.info.cuts switch 
-            {
-                7 => ModContent.ItemType<ResonantEcho>(),
-                _ => throw new ArgumentException("Uh oh! You aren't in a threshold but you are somehow."),
-            };
-            echoCost = $"0/2 [i:{itemID}] ({Lang.GetItemName(itemID)})";
+            int itemID = JewelCutEchoType(JewelItem.info.cuts);
+            echoCost = $"0/2 [i:{itemID}]\n({Lang.GetItemNameValue(itemID)})";
         }
 
         string hex;
@@ -85,7 +85,7 @@ internal class CutJewelUIState : UIState
         else
             hex = "000000";
 
-        string cutChance = chance == -1 ? "" : $"[c/{hex}: {chanceAmount:#0.##}]% success chance";
+        string cutChance = chance == -1 ? "" : $"[c/{hex}: {chanceAmount:#0.##}]% ([c/FFFFFF:{delta:#0.##}) success chance";
 
         if (!_hasJewel)
             _statusText = string.Empty;
@@ -98,8 +98,19 @@ internal class CutJewelUIState : UIState
     private static int JewelCutCoinPrice(JewelInfo info) => Item.buyPrice(0, 1) * ((int)info.tier + info.successfulCuts + 1);
     private static int JewelCutDustPrice(JewelInfo info) => ((int)info.tier + 1) * (info.successfulCuts + 1);
 
-    private static float JewelCutChance(JewelInfo info, ItemSlotUI[] support, bool onlyCheck = true)
+    private static int JewelCutEchoType(int cuts) => cuts switch
     {
+        7 => ModContent.ItemType<RadiantEcho>(),
+        15 => ModContent.ItemType<DoubleRadiantEcho>(),
+        23 => ModContent.ItemType<TripleRadiantEcho>(),
+        31 => ModContent.ItemType<QuadRadiantEcho>(),
+        38 => ModContent.ItemType<QuintRadiantEcho>(),
+        _ => throw new ArgumentException("Uh oh! You aren't in a threshold but you are somehow."),
+    };
+
+    private static float JewelCutChance(JewelInfo info, ItemSlotUI[] support, out float delta, bool onlyCheck = true)
+    {
+        delta = 0f;
         float baseChance = 1f - (info.successfulCuts * 0.05f);
         float baseOverrideChance = -1;
         Dictionary<int, int> itemCountsById = new();
@@ -128,6 +139,8 @@ internal class CutJewelUIState : UIState
         {
             if (!onlyCheck)
                 ClearSupportItems(support);
+
+            delta = baseOverrideChance;
             return baseOverrideChance;
         }
 
@@ -378,7 +391,7 @@ internal class CutJewelUIState : UIState
         }
     }
 
-    private static bool CanJewelSlotAcceptItem(Item item, ItemSlotUI _)
+    public static bool CanJewelSlotAcceptItem(Item item, ItemSlotUI _)
     {
         bool isMouseItem = Main.LocalPlayer.selectedItem == 58 && Main.LocalPlayer.HeldItem == item;
         return item.ModItem is Jewel || item.IsAir || !isMouseItem;
@@ -428,7 +441,7 @@ internal class CutJewelUIState : UIState
             return; // No jewel stored
         }
 
-        JewelInfo info = (_storedItem.ModItem as Jewel).info;
+        JewelInfo info = JewelItem.info;
 
         if (info.cuts >= info.MaxCuts)
         {
@@ -446,20 +459,51 @@ internal class CutJewelUIState : UIState
         int dustPrice = JewelCutDustPrice(info);
         if (Main.LocalPlayer.CountItem(ModContent.ItemType<SparklyDust>()) < dustPrice)
         {
-            UpdateInfo($"Not enough [i:{ModContent.ItemType<SparklyDust>()}] [c/ff0000:Dust]!");
+            UpdateInfo($"Not enough [i:{ModContent.ItemType<SparklyDust>()}] [c/ff0000:Sparkly Dust]!");
             return;
+        }
+
+        if (info.InThresholdCut())
+        {
+            int echoType = JewelCutEchoType(info.cuts);
+
+            if (Main.LocalPlayer.CountItem(echoType, 2) < 2)
+            {
+                UpdateInfo($"Not enough [i:{echoType}]\n[c/ff0000:{Lang.GetItemNameValue(echoType)}es]!");
+                return;
+            }
         }
 
         for (int i = 0; i < dustPrice; ++i)
             Main.LocalPlayer.ConsumeItem(ModContent.ItemType<SparklyDust>(), true);
 
+        if (info.InThresholdCut())
+        {
+            int echoType = JewelCutEchoType(info.cuts);
+
+            for (int i = 0; i < 2; ++i)
+                Main.LocalPlayer.ConsumeItem(echoType, true);
+        }
+
         Main.LocalPlayer.BuyItem(coinPrice);
         SoundEngine.PlaySound(SoundID.NPCHit4, Main.LocalPlayer.Center);
-        bool success = info.TryAddCut(JewelCutChance(info, _supportItems, false));
+        bool success = info.TryAddCut(JewelCutChance(info, _supportItems, out _, false));
 
         if (success)
             UpdateInfo("Cut [c/00FF00:successful!]");
         else
             UpdateInfo("Cut [c/FF0000:failed.]");
+    }
+
+    public void Close()
+    {
+        if (_cutSlot.HasItem)
+            Main.LocalPlayer.QuickSpawnItem(new EntitySource_OverfullInventory(Main.LocalPlayer), _cutSlot.Item);
+
+        foreach (var slot in _supportItems)
+        {
+            if (slot.HasItem)
+                Main.LocalPlayer.QuickSpawnItem(new EntitySource_OverfullInventory(Main.LocalPlayer), slot.Item);
+        }
     }
 }

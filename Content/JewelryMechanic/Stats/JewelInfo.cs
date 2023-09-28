@@ -138,4 +138,6 @@ public abstract partial class JewelInfo
             }
         }
     }
+
+    public bool InThresholdCut() => (cuts - 7) % 8 == 0;
 }

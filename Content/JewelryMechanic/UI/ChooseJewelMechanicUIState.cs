@@ -8,6 +8,7 @@ namespace FF6Mod.UI.Betting;
 internal class ChooseJewelMechanicUIState : UIState
 {
     private static Asset<Texture2D> _CutTexture;
+    private static Asset<Texture2D> _SetTexture;
     private static Asset<Texture2D> _SuperimpositionTexture;
 
     private NPC _LapidaristOwner => Main.npc[_lapidaristWhoAmI];
@@ -17,6 +18,7 @@ internal class ChooseJewelMechanicUIState : UIState
     static ChooseJewelMechanicUIState()
     {
         _CutTexture = ModContent.Request<Texture2D>("PeculiarJewelry/Content/JewelryMechanic/UI/JewelCut");
+        _SetTexture = ModContent.Request<Texture2D>("PeculiarJewelry/Content/JewelryMechanic/UI/JewelSet");
         _SuperimpositionTexture = ModContent.Request<Texture2D>("PeculiarJewelry/Content/JewelryMechanic/UI/Superimposition");
     }
 
@@ -67,11 +69,29 @@ internal class ChooseJewelMechanicUIState : UIState
         };
         cutButton.Append(cutJewelsText);
 
-        UIImageButton impositionButton = new(_SuperimpositionTexture)
+        UIImageButton setButton = new(_SetTexture)
         {
             Width = StyleDimension.FromPixels(32),
             Height = StyleDimension.FromPixels(32),
             Left = StyleDimension.FromPixels(120),
+            Top = StyleDimension.FromPixelsAndPercent(-30, 1),
+            VAlign = 1f,
+        };
+        setButton.OnLeftClick += (UIMouseEvent evt, UIElement listeningElement) => SwitchUI(new SetJewelUIState());
+        panel.Append(setButton);
+
+        UIText setText = new("Set Jewels", 0.8f)
+        {
+            HAlign = 0.5f,
+            Top = StyleDimension.FromPixels(-10)
+        };
+        setButton.Append(setText);
+
+        UIImageButton impositionButton = new(_SuperimpositionTexture)
+        {
+            Width = StyleDimension.FromPixels(32),
+            Height = StyleDimension.FromPixels(32),
+            Left = StyleDimension.FromPixels(220),
             Top = StyleDimension.FromPixelsAndPercent(-30, 1),
             VAlign = 1f,
         };

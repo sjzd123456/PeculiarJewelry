@@ -76,20 +76,52 @@ DoubleLayeredLens: {
 
 CelestialEye: {
 	DisplayName: Celestial Eye
-	Tooltip: ""
+	Tooltip:
+		'''
+		Improves chances of a jewel's cut attempt after attempt 24 and higher.
+		'Simultaneously a harrowing yet magnificent sight'
+		'''
 }
 
 GoldenCarpScales: {
 	DisplayName: Golden Carp Scales
-	Tooltip: ""
+	Tooltip:
+		'''
+		Improves chances of a jewel's cut attempt after attempt 16 and higher.
+		'Glints with a certain magic'
+		'''
 }
 
 IrradiatedPearl: {
 	DisplayName: Irradiated Pearl
+	Tooltip:
+		'''
+		Improves chances of a jewel's cut attempt after attempt 8 and higher.
+		'A miasma of colors dance within'
+		'''
+}
+
+RadiantEcho: {
+	DisplayName: Radiant Echo
+	Tooltip: Can be used to upgrade jewels from cut 7 to 8
+}
+
+DoubleRadiantEcho: {
+	DisplayName: Double Radiant Echo
 	Tooltip: ""
 }
 
-ResonantEcho: {
-	DisplayName: Resonant Echo
+QuadRadiantEcho: {
+	DisplayName: Quad Radiant Echo
+	Tooltip: ""
+}
+
+QuintRadiantEcho: {
+	DisplayName: Quint Radiant Echo
+	Tooltip: ""
+}
+
+TripleRadiantEcho: {
+	DisplayName: Triple Radiant Echo
 	Tooltip: ""
 }

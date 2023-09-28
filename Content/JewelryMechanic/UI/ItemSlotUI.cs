@@ -11,6 +11,8 @@ internal class ItemSlotUI : UIItemSlot
 
     public Item Item => ItemSlots[0];
 
+    public bool HasItem => !Item.IsAir && Item.type > ItemID.None;
+
     private Item[] ItemSlots => (Item[])_UIItemSlotItemArray.GetValue(this);
     private int _context;
     private Func<Item, ItemSlotUI, bool> _handleItem;
