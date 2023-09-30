@@ -44,6 +44,8 @@ public abstract class Jewel : ModItem
 
     public sealed override void ModifyTooltips(List<TooltipLine> tooltips) => JewelInfoTooltips(tooltips, info, this);
 
+    public static string Localize(string text) => Language.GetTextValue("Mods.PeculiarJewelry." + text);
+
     /// <summary>
     /// Adds all relevant tooltips to the given list with the given info.
     /// </summary>
@@ -54,15 +56,10 @@ public abstract class Jewel : ModItem
     /// This ignores the name modification and hides the exclusivity and cuts left.</param>
     public static void JewelInfoTooltips(List<TooltipLine> tooltips, JewelInfo info, ModItem modItem, bool displayAsJewel = true)
     {
-        static string Localize(string text) => Language.GetTextValue("Mods.PeculiarJewelry." + text);
-
         if (displayAsJewel)
         {
             var name = tooltips.First(x => x.Name == "ItemName");
-            name.Text = Localize("Items." + modItem.Name + ".Prefix") + " " + info.tier.Localize() + " " + Localize("Jewelry.Jewel") + " of " + info.Major.GetName().Value;
-
-            if (info.Major.Strength > 1)
-                name.Text += $" +{(int)info.Major.Strength}";
+            name.Text = info.Name;
 
             name.OverrideColor = info.Major.Get().Color;
 
@@ -71,8 +68,7 @@ public abstract class Jewel : ModItem
         else
         {
             string major = info is MajorJewelInfo ? nameof(MajorJewel) : nameof(MinorJewel);
-            string name = Localize("Items." + major + ".Prefix") + " " + info.tier.Localize() + " " + Localize("Jewelry.Jewel") + " of " + info.Major.GetName().Value;
-            tooltips.Add(new TooltipLine(modItem.Mod, "JewelName", name) { OverrideColor = info.Major.Get().Color });
+            tooltips.Add(new TooltipLine(modItem.Mod, "JewelName", info.Name) { OverrideColor = info.Major.Get().Color });
         }
 
         if (info is MajorJewelInfo majorJewelInfo)

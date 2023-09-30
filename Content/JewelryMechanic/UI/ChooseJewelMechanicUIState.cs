@@ -29,8 +29,10 @@ internal class ChooseJewelMechanicUIState : UIState
 
     public override void Update(GameTime gameTime)
     {
+        base.Update(gameTime);
+
         if (_LapidaristOwner.DistanceSQ(Main.LocalPlayer.Center) > 400 * 400)
-            SwitchUI(null);
+            JewelUISystem.SwitchUI(null);
     }
 
     public override void OnInitialize()
@@ -58,7 +60,7 @@ internal class ChooseJewelMechanicUIState : UIState
             Main.npcChatText = "You'd like a jewel cut? Give me the jewel and I can do it...for a nominal price.";
             Main.playerInventory = true;
 
-            SwitchUI(new CutJewelUIState());
+            JewelUISystem.SwitchUI(new CutJewelUIState());
         };
         panel.Append(cutButton);
 
@@ -77,7 +79,7 @@ internal class ChooseJewelMechanicUIState : UIState
             Top = StyleDimension.FromPixelsAndPercent(-30, 1),
             VAlign = 1f,
         };
-        setButton.OnLeftClick += (UIMouseEvent evt, UIElement listeningElement) => SwitchUI(new SetJewelUIState());
+        setButton.OnLeftClick += (UIMouseEvent evt, UIElement listeningElement) => JewelUISystem.SwitchUI(new SetJewelUIState());
         panel.Append(setButton);
 
         UIText setText = new("Set Jewels", 0.8f)
@@ -95,7 +97,7 @@ internal class ChooseJewelMechanicUIState : UIState
             Top = StyleDimension.FromPixelsAndPercent(-30, 1),
             VAlign = 1f,
         };
-        impositionButton.OnLeftClick += (UIMouseEvent evt, UIElement listeningElement) => SwitchUI(null);
+        impositionButton.OnLeftClick += (UIMouseEvent evt, UIElement listeningElement) => JewelUISystem.SwitchUI(null);
         panel.Append(impositionButton);
 
         UIText impositionText = new("Superimposition", 0.8f)
@@ -105,6 +107,4 @@ internal class ChooseJewelMechanicUIState : UIState
         };
         impositionButton.Append(impositionText);
     }
-
-    private static void SwitchUI(UIState state) => JewelUISystem.Instance.JewelInterface.SetState(state);
 }

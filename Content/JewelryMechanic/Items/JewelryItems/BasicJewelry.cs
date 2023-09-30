@@ -26,6 +26,7 @@ public class BasicJewelry : ModItem
         Item.rare = ItemRarityID.Green;
         Item.value = Item.sellPrice(silver: 3);
 
+        tier = JewelryTier.Extravagant;
         Info = new((int)tier + 1);
     }
 

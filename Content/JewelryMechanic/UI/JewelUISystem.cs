@@ -22,6 +22,14 @@ internal class JewelUISystem : ModSystem
         }
     }
 
+    public static void SwitchUI(UIState state)
+    {
+        if (Instance.JewelInterface.CurrentState is IClosableUIState close)
+            close.Close();
+
+        Instance.JewelInterface.SetState(state);
+    }
+
     public override void UpdateUI(GameTime gameTime) => JewelInterface.Update(gameTime);
 
     public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)

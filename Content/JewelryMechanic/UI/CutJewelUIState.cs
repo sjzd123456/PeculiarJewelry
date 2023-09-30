@@ -33,6 +33,8 @@ internal class CutJewelUIState : UIState, IClosableUIState
 
     public override void Update(GameTime gameTime)
     {
+        base.Update(gameTime);
+
         _storedItem = _cutSlot.Item;
         _hasJewel = _storedItem.ModItem is Jewel;
         ResetStatPanelWith(_storedItem);
@@ -85,7 +87,7 @@ internal class CutJewelUIState : UIState, IClosableUIState
         else
             hex = "000000";
 
-        string cutChance = chance == -1 ? "" : $"[c/{hex}: {chanceAmount:#0.##}]% ([c/FFFFFF:{delta:#0.##}) success chance";
+        string cutChance = chance == -1 ? "" : $"[c/{hex}:{chanceAmount:#0.##}]% ([c/{(delta >= 0 ? "00FF00" : "FF0000")}:{delta * 100:#0.##}%]) success chance";
 
         if (!_hasJewel)
             _statusText = string.Empty;
@@ -111,7 +113,8 @@ internal class CutJewelUIState : UIState, IClosableUIState
     private static float JewelCutChance(JewelInfo info, ItemSlotUI[] support, out float delta, bool onlyCheck = true)
     {
         delta = 0f;
-        float baseChance = 1f - (info.successfulCuts * 0.05f);
+        float originalChance = 1f - (info.successfulCuts * 0.05f);
+        float baseChance = originalChance;
         float baseOverrideChance = -1;
         Dictionary<int, int> itemCountsById = new();
 
@@ -155,6 +158,7 @@ internal class CutJewelUIState : UIState, IClosableUIState
         if (!onlyCheck)
             ClearSupportItems(support);
 
+        delta = baseChance - originalChance;
         return baseChance;
     }
 
@@ -185,7 +189,7 @@ internal class CutJewelUIState : UIState, IClosableUIState
             Width = StyleDimension.FromPixels(360),
             Height = StyleDimension.FromPixels(CutPanelHeight + 80),
             Left = StyleDimension.FromPixelsAndPercent(166, 0.5f),
-            Top = StyleDimension.FromPercent(0.25f),
+            Top = StyleDimension.FromPercent(0.15f),
         };
         Append(_statPanel);
 
@@ -315,7 +319,7 @@ internal class CutJewelUIState : UIState, IClosableUIState
             Width = StyleDimension.FromPixels(240),
             Height = StyleDimension.FromPixels(CutPanelHeight + 30),
             Left = StyleDimension.FromPixelsAndPercent(-404, 0.5f),
-            Top = StyleDimension.FromPercent(0.25f),
+            Top = StyleDimension.FromPercent(0.15f),
         };
         Append(infoPanel);
 
@@ -332,8 +336,8 @@ internal class CutJewelUIState : UIState, IClosableUIState
         UIPanel panel = new() // Main back panel
         {
             Width = StyleDimension.FromPixels(320),
-            Height = StyleDimension.FromPixels(CutPanelHeight),
-            Top = StyleDimension.FromPercent(0.25f),
+            Height = StyleDimension.FromPixels(CutPanelHeight + 30),
+            Top = StyleDimension.FromPercent(0.15f),
             HAlign = 0.5f,
         };
         Append(panel);
@@ -374,7 +378,7 @@ internal class CutJewelUIState : UIState, IClosableUIState
 
         UIText supportText = new("Support")
         {
-            Top = StyleDimension.FromPixels(CutPanelHeight - 90),
+            Top = StyleDimension.FromPixels(CutPanelHeight - 60),
             Left = StyleDimension.FromPixels(20),
         };
         panel.Append(supportText);
@@ -414,23 +418,13 @@ internal class CutJewelUIState : UIState, IClosableUIState
 
     private void SetDialoguePanel()
     {
-        UIPanel dialoguePanel = new() // Main back panel
+        Append(new UINPCDialoguePanel()
         {
-            Width = StyleDimension.FromPixels(400),
-            Height = StyleDimension.FromPixels(80),
-            Top = StyleDimension.FromPixelsAndPercent(-320, 0.25f),
             HAlign = 0.5f,
-            VAlign = 0.25f,
-        };
-        Append(dialoguePanel);
-
-        UIText dialogue = new(Main.npcChatText)
-        {
-            IsWrapped = true,
-            Width = StyleDimension.Fill
-        };
-        dialogue.OnUpdate += (UIElement self) => (self as UIText).SetText(Main.npcChatText);
-        dialoguePanel.Append(dialogue);
+            Top = StyleDimension.FromPixelsAndPercent(64, 0.15f),
+            Width = StyleDimension.FromPixels(320),
+            Height = StyleDimension.FromPixels(600)
+        });
     }
 
     private void TryCutJewel(UIMouseEvent evt, UIElement listeningElement)

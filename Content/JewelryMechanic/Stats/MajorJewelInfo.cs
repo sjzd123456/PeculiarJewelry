@@ -8,6 +8,8 @@ internal class MajorJewelInfo : JewelInfo
 {
     internal TriggerEffect effect;
 
+    public override string Prefix => "Major";
+
     internal override void InternalSetup()
     {
         SubStats = new System.Collections.Generic.List<JewelStat>(4);

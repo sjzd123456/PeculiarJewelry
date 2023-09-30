@@ -1,13 +1,28 @@
-﻿using System;
+﻿using PeculiarJewelry.Content.JewelryMechanic.Items.Jewels;
+using System;
 using System.Collections.Generic;
 
 namespace PeculiarJewelry.Content.JewelryMechanic.Stats;
 
 public abstract partial class JewelInfo
 {
+    public abstract string Prefix { get; }
     public virtual int MaxCuts => 20 + (int)tier;
 
     public int RemainingCuts => MaxCuts - cuts;
+
+    public string Name
+    {
+        get
+        {
+            string text = $"{Prefix} {tier.Localize()} {Jewel.Localize("Jewelry.Jewel")} of {Major.GetName().Value}";
+
+            if (Major.Strength > 1)
+                text += $" +{(int)Major.Strength}";
+
+            return text;
+        }
+    }
 
     public JewelStat Major { get; protected set; }
     public List<JewelStat> SubStats { get; protected set; } = null;
