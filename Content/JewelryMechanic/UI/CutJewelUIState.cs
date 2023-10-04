@@ -258,19 +258,25 @@ internal class CutJewelUIState : UIState, IClosableUIState
         {
             invalidText = false;
 
-            int plus = text.IndexOf('+') + 1;
-            int percent = text.IndexOf('%', plus);
-            int space = text.IndexOf(' ', plus);
-            int end = percent;
-
-            if (percent < 0 || space < 0 || Math.Abs(percent - space) <= 0)
+            if (!text.Contains('+'))
             {
                 invalidText = true;
                 return text;
             }
 
+            int plus = text.IndexOf('+') + 1;
+            int percent = text.IndexOf('%', plus);
+            int space = text.IndexOf(' ', plus);
+            int end = percent;
+
             if ((space < percent && space != 0) || percent < 0)
                 end = space;
+
+            if ((percent < 0 && space < 0) || plus - end > 0)
+            {
+                invalidText = true;
+                return text;
+            }
 
             return text[plus..end];
         }
@@ -303,7 +309,7 @@ internal class CutJewelUIState : UIState, IClosableUIState
             int statID = int.Parse(text.Name[^1].ToString());
             string replacement = Replacement(text.Text, out bool invalidText);
 
-            if (invalidText )
+            if (invalidText)
                 return text.Text;
 
             float current = info.SubStats[statID].GetEffectValue(PeculiarJewelry.StatConfig.GlobalPowerScaleMinimum);
@@ -341,6 +347,20 @@ internal class CutJewelUIState : UIState, IClosableUIState
             HAlign = 0.5f,
         };
         Append(panel);
+
+        UIImageButton close = new UIImageButton(ModContent.Request<Texture2D>("PeculiarJewelry/Content/JewelryMechanic/UI/Close"))
+        {
+            Width = StyleDimension.FromPixels(32),
+            Height = StyleDimension.FromPixels(32),
+        };
+
+        close.OnLeftClick += (_, _) =>
+        {
+            JewelUISystem.SwitchUI(null);
+            SoundEngine.PlaySound(SoundID.MenuClose);
+        };
+
+        panel.Append(close);
 
         Item air = new();
         air.TurnToAir();

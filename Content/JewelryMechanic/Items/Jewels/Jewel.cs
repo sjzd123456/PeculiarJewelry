@@ -42,7 +42,7 @@ public abstract class Jewel : ModItem
             info.Setup(open.Player.GetModPlayer<StupidIdiotItemLootWorkaroundPlayer>().storedTier);
     }
 
-    public sealed override void ModifyTooltips(List<TooltipLine> tooltips) => JewelInfoTooltips(tooltips, info, this);
+    public sealed override void ModifyTooltips(List<TooltipLine> tooltips) => PlainJewelTooltips(tooltips, info, this);
 
     public static string Localize(string text) => Language.GetTextValue("Mods.PeculiarJewelry." + text);
 
@@ -54,13 +54,12 @@ public abstract class Jewel : ModItem
     /// <param name="modItem">The mod item this is being attached to.</param>
     /// <param name="displayAsJewel">Whether this is being used directly on a Jewel item or as part of a jewelry accessory. 
     /// This ignores the name modification and hides the exclusivity and cuts left.</param>
-    public static void JewelInfoTooltips(List<TooltipLine> tooltips, JewelInfo info, ModItem modItem, bool displayAsJewel = true)
+    public static void PlainJewelTooltips(List<TooltipLine> tooltips, JewelInfo info, ModItem modItem, bool displayAsJewel = true)
     {
         if (displayAsJewel)
         {
             var name = tooltips.First(x => x.Name == "ItemName");
             name.Text = info.Name;
-
             name.OverrideColor = info.Major.Get().Color;
 
             tooltips.Add(new TooltipLine(modItem.Mod, "JewelTier", Language.GetText("Mods.PeculiarJewelry.Jewelry.TierTooltip").WithFormatArgs((int)info.tier).Value));
@@ -72,7 +71,7 @@ public abstract class Jewel : ModItem
         }
 
         if (info is MajorJewelInfo majorJewelInfo)
-            tooltips.Add(new TooltipLine(modItem.Mod, "TriggerEffect", majorJewelInfo.EffectTooltip()));
+            tooltips.Add(new TooltipLine(modItem.Mod, "TriggerEffect", majorJewelInfo.TriggerTooltip()));
 
         if (displayAsJewel || PeculiarJewelry.ShiftDown)
         {

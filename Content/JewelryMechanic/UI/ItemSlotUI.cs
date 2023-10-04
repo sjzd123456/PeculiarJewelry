@@ -28,6 +28,8 @@ internal class ItemSlotUI : UIItemSlot
         _handleItem = handleItemFunc;
     }
 
+    public void ForceItem(Item newItem) => ItemSlots[0] = newItem;
+
     private void HandleItemSlotLogic()
     {
         if (IsMouseHovering)

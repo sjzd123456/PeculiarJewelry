@@ -3,7 +3,9 @@ using PeculiarJewelry.Content.JewelryMechanic.Items.Jewels;
 using PeculiarJewelry.Content.JewelryMechanic.Stats;
 using ReLogic.Graphics;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.GameContent.UI.Elements;
@@ -22,6 +24,8 @@ internal class SetJewelUIState : UIState, IClosableUIState
     ItemSlotUI _jewelrySlot = null;
     ItemSlotUI[] _jewelSlots = null;
     ItemSlotUI[] _supportSlots = null;
+    Item[] _displayJewelItems = null;
+    bool[] _displayJewel = null;
 
     public override void OnInitialize()
     {
@@ -35,19 +39,35 @@ internal class SetJewelUIState : UIState, IClosableUIState
     {
         UIPanel panel = new()
         {
-            Width = StyleDimension.FromPixels(200),
+            Width = StyleDimension.FromPixels(300),
             Height = StyleDimension.FromPixels(280),
             HAlign = 0.5f,
-            Left = StyleDimension.FromPixels(246),
+            Left = StyleDimension.FromPixels(296),
             Top = StyleDimension.FromPixels(60)
         };
         Append(panel);
 
         UIText stats = new("No jewelry inserted.")
         {
-
+            IsWrapped = true,
+            Width = StyleDimension.Fill,
+            Height = StyleDimension.Fill,
         };
+        stats.OnUpdate += UpdateFutureStats;
         panel.Append(stats);
+    }
+
+    private void UpdateFutureStats(UIElement affectedElement)
+    {
+        UIText self = affectedElement as UIText;
+        self.SetText(GetStats(true));
+
+        UIPanel parent = self.Parent as UIPanel;
+        var wrapped = Font.CreateWrappedText(self.Text, parent.GetInnerDimensions().Width);
+        var size = ChatManager.GetStringSize(Font, wrapped, Vector2.One);
+        size = !self.IsWrapped ? new Vector2(size.X, 16f) : new Vector2(size.X, size.Y + self.WrappedTextBottomPadding);
+        parent.Height = StyleDimension.FromPixels(size.Y);
+        parent.Recalculate();
     }
 
     private void SetCurrentStatPanel()
@@ -81,7 +101,6 @@ internal class SetJewelUIState : UIState, IClosableUIState
         var wrapped = Font.CreateWrappedText(self.Text, parent.GetInnerDimensions().Width);
         var size = ChatManager.GetStringSize(Font, wrapped, Vector2.One);
         size = !self.IsWrapped ? new Vector2(size.X, 16f) : new Vector2(size.X, size.Y + self.WrappedTextBottomPadding);
-        //parent.Width = StyleDimension.FromPixels(size.X);
         parent.Height = StyleDimension.FromPixels(size.Y);
         parent.Recalculate();
     }
@@ -94,29 +113,37 @@ internal class SetJewelUIState : UIState, IClosableUIState
         if (!Jewelry.Info.Any())
             return "Jewelry has no jewels!";
 
-        string allStats = "[c/00FF00:Contains:]\n";
+        string allStats = isFuture ? "[c/00FF00:Will contain:]\n" : "[c/00FF00:Contains:]\n";
 
-        foreach (var info in Jewelry.Info)
+        if (isFuture && Jewelry.Info.Count >= Jewelry.Info.Capacity)
+            return "[c/FF8888:Jewelry cannot]\naccept more jewels!";
+
+        if (PeculiarJewelry.ShiftDown)
         {
-            allStats += info.Name + "\n";
-
-            if (info is MajorJewelInfo major)
-                allStats += major.EffectTooltip() + "\n";
-
-            allStats += info.Major.GetDescription() + "\n";
-
-            if (PeculiarJewelry.ShiftDown)
+            foreach (var info in Jewelry.Info)
             {
+                allStats += info.Name + "\n";
+
+                if (info is MajorJewelInfo major)
+                    allStats += major.TriggerTooltip() + "\n";
+
+                allStats += info.Major.GetDescription() + "\n";
+
                 foreach (var item in info.SubStatTooltips())
                     allStats += item + "\n";
+
+                if (Jewelry.Info.IndexOf(info) < Jewelry.Info.Count - 1)
+                    allStats += "- - -\n";
             }
-
-            if (Jewelry.Info.IndexOf(info) < Jewelry.Info.Count - 1)
-                allStats += "- - -\n";
         }
+        else
+        {
+            List<TooltipLine> lines = new();
+            BasicJewelry.SummaryJewelryTooltips(lines, Jewelry);
 
-        if (!PeculiarJewelry.ShiftDown)
-            allStats += "\n" + Language.GetTextValue("Mods.PeculiarJewelry.Jewelry.HoldShift");
+            foreach (var item in lines)
+                allStats += item.Text + "\n";
+        }
 
         return allStats;
     }
@@ -139,13 +166,16 @@ internal class SetJewelUIState : UIState, IClosableUIState
         };
         panel.Append(cutText);
 
+        _displayJewel = new bool[5] { false, false, false, false, false };
+        _displayJewelItems = new Item[5] { null, null, null, null, null };
         Item air = new();
         air.TurnToAir();
-        _jewelrySlot = new(new Item[] { air }, 0, ItemSlot.Context.ChestItem, CanJewelSlotAcceptItem)
+        _jewelrySlot = new(new Item[] { air }, 0, ItemSlot.Context.ChestItem, CanJewelrySlotAcceptItem)
         {
             HAlign = 0.5f,
             Top = StyleDimension.FromPixels(110)
         };
+        _jewelrySlot.OnUpdate += UpdateJewelSlots;
         panel.Append(_jewelrySlot);
 
         UIText jewelryText = new("Jewelry", 0.8f)
@@ -158,7 +188,8 @@ internal class SetJewelUIState : UIState, IClosableUIState
         _jewelSlots = new ItemSlotUI[5];
         for (int i = 0; i < 5; ++i)
         {
-            _jewelSlots[i] = new(new Item[] { air }, 0, ItemSlot.Context.ChestItem, CutJewelUIState.CanJewelSlotAcceptItem)
+            int slot = i;
+            _jewelSlots[i] = new(new Item[] { air }, 0, ItemSlot.Context.ChestItem, (Item item, ItemSlotUI _) => CanJewelSlotAcceptItem(item, slot))
             {
                 HAlign = 0.5f,
                 Left = StyleDimension.FromPixels((i - 2) * 52),
@@ -204,6 +235,54 @@ internal class SetJewelUIState : UIState, IClosableUIState
         _supportSlots[1].Append(supportText);
     }
 
+    private bool CanJewelSlotAcceptItem(Item item, int i)
+    {
+        if (_displayJewel[i])
+            return false;
+
+        bool isMouseItem = Main.LocalPlayer.selectedItem == 58 && Main.LocalPlayer.HeldItem == item;
+        return item.ModItem is Jewel || item.IsAir || !isMouseItem;
+    }
+
+    private void UpdateJewelSlots(UIElement affectedElement)
+    {
+        if (!HasJewelry)
+        {
+            for (int i = 0; i < _jewelSlots.Length; i++)
+            {
+                var self = _jewelSlots[i];
+
+                if (!self.Item.IsAir)
+                    self.Item.TurnToAir();
+            }
+
+            _displayJewelItems = new Item[5] { null, null, null, null, null };
+        }
+        else
+        {
+            _displayJewel = new bool[5] { false, false, false, false, false };
+
+            for (int i = 0; i < _jewelSlots.Length; i++)
+            {
+                if (Jewelry.Info.Count <= i)
+                    break;
+                
+                var self = _jewelSlots[i];
+                var info = Jewelry.Info[i];
+
+                if (_displayJewelItems[i] is null)
+                {
+                    Item item = new(info is MajorJewelInfo ? ModContent.ItemType<MajorJewel>() : ModContent.ItemType<MinorJewel>());
+                    (item.ModItem as Jewel).info = info;
+                    _displayJewelItems[i] = item;
+                }
+
+                _displayJewel[i] = true;
+                self.ForceItem(_displayJewelItems[i].Clone());
+            }
+        }
+    }
+
     private void SetDialoguePanel()
     {
         Append(new UINPCDialoguePanel()
@@ -223,25 +302,26 @@ internal class SetJewelUIState : UIState, IClosableUIState
         if (!_jewelSlots.Any(x => !x.Item.IsAir))
             return;
 
-        var jewelry = _jewelrySlot.Item.ModItem as BasicJewelry;
-
-        if (jewelry.Info.Count >= jewelry.Info.Capacity)
+        if (Jewelry.Info.Count >= Jewelry.Info.Capacity || Jewelry.Info.Count >= 5)
             return;
 
-        for (int i = 0; i < jewelry.Info.Capacity; ++i) 
+        for (int i = 0; i < Jewelry.Info.Capacity; ++i) 
         {
-            if (!_jewelSlots[i].HasItem)
+            if (!_jewelSlots[i].HasItem || _displayJewel[i])
                 continue;
 
             var jewel = _jewelSlots[i].Item.ModItem as Jewel;
-            jewelry.Info.Add(jewel.info);
+            Jewelry.Info.Add(jewel.info);
             _jewelSlots[i].Item.TurnToAir();
+
+            if (Jewelry.Info.Count >= Jewelry.Info.Capacity || Jewelry.Info.Count >= 5)
+                break;
         }
 
         Main.npcChatText = "There you are! Proud of this one.";
     }
 
-    private static bool CanJewelSlotAcceptItem(Item item, ItemSlotUI _)
+    private static bool CanJewelrySlotAcceptItem(Item item, ItemSlotUI _)
     {
         bool isMouseItem = Main.LocalPlayer.selectedItem == 58 && Main.LocalPlayer.HeldItem == item;
         return item.ModItem is BasicJewelry || item.IsAir || !isMouseItem;

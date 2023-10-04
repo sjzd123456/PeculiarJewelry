@@ -1,7 +1,9 @@
 ﻿using PeculiarJewelry.Content.JewelryMechanic.Items.Jewels;
 using PeculiarJewelry.Content.JewelryMechanic.Stats;
 using PeculiarJewelry.Content.JewelryMechanic.Stats.IO;
+using System;
 using System.Collections.Generic;
+using Terraria;
 using Terraria.ModLoader.IO;
 
 namespace PeculiarJewelry.Content.JewelryMechanic.Items.JewelryItems;
@@ -33,10 +35,46 @@ public class BasicJewelry : ModItem
     public override void ModifyTooltips(List<TooltipLine> tooltips)
     {
         if (!PeculiarJewelry.ShiftDown)
+        {
+            SummaryJewelryTooltips(tooltips, this);
             tooltips.Add(new TooltipLine(Mod, "ShiftNotice", Language.GetTextValue("Mods.PeculiarJewelry.Jewelry.HoldShift")));
+        }
+        else
+            foreach (var item in Info)
+                Jewel.PlainJewelTooltips(tooltips, item, this, false);
+    }
 
-        foreach (var item in Info)
-            Jewel.JewelInfoTooltips(tooltips, item, this, false);
+    public static void SummaryJewelryTooltips(List<TooltipLine> tooltips, BasicJewelry basicJewelry)
+    {
+        Dictionary<StatType, float> strengthsByType = new();
+        Dictionary<StatType, Color> colorsByType = new();
+        int triggerIndex = 0;
+
+        foreach (var item in basicJewelry.Info)
+        {
+            List<JewelStat> stats = new() { item.Major };
+            stats.AddRange(item.SubStats);
+
+            foreach (var stat in stats)
+            {
+                if (strengthsByType.ContainsKey(stat.Type))
+                    strengthsByType[stat.Type] += stat.GetEffectValue();
+                else
+                {
+                    strengthsByType.Add(stat.Type, stat.GetEffectValue());
+                    colorsByType.Add(stat.Type, stat.Get().Color);
+                }
+            }
+
+            if (item is MajorJewelInfo major)
+                tooltips.Add(new(basicJewelry.Mod, "TriggerEffect" + triggerIndex++, major.TriggerTooltip()));
+        }
+
+        foreach (var (type, strength) in strengthsByType)
+        {
+            var desc = "+" + Language.GetText("Mods.PeculiarJewelry.Jewelry.StatTypes." + type + ".Description").WithFormatArgs(strength.ToString("#0.##")).Value;
+            tooltips.Add(new TooltipLine(basicJewelry.Mod, "SummaryInfo" + type, desc) { OverrideColor = colorsByType[type] });
+        }
     }
 
     public override void UpdateAccessory(Player player, bool hideVisual)

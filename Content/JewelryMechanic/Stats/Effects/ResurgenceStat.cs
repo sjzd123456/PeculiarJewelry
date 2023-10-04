@@ -3,7 +3,7 @@
 internal class ResurgenceStat : JewelStatEffect
 {
     public override StatType Type => StatType.Resurgence;
-    public override Color Color => Color.LavenderBlush;
+    public override Color Color => Color.Lavender;
 
     public override StatExclusivity Exclusivity => StatExclusivity.Magic;
 
