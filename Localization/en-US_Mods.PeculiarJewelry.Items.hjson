@@ -107,41 +107,62 @@ RadiantEcho: {
 }
 
 DoubleRadiantEcho: {
-	DisplayName: Double Radiant Echo
-	Tooltip: ""
-}
-
-QuadRadiantEcho: {
-	DisplayName: Quad Radiant Echo
-	Tooltip: ""
-}
-
-QuintRadiantEcho: {
-	DisplayName: Quint Radiant Echo
-	Tooltip: ""
+	DisplayName: Double-Forged Radiant Echo
+	Tooltip: Can be used to upgrade jewels from cut 15 to 16
 }
 
 TripleRadiantEcho: {
-	DisplayName: Triple Radiant Echo
-	Tooltip: ""
+	DisplayName: Triple-Forged Radiant Echo
+	Tooltip: Can be used to upgrade jewels from cut 23 to 24
+}
+
+QuadRadiantEcho: {
+	DisplayName: Quad-Forged Radiant Echo
+	Tooltip: Can be used to upgrade jewels from cut 31 to 32
+}
+
+QuintRadiantEcho: {
+	DisplayName: Penta-Forged Radiant Echo
+	Tooltip: Can be used to upgrade jewels from cut 39 to 40
 }
 
 RoughPliers: {
 	DisplayName: Rough Pliers
-	Tooltip: ""
-}
-
-GentlePliers: {
-	DisplayName: Gentle Pliers
-	Tooltip: ""
+	CommonTooltip:
+		'''
+		Allows extraction of set jewels from jewelry
+		Successful extraction breaks the pliers
+		'''
+	Tooltip:
+		'''
+		{$RoughPliers.CommonTooltip}
+		25% success chance
+		'''
 }
 
 NicePliers: {
 	DisplayName: Nice Pliers
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$RoughPliers.CommonTooltip}
+		50% success chance
+		'''
+}
+
+GentlePliers: {
+	DisplayName: Gentle Pliers
+	Tooltip:
+		'''
+		{$RoughPliers.CommonTooltip}
+		75% success chance
+		'''
 }
 
 SilkenPliers: {
 	DisplayName: Silken Pliers
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$RoughPliers.CommonTooltip}
+		Always succeeds
+		'''
 }

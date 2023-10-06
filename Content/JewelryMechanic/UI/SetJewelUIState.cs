@@ -6,8 +6,6 @@ using ReLogic.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
-using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.GameContent.UI.Elements;
@@ -31,6 +29,8 @@ internal class SetJewelUIState : UIState, IClosableUIState
     Item[] _displayJewelItems = null;
     bool[] _displayJewel = null;
 
+    private static string Localize(string postfix) => Language.GetTextValue("Mods.PeculiarJewelry.UI.SetMenu." + postfix);
+
     public override void OnInitialize()
     {
         SetDialoguePanel();
@@ -51,7 +51,7 @@ internal class SetJewelUIState : UIState, IClosableUIState
         };
         Append(panel);
 
-        UIText stats = new("No jewelry inserted.")
+        UIText stats = new(CutJewelUIState.Localize("NoJewel"))
         {
             IsWrapped = false,
             Width = StyleDimension.Fill,
@@ -86,7 +86,7 @@ internal class SetJewelUIState : UIState, IClosableUIState
         };
         Append(panel);
 
-        UIText stats = new("No jewelry inserted.")
+        UIText stats = new(CutJewelUIState.Localize("NoJewel"))
         {
             IsWrapped = true,
             Width = StyleDimension.Fill,
@@ -112,12 +112,12 @@ internal class SetJewelUIState : UIState, IClosableUIState
     private string GetStats(bool isFuture)
     {
         if (!HasJewelry)
-            return "No jewelry inserted.";
+            return CutJewelUIState.Localize("NoJewel");
 
-        string allStats = isFuture ? "[c/00FF00:Will contain:]\n" : "[c/00FF00:Contains:]\n";
+        string allStats = isFuture ? $"[c/00FF00:{Localize("WillContain")}:]\n" : $"[c/00FF00:{Localize("Contains")}:]\n";
 
         if (isFuture && Jewelry.Info.Count >= Jewelry.Info.Capacity)
-            return "[c/FF8888:Jewelry cannot accept more jewels!]";
+            return Localize("Full");
 
         List<JewelInfo> info = new(Jewelry.Info);
 
@@ -142,7 +142,7 @@ internal class SetJewelUIState : UIState, IClosableUIState
         }
 
         if (!info.Any())
-            return "Jewelry has no jewels!";
+            return Localize("Empty");
 
         const string Hex = "[c/ffff00:";
 
@@ -197,7 +197,7 @@ internal class SetJewelUIState : UIState, IClosableUIState
         };
         Append(panel);
 
-        UIText cutText = new("Jewel Setting")
+        UIText cutText = new(Localize("Name"))
         {
             HAlign = 0.5f,
             TextColor = Color.Aquamarine,
@@ -216,7 +216,7 @@ internal class SetJewelUIState : UIState, IClosableUIState
         _jewelrySlot.OnUpdate += UpdateJewelSlots;
         panel.Append(_jewelrySlot);
 
-        UIText jewelryText = new("Jewelry", 0.8f)
+        UIText jewelryText = new(Localize("Jewelry"), 0.8f)
         {
             HAlign = 0.5f,
             Top = StyleDimension.FromPixels(-14)
@@ -236,7 +236,7 @@ internal class SetJewelUIState : UIState, IClosableUIState
             panel.Append(_jewelSlots[i]);
         }
 
-        UIText jewelText = new("Jewels", 0.8f)
+        UIText jewelText = new(Localize("Jewels"), 0.8f)
         {
             HAlign = 0.5f,
             Top = StyleDimension.FromPixels(-14)
@@ -265,7 +265,7 @@ internal class SetJewelUIState : UIState, IClosableUIState
         button.OnLeftClick += SetJewel;
         panel.Append(button);
 
-        UIText supportText = new("Support Items", 0.8f)
+        UIText supportText = new(Localize("SupportItems"), 0.8f)
         {
             HAlign = 0.5f,
             Top = StyleDimension.FromPixels(-14)

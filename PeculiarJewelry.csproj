@@ -13,6 +13,8 @@
     <None Remove="Localization\en-US_Mods.PeculiarJewelry.hjson" />
     <None Remove="Localization\en-US_Mods.PeculiarJewelry.Jewelry.hjson" />
     <None Remove="Localization\en-US_Mods.PeculiarJewelry.Jewelry.StatTypes.hjson" />
+    <None Remove="Localization\en-US_Mods.PeculiarJewelry.UI.CutMenu.hjson" />
+    <None Remove="Localization\en-US_Mods.PeculiarJewelry.UI.SetMenu.hjson" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="tModLoader.CodeAssist" Version="0.1.*" />

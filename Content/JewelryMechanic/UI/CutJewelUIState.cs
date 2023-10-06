@@ -5,6 +5,7 @@ using PeculiarJewelry.Content.JewelryMechanic.Items.RadiantEchoes;
 using PeculiarJewelry.Content.JewelryMechanic.Stats;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -31,6 +32,8 @@ internal class CutJewelUIState : UIState, IClosableUIState
     private UIText _infoText = null;
     private string _statusText = string.Empty;
 
+    internal static string Localize(string postfix) => Language.GetTextValue("Mods.PeculiarJewelry.UI.CutMenu." + postfix);
+
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
@@ -50,15 +53,15 @@ internal class CutJewelUIState : UIState, IClosableUIState
             return $"[c/{(value >= cutoff ? white : red)}:{value}]";
         }
 
-        string noJewel = "(No jewel selected)";
+        string noJewel = Localize("NoJewel");
         float price = _hasJewel ? JewelCutCoinPrice(JewelItem.info) : 0;
         int goldCoins = (int)(Utils.CoinsCount(out bool _, Main.LocalPlayer.inventory) / Item.buyPrice(0, 1, 0, 0));
         int endCoins = Utils.CoinsSplit((long)price)[2];
-        string coinPrice = !_hasJewel ? noJewel : HighlightStat(goldCoins, endCoins) + "/" + endCoins + $" gold [i:{ItemID.GoldCoin}]";
+        string coinPrice = !_hasJewel ? noJewel : HighlightStat(goldCoins, endCoins) + "/" + endCoins + $" {Localize("Gold")} [i:{ItemID.GoldCoin}]";
 
         int dustPriceNum = _hasJewel ? JewelCutDustPrice(JewelItem.info) : 0;
         string dustPriceText = HighlightStat(Main.LocalPlayer.CountItem(ModContent.ItemType<SparklyDust>()), dustPriceNum);
-        string dustPrice = !_hasJewel ? "" : dustPriceText + "/" + dustPriceNum.ToString() + $" dust [i:{ModContent.ItemType<SparklyDust>()}]";
+        string dustPrice = !_hasJewel ? "" : dustPriceText + "/" + dustPriceNum.ToString() + $" {Localize("Dust")} [i:{ModContent.ItemType<SparklyDust>()}]";
 
         float delta = -1;
         float chance = _hasJewel ? JewelCutChance(JewelItem.info, _supportItems, out delta) : -1;
@@ -87,7 +90,7 @@ internal class CutJewelUIState : UIState, IClosableUIState
         else
             hex = "000000";
 
-        string cutChance = chance == -1 ? "" : $"[c/{hex}:{chanceAmount:#0.##}]% ([c/{(delta >= 0 ? "00FF00" : "FF0000")}:{delta * 100:#0.##}%]) success chance";
+        string cutChance = chance == -1 ? "" : $"[c/{hex}:{chanceAmount:#0.##}]% ([c/{(delta >= 0 ? "00FF00" : "FF0000")}:{delta * 100:#0.##}%]) {Localize("SuccessChance")}";
 
         if (!_hasJewel)
             _statusText = string.Empty;
@@ -203,7 +206,7 @@ internal class CutJewelUIState : UIState, IClosableUIState
         int width = -1;
 
         if (item.IsAir || item.ModItem is not Jewel)
-            _statPanel.Append(new UIText("(No jewel selected)"));
+            _statPanel.Append(new UIText(Localize("NoJewel")));
         else
         {
             var subStats = (item.ModItem as Jewel).info.SubStats;
@@ -211,7 +214,8 @@ internal class CutJewelUIState : UIState, IClosableUIState
             item.ModItem.ModifyTooltips(tooltips);
 
             if (_hoveringAnvil && (item.ModItem as Jewel).info.successfulCuts % 4 == 3)
-                tooltips.Add(new TooltipLine(ModLoader.GetMod("PeculiarJewelry"), "SubstatUpgrade", "One substat will be " + (subStats.Count == subStats.Capacity ? "upgraded" : "added")));
+                tooltips.Add(new TooltipLine(ModLoader.GetMod("PeculiarJewelry"), "SubstatUpgrade", Localize("SubstatUpgrade") + 
+                    (subStats.Count == subStats.Capacity ? Localize("Upgraded") : Localize("Added"))));
 
             for (int i = 0; i < tooltips.Count; i++)
             {
@@ -371,7 +375,7 @@ internal class CutJewelUIState : UIState, IClosableUIState
         };
         panel.Append(_cutSlot);
 
-        UIText cutText = new("Jewel Cutting")
+        UIText cutText = new(Localize("Name"))
         {
             HAlign = 0.5f,
             TextColor = Color.Aquamarine,
@@ -390,13 +394,13 @@ internal class CutJewelUIState : UIState, IClosableUIState
         button.OnMouseOut += (UIMouseEvent evt, UIElement listeningElement) => _hoveringAnvil = false;
         panel.Append(button);
 
-        UIText cutJewelText = new("Cut")
+        UIText cutJewelText = new(Localize("Cut"))
         {
             Top = StyleDimension.FromPixels(-18)
         };
         button.Append(cutJewelText);
 
-        UIText supportText = new("Support")
+        UIText supportText = new(Localize("Support"))
         {
             Top = StyleDimension.FromPixels(CutPanelHeight - 60),
             Left = StyleDimension.FromPixels(20),
@@ -451,7 +455,7 @@ internal class CutJewelUIState : UIState, IClosableUIState
     {
         if (!_hasJewel)
         {
-            UpdateInfo("[c/ff0000:Missing] jewel!");
+            UpdateInfo(Localize("MissingJewel"));
             return; // No jewel stored
         }
 
@@ -459,21 +463,21 @@ internal class CutJewelUIState : UIState, IClosableUIState
 
         if (info.cuts >= info.MaxCuts)
         {
-            UpdateInfo("[c/ff0000:Jewel cannot be cut] any\nfurther!");
+            UpdateInfo(Localize("NoCuts"));
             return; // Too many cuts
         }
 
         int coinPrice = JewelCutCoinPrice(info);
         if (Utils.CoinsCount(out bool overflow, Main.LocalPlayer.inventory) < coinPrice || overflow)
         {
-            UpdateInfo("Not enough [c/ff0000:coins]!");
+            UpdateInfo(Localize("NoCoins"));
             return;
         }
 
         int dustPrice = JewelCutDustPrice(info);
         if (Main.LocalPlayer.CountItem(ModContent.ItemType<SparklyDust>()) < dustPrice)
         {
-            UpdateInfo($"Not enough [i:{ModContent.ItemType<SparklyDust>()}] [c/ff0000:Sparkly Dust]!");
+            UpdateInfo(Language.GetText("Mods.PeculiarJewelry.UI.CutMenu.NoDust").WithFormatArgs(ModContent.ItemType<SparklyDust>()).Value);
             return;
         }
 
@@ -483,7 +487,7 @@ internal class CutJewelUIState : UIState, IClosableUIState
 
             if (Main.LocalPlayer.CountItem(echoType, 2) < 2)
             {
-                UpdateInfo($"Not enough [i:{echoType}]\n[c/ff0000:{Lang.GetItemNameValue(echoType)}es]!");
+                UpdateInfo($"{Localize("NotEnough")} [i:{echoType}]\n[c/ff0000:({Lang.GetItemNameValue(echoType)})]!");
                 return;
             }
         }
@@ -504,9 +508,9 @@ internal class CutJewelUIState : UIState, IClosableUIState
         bool success = info.TryAddCut(JewelCutChance(info, _supportItems, out _, false));
 
         if (success)
-            UpdateInfo("Cut [c/00FF00:successful!]");
+            UpdateInfo(Localize("SuccessfulCut"));
         else
-            UpdateInfo("Cut [c/FF0000:failed.]");
+            UpdateInfo(Localize("FailedCut"));
     }
 
     public void Close()
