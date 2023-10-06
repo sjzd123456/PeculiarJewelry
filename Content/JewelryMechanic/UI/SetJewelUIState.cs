@@ -1,11 +1,13 @@
 ﻿using PeculiarJewelry.Content.JewelryMechanic.Items.JewelryItems;
 using PeculiarJewelry.Content.JewelryMechanic.Items.Jewels;
+using PeculiarJewelry.Content.JewelryMechanic.Items.Pliers;
 using PeculiarJewelry.Content.JewelryMechanic.Stats;
 using ReLogic.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
+using System.Threading;
+using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.GameContent.UI.Elements;
@@ -16,6 +18,8 @@ namespace PeculiarJewelry.Content.JewelryMechanic.UI;
 
 internal class SetJewelUIState : UIState, IClosableUIState
 {
+    public const int JewelSlots = 5;
+
     private BasicJewelry Jewelry => _jewelrySlot.Item.ModItem as BasicJewelry;
     private bool HasJewelry => _jewelrySlot.HasItem;
 
@@ -39,17 +43,17 @@ internal class SetJewelUIState : UIState, IClosableUIState
     {
         UIPanel panel = new()
         {
-            Width = StyleDimension.FromPixels(300),
+            Width = StyleDimension.FromPixels(500),
             Height = StyleDimension.FromPixels(280),
             HAlign = 0.5f,
-            Left = StyleDimension.FromPixels(296),
+            Left = StyleDimension.FromPixels(396),
             Top = StyleDimension.FromPixels(60)
         };
         Append(panel);
 
         UIText stats = new("No jewelry inserted.")
         {
-            IsWrapped = true,
+            IsWrapped = false,
             Width = StyleDimension.Fill,
             Height = StyleDimension.Fill,
         };
@@ -65,7 +69,7 @@ internal class SetJewelUIState : UIState, IClosableUIState
         UIPanel parent = self.Parent as UIPanel;
         var wrapped = Font.CreateWrappedText(self.Text, parent.GetInnerDimensions().Width);
         var size = ChatManager.GetStringSize(Font, wrapped, Vector2.One);
-        size = !self.IsWrapped ? new Vector2(size.X, 16f) : new Vector2(size.X, size.Y + self.WrappedTextBottomPadding);
+        size = !self.IsWrapped ? new Vector2(size.X, size.Y + 16) : new Vector2(size.X, size.Y + self.WrappedTextBottomPadding);
         parent.Height = StyleDimension.FromPixels(size.Y);
         parent.Recalculate();
     }
@@ -110,39 +114,73 @@ internal class SetJewelUIState : UIState, IClosableUIState
         if (!HasJewelry)
             return "No jewelry inserted.";
 
-        if (!Jewelry.Info.Any())
-            return "Jewelry has no jewels!";
-
         string allStats = isFuture ? "[c/00FF00:Will contain:]\n" : "[c/00FF00:Contains:]\n";
 
         if (isFuture && Jewelry.Info.Count >= Jewelry.Info.Capacity)
-            return "[c/FF8888:Jewelry cannot]\naccept more jewels!";
+            return "[c/FF8888:Jewelry cannot accept more jewels!]";
+
+        List<JewelInfo> info = new(Jewelry.Info);
+
+        if (isFuture)
+        {
+            int added = 0;
+
+            for (int i = 0; i < JewelSlots; i++)
+            {
+                if (Jewelry.Info.Count + added >= Jewelry.Info.Capacity)
+                    break;
+
+                if (_displayJewel[i])
+                    continue;
+
+                if (_jewelSlots[i].HasItem)
+                {
+                    info.Add((_jewelSlots[i].Item.ModItem as Jewel).info);
+                    added++;
+                }
+            }
+        }
+
+        if (!info.Any())
+            return "Jewelry has no jewels!";
+
+        const string Hex = "[c/ffff00:";
+
+        string ChangeIfDifferent(JewelInfo inf, string text) => info.IndexOf(inf) >= Jewelry.Info.Count ? $"{Hex}{text}]\n" : $"{text}\n";
 
         if (PeculiarJewelry.ShiftDown)
         {
-            foreach (var info in Jewelry.Info)
+            foreach (var inf in info)
             {
-                allStats += info.Name + "\n";
+                allStats += ChangeIfDifferent(inf, $"{inf.Name}");
 
-                if (info is MajorJewelInfo major)
-                    allStats += major.TriggerTooltip() + "\n";
+                if (inf is MajorJewelInfo major)
+                    allStats += ChangeIfDifferent(inf, major.TriggerTooltip());
 
-                allStats += info.Major.GetDescription() + "\n";
+                allStats += ChangeIfDifferent(inf, inf.Major.GetDescription());
 
-                foreach (var item in info.SubStatTooltips())
-                    allStats += item + "\n";
+                foreach (var item in inf.SubStatTooltips())
+                    allStats += ChangeIfDifferent(inf, item);
 
-                if (Jewelry.Info.IndexOf(info) < Jewelry.Info.Count - 1)
-                    allStats += "- - -\n";
+                if (Jewelry.Info.IndexOf(inf) < Jewelry.Info.Count - 1)
+                    allStats += "\n\n";
             }
         }
         else
         {
             List<TooltipLine> lines = new();
-            BasicJewelry.SummaryJewelryTooltips(lines, Jewelry);
+            List<TooltipLine> originalLines = new();
+
+            BasicJewelry.SummaryJewelryTooltips(lines, info, Jewelry.Mod);
+            BasicJewelry.SummaryJewelryTooltips(originalLines, Jewelry.Info, Jewelry.Mod);
 
             foreach (var item in lines)
-                allStats += item.Text + "\n";
+            {
+                if (!originalLines.Any(x => x.Name == item.Name) || originalLines.First(x => x.Name == item.Name).Text != item.Text)
+                    allStats += $"{Hex}{item.Text}]\n";
+                else
+                    allStats += item.Text + "\n";
+            }
         }
 
         return allStats;
@@ -166,8 +204,8 @@ internal class SetJewelUIState : UIState, IClosableUIState
         };
         panel.Append(cutText);
 
-        _displayJewel = new bool[5] { false, false, false, false, false };
-        _displayJewelItems = new Item[5] { null, null, null, null, null };
+        _displayJewel = new bool[JewelSlots] { false, false, false, false, false };
+        _displayJewelItems = new Item[JewelSlots] { null, null, null, null, null };
         Item air = new();
         air.TurnToAir();
         _jewelrySlot = new(new Item[] { air }, 0, ItemSlot.Context.ChestItem, CanJewelrySlotAcceptItem)
@@ -185,11 +223,11 @@ internal class SetJewelUIState : UIState, IClosableUIState
         };
         _jewelrySlot.Append(jewelryText);
 
-        _jewelSlots = new ItemSlotUI[5];
-        for (int i = 0; i < 5; ++i)
+        _jewelSlots = new ItemSlotUI[JewelSlots];
+        for (int i = 0; i < JewelSlots; ++i)
         {
             int slot = i;
-            _jewelSlots[i] = new(new Item[] { air }, 0, ItemSlot.Context.ChestItem, (Item item, ItemSlotUI _) => CanJewelSlotAcceptItem(item, slot))
+            _jewelSlots[i] = new(new Item[] { air }, 0, ItemSlot.Context.ChestItem, (Item item, ItemSlotUI _) => CanJewelSlotAcceptItem(ref item, slot))
             {
                 HAlign = 0.5f,
                 Left = StyleDimension.FromPixels((i - 2) * 52),
@@ -235,13 +273,62 @@ internal class SetJewelUIState : UIState, IClosableUIState
         _supportSlots[1].Append(supportText);
     }
 
-    private bool CanJewelSlotAcceptItem(Item item, int i)
+    private bool CanJewelSlotAcceptItem(ref Item item, int i)
     {
-        if (_displayJewel[i])
+        if (!_jewelrySlot.HasItem)
             return false;
+
+        if (_displayJewel[i])
+            return CanTakeOutJewel(ref item, i);
 
         bool isMouseItem = Main.LocalPlayer.selectedItem == 58 && Main.LocalPlayer.HeldItem == item;
         return item.ModItem is Jewel || item.IsAir || !isMouseItem;
+    }
+
+    private bool CanTakeOutJewel(ref Item item, int jewelIndex)
+    {
+        bool clicking = Main.mouseLeftRelease && Main.mouseLeft;
+        if (!clicking)
+            return false;
+
+        if (item.ModItem is Plier plier)
+        {
+            Item jewel = _jewelSlots[jewelIndex].Item;
+
+            void KillJewel() // Kills the current jewel
+            {
+                for (int i = jewelIndex; i < JewelSlots; ++i) // idk what exactly necessitates this code but it works so idk whatever
+                {
+                    _jewelSlots[i].ForceItem(i == JewelSlots - 1 ? new Item(ItemID.None) : _jewelSlots[i + 1].Item);
+
+                    if (i < JewelSlots - 1)
+                        _jewelSlots[i + 1].ForceItem(new Item(0));
+                }
+
+                jewel.TurnToAir();
+                Jewelry.Info.RemoveAt(jewelIndex);
+            }
+
+            if (plier.SuccessfulAttempt())
+            {
+                Item newJewel = jewel.Clone();
+                item = newJewel;
+                Main.mouseItem = newJewel;
+                KillJewel();
+            }
+            else
+            {
+                if (Main.rand.NextBool()) // Kill pliers
+                {
+                    item.TurnToAir();
+                    Main.mouseItem.TurnToAir();
+                }
+                else
+                    KillJewel();
+            }
+        }
+
+        return false;
     }
 
     private void UpdateJewelSlots(UIElement affectedElement)
@@ -256,11 +343,11 @@ internal class SetJewelUIState : UIState, IClosableUIState
                     self.Item.TurnToAir();
             }
 
-            _displayJewelItems = new Item[5] { null, null, null, null, null };
+            _displayJewelItems = new Item[JewelSlots] { null, null, null, null, null };
         }
         else
         {
-            _displayJewel = new bool[5] { false, false, false, false, false };
+            _displayJewel = new bool[JewelSlots] { false, false, false, false, false };
 
             for (int i = 0; i < _jewelSlots.Length; i++)
             {
@@ -269,8 +356,26 @@ internal class SetJewelUIState : UIState, IClosableUIState
                 
                 var self = _jewelSlots[i];
                 var info = Jewelry.Info[i];
+                bool similarSubs = true;
 
-                if (_displayJewelItems[i] is null)
+                if (_displayJewelItems[i] is not null)
+                {
+                    var displayJewel = _displayJewelItems[i].ModItem as Jewel;
+
+                    for (int j = 0; j < displayJewel.info.SubStats.Count; j++)
+                    {
+                        var displaySub = displayJewel.info.SubStats[j];
+                        var currentSub = Jewelry.Info[i].SubStats[j];
+
+                        if (displaySub.Type != currentSub.Type || displaySub.Strength != currentSub.Strength)
+                        {
+                            similarSubs = false;
+                            break;
+                        }
+                    }
+                }
+
+                if (_displayJewelItems[i] is null || (_displayJewelItems[i].ModItem as Jewel).info.Major.Type != info.Major.Type || !similarSubs)
                 {
                     Item item = new(info is MajorJewelInfo ? ModContent.ItemType<MajorJewel>() : ModContent.ItemType<MinorJewel>());
                     (item.ModItem as Jewel).info = info;
@@ -302,7 +407,7 @@ internal class SetJewelUIState : UIState, IClosableUIState
         if (!_jewelSlots.Any(x => !x.Item.IsAir))
             return;
 
-        if (Jewelry.Info.Count >= Jewelry.Info.Capacity || Jewelry.Info.Count >= 5)
+        if (Jewelry.Info.Count >= Jewelry.Info.Capacity || Jewelry.Info.Count >= JewelSlots)
             return;
 
         for (int i = 0; i < Jewelry.Info.Capacity; ++i) 
@@ -314,7 +419,7 @@ internal class SetJewelUIState : UIState, IClosableUIState
             Jewelry.Info.Add(jewel.info);
             _jewelSlots[i].Item.TurnToAir();
 
-            if (Jewelry.Info.Count >= Jewelry.Info.Capacity || Jewelry.Info.Count >= 5)
+            if (Jewelry.Info.Count >= Jewelry.Info.Capacity || Jewelry.Info.Count >= JewelSlots)
                 break;
         }
 

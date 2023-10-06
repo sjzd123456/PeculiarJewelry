@@ -125,3 +125,23 @@ TripleRadiantEcho: {
 	DisplayName: Triple Radiant Echo
 	Tooltip: ""
 }
+
+RoughPliers: {
+	DisplayName: Rough Pliers
+	Tooltip: ""
+}
+
+GentlePliers: {
+	DisplayName: Gentle Pliers
+	Tooltip: ""
+}
+
+NicePliers: {
+	DisplayName: Nice Pliers
+	Tooltip: ""
+}
+
+SilkenPliers: {
+	DisplayName: Silken Pliers
+	Tooltip: ""
+}

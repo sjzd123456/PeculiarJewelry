@@ -31,8 +31,8 @@ internal class ChooseJewelMechanicUIState : UIState
     {
         base.Update(gameTime);
 
-        if (_LapidaristOwner.DistanceSQ(Main.LocalPlayer.Center) > 400 * 400)
-            JewelUISystem.SwitchUI(null);
+        //if (_LapidaristOwner.DistanceSQ(Main.LocalPlayer.Center) > 400 * 400)
+            //JewelUISystem.SwitchUI(null);
     }
 
     public override void OnInitialize()

@@ -36,7 +36,7 @@ public class BasicJewelry : ModItem
     {
         if (!PeculiarJewelry.ShiftDown)
         {
-            SummaryJewelryTooltips(tooltips, this);
+            SummaryJewelryTooltips(tooltips, Info, Mod);
             tooltips.Add(new TooltipLine(Mod, "ShiftNotice", Language.GetTextValue("Mods.PeculiarJewelry.Jewelry.HoldShift")));
         }
         else
@@ -44,13 +44,13 @@ public class BasicJewelry : ModItem
                 Jewel.PlainJewelTooltips(tooltips, item, this, false);
     }
 
-    public static void SummaryJewelryTooltips(List<TooltipLine> tooltips, BasicJewelry basicJewelry)
+    public static void SummaryJewelryTooltips(List<TooltipLine> tooltips, List<JewelInfo> info, Mod mod)
     {
         Dictionary<StatType, float> strengthsByType = new();
         Dictionary<StatType, Color> colorsByType = new();
         int triggerIndex = 0;
 
-        foreach (var item in basicJewelry.Info)
+        foreach (var item in info)
         {
             List<JewelStat> stats = new() { item.Major };
             stats.AddRange(item.SubStats);
@@ -67,13 +67,13 @@ public class BasicJewelry : ModItem
             }
 
             if (item is MajorJewelInfo major)
-                tooltips.Add(new(basicJewelry.Mod, "TriggerEffect" + triggerIndex++, major.TriggerTooltip()));
+                tooltips.Add(new(mod, "TriggerEffect" + triggerIndex++, major.TriggerTooltip()));
         }
 
         foreach (var (type, strength) in strengthsByType)
         {
             var desc = "+" + Language.GetText("Mods.PeculiarJewelry.Jewelry.StatTypes." + type + ".Description").WithFormatArgs(strength.ToString("#0.##")).Value;
-            tooltips.Add(new TooltipLine(basicJewelry.Mod, "SummaryInfo" + type, desc) { OverrideColor = colorsByType[type] });
+            tooltips.Add(new TooltipLine(mod, "SummaryInfo" + type, desc) { OverrideColor = colorsByType[type] });
         }
     }
 
