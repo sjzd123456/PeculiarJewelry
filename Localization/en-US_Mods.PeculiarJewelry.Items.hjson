@@ -1,13 +1,13 @@
 MinorJewel: {
 	DisplayName: Minor Jewel
 	Prefix: Minor
-	Tooltip: ""
+	Tooltip: A small jewel with some power
 }
 
 MajorJewel: {
 	DisplayName: Major Jewel
 	Prefix: Major
-	Tooltip: ""
+	Tooltip: Large and full of much potential
 }
 
 BasicRing: {
@@ -164,5 +164,15 @@ SilkenPliers: {
 		'''
 		{$RoughPliers.CommonTooltip}
 		Always succeeds
+		'''
+}
+
+BrokenStopwatch: {
+	DisplayName: Broken Stopwatch
+	Tooltip:
+		'''
+		Stops jewel modifications from consuming items on failure
+		Breaks after any use
+		'A subtle, inconsistent tick sounds from the center'
 		'''
 }

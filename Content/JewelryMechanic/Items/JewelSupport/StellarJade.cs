@@ -1,14 +1,13 @@
 using PeculiarJewelry.Content.JewelryMechanic.Misc;
 using PeculiarJewelry.Content.JewelryMechanic.Stats;
 using System;
-using System.Collections.Generic;
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.GameContent;
 
 namespace PeculiarJewelry.Content.JewelryMechanic.Items.JewelSupport;
 
-public class StellarJade : JewelSupportItem
+public class StellarJade : JewelSupportItem, ISetSupportItem
 {
     public override void SetDefaults()
     {

@@ -1,5 +1,6 @@
 ﻿using PeculiarJewelry.Content.JewelryMechanic.Items.JewelryItems;
 using PeculiarJewelry.Content.JewelryMechanic.Items.Jewels;
+using PeculiarJewelry.Content.JewelryMechanic.Items.JewelSupport;
 using PeculiarJewelry.Content.JewelryMechanic.Items.Pliers;
 using PeculiarJewelry.Content.JewelryMechanic.Stats;
 using ReLogic.Graphics;
@@ -246,7 +247,7 @@ internal class SetJewelUIState : UIState, IClosableUIState
         _supportSlots = new ItemSlotUI[3];
         for (int i = 0; i < 3; ++i)
         {
-            _supportSlots[i] = new(new Item[] { air }, 0, ItemSlot.Context.ChestItem, CutJewelUIState.CanJewelSlotAcceptItem)
+            _supportSlots[i] = new(new Item[] { air }, 0, ItemSlot.Context.ChestItem, CanSupportSlotAcceptItem)
             {
                 HAlign = 0.5f,
                 Left = StyleDimension.FromPixels((i - 1) * 52),
@@ -271,6 +272,12 @@ internal class SetJewelUIState : UIState, IClosableUIState
             Top = StyleDimension.FromPixels(-14)
         };
         _supportSlots[1].Append(supportText);
+    }
+
+    public static bool CanSupportSlotAcceptItem(Item item, ItemSlotUI _)
+    {
+        bool isMouseItem = Main.LocalPlayer.selectedItem == 58 && Main.LocalPlayer.HeldItem == item;
+        return item.ModItem is ISetSupportItem || item.IsAir || !isMouseItem;
     }
 
     private bool CanJewelSlotAcceptItem(ref Item item, int i)
@@ -309,32 +316,66 @@ internal class SetJewelUIState : UIState, IClosableUIState
                 Jewelry.Info.RemoveAt(jewelIndex);
             }
 
-            if (plier.SuccessfulAttempt())
+            bool hasJade = _supportSlots.Any(x => x.HasItem && x.Item.type == ModContent.ItemType<StellarJade>());
+            bool hasStopwatch = _supportSlots.Any(x => x.HasItem && x.Item.type == ModContent.ItemType<BrokenStopwatch>());
+
+            if (hasJade || plier.SuccessfulAttempt())
             {
                 Item newJewel = jewel.Clone();
                 item = newJewel;
                 Main.mouseItem = newJewel;
                 KillJewel();
+
+                if (hasJade)
+                    ConsumeSupportItem(ModContent.ItemType<StellarJade>());
             }
             else
             {
-                if (Main.rand.NextBool()) // Kill pliers
+                if (!hasStopwatch)
                 {
-                    item.TurnToAir();
-                    Main.mouseItem.TurnToAir();
+                    if (Main.rand.NextBool()) // Kill pliers
+                    {
+                        item.TurnToAir();
+                        Main.mouseItem.TurnToAir();
+                    }
+                    else
+                        KillJewel();
                 }
-                else
-                    KillJewel();
             }
+
+            if (hasStopwatch)
+                ConsumeSupportItem(ModContent.ItemType<BrokenStopwatch>());
         }
 
         return false;
+    }
+
+    private void ConsumeSupportItem(int typeToEat)
+    {
+        for (int i = 0; i < _supportSlots.Length; ++i)
+        {
+            if (_supportSlots[i].HasItem && _supportSlots[i].Item.type == typeToEat)
+            {
+                _supportSlots[i].Item.stack--;
+
+                if (_supportSlots[i].Item.stack <= 0)
+                    _supportSlots[i].Item.TurnToAir();
+            }
+        }
     }
 
     private void UpdateJewelSlots(UIElement affectedElement)
     {
         if (!HasJewelry)
         {
+            for (int i = 0; i < JewelSlots; ++i)
+            {
+                var slot = _jewelSlots[i];
+
+                if (!_displayJewel[i] && slot.HasItem && !slot.Item.IsAir && slot.Item.ModItem is Jewel)
+                    Main.LocalPlayer.QuickSpawnItem(new EntitySource_OverfullInventory(Main.LocalPlayer), slot.Item);
+            }
+
             for (int i = 0; i < _jewelSlots.Length; i++)
             {
                 var self = _jewelSlots[i];
