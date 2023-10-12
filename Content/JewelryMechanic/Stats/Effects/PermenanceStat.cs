@@ -1,10 +1,13 @@
-﻿namespace PeculiarJewelry.Content.JewelryMechanic.Stats.Effects;
+﻿using PeculiarJewelry.Content.JewelryMechanic.Items.MaterialBonuses.Bonuses;
+
+namespace PeculiarJewelry.Content.JewelryMechanic.Stats.Effects;
 
 internal class PermenanceStat : JewelStatEffect
 {
     public override StatType Type => StatType.Permenance;
     public override Color Color => new(70, 70, 70);
 
-    public override void Apply(Player player, float strength, Item item) => player.statDefense += (int)GetEffectValue(strength);
-    public override float GetEffectValue(float multiplier) => (int)(PeculiarJewelry.StatConfig.PermenanceStrength * multiplier);
+    public override void Apply(Player player, float strength) => player.statDefense += (int)GetEffectValue(strength, player);
+    public override float GetEffectValue(float multiplier, Player player) 
+        => (int)(PeculiarJewelry.StatConfig.PermenanceStrength * multiplier * BaseMaterialBonus.BonusesByKey["Iron"].EffectBonus(player));
 }

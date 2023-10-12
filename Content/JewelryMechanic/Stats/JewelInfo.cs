@@ -94,22 +94,22 @@ public abstract partial class JewelInfo
         }
     }
 
-    public void ApplyTo(Player player, Item item)
+    public void ApplyTo(Player player)
     {
-        Major.Apply(player, item);
+        Major.Apply(player);
 
         foreach (var subStat in SubStats)
-            subStat.Apply(player, item);
+            subStat.Apply(player);
     }
 
-    public string[] SubStatTooltips()
+    public string[] SubStatTooltips(Player player)
     {
         string[] tooltip = new string[SubStats.Capacity];
 
         for (int i = 0; i < SubStats.Capacity; ++i)
         {
             if (i < SubStats.Count)
-                tooltip[i] = SubStats[i].GetDescription();
+                tooltip[i] = SubStats[i].GetDescription(player);
             else
                 tooltip[i] = "-";
         }

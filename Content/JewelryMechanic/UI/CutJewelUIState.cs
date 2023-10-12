@@ -302,8 +302,8 @@ internal class CutJewelUIState : UIState, IClosableUIState
             overrideColor = Color.Yellow;
 
             string replacement = Replacement(text.Text, out bool _);
-            float current = info.Major.GetEffectValue(PeculiarJewelry.StatConfig.GlobalPowerScaleMinimum);
-            return text.Text.Replace(replacement, "[c/ffa500:" + current.ToString("#0.##") + " - " + info.Major.GetEffectValue(1f).ToString("#0.##") + "]");
+            float current = info.Major.GetEffectValue(Main.LocalPlayer, PeculiarJewelry.StatConfig.GlobalPowerScaleMinimum);
+            return text.Text.Replace(replacement, "[c/ffa500:" + current.ToString("#0.##") + " - " + info.Major.GetEffectValue(Main.LocalPlayer, 1f).ToString("#0.##") + "]");
         }
 
         if (text.Name.StartsWith("SubStat"))
@@ -316,8 +316,8 @@ internal class CutJewelUIState : UIState, IClosableUIState
             if (invalidText)
                 return text.Text;
 
-            float current = info.SubStats[statID].GetEffectValue(PeculiarJewelry.StatConfig.GlobalPowerScaleMinimum);
-            return text.Text.Replace(replacement, "[c/ffa500:" + current.ToString("#0.##") + " - " + info.SubStats[statID].GetEffectValue(1f).ToString("#0.##") + "]");
+            float current = info.SubStats[statID].GetEffectValue(Main.LocalPlayer, PeculiarJewelry.StatConfig.GlobalPowerScaleMinimum);
+            return text.Text.Replace(replacement, "[c/ffa500:" + current.ToString("#0.##") + " - " + info.SubStats[statID].GetEffectValue(Main.LocalPlayer, 1f).ToString("#0.##") + "]");
         }
         return text.Text;
     }

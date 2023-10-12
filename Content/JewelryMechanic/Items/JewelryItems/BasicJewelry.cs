@@ -1,14 +1,17 @@
 ﻿using PeculiarJewelry.Content.JewelryMechanic.Items.Jewels;
+using PeculiarJewelry.Content.JewelryMechanic.Items.MaterialBonuses;
+using PeculiarJewelry.Content.JewelryMechanic.Misc;
 using PeculiarJewelry.Content.JewelryMechanic.Stats;
 using PeculiarJewelry.Content.JewelryMechanic.Stats.IO;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using Terraria;
 using Terraria.ModLoader.IO;
 
 namespace PeculiarJewelry.Content.JewelryMechanic.Items.JewelryItems;
 
-public class BasicJewelry : ModItem
+public abstract class BasicJewelry : ModItem
 {
     public enum JewelryTier : byte
     {
@@ -19,18 +22,35 @@ public class BasicJewelry : ModItem
         Extravagant,
     }
 
-    public List<JewelInfo> Info { get; private set; }
+    public abstract string MaterialCategory { get; }
+
+    public List<JewelInfo> Info { get; protected set; }
     public JewelryTier tier = JewelryTier.Ordinary;
 
-    public override void SetDefaults()
+    public sealed override void SetDefaults()
     {
         Item.accessory = true;
-        Item.rare = ItemRarityID.Green;
-        Item.value = Item.sellPrice(silver: 3);
+        Item.rare = ModContent.RarityType<JewelRarity>();
+        Item.value = Item.sellPrice(silver: 10);
+
+        Defaults();
 
         tier = JewelryTier.Extravagant;
         Info = new((int)tier + 1);
     }
+
+    protected virtual void Defaults() { }
+
+    public sealed override void UpdateEquip(Player player)
+    {
+        foreach (var item in Info)
+            player.GetModPlayer<JewelPlayer>().jewelInfos.Add(item);
+
+        player.GetModPlayer<MaterialPlayer>().AddMaterial(MaterialCategory);
+        EquipEffect(player);
+    }
+
+    protected virtual void EquipEffect(Player player) { }
 
     public override void ModifyTooltips(List<TooltipLine> tooltips)
     {
@@ -44,11 +64,12 @@ public class BasicJewelry : ModItem
                 Jewel.PlainJewelTooltips(tooltips, item, this, false);
     }
 
-    public static void SummaryJewelryTooltips(List<TooltipLine> tooltips, List<JewelInfo> info, Mod mod)
+    public static void SummaryJewelryTooltips(List<TooltipLine> tooltips, List<JewelInfo> info, Mod mod, Player player = null)
     {
         Dictionary<StatType, float> strengthsByType = new();
         Dictionary<StatType, Color> colorsByType = new();
         int triggerIndex = 0;
+        player ??= Main.LocalPlayer;
 
         foreach (var item in info)
         {
@@ -58,10 +79,10 @@ public class BasicJewelry : ModItem
             foreach (var stat in stats)
             {
                 if (strengthsByType.ContainsKey(stat.Type))
-                    strengthsByType[stat.Type] += stat.GetEffectValue();
+                    strengthsByType[stat.Type] += stat.GetEffectValue(player);
                 else
                 {
-                    strengthsByType.Add(stat.Type, stat.GetEffectValue());
+                    strengthsByType.Add(stat.Type, stat.GetEffectValue(player));
                     colorsByType.Add(stat.Type, stat.Get().Color);
                 }
             }
@@ -80,12 +101,7 @@ public class BasicJewelry : ModItem
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
         foreach (var item in Info)
-        {
-            if (item is MajorJewelInfo major)
-                player.GetModPlayer<JewelPlayer>().majorInfo.Add(major);
-
-            item.ApplyTo(player, Item);
-        }
+            player.GetModPlayer<JewelPlayer>().jewelInfos.Add(item);
     }
 
     public override void SaveData(TagCompound tag)

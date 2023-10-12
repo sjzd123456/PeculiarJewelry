@@ -17,13 +17,13 @@ public class JewelStat
         Strength = JewelryCommon.StatStrengthRange();
     }
 
-    public void Apply(Player player, Item item) => JewelStatEffect.StatsByType[Type].Apply(player, Strength, item);
-    public float GetEffectValue(float add = 0f) => JewelStatEffect.StatsByType[Type].GetEffectValue(Strength + add);
+    public void Apply(Player player) => JewelStatEffect.StatsByType[Type].Apply(player, Strength);
+    public float GetEffectValue(Player player, float add = 0f) => JewelStatEffect.StatsByType[Type].GetEffectValue(Strength + add, player);
 
     public JewelStatEffect Get() => JewelStatEffect.StatsByType[Type];
     public LocalizedText GetName() => JewelStatEffect.StatsByType[Type].DisplayName;
 
-    public string GetDescription(bool showStars = true)
+    public string GetDescription(Player player, bool showStars = true)
     {
         var stat = JewelStatEffect.StatsByType[Type];
         string stars = " ";
@@ -38,6 +38,6 @@ public class JewelStat
             }
         }
 
-        return stat.Description.WithFormatArgs(stat.GetEffectValue(Strength).ToString("#0.##")).Value + stars;
+        return stat.Description.WithFormatArgs(stat.GetEffectValue(Strength, player).ToString("#0.##")).Value + stars;
     }
 }

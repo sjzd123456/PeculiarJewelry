@@ -10,11 +10,6 @@ MajorJewel: {
 	Tooltip: Large and full of much potential
 }
 
-BasicRing: {
-	DisplayName: Basic Ring
-	Tooltip: ""
-}
-
 BasicJewelry: {
 	DisplayName: Basic Jewelry
 	Tooltip: ""
@@ -175,4 +170,44 @@ BrokenStopwatch: {
 		Breaks after any use
 		'A subtle, inconsistent tick sounds from the center'
 		'''
+}
+
+CopperTiara: {
+	DisplayName: Copper Tiara
+	Tooltip: ""
+}
+
+IronTiara: {
+	DisplayName: Iron Tiara
+	Tooltip: ""
+}
+
+LeadTiara: {
+	DisplayName: Lead Tiara
+	Tooltip: ""
+}
+
+TinTiara: {
+	DisplayName: Tin Tiara
+	Tooltip: ""
+}
+
+GoldTiara: {
+	DisplayName: Gold Tiara
+	Tooltip: ""
+}
+
+PlatinumTiara: {
+	DisplayName: Platinum Tiara
+	Tooltip: ""
+}
+
+SilverTiara: {
+	DisplayName: Silver Tiara
+	Tooltip: ""
+}
+
+TungstenTiara: {
+	DisplayName: Tungsten Tiara
+	Tooltip: ""
 }

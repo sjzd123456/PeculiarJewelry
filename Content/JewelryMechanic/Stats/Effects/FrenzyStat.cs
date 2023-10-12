@@ -7,9 +7,9 @@ internal class FrenzyStat : JewelStatEffect
 
     public override StatExclusivity Exclusivity => StatExclusivity.Melee;
 
-    public override void Apply(Player player, float strength, Item item)
+    public override void Apply(Player player, float strength)
     {
     }
 
-    public override float GetEffectValue(float multiplier) => PeculiarJewelry.StatConfig.FrenzyStrength * multiplier;
+    public override float GetEffectValue(float multiplier, Player player) => PeculiarJewelry.StatConfig.FrenzyStrength * multiplier;
 }

@@ -7,6 +7,7 @@ using ReLogic.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.GameContent.UI.Elements;
@@ -110,10 +111,12 @@ internal class SetJewelUIState : UIState, IClosableUIState
         parent.Recalculate();
     }
 
-    private string GetStats(bool isFuture)
+    private string GetStats(bool isFuture, Player player = null)
     {
         if (!HasJewelry)
             return CutJewelUIState.Localize("NoJewel");
+
+        player ??= Main.LocalPlayer;
 
         string allStats = isFuture ? $"[c/00FF00:{Localize("WillContain")}:]\n" : $"[c/00FF00:{Localize("Contains")}:]\n";
 
@@ -158,9 +161,9 @@ internal class SetJewelUIState : UIState, IClosableUIState
                 if (inf is MajorJewelInfo major)
                     allStats += ChangeIfDifferent(inf, major.TriggerTooltip());
 
-                allStats += ChangeIfDifferent(inf, inf.Major.GetDescription());
+                allStats += ChangeIfDifferent(inf, inf.Major.GetDescription(player));
 
-                foreach (var item in inf.SubStatTooltips())
+                foreach (var item in inf.SubStatTooltips(player))
                     allStats += ChangeIfDifferent(inf, item);
 
                 if (Jewelry.Info.IndexOf(inf) < Jewelry.Info.Count - 1)
@@ -197,6 +200,20 @@ internal class SetJewelUIState : UIState, IClosableUIState
             HAlign = 0.5f,
         };
         Append(panel);
+
+        UIImageButton close = new UIImageButton(ModContent.Request<Texture2D>("PeculiarJewelry/Content/JewelryMechanic/UI/Close"))
+        {
+            Width = StyleDimension.FromPixels(32),
+            Height = StyleDimension.FromPixels(32),
+        };
+
+        close.OnLeftClick += (_, _) =>
+        {
+            JewelUISystem.SwitchUI(null);
+            SoundEngine.PlaySound(SoundID.MenuClose);
+        };
+
+        panel.Append(close);
 
         UIText cutText = new(Localize("Name"))
         {
