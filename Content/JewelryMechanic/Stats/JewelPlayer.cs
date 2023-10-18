@@ -40,7 +40,7 @@ internal class JewelPlayer : ModPlayer
         foreach (var item in jewelry)
         {
             item.ApplySingleJewelBonus(Player);
-            item.ApplyTo(Player);
+            item.ApplyTo(Player, -(1f - ((float)item.tier + 1f) / 5f));
             item.ResetSingleJewelBonus(Player);
         }
     }

@@ -59,7 +59,7 @@ public class StellarJadeProjectile : ModProjectile
             Dust.NewDust(Projectile.Center, 1, 1, DustID.GreenFairy, Projectile.velocity.X, Projectile.velocity.Y);
     }
 
-    public override void Kill(int timeLeft) => Item.NewItem(Projectile.GetSource_DropAsItem(), Projectile.Center, ModContent.ItemType<StellarJade>());
+    public override void OnKill(int timeLeft) => Item.NewItem(Projectile.GetSource_DropAsItem(), Projectile.Center, ModContent.ItemType<StellarJade>());
 
     public override bool PreDraw(ref Color lightColor)
     {

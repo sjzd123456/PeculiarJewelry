@@ -17,6 +17,8 @@ internal abstract class BaseMaterialBonus : ModType
         BonusesByKey.Add(MaterialKey, this);
     }
 
+    public virtual bool AppliesToStat(Player player, StatType type) => false;
+
     public virtual float EffectBonus(Player player, StatType statType) => 1f;
     public virtual void StaticBonus(Player player) { }
     public virtual void SingleJewelBonus(Player player, BasicJewelry jewel) { }

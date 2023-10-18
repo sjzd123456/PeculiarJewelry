@@ -9,5 +9,5 @@ internal class ExactitudeStat : JewelStatEffect
     {
     }
 
-    public override float GetEffectValue(float multiplier, Player player) => PeculiarJewelry.StatConfig.ExactitudeStrength * multiplier;
+    protected override float InternalEffectBonus(float multiplier, Player player) => PeculiarJewelry.StatConfig.ExactitudeStrength * multiplier;
 }

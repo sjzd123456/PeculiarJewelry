@@ -1,15 +1,12 @@
-﻿using PeculiarJewelry.Content.JewelryMechanic.Items.MaterialBonuses.Bonuses;
-
-namespace PeculiarJewelry.Content.JewelryMechanic.Stats.Effects;
+﻿namespace PeculiarJewelry.Content.JewelryMechanic.Stats.Effects;
 
 internal class CelerityStat : JewelStatEffect
 {
     public override StatType Type => StatType.Celerity;
     public override Color Color => Color.Lime;
 
-    public override void Apply(Player player, float strength) => player.GetModPlayer<CelerityPlayer>().bonus = GetEffectValue(strength, player);
-    public override float GetEffectValue(float multiplier, Player player)
-         => PeculiarJewelry.StatConfig.DexterityStrength * multiplier * player.MaterialBonus("Silver", Type);
+    public override void Apply(Player player, float strength) => player.GetModPlayer<CelerityPlayer>().bonus = GetEffectBonus(player, strength);
+    protected override float InternalEffectBonus(float multiplier, Player player) => PeculiarJewelry.StatConfig.DexterityStrength * multiplier;
 
     class CelerityPlayer : ModPlayer
     {

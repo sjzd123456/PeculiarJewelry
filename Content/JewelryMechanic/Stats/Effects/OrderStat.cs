@@ -7,7 +7,6 @@ internal class OrderStat : JewelStatEffect
 
     public override StatExclusivity Exclusivity => StatExclusivity.Summon;
 
-    public override void Apply(Player player, float strength) => player.GetDamage(DamageClass.Summon) += GetEffectValue(strength, player);
-    public override float GetEffectValue(float multiplier, Player player)
-        => PeculiarJewelry.StatConfig.OrderStrength * multiplier * player.MaterialBonuses(Type, "Demonite", "Crimtane", "Cobalt");
+    public override void Apply(Player player, float strength) => player.GetDamage(DamageClass.Summon) += GetEffectBonus(player, strength);
+    protected override float InternalEffectBonus(float multiplier, Player player) => PeculiarJewelry.StatConfig.OrderStrength * multiplier;
 }

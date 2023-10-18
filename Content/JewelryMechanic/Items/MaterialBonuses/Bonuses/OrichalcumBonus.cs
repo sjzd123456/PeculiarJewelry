@@ -9,6 +9,7 @@ internal class OrichalcumBonus : BaseMaterialBonus
 
     float bonus = 1f;
 
+    public override bool AppliesToStat(Player player, StatType type) => type == StatType.Arcane || type == StatType.Resurgence || type == StatType.Willpower;
     public override void SingleJewelBonus(Player player, BasicJewelry jewel) => bonus = 1.15f;
     public override void ResetSingleJewelBonus(Player player, BasicJewelry jewel) => bonus = 1f;
 

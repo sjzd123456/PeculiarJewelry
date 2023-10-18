@@ -59,7 +59,7 @@ Bonuses: {
 	Meteorite: {
 		1Set: "{$1Bonus} Trigger effects last longer and conditional effects linger"
 		3Set: "{$3Bonus} Trigger effects are guaranteed and conditional trigger effects apply at a reduced ratio when false"
-		5Set: 
+		5Set:
 			'''
 			{$5Bonus} Your damage increases the faster you are
 			Moving very fast turns gives you the power of a comet
@@ -73,7 +73,7 @@ Bonuses: {
 	}
 
 	Crimtane: {
-		1Set: 
+		1Set:
 			'''
 			{$1Bonus} Jewels on this jewelry give 25% additional all damage buffs"
 			All max health and health regeneration bonuses are reduced by 6%
@@ -92,5 +92,11 @@ Bonuses: {
 		1Set: "{$1Bonus} {$JewelStatBonusLine} mage stats"
 		3Set: "{$3Bonus} Every third cast, your magic attack will be twice as big and deal twice the damage, but consume twice the mana for that attack"
 		5Set: "{$5Bonus} Picking up a mana star adds a stacking, decaying damage boost"
+	}
+
+	Adamantium: {
+		1Set: "{$1Bonus} {$JewelStatBonusLine} critical strike stats"
+		3Set: "{$3Bonus} When doing a critical hit, half the chance and increase the damage done until the roll fails"
+		5Set: "{$5Bonus} When failing a critical hit opportunity, get one more chance to get a crit"
 	}
 }

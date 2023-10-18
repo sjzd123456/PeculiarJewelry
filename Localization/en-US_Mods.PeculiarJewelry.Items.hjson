@@ -297,3 +297,13 @@ PalladiumTiara: {
 		{$Material.Bonuses.Palladium.1Set}
 		'''
 }
+
+AdamantiteTiara: {
+	DisplayName: Adamantite Tiara
+	Tooltip: ""
+}
+
+TitaniumTiara: {
+	DisplayName: Titanium Tiara
+	Tooltip: ""
+}

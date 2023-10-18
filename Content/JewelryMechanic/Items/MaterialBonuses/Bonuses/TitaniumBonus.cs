@@ -3,13 +3,13 @@ using PeculiarJewelry.Content.JewelryMechanic.Stats;
 
 namespace PeculiarJewelry.Content.JewelryMechanic.Items.MaterialBonuses.Bonuses;
 
-internal class PalladiumBonus : BaseMaterialBonus
+internal class TitaniumBonus : BaseMaterialBonus
 {
-    public override string MaterialKey => "Palladium";
+    public override string MaterialKey => "Titanium";
 
     float bonus = 1f;
 
-    public override bool AppliesToStat(Player player, StatType type) => type == StatType.Frenzy || type == StatType.Gigantism || type == StatType.Might;
+    public override bool AppliesToStat(Player player, StatType type) => type == StatType.Potency || type == StatType.Absolution;
     public override void SingleJewelBonus(Player player, BasicJewelry jewel) => bonus = 1.15f;
     public override void ResetSingleJewelBonus(Player player, BasicJewelry jewel) => bonus = 1f;
 

@@ -7,7 +7,6 @@ internal class PrecisionStat : JewelStatEffect
 
     public override StatExclusivity Exclusivity => StatExclusivity.Ranged;
 
-    public override void Apply(Player player, float strength) => player.GetDamage(DamageClass.Ranged) += GetEffectValue(strength, player);
-    public override float GetEffectValue(float multiplier, Player player)
-        => PeculiarJewelry.StatConfig.PrecisionStrength * multiplier * player.MaterialBonuses(Type, "Demonite", "Crimtane", "Mythril");
+    public override void Apply(Player player, float strength) => player.GetDamage(DamageClass.Ranged) += GetEffectBonus(player, strength);
+    protected override float InternalEffectBonus(float multiplier, Player player) => PeculiarJewelry.StatConfig.PrecisionStrength * multiplier;
 }

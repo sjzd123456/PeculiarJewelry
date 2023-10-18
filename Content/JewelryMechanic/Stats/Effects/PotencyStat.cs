@@ -7,7 +7,6 @@ internal class PotencyStat : JewelStatEffect
 
     public override StatExclusivity Exclusivity => StatExclusivity.Generic;
 
-    public override void Apply(Player player, float strength) => player.GetDamage(DamageClass.Generic) += GetEffectValue(strength, player);
-    public override float GetEffectValue(float multiplier, Player player) 
-        => PeculiarJewelry.StatConfig.PotencyStrength * multiplier * 0.2f * player.MaterialBonuses(Type, "Demonite", "Crimtane");
+    public override void Apply(Player player, float strength) => player.GetDamage(DamageClass.Generic) += GetEffectBonus(player, strength);
+    protected override float InternalEffectBonus(float multiplier, Player player) => PeculiarJewelry.StatConfig.PotencyStrength * multiplier * 0.2f;
 }

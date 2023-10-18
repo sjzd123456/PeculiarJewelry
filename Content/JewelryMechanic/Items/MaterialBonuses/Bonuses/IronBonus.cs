@@ -9,6 +9,7 @@ internal class IronBonus : BaseMaterialBonus
 
     float bonus = 1f;
 
+    public override bool AppliesToStat(Player player, StatType type) => type == StatType.Permenance;
     public override void SingleJewelBonus(Player player, BasicJewelry jewel) => bonus = 1.15f;
     public override void ResetSingleJewelBonus(Player player, BasicJewelry jewel) => bonus = 1f;
 

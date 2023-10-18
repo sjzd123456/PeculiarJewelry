@@ -21,20 +21,15 @@ internal class MaterialPlayer : ModPlayer
 
     internal readonly Dictionary<EquipType, EquipLayerInfo?> jewelryEquips = new();
 
-    private readonly Dictionary<string, int> _materialsWornCount = new()
-    {
-        { "Copper", 0 },
-        { "Tin", 0 },
-        { "Iron", 0 },
-        { "Lead", 0 },
-        { "Silver", 0 },
-        { "Tungsten", 0 },
-        { "Gold", 0 },
-        { "Platinum", 0 },
-    };
+    private Dictionary<string, int> _materialsWornCount = null;
 
     public override void ResetEffects()
     {
+        _materialsWornCount = new Dictionary<string, int>();
+
+        foreach (var mat in BaseMaterialBonus.BonusesByKey)
+            _materialsWornCount.Add(mat.Key, 0);
+
         foreach (var item in _materialsWornCount.Keys)
             _materialsWornCount[item] = 0;
 

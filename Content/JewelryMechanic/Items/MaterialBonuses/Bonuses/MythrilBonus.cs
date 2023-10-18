@@ -9,6 +9,7 @@ internal class MythrilBonus : BaseMaterialBonus
 
     float bonus = 1f;
 
+    public override bool AppliesToStat(Player player, StatType type) => type == StatType.Precision || type == StatType.Preservation || type == StatType.Tension;
     public override void SingleJewelBonus(Player player, BasicJewelry jewel) => bonus = 1.15f;
     public override void ResetSingleJewelBonus(Player player, BasicJewelry jewel) => bonus = 1f;
 

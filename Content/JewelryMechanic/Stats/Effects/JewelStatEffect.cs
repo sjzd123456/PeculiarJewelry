@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using PeculiarJewelry.Content.JewelryMechanic.Items.MaterialBonuses;
+using PeculiarJewelry.Content.JewelryMechanic.Items.MaterialBonuses.Bonuses;
+using System.Collections.Generic;
 
 namespace PeculiarJewelry.Content.JewelryMechanic.Stats.Effects;
 
@@ -24,5 +26,21 @@ public abstract class JewelStatEffect : ModType
     }
 
     public abstract void Apply(Player player, float strength);
-    public abstract float GetEffectValue(float multiplier, Player player);
+
+    public float GetEffectBonus(Player player, float strength)
+    {
+        float value = InternalEffectBonus(strength, player);
+
+        foreach (var item in BaseMaterialBonus.BonusesByKey.Keys)
+        {
+            if (player.GetModPlayer<MaterialPlayer>().MaterialCount(item) > 0 && BaseMaterialBonus.BonusesByKey[item].AppliesToStat(player, Type))
+            {
+
+            }
+        }
+
+        return value;
+    }
+
+    protected abstract float InternalEffectBonus(float multiplier, Player player);
 }

@@ -8,5 +8,5 @@ internal class AbsolutionStat : JewelStatEffect
     public override StatExclusivity Exclusivity => StatExclusivity.Generic;
 
     public override void Apply(Player player, float strength) { }
-    public override float GetEffectValue(float multiplier, Player player) => PeculiarJewelry.StatConfig.AbsolutionStrength * multiplier;
+    protected override float InternalEffectBonus(float multiplier, Player player) => PeculiarJewelry.StatConfig.AbsolutionStrength * multiplier;
 }

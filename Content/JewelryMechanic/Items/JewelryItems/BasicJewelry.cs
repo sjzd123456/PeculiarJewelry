@@ -44,9 +44,7 @@ public abstract class BasicJewelry : ModItem
 
     public sealed override void UpdateEquip(Player player)
     {
-        foreach (var item in Info)
-            player.GetModPlayer<JewelPlayer>().jewelry.Add(this);
-
+        player.GetModPlayer<JewelPlayer>().jewelry.Add(this);
         player.GetModPlayer<MaterialPlayer>().AddMaterial(MaterialCategory);
         EquipEffect(player);
     }
@@ -130,11 +128,7 @@ public abstract class BasicJewelry : ModItem
 
     public static string JewelryPrefix(JewelryTier tier) => Language.GetTextValue("Mods.PeculiarJewelry.Jewelry.JewelryPrefixes." + tier);
 
-    public override void UpdateAccessory(Player player, bool hideVisual)
-    {
-        foreach (var item in Info)
-            player.GetModPlayer<JewelPlayer>().jewelry.Add(this);
-    }
+    public override void UpdateAccessory(Player player, bool hideVisual) => player.GetModPlayer<JewelPlayer>().jewelry.Add(this);
 
     public override bool CanReforge() => false;
 
@@ -160,10 +154,10 @@ public abstract class BasicJewelry : ModItem
         }
     }
 
-    internal void ApplyTo(Player player)
+    internal void ApplyTo(Player player, float add = 0, float multiplier = 1f)
     {
         foreach (var item in Info)
-            item.ApplyTo(player);
+            item.ApplyTo(player, add, multiplier);
     }
 
     internal void ApplySingleJewelBonus(Player player) => player.SingleBonus(MaterialCategory, this);

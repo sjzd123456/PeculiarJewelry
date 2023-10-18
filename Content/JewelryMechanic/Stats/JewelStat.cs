@@ -1,4 +1,5 @@
 ﻿using PeculiarJewelry.Content.JewelryMechanic.Stats.Effects;
+using System.Threading;
 using Terraria;
 
 namespace PeculiarJewelry.Content.JewelryMechanic.Stats;
@@ -17,8 +18,8 @@ public class JewelStat
         Strength = JewelryCommon.StatStrengthRange();
     }
 
-    public void Apply(Player player) => JewelStatEffect.StatsByType[Type].Apply(player, Strength);
-    public float GetEffectValue(Player player, float add = 0f) => JewelStatEffect.StatsByType[Type].GetEffectValue(Strength + add, player);
+    public void Apply(Player player, float add = 0, float multiplier = 0) => JewelStatEffect.StatsByType[Type].Apply(player, (Strength + add) * multiplier);
+    public float GetEffectValue(Player player, float add = 0f) => JewelStatEffect.StatsByType[Type].GetEffectBonus(player, Strength + add);
 
     public JewelStatEffect Get() => JewelStatEffect.StatsByType[Type];
     public LocalizedText GetName() => JewelStatEffect.StatsByType[Type].DisplayName;
@@ -38,6 +39,6 @@ public class JewelStat
             }
         }
 
-        return stat.Description.WithFormatArgs(stat.GetEffectValue(Strength, player).ToString("#0.##")).Value + stars;
+        return stat.Description.WithFormatArgs(stat.GetEffectBonus(player, Strength).ToString("#0.##")).Value + stars;
     }
 }

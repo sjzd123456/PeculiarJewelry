@@ -94,12 +94,12 @@ public abstract partial class JewelInfo
         }
     }
 
-    public void ApplyTo(Player player)
+    public void ApplyTo(Player player, float add = 0, float multiplier = 1f)
     {
-        Major.Apply(player);
+        Major.Apply(player, add, multiplier);
 
         foreach (var subStat in SubStats)
-            subStat.Apply(player);
+            subStat.Apply(player, add, multiplier);
     }
 
     public string[] SubStatTooltips(Player player)
