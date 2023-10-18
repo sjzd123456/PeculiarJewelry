@@ -12,7 +12,7 @@ MajorJewel: {
 
 BasicJewelry: {
 	DisplayName: Basic Jewelry
-	Tooltip: ""
+	Tooltip: Can hold jewels
 }
 
 SparklyDust: {
@@ -174,40 +174,126 @@ BrokenStopwatch: {
 
 CopperTiara: {
 	DisplayName: Copper Tiara
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Copper.1Set}
+		'''
 }
 
 IronTiara: {
 	DisplayName: Iron Tiara
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Iron.1Set}
+		'''
 }
 
 LeadTiara: {
 	DisplayName: Lead Tiara
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Lead.1Set}
+		'''
 }
 
 TinTiara: {
 	DisplayName: Tin Tiara
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Tin.1Set}
+		'''
 }
 
 GoldTiara: {
 	DisplayName: Gold Tiara
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Gold.1Set}
+		'''
 }
 
 PlatinumTiara: {
 	DisplayName: Platinum Tiara
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Platinum.1Set}
+		'''
 }
 
 SilverTiara: {
 	DisplayName: Silver Tiara
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Silver.1Set}
+		'''
 }
 
 TungstenTiara: {
 	DisplayName: Tungsten Tiara
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Tungsten.1Set}
+		'''
+}
+
+CobaltTiara: {
+	DisplayName: Cobalt Tiara
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Cobalt.1Set}
+		'''
+}
+
+CrimtaneTiara: {
+	DisplayName: Crimtane Tiara
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Crimtane.1Set}
+		'''
+}
+
+MeteoriteTiara: {
+	DisplayName: Meteorite Tiara
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Meteorite.1Set}
+		'''
+}
+
+MythrilTiara: {
+	DisplayName: Mythril Tiara
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Mythril.1Set}
+		'''
+}
+
+OrichalcumTiara: {
+	DisplayName: Orichalcum Tiara
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Orichalcum.1Set}
+		'''
+}
+
+PalladiumTiara: {
+	DisplayName: Palladium Tiara
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Palladium.1Set}
+		'''
 }

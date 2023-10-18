@@ -302,6 +302,9 @@ internal class SetJewelUIState : UIState, IClosableUIState
         if (!_jewelrySlot.HasItem)
             return false;
 
+        if ((int)Jewelry.tier >= i)
+            return false;
+
         if (_displayJewel[i])
             return CanTakeOutJewel(ref item, i);
 

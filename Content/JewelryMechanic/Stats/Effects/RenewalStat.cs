@@ -10,5 +10,5 @@ internal class RenewalStat : JewelStatEffect
 
     public override void Apply(Player player, float strength) => player.lifeRegen += (int)GetEffectValue(strength, player);
     public override float GetEffectValue(float multiplier, Player player) 
-        => PeculiarJewelry.StatConfig.RenewalStrength * multiplier * BaseMaterialBonus.BonusesByKey["Tin"].EffectBonus(player);
+        => PeculiarJewelry.StatConfig.RenewalStrength * multiplier * BaseMaterialBonus.BonusesByKey["Tin"].EffectBonus(player, Type);
 }

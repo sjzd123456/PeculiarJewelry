@@ -15,6 +15,14 @@ TierPrefixes: {
 	Stellar: Stellar
 }
 
+JewelryPrefixes: {
+	Ordinary: Ordinary
+	Pretty: Pretty
+	Elegant: Elegant
+	Elaborate: Elaborate
+	Extravagant: Extravagant
+}
+
 StatExclusivities: {
 	Melee: Exclusive to [c/990000:melee]
 	Ranged: Exclusive to [c/ff6600:ranged]

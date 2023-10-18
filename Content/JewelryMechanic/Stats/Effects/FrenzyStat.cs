@@ -11,5 +11,6 @@ internal class FrenzyStat : JewelStatEffect
     {
     }
 
-    public override float GetEffectValue(float multiplier, Player player) => PeculiarJewelry.StatConfig.FrenzyStrength * multiplier;
+    public override float GetEffectValue(float multiplier, Player player) 
+        => PeculiarJewelry.StatConfig.FrenzyStrength * multiplier * player.MaterialBonus("Palladium", Type);
 }

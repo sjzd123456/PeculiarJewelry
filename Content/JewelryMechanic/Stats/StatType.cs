@@ -134,5 +134,5 @@ public enum StatType
 
 public static class StatTypeLocalization
 {
-    public static string Localize(this StatType type) => Language.GetTextValue("Mods.PeculiarJewelry.Jewelry.StatTypes." + type);
+    public static string Localize(this StatType type) => Language.GetTextValue("Mods.PeculiarJewelry.Jewelry.StatTypes." + type + ".DisplayName");
 }

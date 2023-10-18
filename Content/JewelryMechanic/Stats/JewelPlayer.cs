@@ -1,4 +1,5 @@
-﻿using PeculiarJewelry.Content.JewelryMechanic.Items.MaterialBonuses;
+﻿using PeculiarJewelry.Content.JewelryMechanic.Items.JewelryItems;
+using PeculiarJewelry.Content.JewelryMechanic.Items.MaterialBonuses;
 using PeculiarJewelry.Content.JewelryMechanic.Stats.Triggers;
 using System.Collections.Generic;
 using Terraria;
@@ -13,19 +14,20 @@ internal class JewelPlayer : ModPlayer
         {
             List<MajorJewelInfo> infos = new();
 
-            foreach (var item in jewelInfos)
-                if (item is MajorJewelInfo major)
-                    infos.Add(major);
+            foreach (var item in jewelry)
+                foreach (var info in item.Info)
+                    if (info is MajorJewelInfo major)
+                        infos.Add(major);
 
             return infos;
         }
     }
 
-    public List<JewelInfo> jewelInfos = new();
+    public List<BasicJewelry> jewelry = new();
 
     public override void ResetEffects()
     {
-        jewelInfos.Clear();
+        jewelry.Clear();
     }
 
     public override void PostUpdateEquips()
@@ -35,8 +37,12 @@ internal class JewelPlayer : ModPlayer
 
         Player.GetModPlayer<MaterialPlayer>().StaticMaterialEffects();
 
-        foreach (var item in jewelInfos)
+        foreach (var item in jewelry)
+        {
+            item.ApplySingleJewelBonus(Player);
             item.ApplyTo(Player);
+            item.ResetSingleJewelBonus(Player);
+        }
     }
 
     public override void OnHurt(Player.HurtInfo info)

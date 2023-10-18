@@ -11,5 +11,6 @@ internal class PreservationStat : JewelStatEffect
     {
     }
 
-    public override float GetEffectValue(float multiplier, Player player) => PeculiarJewelry.StatConfig.PreservationStrength * multiplier;
+    public override float GetEffectValue(float multiplier, Player player) 
+        => PeculiarJewelry.StatConfig.PreservationStrength * multiplier * player.MaterialBonus("Mythril", Type);
 }

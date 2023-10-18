@@ -10,5 +10,6 @@ internal class AbundanceStat : JewelStatEffect
     public override StatExclusivity Exclusivity => StatExclusivity.Summon;
 
     public override void Apply(Player player, float strength) => player.maxMinions += (int)GetEffectValue(strength, player);
-    public override float GetEffectValue(float multiplier, Player player) => (int)Math.Ceiling(PeculiarJewelry.StatConfig.AbundanceStrength * multiplier) * 2;
+    public override float GetEffectValue(float multiplier, Player player)
+        => PeculiarJewelry.StatConfig.LegionStrength * multiplier * player.MaterialBonus("Cobalt", Type) * 2;
 }

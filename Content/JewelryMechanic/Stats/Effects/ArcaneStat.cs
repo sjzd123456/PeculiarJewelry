@@ -8,5 +8,6 @@ internal class ArcaneStat : JewelStatEffect
     public override StatExclusivity Exclusivity => StatExclusivity.Magic;
 
     public override void Apply(Player player, float strength) => player.statManaMax2 += (int)GetEffectValue(strength, player);
-    public override float GetEffectValue(float multiplier, Player player) => PeculiarJewelry.StatConfig.ArcaneStrength * multiplier;
+    public override float GetEffectValue(float multiplier, Player player) 
+        => PeculiarJewelry.StatConfig.ArcaneStrength * multiplier * player.MaterialBonus("Orichalcum", Type);
 }

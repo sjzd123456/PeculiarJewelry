@@ -1,10 +1,12 @@
-﻿namespace PeculiarJewelry.Content.JewelryMechanic.Items.MaterialBonuses.Bonuses;
+﻿using PeculiarJewelry.Content.JewelryMechanic.Stats;
+
+namespace PeculiarJewelry.Content.JewelryMechanic.Items.MaterialBonuses.Bonuses;
 
 internal class PlatinumBonus : BaseMaterialBonus
 {
     public override string MaterialKey => "Platinum";
 
-    public override float EffectBonus(Player player)
+    public override float EffectBonus(Player player, StatType statType)
     {
         int count = player.GetModPlayer<MaterialPlayer>().MaterialCount(MaterialKey);
 
@@ -18,5 +20,5 @@ internal class PlatinumBonus : BaseMaterialBonus
 
     }
 
-    // Needs 3-Set, 5-Set
+    // Needs 1-Set, 3-Set, 5-Set
 }

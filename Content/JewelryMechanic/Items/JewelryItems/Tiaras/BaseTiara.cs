@@ -1,3 +1,4 @@
+using Microsoft.CodeAnalysis.FlowAnalysis;
 using PeculiarJewelry.Content.JewelryMechanic.Items.MaterialBonuses;
 using PeculiarJewelry.Content.JewelryMechanic.Stats;
 using ReLogic.Content;
@@ -24,11 +25,12 @@ public abstract class BaseTiara : BasicJewelry
     {
         Item.width = 38;
         Item.height = 22;
+        Item.accessory = false;
     }
 
-    protected override void EquipEffect(Player player)
+    protected override void EquipEffect(Player player, bool isVanity = false)
     {
-        if (Info.Any())
+        if (Info.Any() && (isVanity || player.armor[10].IsAir))
             player.GetModPlayer<MaterialPlayer>().SetEquip(EquipType.Head, new MaterialPlayer.EquipLayerInfo(GetDisplayColor(), _jewelsEquip.Value));
     }
 

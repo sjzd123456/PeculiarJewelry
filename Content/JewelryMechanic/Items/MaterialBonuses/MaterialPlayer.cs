@@ -73,6 +73,7 @@ internal class MaterialPlayer : ModPlayer
     internal void StaticMaterialEffects()
     {
         foreach (var mat in _materialsWornCount.Where(x => x.Value > 0))
-            BaseMaterialBonus.BonusesByKey[mat.Key].StaticBonus(Player);
+            for (int i = 0; i < _materialsWornCount[mat.Key]; ++i)
+                BaseMaterialBonus.BonusesByKey[mat.Key].StaticBonus(Player);
     }
 }

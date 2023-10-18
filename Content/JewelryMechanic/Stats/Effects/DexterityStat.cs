@@ -9,7 +9,7 @@ internal class DexterityStat : JewelStatEffect
 
     public override void Apply(Player player, float strength) => player.GetModPlayer<DexterityPlayer>().bonus = GetEffectValue(strength, player);
     public override float GetEffectValue(float multiplier, Player player) 
-        => PeculiarJewelry.StatConfig.DexterityStrength * multiplier * BaseMaterialBonus.BonusesByKey["Tungsten"].EffectBonus(player);
+        => PeculiarJewelry.StatConfig.DexterityStrength * multiplier * BaseMaterialBonus.BonusesByKey["Tungsten"].EffectBonus(player, Type);
 
     class DexterityPlayer : ModPlayer
     {

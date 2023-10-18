@@ -11,5 +11,6 @@ internal class GigantismStat : JewelStatEffect
     {
     }
 
-    public override float GetEffectValue(float multiplier, Player player) => PeculiarJewelry.StatConfig.GigantismStrength * multiplier;
+    public override float GetEffectValue(float multiplier, Player player) 
+        => PeculiarJewelry.StatConfig.GigantismStrength * multiplier * player.MaterialBonus("Palladium", Type);
 }

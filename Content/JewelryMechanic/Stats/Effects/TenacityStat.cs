@@ -1,6 +1,4 @@
-﻿using PeculiarJewelry.Content.JewelryMechanic.Items.MaterialBonuses.Bonuses;
-
-namespace PeculiarJewelry.Content.JewelryMechanic.Stats.Effects;
+﻿namespace PeculiarJewelry.Content.JewelryMechanic.Stats.Effects;
 
 internal class TenacityStat : JewelStatEffect
 {
@@ -9,5 +7,5 @@ internal class TenacityStat : JewelStatEffect
 
     public override void Apply(Player player, float strength) => player.endurance += GetEffectValue(strength, player);
     public override float GetEffectValue(float multiplier, Player player) 
-        => PeculiarJewelry.StatConfig.TenacityStrength * multiplier * BaseMaterialBonus.BonusesByKey["Lead"].EffectBonus(player);
+        => PeculiarJewelry.StatConfig.TenacityStrength * multiplier * player.MaterialBonus("Lead", Type) * player.MaterialBonus("Demonite", Type);
 }

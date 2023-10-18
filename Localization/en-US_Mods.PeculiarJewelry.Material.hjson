@@ -1,0 +1,96 @@
+JewelStatBonusLine: Jewels on this jewelry give 15% more
+1Bonus: Material bonus:
+3Bonus: 3-Set bonus:
+5Bonus: 5-Set bonus:
+
+Bonuses: {
+	Copper: {
+		1Set: "{$1Bonus} {$JewelStatBonusLine} max health"
+		3Set: "{$3Bonus} Your defense is added to your max health"
+		5Set:
+			'''
+			{$5Bonus} You may consume a life crystal to heal 50% of your max health, which induces a 2 minutes crystal sickness
+			Life fruits are the same, but the sickness lasts 1 minute and it heals 10% of your max health
+			'''
+	}
+
+	Tin: {
+		1Set: "{$1Bonus} {$JewelStatBonusLine} health regeneration"
+		3Set: "{$3Bonus} Getting hit triples your current regeneration until you've healed more than you were hit for"
+		5Set: "{$5Bonus} Damage scales with increased life regeneration"
+	}
+
+	Iron: {
+		1Set: "{$1Bonus} {$JewelStatBonusLine} defense"
+		3Set: "{$3Bonus} Damage equal to twice your defense or lower is halved"
+		5Set: "{$5Bonus} Upon being hit, increase your defense temporarily by a portion of the damage taken, this buff stacks with itself but decays over time"
+	}
+
+	Lead: {
+		1Set: "{$1Bonus} {$JewelStatBonusLine} damage resistance"
+		3Set: "{$3Bonus} Immunity to knockback"
+		5Set: "{$5Bonus} Every 30 seconds, generate a spirit shield that negates one attack. Can stack up to 3 times"
+	}
+
+	Silver: {
+		1Set: "{$1Bonus} {$JewelStatBonusLine} velocity"
+		3Set: "{$3Bonus} Massively increased run speed"
+		5Set: "{$5Bonus} Enables a dash"
+	}
+
+	Tungsten: {
+		1Set: "{$1Bonus} {$JewelStatBonusLine} movement control"
+		3Set: "{$3Bonus} Significantly increased jump height"
+		5Set: "{$5Bonus} Double tapping down will instantly put the player at max falling speed"
+	}
+
+	Gold: {
+		1Set: "{$1Bonus} Increased luck"
+		3Set: "{$3Bonus} Luck is multiplied as the ratio of health to max health decreases"
+		5Set: "{$5Bonus} Chance for a heavily beneficial effect to occur randomly"
+	}
+
+	Platinum: {
+		1Set: "{$1Bonus} Utility and fishing stats on jewels give 25% more stats"
+		3Set: "{$3Bonus} Place stuff a lot faster, permanent sonar potion"
+		5Set: "{$5Bonus} Permanent wormhole and crate potion effect and pylons are usable anywhere"
+	}
+
+	Meteorite: {
+		1Set: "{$1Bonus} Trigger effects last longer and conditional effects linger"
+		3Set: "{$3Bonus} Trigger effects are guaranteed and conditional trigger effects apply at a reduced ratio when false"
+		5Set: 
+			'''
+			{$5Bonus} Your damage increases the faster you are
+			Moving very fast turns gives you the power of a comet
+			'''
+	}
+
+	Cobalt: {
+		1Set: "{$1Bonus} {$JewelStatBonusLine} summoner stats"
+		3Set: "{$3Bonus} Summons gain shadow clones that do a fraction of the damage"
+		5Set: "{$5Bonus} Summons are now significantly faster"
+	}
+
+	Crimtane: {
+		1Set: 
+			'''
+			{$1Bonus} Jewels on this jewelry give 25% additional all damage buffs"
+			All max health and health regeneration bonuses are reduced by 6%
+			'''
+		3Set: "{$3Bonus} Gain an additional increase in offensive stats, but regeneration and life steal is disabled"
+		5Set: "{$5Bonus} Missing an attack will hurt the player, but damage is increased by a lot"
+	}
+
+	Mythril: {
+		1Set: "{$1Bonus} {$JewelStatBonusLine} ranger stats"
+		3Set: "{$3Bonus} Fire rate increased greatly when completely still"
+		5Set: "{$5Bonus} Each unmissed shot gradually increases the damage of the next attack"
+	}
+
+	Orichalcum: {
+		1Set: "{$1Bonus} {$JewelStatBonusLine} mage stats"
+		3Set: "{$3Bonus} Every third cast, your magic attack will be twice as big and deal twice the damage, but consume twice the mana for that attack"
+		5Set: "{$5Bonus} Picking up a mana star adds a stacking, decaying damage boost"
+	}
+}

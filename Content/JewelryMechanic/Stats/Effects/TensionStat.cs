@@ -11,5 +11,6 @@ internal class TensionStat : JewelStatEffect
     {
     }
 
-    public override float GetEffectValue(float multiplier, Player player) => PeculiarJewelry.StatConfig.TensionStrength * multiplier;
+    public override float GetEffectValue(float multiplier, Player player) 
+        => PeculiarJewelry.StatConfig.TensionStrength * multiplier * player.MaterialBonus("Mythril", Type);
 }

@@ -11,5 +11,6 @@ internal class LegionStat : JewelStatEffect
     {
     }
 
-    public override float GetEffectValue(float multiplier, Player player) => PeculiarJewelry.StatConfig.LegionStrength * multiplier;
+    public override float GetEffectValue(float multiplier, Player player) 
+        => PeculiarJewelry.StatConfig.LegionStrength * multiplier * player.MaterialBonus("Cobalt", Type);
 }

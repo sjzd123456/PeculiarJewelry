@@ -1,15 +1,23 @@
-﻿namespace PeculiarJewelry.Content.JewelryMechanic.Items.MaterialBonuses.Bonuses;
+﻿using PeculiarJewelry.Content.JewelryMechanic.Items.JewelryItems;
+using PeculiarJewelry.Content.JewelryMechanic.Stats;
+
+namespace PeculiarJewelry.Content.JewelryMechanic.Items.MaterialBonuses.Bonuses;
 
 internal class SilverBonus : BaseMaterialBonus
 {
     public override string MaterialKey => "Silver";
 
-    public override float EffectBonus(Player player)
+    float bonus = 1f;
+
+    public override void SingleJewelBonus(Player player, BasicJewelry jewel) => bonus = 1.15f;
+    public override void ResetSingleJewelBonus(Player player, BasicJewelry jewel) => bonus = 1f;
+
+    public override float EffectBonus(Player player, StatType statType)
     {
         int count = player.GetModPlayer<MaterialPlayer>().MaterialCount(MaterialKey);
 
         if (count >= 1)
-            return 1.15f;
+            return bonus;
         return 1f;
     }
 

@@ -6,6 +6,7 @@ using PeculiarJewelry.Content.JewelryMechanic.Stats.IO;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Linq;
 using Terraria;
 using Terraria.ModLoader.IO;
 
@@ -44,16 +45,21 @@ public abstract class BasicJewelry : ModItem
     public sealed override void UpdateEquip(Player player)
     {
         foreach (var item in Info)
-            player.GetModPlayer<JewelPlayer>().jewelInfos.Add(item);
+            player.GetModPlayer<JewelPlayer>().jewelry.Add(this);
 
         player.GetModPlayer<MaterialPlayer>().AddMaterial(MaterialCategory);
         EquipEffect(player);
     }
 
-    protected virtual void EquipEffect(Player player) { }
+    public override void EquipFrameEffects(Player player, EquipType type) => EquipEffect(player, true);
+    protected virtual void EquipEffect(Player player, bool isVanity = false) { }
 
     public override void ModifyTooltips(List<TooltipLine> tooltips)
     {
+        var name = tooltips.First(x => x.Name == "ItemName");
+        var stat = DetermineHighestStat(Info);
+        name.Text = $"{JewelryPrefix(tier)} {name.Text} of {stat.Localize()}";
+
         if (!PeculiarJewelry.ShiftDown)
         {
             SummaryJewelryTooltips(tooltips, Info, Mod);
@@ -62,6 +68,30 @@ public abstract class BasicJewelry : ModItem
         else
             foreach (var item in Info)
                 Jewel.PlainJewelTooltips(tooltips, item, this, false);
+    }
+
+    private static StatType DetermineHighestStat(List<JewelInfo> info)
+    {
+        Dictionary<StatType, int> typesByUpgrades = new();
+
+        if (info.Count == 0)
+            return StatType.Potency;
+
+        foreach (var jewel in info)
+        {
+            List<JewelStat> stats = new() { jewel.Major };
+            stats.AddRange(jewel.SubStats);
+
+            foreach (var stat in stats)
+            {
+                if (typesByUpgrades.ContainsKey(stat.Get().Type))
+                    typesByUpgrades[stat.Get().Type]++;
+                else
+                    typesByUpgrades.Add(stat.Get().Type, 1);
+            }
+        }
+
+        return typesByUpgrades.Max().Key;
     }
 
     public static void SummaryJewelryTooltips(List<TooltipLine> tooltips, List<JewelInfo> info, Mod mod, Player player = null)
@@ -98,11 +128,15 @@ public abstract class BasicJewelry : ModItem
         }
     }
 
+    public static string JewelryPrefix(JewelryTier tier) => Language.GetTextValue("Mods.PeculiarJewelry.Jewelry.JewelryPrefixes." + tier);
+
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
         foreach (var item in Info)
-            player.GetModPlayer<JewelPlayer>().jewelInfos.Add(item);
+            player.GetModPlayer<JewelPlayer>().jewelry.Add(this);
     }
+
+    public override bool CanReforge() => false;
 
     public override void SaveData(TagCompound tag)
     {
@@ -125,4 +159,13 @@ public abstract class BasicJewelry : ModItem
             Info.Add(newInfo);
         }
     }
+
+    internal void ApplyTo(Player player)
+    {
+        foreach (var item in Info)
+            item.ApplyTo(player);
+    }
+
+    internal void ApplySingleJewelBonus(Player player) => player.SingleBonus(MaterialCategory, this);
+    internal void ResetSingleJewelBonus(Player player) => player.UndoSingle(MaterialCategory, this);
 }
