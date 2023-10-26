@@ -1,5 +1,5 @@
-﻿using PeculiarJewelry.Content.JewelryMechanic.Items.MaterialBonuses;
-using PeculiarJewelry.Content.JewelryMechanic.Items.MaterialBonuses.Bonuses;
+﻿using PeculiarJewelry.Content.JewelryMechanic.MaterialBonuses;
+using PeculiarJewelry.Content.JewelryMechanic.MaterialBonuses.Bonuses;
 using System.Collections.Generic;
 
 namespace PeculiarJewelry.Content.JewelryMechanic.Stats.Effects;

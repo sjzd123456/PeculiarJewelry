@@ -159,7 +159,7 @@ internal class SetJewelUIState : UIState, IClosableUIState
                 allStats += ChangeIfDifferent(inf, $"{inf.Name}");
 
                 if (inf is MajorJewelInfo major)
-                    allStats += ChangeIfDifferent(inf, major.TriggerTooltip());
+                    allStats += ChangeIfDifferent(inf, major.TriggerTooltip(player));
 
                 allStats += ChangeIfDifferent(inf, inf.Major.GetDescription(player));
 
@@ -302,7 +302,7 @@ internal class SetJewelUIState : UIState, IClosableUIState
         if (!_jewelrySlot.HasItem)
             return false;
 
-        if ((int)Jewelry.tier >= i)
+        if ((int)Jewelry.tier < i)
             return false;
 
         if (_displayJewel[i])
@@ -471,12 +471,23 @@ internal class SetJewelUIState : UIState, IClosableUIState
         if (Jewelry.Info.Count >= Jewelry.Info.Capacity || Jewelry.Info.Count >= JewelSlots)
             return;
 
+        int majorCount = Jewelry.Info.Count(x => x is MajorJewelInfo);
+
         for (int i = 0; i < Jewelry.Info.Capacity; ++i) 
         {
             if (!_jewelSlots[i].HasItem || _displayJewel[i])
                 continue;
 
             var jewel = _jewelSlots[i].Item.ModItem as Jewel;
+
+            if (jewel.info is MajorJewelInfo)
+            {
+                if (majorCount >= Jewelry.MaxMajorCount())
+                    continue;
+                else
+                    majorCount++;
+            }
+
             Jewelry.Info.Add(jewel.info);
             _jewelSlots[i].Item.TurnToAir();
 

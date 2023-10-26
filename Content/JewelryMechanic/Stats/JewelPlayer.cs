@@ -1,5 +1,5 @@
 ﻿using PeculiarJewelry.Content.JewelryMechanic.Items.JewelryItems;
-using PeculiarJewelry.Content.JewelryMechanic.Items.MaterialBonuses;
+using PeculiarJewelry.Content.JewelryMechanic.MaterialBonuses;
 using PeculiarJewelry.Content.JewelryMechanic.Stats.Triggers;
 using System.Collections.Generic;
 using Terraria;

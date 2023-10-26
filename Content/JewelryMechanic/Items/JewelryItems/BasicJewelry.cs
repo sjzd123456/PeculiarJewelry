@@ -1,13 +1,11 @@
 ﻿using PeculiarJewelry.Content.JewelryMechanic.Items.Jewels;
-using PeculiarJewelry.Content.JewelryMechanic.Items.MaterialBonuses;
+using PeculiarJewelry.Content.JewelryMechanic.MaterialBonuses;
+using PeculiarJewelry.Content.JewelryMechanic.MaterialBonuses.Bonuses;
 using PeculiarJewelry.Content.JewelryMechanic.Misc;
 using PeculiarJewelry.Content.JewelryMechanic.Stats;
 using PeculiarJewelry.Content.JewelryMechanic.Stats.IO;
-using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
-using Terraria;
 using Terraria.ModLoader.IO;
 
 namespace PeculiarJewelry.Content.JewelryMechanic.Items.JewelryItems;
@@ -33,11 +31,11 @@ public abstract class BasicJewelry : ModItem
         Item.accessory = true;
         Item.rare = ModContent.RarityType<JewelRarity>();
         Item.value = Item.sellPrice(silver: 10);
-
-        Defaults();
-
+        
         tier = JewelryTier.Extravagant;
         Info = new((int)tier + 1);
+
+        Defaults();
     }
 
     protected virtual void Defaults() { }
@@ -50,6 +48,7 @@ public abstract class BasicJewelry : ModItem
     }
 
     public override void EquipFrameEffects(Player player, EquipType type) => EquipEffect(player, true);
+    public override void UpdateVanity(Player player) => EquipEffect(player, true);
     protected virtual void EquipEffect(Player player, bool isVanity = false) { }
 
     public override void ModifyTooltips(List<TooltipLine> tooltips)
@@ -89,7 +88,19 @@ public abstract class BasicJewelry : ModItem
             }
         }
 
-        return typesByUpgrades.Max().Key;
+        int max = 0;
+        StatType key = StatType.Willpower;
+
+        foreach (var item in typesByUpgrades.Keys)
+        {
+            if (max < typesByUpgrades[item])
+            {
+                max = typesByUpgrades[item];
+                key = item;
+            }
+        }
+
+        return key;
     }
 
     public static void SummaryJewelryTooltips(List<TooltipLine> tooltips, List<JewelInfo> info, Mod mod, Player player = null)
@@ -116,7 +127,7 @@ public abstract class BasicJewelry : ModItem
             }
 
             if (item is MajorJewelInfo major)
-                tooltips.Add(new(mod, "TriggerEffect" + triggerIndex++, major.TriggerTooltip()));
+                tooltips.Add(new(mod, "TriggerEffect" + triggerIndex++, major.TriggerTooltip(player)));
         }
 
         foreach (var (type, strength) in strengthsByType)
@@ -162,4 +173,13 @@ public abstract class BasicJewelry : ModItem
 
     internal void ApplySingleJewelBonus(Player player) => player.SingleBonus(MaterialCategory, this);
     internal void ResetSingleJewelBonus(Player player) => player.UndoSingle(MaterialCategory, this);
+    internal int MaxMajorCount() => BaseMaterialBonus.BonusesByKey[MaterialCategory].GetMajorJewelCount;
+
+    public Color GetDisplayColor()
+    {
+        var jewel = Info.FirstOrDefault(x => x is MajorJewelInfo);
+        jewel ??= Info.First();
+
+        return jewel.Major.Get().Color;
+    }
 }

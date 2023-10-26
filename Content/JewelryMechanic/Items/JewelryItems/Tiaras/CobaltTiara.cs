@@ -9,7 +9,7 @@ public class CobaltTiara : BaseTiara
     {
         CreateRecipe()
             .AddIngredient(ItemID.CobaltBar, 8)
-            .AddTile(TileID.Anvils)
+            .AddTile(TileID.MythrilAnvil)
             .Register();
     }
 }

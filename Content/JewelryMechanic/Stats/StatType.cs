@@ -127,6 +127,24 @@ public enum StatType
     Absolution,
 
     /// <summary>
+    /// Fishing power.
+    /// UTILITY.
+    /// </summary>
+    Allure,
+
+    /// <summary>
+    /// Buff duration, debuff duration reduction, max breath.
+    /// UTILITY.
+    /// </summary>
+    Tolerance,
+
+    /// <summary>
+    /// Mining speed, tile reach, item attraction range (or just "Utility")
+    /// UTILITY.
+    /// </summary>
+    Diligence,
+
+    /// <summary>
     /// Solely used as a bookend, i.e. Main.rand.Next(Max).
     /// </summary>
     Max

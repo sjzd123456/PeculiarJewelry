@@ -20,5 +20,5 @@ internal class MajorJewelInfo : JewelInfo
     public void InstantTrigger(TriggerContext context, Player player) => effect.InstantTrigger(context, player, tier);
     public void ConstantTrigger(Player player) => effect.ConstantTrigger(player, tier);
 
-    public string TriggerTooltip() => effect.Tooltip(tier);
+    public string TriggerTooltip(Player player) => effect.Tooltip(tier, player);
 }

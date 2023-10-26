@@ -1,6 +1,4 @@
-using Microsoft.CodeAnalysis.FlowAnalysis;
-using PeculiarJewelry.Content.JewelryMechanic.Items.MaterialBonuses;
-using PeculiarJewelry.Content.JewelryMechanic.Stats;
+using PeculiarJewelry.Content.JewelryMechanic.MaterialBonuses;
 using ReLogic.Content;
 using System.Linq;
 
@@ -26,20 +24,13 @@ public abstract class BaseTiara : BasicJewelry
         Item.width = 38;
         Item.height = 22;
         Item.accessory = false;
+        Item.defense = (int)((float)tier * 0.33f);
     }
 
     protected override void EquipEffect(Player player, bool isVanity = false)
     {
         if (Info.Any() && (isVanity || player.armor[10].IsAir))
             player.GetModPlayer<MaterialPlayer>().SetEquip(EquipType.Head, new MaterialPlayer.EquipLayerInfo(GetDisplayColor(), _jewelsEquip.Value));
-    }
-
-    public Color GetDisplayColor()
-    {
-        var jewel = Info.FirstOrDefault(x => x is MajorJewelInfo);
-        jewel ??= Info.First();
-
-        return jewel.Major.Get().Color;
     }
 
     public override void PostDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale)

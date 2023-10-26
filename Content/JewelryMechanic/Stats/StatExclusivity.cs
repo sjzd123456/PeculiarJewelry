@@ -7,7 +7,8 @@ public enum StatExclusivity : byte
     Ranged,
     Magic,
     Summon,
-    Generic
+    Generic,
+    Utility,
 }
 
 public static class StatExclusivityLocalization

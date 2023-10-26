@@ -6,8 +6,8 @@ global using Terraria.Localization;
 global using Terraria.ModLoader;
 
 using PeculiarJewelry.Content.JewelryMechanic.Stats;
-using PeculiarJewelry.Content.JewelryMechanic.Items.MaterialBonuses.Bonuses;
 using PeculiarJewelry.Content.JewelryMechanic.Items.JewelryItems;
+using PeculiarJewelry.Content.JewelryMechanic.MaterialBonuses.Bonuses;
 
 namespace PeculiarJewelry;
 

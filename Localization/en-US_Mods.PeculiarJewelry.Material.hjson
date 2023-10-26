@@ -72,6 +72,12 @@ Bonuses: {
 		5Set: "{$5Bonus} Summons are now significantly faster"
 	}
 
+	Palladium: {
+		1Set: "{$1Bonus} {$JewelStatBonusLine} melee stats"
+		3Set: "{$3Bonus} Hitting an attack with a true melee swing increases the use speed of the next attack significantly"
+		5Set: "{$5Bonus} True melee swings can destroy hostile projectiles"
+	}
+
 	Crimtane: {
 		1Set:
 			'''
@@ -94,12 +100,18 @@ Bonuses: {
 		5Set: "{$5Bonus} Picking up a mana star adds a stacking, decaying damage boost"
 	}
 
-	Adamantium: {
+	Adamantite: {
 		1Set: "{$1Bonus} {$JewelStatBonusLine} critical strike stats"
 		3Set: "{$3Bonus} When doing a critical hit, half the chance and increase the damage done until the roll fails"
 		5Set: "{$5Bonus} When failing a critical hit opportunity, get one more chance to get a crit"
 	}
-	
+
+	Titanium: {
+		1Set: "{$1Bonus} {$JewelStatBonusLine} generic stats"
+		3Set: "{$3Bonus} Each attack on an enemy reduces their defense by 1 until another enemy is hit"
+		5Set: "{$5Bonus} Hitting an enemy spawns an echo projectile that does half of the original damage but ignores armor"
+	}
+
 	Hallowed: {
 		1Set: "{$1Bonus} All jewels on this jewelry give 5% more stats"
 		3Set: "{$3Bonus} When there are no bosses or events active, you are immortal"
@@ -111,33 +123,33 @@ Bonuses: {
 		3Set: "{$3Bonus} Little snatchers grow from you and attack with life stealing bites"
 		5Set: "{$5Bonus} Hits have a chance to grow a sprout that can be hit again to spawn a healing heart"
 	}
-	
+
 	Shroomite: {
 		1Set: "{$1Bonus} All max health and health regeneration stats on any jewelry -6%, critical strike and critical damage stats on this jewel give 25% more stats"
 		3Set: "{$3Bonus} Critical rate over 100% adds additional critical damage"
 		5Set: "{$5Bonus} Critical attacks double projectiles"
 	}
-		
+
 	Spectre: {
 		1Set: "{$1Bonus} All defense and damage resistance stats on any jewelry -6%, movement control and velocity stats on this jewel give 25% more stats"
 		3Set: "{$3Bonus} Enables liquid walking"
 		5Set: "{$5Bonus} You are given a powerful, ephemeral set of wings"
 	}
-			
+
 	Beetle: {
 		1Set: "{$1Bonus} All velocity and movement control stats on any jewelry -6%, defense and damage resistance stats on this jewel give 25% more stats"
 		3Set: "{$3Bonus} Deal double damage when standing still"
 		5Set: "{$5Bonus} Take 50% less final damage when standing completely still"
 	}
-				
+
 	Spooky: {
 		1Set: "{$1Bonus} All critical chance and critical damage stats on any jewelry -6%, max health and health regeneration stats on this jewel give 25% more stats"
-		3Set: 
+		3Set:
 			'''
 			{$3Bonus} Health regeneration cannot be interrupted or slown by damage
 			Immunity to bleeding
 			'''
-		5Set: 
+		5Set:
 			'''
 			{$5Bonus} Received damage is instead gradually applied over 10 seconds
 			Using a health potion cancels all impending damage
@@ -145,8 +157,22 @@ Bonuses: {
 	}
 
 	Luminite: {
-		1Set: "{$1Bonus} TBD"
-		3Set: "{$3Bonus} TBD"
-		5Set: "{$5Bonus} TBD"
+		1Set:
+			'''
+			{$1Bonus} All stats on this jewelry gives 15% less stats
+			An additional major jewel can be set on this jewelry
+			'''
+		3Set: "{$3Bonus} Cosmic interest"
+		5Set: "{$5Bonus} Cosmic favoritism"
+	}
+
+	Demonite: {
+		1Set:
+			'''
+			{$1Bonus} Jewels on this jewelry give 25% additional all damage buffs"
+			All defense and damage resistance bonuses are reduced by 6%
+			'''
+		3Set: "{$3Bonus} Gain an additional increase in offensive stats, but regeneration and life steal is disabled"
+		5Set: "{$5Bonus} Missing an attack will hurt the player, but damage is increased by a lot"
 	}
 }

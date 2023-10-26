@@ -9,7 +9,7 @@ public class AdamantiteTiara : BaseTiara
     {
         CreateRecipe()
             .AddIngredient(ItemID.AdamantiteBar, 8)
-            .AddTile(TileID.Anvils)
+            .AddTile(TileID.MythrilAnvil)
             .Register();
     }
 }

@@ -1,4 +1,4 @@
-﻿using PeculiarJewelry.Content.JewelryMechanic.Items.MaterialBonuses.Bonuses;
+﻿using PeculiarJewelry.Content.JewelryMechanic.MaterialBonuses.Bonuses;
 
 namespace PeculiarJewelry.Content.JewelryMechanic.Stats.Effects;
 

@@ -9,7 +9,7 @@ public class PalladiumTiara : BaseTiara
     {
         CreateRecipe()
             .AddIngredient(ItemID.PalladiumBar, 8)
-            .AddTile(TileID.Anvils)
+            .AddTile(TileID.MythrilAnvil)
             .Register();
     }
 }

@@ -71,7 +71,7 @@ public abstract class Jewel : ModItem
         }
 
         if (info is MajorJewelInfo majorJewelInfo)
-            tooltips.Add(new TooltipLine(modItem.Mod, "TriggerEffect", majorJewelInfo.TriggerTooltip()));
+            tooltips.Add(new TooltipLine(modItem.Mod, "TriggerEffect", majorJewelInfo.TriggerTooltip(Main.LocalPlayer)));
 
         if (displayAsJewel || PeculiarJewelry.ShiftDown)
         {

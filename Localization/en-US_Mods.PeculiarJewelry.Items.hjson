@@ -300,10 +300,82 @@ PalladiumTiara: {
 
 AdamantiteTiara: {
 	DisplayName: Adamantite Tiara
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Adamantite.1Set}
+		'''
 }
 
 TitaniumTiara: {
 	DisplayName: Titanium Tiara
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Titanium.1Set}
+		'''
+}
+
+BeetleTiara: {
+	DisplayName: Beetle Tiara
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Beetle.1Set}
+		'''
+}
+
+ChlorophyteTiara: {
+	DisplayName: Chlorophyte Tiara
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Chlorophyte.1Set}
+		'''
+}
+
+DemoniteTiara: {
+	DisplayName: Demonite Tiara
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Demonite.1Set}
+		'''
+}
+
+HallowedTiara: {
+	DisplayName: Hallowed Tiara
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Hallowed.1Set}
+		'''
+}
+
+LuminiteTiara: {
+	DisplayName: Luminite Tiara
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Luminite.1Set}
+		'''
+}
+
+ShroomiteTiara: {
+	DisplayName: Shroomite Tiara
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Shroomite.1Set}
+		'''
+}
+
+GoldEarring: {
+	DisplayName: Gold Earring
+	Tooltip: ""
+}
+
+HellstoneTiara: {
+	DisplayName: Hellstone Tiara
 	Tooltip: ""
 }

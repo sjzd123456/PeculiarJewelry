@@ -107,3 +107,18 @@ Absolution: {
 	DisplayName: Absolution
 	Description: "{0}% defense piercing"
 }
+
+Allure: {
+	DisplayName: Allure
+	Description: "{0} fishing power"
+}
+
+Diligence: {
+	DisplayName: Diligence
+	Description: "{0}% mining speed, placement range and item pickup range"
+}
+
+Tolerance: {
+	DisplayName: Tolerance
+	Description: "{0}% buff time and item pickup range, -{0}% debuff time"
+}

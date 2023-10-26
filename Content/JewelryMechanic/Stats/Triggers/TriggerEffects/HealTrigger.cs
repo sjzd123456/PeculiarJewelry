@@ -7,7 +7,7 @@ internal class HealTrigger : TriggerEffect
 
     protected override void InternalInstantOtherEffect(TriggerContext context, Player player, float coefficient, JewelTier tier)
     {
-        int hp = (int)TooltipArgument(coefficient, tier);
+        int hp = (int)TotalPower(player, coefficient, tier);
 
         if (player.statLife + hp > player.statLifeMax2)
             hp = player.statLife + hp - player.statLifeMax2;
@@ -16,5 +16,5 @@ internal class HealTrigger : TriggerEffect
         player.AddBuff(CooldownBuffType, CooldownTime(tier));
     }
 
-    public override float TooltipArgument(float coefficient, JewelTier tier) => 20 * coefficient;
+    public override float TriggerPower(JewelTier tier) => 20;
 }

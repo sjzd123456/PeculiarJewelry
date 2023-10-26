@@ -1,5 +1,7 @@
-﻿using System;
+﻿using PeculiarJewelry.Content.JewelryMechanic.MaterialBonuses;
+using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 
 namespace PeculiarJewelry.Content.JewelryMechanic.Stats.Triggers;
 
@@ -32,7 +34,7 @@ internal abstract class TriggerEffect : ModType
     public abstract TriggerType Type { get; }
     public virtual bool NeedsCooldown => false;
 
-    public int CooldownBuffType => !NeedsCooldown ? throw new FieldAccessException($"{GetType().Name} has no buff!") 
+    public int CooldownBuffType => !NeedsCooldown ? throw new FieldAccessException($"{GetType().Name} has no buff!")
         : ModLoader.GetMod("PeculiarJewelry").Find<ModBuff>(GetType().Name + "Buff").Type;
 
     public TriggerContext Context { get; protected set; }
@@ -50,7 +52,7 @@ internal abstract class TriggerEffect : ModType
         {
             string key = "Mods.PeculiarJewelry.Jewelry.TriggerEffects." + GetType().Name + "Buff.";
             Mod.AddContent(new TriggerCooldownBuff(GetType().Name + "Buff", Language.GetText(key + "BuffName"), Language.GetText(key + "BuffDescription")));
-        } 
+        }
     }
 
     internal void ForceSetContext(TriggerContext context) => Context = context;
@@ -64,10 +66,12 @@ internal abstract class TriggerEffect : ModType
 
         if (Type == TriggerType.InstantOther)
         {
-            if (ReportChance(tier) > Main.rand.NextFloat())
+            if (ReportInstantChance(tier, player) > Main.rand.NextFloat())
             {
                 float coefficient = ConditionCoefficients[context];
-                InternalInstantOtherEffect(context, player, coefficient, tier);
+                float bonus = player.GetModPlayer<MaterialPlayer>().CompoundCoefficientTriggerBonuses();
+
+                InternalInstantOtherEffect(context, player, coefficient * bonus, tier);
             }
         }
         //else
@@ -97,24 +101,30 @@ internal abstract class TriggerEffect : ModType
     protected virtual bool ConstantConditionMet(TriggerContext context, Player player, JewelTier tier) => false;
     protected virtual void InternalConditionalEffect(TriggerContext context, Player player, float coefficient) { }
 
-    public virtual string Tooltip(JewelTier tier)
+    public virtual string Tooltip(JewelTier tier, Player player)
     {
-        float coefficient = ConditionCoefficients[Context];
         string condition = Language.GetText("Mods.PeculiarJewelry.Jewelry.TriggerContexts." + Context).Value;
-        string chance = Language.GetText("Mods.PeculiarJewelry.Jewelry.ChanceTo").WithFormatArgs((ReportChance(tier) * 100).ToString("#0.##")).Value;
-        string effect = Language.GetText("Mods.PeculiarJewelry.Jewelry.TriggerEffects." + GetType().Name).WithFormatArgs(TooltipArgument(coefficient, tier)).Value;
+        string chance = Language.GetText("Mods.PeculiarJewelry.Jewelry.ChanceTo").WithFormatArgs((ReportInstantChance(tier, player) * 100).ToString("#0.##")).Value;
+        string effect = Language.GetText("Mods.PeculiarJewelry.Jewelry.TriggerEffects." + GetType().Name).WithFormatArgs(TriggerPower(tier)).Value;
         return condition + " " + chance + effect;
     }
 
-    private float ReportChance(JewelTier jewelTier)
+    private static float ReportInstantChance(JewelTier jewelTier, Player player)
     {
         int tier = (int)jewelTier;
+        float chance = (tier + 1f) / (tier + 3f);
+        int meteoriteCount = player.GetModPlayer<MaterialPlayer>().MaterialCount("Meteorite");
+        chance += (100 - (chance * 100)) / 100 * (meteoriteCount / (meteoriteCount + 3f));
 
-        if (Type == TriggerType.InstantOther)
-            return (tier + 1f) / (tier + 3f);
-        return tier / (tier + 1f);
+        return chance;
     }
 
-    public virtual string TooltipArgumentFormat(float coefficient, JewelTier tier) => TooltipArgument(coefficient, tier).ToString("#0.##");
-    public abstract float TooltipArgument(float coefficient, JewelTier tier);
+    public virtual string TooltipArgumentFormat(float coefficient, JewelTier tier) => (TriggerPower(tier) * coefficient).ToString("#0.##");
+    public abstract float TriggerPower(JewelTier tier);
+
+    public float TotalPower(Player player, float coefficient, JewelTier tier) 
+    {
+        float hellstoneMultiplier = player.GetModPlayer<MaterialPlayer>().MaterialCount("Hellstone") * 0.5f;
+        return coefficient * TriggerPower(tier) * (hellstoneMultiplier + 1);
+    } 
 }

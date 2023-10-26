@@ -29,6 +29,7 @@ StatExclusivities: {
 	Magic: Exclusive to [c/0066ff:magic]
 	Summon: Exclusive to [c/fed558:summon]
 	Generic: Exclusive to [c/ffffcc:generic]
+	Utility: Exclusive to [c/996633:utility]
 }
 
 TriggerContexts: {
