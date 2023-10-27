@@ -379,3 +379,118 @@ HellstoneTiara: {
 	DisplayName: Hellstone Tiara
 	Tooltip: ""
 }
+
+ChlorophyteEarring: {
+	DisplayName: Chlorophyte Earring
+	Tooltip: ""
+}
+
+CopperEarring: {
+	DisplayName: Copper Earring
+	Tooltip: ""
+}
+
+LeadEarring: {
+	DisplayName: Lead Earring
+	Tooltip: ""
+}
+
+SilverEarring: {
+	DisplayName: Silver Earring
+	Tooltip: ""
+}
+
+TinEarring: {
+	DisplayName: Tin Earring
+	Tooltip: ""
+}
+
+TungstenEarring: {
+	DisplayName: Tungsten Earring
+	Tooltip: ""
+}
+
+AdamantiteEarring: {
+	DisplayName: Adamantite Earring
+	Tooltip: ""
+}
+
+CobaltEarring: {
+	DisplayName: Cobalt Earring
+	Tooltip: ""
+}
+
+CrimtaneEarring: {
+	DisplayName: Crimtane Earring
+	Tooltip: ""
+}
+
+DemoniteEarring: {
+	DisplayName: Demonite Earring
+	Tooltip: ""
+}
+
+HallowedEarring: {
+	DisplayName: Hallowed Earring
+	Tooltip: ""
+}
+
+HellstoneEarring: {
+	DisplayName: Hellstone Earring
+	Tooltip: ""
+}
+
+IronEarring: {
+	DisplayName: Iron Earring
+	Tooltip: ""
+}
+
+LuminiteEarring: {
+	DisplayName: Luminite Earring
+	Tooltip: ""
+}
+
+MeteoriteEarring: {
+	DisplayName: Meteorite Earring
+	Tooltip: ""
+}
+
+MythrilEarring: {
+	DisplayName: Mythril Earring
+	Tooltip: ""
+}
+
+OrichalcumEarring: {
+	DisplayName: Orichalcum Earring
+	Tooltip: ""
+}
+
+PalladiumEarring: {
+	DisplayName: Palladium Earring
+	Tooltip: ""
+}
+
+PlatinumEarring: {
+	DisplayName: Platinum Earring
+	Tooltip: ""
+}
+
+ShroomiteEarring: {
+	DisplayName: Shroomite Earring
+	Tooltip: ""
+}
+
+SpectreEarring: {
+	DisplayName: Spectre Earring
+	Tooltip: ""
+}
+
+SpookyEarring: {
+	DisplayName: Spooky Earring
+	Tooltip: ""
+}
+
+TitaniumEarring: {
+	DisplayName: Titanium Earring
+	Tooltip: ""
+}
