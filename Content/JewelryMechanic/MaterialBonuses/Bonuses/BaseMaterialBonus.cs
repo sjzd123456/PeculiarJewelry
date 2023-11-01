@@ -22,7 +22,7 @@ internal abstract class BaseMaterialBonus : ModType
     public virtual bool AppliesToStat(Player player, StatType type) => false;
 
     public virtual float EffectBonus(Player player, StatType statType) => 1f;
-    public virtual void StaticBonus(Player player) { }
+    public virtual void StaticBonus(Player player, bool firstSet) { }
     public virtual void SingleJewelBonus(Player player, BasicJewelry jewel) { }
     public virtual void ResetSingleJewelBonus(Player player, BasicJewelry jewel) { }
     public virtual float TriggerCoefficientBonus() => 1;

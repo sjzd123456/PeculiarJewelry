@@ -22,7 +22,7 @@ internal class TinBonus : BaseMaterialBonus
         return 1f;
     }
 
-    public override void StaticBonus(Player player)
+    public override void StaticBonus(Player player, bool firstSet)
     {
         int count = player.GetModPlayer<MaterialPlayer>().MaterialCount(MaterialKey);
 

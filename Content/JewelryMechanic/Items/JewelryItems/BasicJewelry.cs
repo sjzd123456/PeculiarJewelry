@@ -6,6 +6,7 @@ using PeculiarJewelry.Content.JewelryMechanic.Stats;
 using PeculiarJewelry.Content.JewelryMechanic.Stats.IO;
 using System.Collections.Generic;
 using System.Linq;
+using Terraria;
 using Terraria.ModLoader.IO;
 
 namespace PeculiarJewelry.Content.JewelryMechanic.Items.JewelryItems;
@@ -54,8 +55,22 @@ public abstract class BasicJewelry : ModItem
     public override void ModifyTooltips(List<TooltipLine> tooltips)
     {
         var name = tooltips.First(x => x.Name == "ItemName");
-        var stat = DetermineHighestStat(Info);
-        name.Text = $"{JewelryPrefix(tier)} {name.Text} of {stat.Localize()}";
+
+        if (Info.Any())
+        {
+            var stat = DetermineHighestStat(Info);
+            name.Text = $"{JewelryPrefix(tier)} {name.Text} of {stat.Localize()}";
+        }
+        else
+            name.Text = $"{JewelryPrefix(tier)} {name.Text}";
+
+        int count = Main.LocalPlayer.GetModPlayer<MaterialPlayer>().MaterialCount(MaterialCategory);
+
+        if (count >= 3)
+            tooltips.Add(new TooltipLine(Mod, "3Set", Language.GetTextValue("Mods.PeculiarJewelry.Material.Bonuses." + MaterialCategory + ".3Set")));
+
+        if (count >= 5)
+            tooltips.Add(new TooltipLine(Mod, "5Set", Language.GetTextValue("Mods.PeculiarJewelry.Material.Bonuses." + MaterialCategory + ".5Set")));
 
         if (!PeculiarJewelry.ShiftDown)
         {

@@ -46,7 +46,11 @@ Bonuses: {
 
 	Gold: {
 		1Set: "{$1Bonus} Increased luck"
-		3Set: "{$3Bonus} Luck is multiplied as the ratio of health to max health decreases"
+		3Set:
+			'''
+			{$3Bonus} Hitting enemies in a specific biome may drop potion materials from that biome, 
+			and hitting enemies with a pickaxe or axe will drop random ore or wood respectively.
+			'''
 		5Set: "{$5Bonus} Chance for a heavily beneficial effect to occur randomly"
 	}
 

@@ -519,3 +519,33 @@ TinNecklace: {
 	DisplayName: Tin Necklace
 	Tooltip: ""
 }
+
+CrimtaneNecklace: {
+	DisplayName: Crimtane Necklace
+	Tooltip: ""
+}
+
+DemoniteNecklace: {
+	DisplayName: Demonite Necklace
+	Tooltip: ""
+}
+
+HellstoneNecklace: {
+	DisplayName: Hellstone Necklace
+	Tooltip: ""
+}
+
+LeadNecklace: {
+	DisplayName: Lead Necklace
+	Tooltip: ""
+}
+
+PlatinumNecklace: {
+	DisplayName: Platinum Necklace
+	Tooltip: ""
+}
+
+TungstenNecklace: {
+	DisplayName: Tungsten Necklace
+	Tooltip: ""
+}

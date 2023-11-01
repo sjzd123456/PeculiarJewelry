@@ -22,9 +22,12 @@ internal class TungstenBonus : BaseMaterialBonus
         return 1f;
     }
 
-    public override void StaticBonus(Player player)
+    public override void StaticBonus(Player player, bool firstSet)
     {
+        int count = player.GetModPlayer<MaterialPlayer>().MaterialCount(MaterialKey);
 
+        if (count >= 3)
+            player.frogLegJumpBoost = true;
     }
 
     // Needs 3-Set, 5-Set

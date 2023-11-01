@@ -22,10 +22,28 @@ internal class IronBonus : BaseMaterialBonus
         return 1f;
     }
 
-    public override void StaticBonus(Player player)
+    public override void StaticBonus(Player player, bool firstSet)
     {
-        
+        int count = player.GetModPlayer<MaterialPlayer>().MaterialCount(MaterialKey);
+
+        if (count >= 3)
+            player.GetModPlayer<IronBonusPlayer>().threeSet = true;
     }
 
-    // Needs 3-Set, 5-Set
+    // Needs 5-Set
+
+    class IronBonusPlayer : ModPlayer
+    {
+        internal bool threeSet;
+
+        public override void ResetEffects() => threeSet = false;
+
+        public override void ModifyHurt(ref Player.HurtModifiers modifiers) => modifiers.ModifyHurtInfo += ModDamage;
+
+        private void ModDamage(ref Player.HurtInfo info)
+        {
+            if (threeSet && info.Damage <= Player.statDefense * 2)
+                info.Damage = (int)(info.Damage * 0.5f);
+        }
+    }
 }

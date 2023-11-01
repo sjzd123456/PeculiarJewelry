@@ -8,6 +8,5 @@ internal class MightStat : JewelStatEffect
     public override StatExclusivity Exclusivity => StatExclusivity.Melee;
 
     public override void Apply(Player player, float strength) => player.GetDamage(DamageClass.Melee) += GetEffectBonus(player, strength);
-    protected override float InternalEffectBonus(float multiplier, Player player)
-        => PeculiarJewelry.StatConfig.MightStrength * multiplier * player.MaterialBonuses(Type, "Demonite", "Crimtane");
+    protected override float InternalEffectBonus(float multiplier, Player player) => PeculiarJewelry.StatConfig.MightStrength * multiplier;
 }

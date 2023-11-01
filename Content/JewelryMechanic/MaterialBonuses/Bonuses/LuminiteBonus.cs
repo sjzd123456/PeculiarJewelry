@@ -6,7 +6,7 @@ internal class LuminiteBonus : BaseMaterialBonus
 
     public override int GetMajorJewelCount => 2;
 
-    public override void StaticBonus(Player player)
+    public override void StaticBonus(Player player, bool firstSet)
     {
     }
 

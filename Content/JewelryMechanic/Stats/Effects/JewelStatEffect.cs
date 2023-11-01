@@ -34,9 +34,7 @@ public abstract class JewelStatEffect : ModType
         foreach (var item in BaseMaterialBonus.BonusesByKey.Keys)
         {
             if (player.GetModPlayer<MaterialPlayer>().MaterialCount(item) > 0 && BaseMaterialBonus.BonusesByKey[item].AppliesToStat(player, Type))
-            {
-
-            }
+                value *= BaseMaterialBonus.BonusesByKey[item].EffectBonus(player, Type);
         }
 
         return value;

@@ -67,7 +67,7 @@ internal class MaterialPlayer : ModPlayer
     {
         foreach (var mat in _materialsWornCount.Where(x => x.Value > 0))
             for (int i = 0; i < _materialsWornCount[mat.Key]; ++i)
-                BaseMaterialBonus.BonusesByKey[mat.Key].StaticBonus(Player);
+                BaseMaterialBonus.BonusesByKey[mat.Key].StaticBonus(Player, i == 0);
     }
 
     internal float CompoundCoefficientTriggerBonuses()

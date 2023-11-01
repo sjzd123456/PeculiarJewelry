@@ -6,7 +6,7 @@ namespace PeculiarJewelry.Content.JewelryMechanic.Stats;
 
 public class JewelStat
 {
-    public static JewelStat Random => new((StatType)Main.rand.Next((int)StatType.Max));
+    public static JewelStat Random => new(StatType.Permenance);//new((StatType)Main.rand.Next((int)StatType.Max));
 
     public readonly StatType Type;
 

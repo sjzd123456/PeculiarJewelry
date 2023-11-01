@@ -25,7 +25,7 @@ internal class DemoniteBonus : BaseMaterialBonus
         return 1f;
     }
 
-    public override void StaticBonus(Player player)
+    public override void StaticBonus(Player player, bool firstSet)
     {
 
     }

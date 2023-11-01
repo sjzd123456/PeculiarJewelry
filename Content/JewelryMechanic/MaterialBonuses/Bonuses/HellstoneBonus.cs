@@ -7,7 +7,7 @@ internal class HellstoneBonus : BaseMaterialBonus
 {
     public override string MaterialKey => "Hellstone";
 
-    public override void StaticBonus(Player player)
+    public override void StaticBonus(Player player, bool firstSet)
     {
 
     }
