@@ -28,7 +28,7 @@ internal class GoldBonus : BaseMaterialBonus
             player.GetModPlayer<GoldBonusPlayer>().threeSet = true;
     }
 
-    // Needs 3-Set, 5-Set
+    // Needs 5-Set
 
     class GoldBonusPlayer : ModPlayer
     {

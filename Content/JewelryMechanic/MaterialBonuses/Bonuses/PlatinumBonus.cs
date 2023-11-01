@@ -26,8 +26,14 @@ internal class PlatinumBonus : BaseMaterialBonus
 
     public override void StaticBonus(Player player, bool firstSet)
     {
+        int count = player.GetModPlayer<MaterialPlayer>().MaterialCount(MaterialKey);
 
+        if (count >= 3)
+        {
+            player.tileSpeed *= 2;
+            player.sonarPotion = true;
+        }
     }
 
-    // Needs 1-Set, 3-Set, 5-Set
+    // Needs 5-Set
 }
