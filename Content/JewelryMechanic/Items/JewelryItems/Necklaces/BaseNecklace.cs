@@ -1,35 +1,34 @@
 using PeculiarJewelry.Content.JewelryMechanic.MaterialBonuses;
 using ReLogic.Content;
-using System;
 using System.Linq;
 
-namespace PeculiarJewelry.Content.JewelryMechanic.Items.JewelryItems.Earrings;
+namespace PeculiarJewelry.Content.JewelryMechanic.Items.JewelryItems.Necklaces;
 
-[AutoloadEquip(EquipType.Face)]
-public abstract class BaseEarring : BasicJewelry
+[AutoloadEquip(EquipType.Head)]
+public abstract class BaseNecklace : BasicJewelry
 {
     static Asset<Texture2D> _jewels;
     static Asset<Texture2D> _jewelsEquip;
 
     public override void SetStaticDefaults()
     {
-        _jewels ??= Mod.Assets.Request<Texture2D>("Content/JewelryMechanic/Items/JewelryItems/Earrings/EarringJewels");
-        _jewelsEquip ??= Mod.Assets.Request<Texture2D>("Content/JewelryMechanic/Items/JewelryItems/Earrings/EarringJewels_Face");
+        _jewels ??= Mod.Assets.Request<Texture2D>("Content/JewelryMechanic/Items/JewelryItems/Necklaces/NecklaceJewels");
+        _jewelsEquip ??= Mod.Assets.Request<Texture2D>("Content/JewelryMechanic/Items/JewelryItems/Necklaces/NecklaceJewels_Neck");
     }
 
     public override void Unload() => _jewels = null;
 
     protected override void Defaults()
     {
-        Item.width = 38;
-        Item.height = 22;
+        Item.width = 26;
+        Item.height = 42;
         Item.accessory = true;
     }
 
     protected override void EquipEffect(Player player, bool isVanity = false)
     {
         if (Info.Any())
-            player.GetModPlayer<MaterialPlayer>().SetEquip(EquipType.Face, new MaterialPlayer.EquipLayerInfo(GetDisplayColor(), _jewelsEquip.Value));
+            player.GetModPlayer<MaterialPlayer>().SetEquip(EquipType.Neck, new MaterialPlayer.EquipLayerInfo(GetDisplayColor(), _jewelsEquip.Value));
     }
 
     public override void PostDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale)

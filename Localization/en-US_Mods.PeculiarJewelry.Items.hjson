@@ -494,3 +494,28 @@ TitaniumEarring: {
 	DisplayName: Titanium Earring
 	Tooltip: ""
 }
+
+SilverNecklace: {
+	DisplayName: Silver Necklace
+	Tooltip: ""
+}
+
+CopperNecklace: {
+	DisplayName: Copper Necklace
+	Tooltip: ""
+}
+
+GoldNecklace: {
+	DisplayName: Gold Necklace
+	Tooltip: ""
+}
+
+IronNecklace: {
+	DisplayName: Iron Necklace
+	Tooltip: ""
+}
+
+TinNecklace: {
+	DisplayName: Tin Necklace
+	Tooltip: ""
+}
