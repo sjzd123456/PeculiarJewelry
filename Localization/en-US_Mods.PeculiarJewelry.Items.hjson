@@ -579,3 +579,8 @@ HallowedNecklace: {
 	DisplayName: Hallowed Necklace
 	Tooltip: ""
 }
+
+ChlorophyteNecklace: {
+	DisplayName: Chlorophyte Necklace
+	Tooltip: ""
+}

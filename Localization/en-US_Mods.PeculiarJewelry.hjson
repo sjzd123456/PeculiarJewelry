@@ -34,4 +34,7 @@ NPCs: {
 	}
 }
 
-Projectiles.StellarJadeProjectile.DisplayName: Stellar Jade Projectile
+Projectiles: {
+	StellarJadeProjectile.DisplayName: Stellar Jade Projectile
+	TrapperMinion.DisplayName: Trapper Minion
+}
