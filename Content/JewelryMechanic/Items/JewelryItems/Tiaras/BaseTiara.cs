@@ -12,7 +12,7 @@ public abstract class BaseTiara : BasicJewelry
 
     public override void SetStaticDefaults()
     {
-        ArmorIDs.Head.Sets.DrawFullHair[Item.headSlot] = true;
+        ArmorIDs.Head.Sets.DrawHatHair[Item.headSlot] = true;
         _jewels ??= Mod.Assets.Request<Texture2D>("Content/JewelryMechanic/Items/JewelryItems/Tiaras/TiaraJewels");
         _jewelsEquip ??= Mod.Assets.Request<Texture2D>("Content/JewelryMechanic/Items/JewelryItems/Tiaras/TiaraJewels_Head");
     }

@@ -57,7 +57,7 @@ internal abstract class TriggerEffect : ModType
 
     internal void ForceSetContext(TriggerContext context) => Context = context;
 
-    public static int CooldownTime(JewelTier tier) => (int)Math.Pow(2, 1 - ((float)tier / 10));
+    public static int CooldownTime(JewelTier tier) => (int)Math.Pow(2, 1 - ((float)tier / 10)) * 60;
 
     public void InstantTrigger(TriggerContext context, Player player, JewelTier tier)
     {
@@ -91,7 +91,11 @@ internal abstract class TriggerEffect : ModType
         if (NeedsCooldown && player.HasBuff(CooldownBuffType))
             return;
 
-        if (ConstantConditionMet(Context, player, tier))
+        bool condition = ConstantConditionMet(Context, player, tier);
+        int meteoriteCount = player.GetModPlayer<MaterialPlayer>().MaterialCount("Meteorite");
+        bool canRun = meteoriteCount >= 3 ? (condition || Main.rand.NextBool(4)) : condition;
+
+        if (canRun)
         {
             float coefficient = ConditionCoefficients[Context];
             InternalConditionalEffect(Context, player, coefficient);
@@ -111,9 +115,13 @@ internal abstract class TriggerEffect : ModType
 
     private static float ReportInstantChance(JewelTier jewelTier, Player player)
     {
+        int meteoriteCount = player.GetModPlayer<MaterialPlayer>().MaterialCount("Meteorite");
+
+        if (meteoriteCount >= 3)
+            return 1f;
+
         int tier = (int)jewelTier;
         float chance = (tier + 1f) / (tier + 3f);
-        int meteoriteCount = player.GetModPlayer<MaterialPlayer>().MaterialCount("Meteorite");
         chance += (100 - (chance * 100)) / 100 * (meteoriteCount / (meteoriteCount + 3f));
 
         return chance;

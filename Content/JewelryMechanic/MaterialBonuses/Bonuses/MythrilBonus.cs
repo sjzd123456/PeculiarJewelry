@@ -24,8 +24,20 @@ internal class MythrilBonus : BaseMaterialBonus
 
     public override void StaticBonus(Player player, bool firstSet)
     {
-        
+        int count = player.GetModPlayer<MaterialPlayer>().MaterialCount(MaterialKey);
+
+        if (count >= 3)
+            player.GetModPlayer<MythrilBonusPlayer>().threeSet = true;
     }
 
-    // Needs 3-Set, 5-Set
+    // Needs 5-Set
+
+    class MythrilBonusPlayer : ModPlayer
+    {
+        internal bool threeSet = false;
+
+        public override void ResetEffects() => threeSet = false;
+        public override float UseSpeedMultiplier(Item item) 
+            => item.DamageType.CountsAsClass(DamageClass.Ranged) && threeSet && Player.velocity.LengthSquared() <= 0.0001f ? 2f : 1;
+    }
 }

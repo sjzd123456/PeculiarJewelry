@@ -6,7 +6,7 @@ namespace PeculiarJewelry.Content.JewelryMechanic.Stats;
 
 public class JewelStat
 {
-    public static JewelStat Random => new(StatType.Allure);//new((StatType)Main.rand.Next((int)StatType.Max));
+    public static JewelStat Random => new((StatType)Main.rand.Next((int)StatType.Max));
 
     public readonly StatType Type;
 
@@ -31,7 +31,6 @@ public class JewelStat
 
         if (showStars)
         {
-
             if (Strength > 1)
             {
                 for (int i = 1; i < Strength - 1; ++i)

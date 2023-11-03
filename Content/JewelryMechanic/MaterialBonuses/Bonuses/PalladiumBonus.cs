@@ -24,8 +24,36 @@ internal class PalladiumBonus : BaseMaterialBonus
 
     public override void StaticBonus(Player player, bool firstSet)
     {
-        
+        int count = player.GetModPlayer<MaterialPlayer>().MaterialCount(MaterialKey);
+
+        if (count >= 3)
+            player.GetModPlayer<PalladiumBonusPlayer>().threeSet = true;
     }
 
-    // Needs 3-Set, 5-Set
+    // Needs 5-Set
+
+    class PalladiumBonusPlayer : ModPlayer
+    {
+        internal bool threeSet = false;
+
+        private bool _speedUpNextSwing = false;
+
+        public override void ResetEffects() => threeSet = false;
+
+        public override float UseSpeedMultiplier(Item item)
+        {
+            if (_speedUpNextSwing)
+            {
+                _speedUpNextSwing = false;
+                return 2.6f;
+            }
+            return 1f;
+        }
+
+        public override void OnHitNPCWithItem(Item item, NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            if (threeSet)
+                _speedUpNextSwing = true;
+        }
+    }
 }

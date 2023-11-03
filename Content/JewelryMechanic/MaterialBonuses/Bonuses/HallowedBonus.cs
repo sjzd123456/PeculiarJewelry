@@ -1,5 +1,6 @@
 ﻿using PeculiarJewelry.Content.JewelryMechanic.Items.JewelryItems;
 using PeculiarJewelry.Content.JewelryMechanic.Stats;
+using Terraria.DataStructures;
 
 namespace PeculiarJewelry.Content.JewelryMechanic.MaterialBonuses.Bonuses;
 
@@ -24,8 +25,29 @@ internal class HallowedBonus : BaseMaterialBonus
 
     public override void StaticBonus(Player player, bool firstSet)
     {
-        
+        int count = player.GetModPlayer<MaterialPlayer>().MaterialCount(MaterialKey);
+
+        if (count >= 3)
+            player.GetModPlayer<HallowedBonusPlayer>().threeSet = true;
     }
 
-    // Needs 3-Set, 5-Set
+    // Needs 5-Set
+
+    class HallowedBonusPlayer : ModPlayer
+    {
+        internal bool IsImmune => threeSet && !Main.CurrentFrameFlags.AnyActiveBossNPC && Main.invasionType == InvasionID.None;
+        internal bool threeSet = false;
+
+        public override bool PreKill(double damage, int hitDirection, bool pvp, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource)
+        {
+            if (IsImmune)
+            {
+                playSound = genGore = false;
+                Player.statLife = 1;
+                return false;
+            }
+
+            return true;
+        }
+    }
 }

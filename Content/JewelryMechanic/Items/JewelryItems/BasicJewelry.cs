@@ -43,14 +43,19 @@ public abstract class BasicJewelry : ModItem
 
     public sealed override void UpdateEquip(Player player)
     {
-        player.GetModPlayer<JewelPlayer>().jewelry.Add(this);
+        if (!Item.accessory)
+            player.GetModPlayer<JewelPlayer>().jewelry.Add(this);
+
         player.GetModPlayer<MaterialPlayer>().AddMaterial(MaterialCategory);
         EquipEffect(player);
     }
 
+    public override void UpdateAccessory(Player player, bool hideVisual) => player.GetModPlayer<JewelPlayer>().jewelry.Add(this);
     public override void EquipFrameEffects(Player player, EquipType type) => EquipEffect(player, true);
     public override void UpdateVanity(Player player) => EquipEffect(player, true);
     protected virtual void EquipEffect(Player player, bool isVanity = false) { }
+    public static string JewelryPrefix(JewelryTier tier) => Language.GetTextValue("Mods.PeculiarJewelry.Jewelry.JewelryPrefixes." + tier);
+    public override bool CanReforge() => false;
 
     public override void ModifyTooltips(List<TooltipLine> tooltips)
     {
@@ -74,8 +79,10 @@ public abstract class BasicJewelry : ModItem
 
         if (!PeculiarJewelry.ShiftDown)
         {
-            SummaryJewelryTooltips(tooltips, Info, Mod);
-            tooltips.Add(new TooltipLine(Mod, "ShiftNotice", Language.GetTextValue("Mods.PeculiarJewelry.Jewelry.HoldShift")));
+            SummaryJewelryTooltips(tooltips, this, Mod);
+
+            if (Info.Any())
+                tooltips.Add(new TooltipLine(Mod, "ShiftNotice", Language.GetTextValue("Mods.PeculiarJewelry.Jewelry.HoldShift")));
         }
         else
             foreach (var item in Info)
@@ -118,12 +125,15 @@ public abstract class BasicJewelry : ModItem
         return key;
     }
 
-    public static void SummaryJewelryTooltips(List<TooltipLine> tooltips, List<JewelInfo> info, Mod mod, Player player = null)
+    public static void SummaryJewelryTooltips(List<TooltipLine> tooltips, BasicJewelry jewelry, Mod mod, Player player = null, List<JewelInfo> overrideInfo = null)
     {
+        List<JewelInfo> info = overrideInfo ?? jewelry.Info;
         Dictionary<StatType, float> strengthsByType = new();
         Dictionary<StatType, Color> colorsByType = new();
         int triggerIndex = 0;
+
         player ??= Main.LocalPlayer;
+        jewelry.ApplySingleJewelBonus(player);
 
         foreach (var item in info)
         {
@@ -150,13 +160,9 @@ public abstract class BasicJewelry : ModItem
             var desc = "+" + Language.GetText("Mods.PeculiarJewelry.Jewelry.StatTypes." + type + ".Description").WithFormatArgs(strength.ToString("#0.##")).Value;
             tooltips.Add(new TooltipLine(mod, "SummaryInfo" + type, desc) { OverrideColor = colorsByType[type] });
         }
+
+        jewelry.ResetSingleJewelBonus(player);
     }
-
-    public static string JewelryPrefix(JewelryTier tier) => Language.GetTextValue("Mods.PeculiarJewelry.Jewelry.JewelryPrefixes." + tier);
-
-    public override void UpdateAccessory(Player player, bool hideVisual) => player.GetModPlayer<JewelPlayer>().jewelry.Add(this);
-
-    public override bool CanReforge() => false;
 
     public override void SaveData(TagCompound tag)
     {

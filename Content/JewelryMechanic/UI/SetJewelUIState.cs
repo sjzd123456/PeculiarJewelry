@@ -175,8 +175,8 @@ internal class SetJewelUIState : UIState, IClosableUIState
             List<TooltipLine> lines = new();
             List<TooltipLine> originalLines = new();
 
-            BasicJewelry.SummaryJewelryTooltips(lines, info, Jewelry.Mod);
-            BasicJewelry.SummaryJewelryTooltips(originalLines, Jewelry.Info, Jewelry.Mod);
+            BasicJewelry.SummaryJewelryTooltips(lines, Jewelry, Jewelry.Mod, null, info);
+            BasicJewelry.SummaryJewelryTooltips(originalLines, Jewelry, Jewelry.Mod);
 
             foreach (var item in lines)
             {

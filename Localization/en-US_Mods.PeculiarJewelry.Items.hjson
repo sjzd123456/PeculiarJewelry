@@ -549,3 +549,33 @@ TungstenNecklace: {
 	DisplayName: Tungsten Necklace
 	Tooltip: ""
 }
+
+MeteoriteNecklace: {
+	DisplayName: Meteorite Necklace
+	Tooltip: ""
+}
+
+PalladiumNecklace: {
+	DisplayName: Palladium Necklace
+	Tooltip: ""
+}
+
+MythrilNecklace: {
+	DisplayName: Mythril Necklace
+	Tooltip: ""
+}
+
+OrichalcumNecklace: {
+	DisplayName: Orichalcum Necklace
+	Tooltip: ""
+}
+
+AdamantiteNecklace: {
+	DisplayName: Adamantite Necklace
+	Tooltip: ""
+}
+
+HallowedNecklace: {
+	DisplayName: Hallowed Necklace
+	Tooltip: ""
+}

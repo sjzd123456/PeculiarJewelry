@@ -8,12 +8,13 @@ internal class DemoniteBonus : BaseMaterialBonus
     public override string MaterialKey => "Demonite";
 
     private float damageBonus = 1f;
+    private float bonusStrength = 1.25f;
 
     public override bool AppliesToStat(Player player, StatType type) => 
         type == StatType.Potency || type == StatType.Might || type == StatType.Order || type == StatType.Precision || type == StatType.Willpower || // Benefits
         type == StatType.Permenance || type == StatType.Tenacity; // Reduces
 
-    public override void SingleJewelBonus(Player player, BasicJewelry jewel) => damageBonus = 1.25f;
+    public override void SingleJewelBonus(Player player, BasicJewelry jewel) => damageBonus = bonusStrength;
     public override void ResetSingleJewelBonus(Player player, BasicJewelry jewel) => damageBonus = 1f;
 
     public override float EffectBonus(Player player, StatType statType)
@@ -27,8 +28,24 @@ internal class DemoniteBonus : BaseMaterialBonus
 
     public override void StaticBonus(Player player, bool firstSet)
     {
+        int count = player.GetModPlayer<MaterialPlayer>().MaterialCount(MaterialKey);
+        bonusStrength = 1.25f;
 
+        if (count >= 3)
+        {
+            player.GetModPlayer<DemoniteBonusPlayer>().threeSet = true;
+            bonusStrength = 1.4f;
+        }
     }
 
     // Needs 3-Set, 5-Set
+
+    class DemoniteBonusPlayer : ModPlayer
+    {
+        internal bool threeSet = false;
+
+        public override void ResetEffects() => threeSet = false;
+
+        public override void ModifyHurt(ref Player.HurtModifiers modifiers) => modifiers.FinalDamage *= 1.4f;
+    }
 }
