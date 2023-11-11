@@ -19,6 +19,8 @@ internal abstract class BaseMaterialBonus : ModType
         BonusesByKey.Add(MaterialKey, this);
     }
 
+    public int CountMaterial(Player player) => player.GetModPlayer<MaterialPlayer>().MaterialCount(MaterialKey);
+
     public virtual bool AppliesToStat(Player player, StatType type) => false;
 
     public virtual float EffectBonus(Player player, StatType statType) => 1f;

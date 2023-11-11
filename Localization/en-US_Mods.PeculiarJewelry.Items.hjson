@@ -584,3 +584,23 @@ ChlorophyteNecklace: {
 	DisplayName: Chlorophyte Necklace
 	Tooltip: ""
 }
+
+ShroomiteNecklace: {
+	DisplayName: Shroomite Necklace
+	Tooltip: ""
+}
+
+SpectreNecklace: {
+	DisplayName: Spectre Necklace
+	Tooltip: ""
+}
+
+SpectreTiara: {
+	DisplayName: Spectre Tiara
+	Tooltip: ""
+}
+
+SpookyTiara: {
+	DisplayName: Spooky Tiara
+	Tooltip: ""
+}

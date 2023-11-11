@@ -1,5 +1,6 @@
 ﻿using PeculiarJewelry.Content.JewelryMechanic.Items.JewelryItems;
 using PeculiarJewelry.Content.JewelryMechanic.Stats;
+using Terraria.Initializers;
 
 namespace PeculiarJewelry.Content.JewelryMechanic.MaterialBonuses.Bonuses;
 
@@ -16,7 +17,7 @@ internal class SpectreBonus : BaseMaterialBonus
 
     public override float EffectBonus(Player player, StatType type)
     {
-        int count = player.GetModPlayer<MaterialPlayer>().MaterialCount(MaterialKey);
+        int count = CountMaterial(player);
         bool defensive = type == StatType.Permenance || type == StatType.Tenacity;
 
         if (count >= 1)
@@ -26,7 +27,18 @@ internal class SpectreBonus : BaseMaterialBonus
 
     public override void StaticBonus(Player player, bool firstSet)
     {
-        
+        if (CountMaterial(player) >= 3)
+        {
+            player.waterWalk = player.waterWalk2 = true;
+
+            if (player.wings <= 0)
+            {
+                player.wings = ArmorIDs.Wing.JimsWings;
+                player.wingTimeMax = player.GetWingStats(ArmorIDs.Wing.FishronWings).FlyTime;
+                player.equippedWings = new Item(ItemID.FishronWings);
+                player.wingsLogic = ArmorIDs.Wing.FishronWings;
+            }
+        }
     }
 
     // Needs 3-Set, 5-Set

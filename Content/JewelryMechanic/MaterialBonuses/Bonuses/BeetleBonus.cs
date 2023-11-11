@@ -26,8 +26,9 @@ internal class BeetleBonus : BaseMaterialBonus
 
     public override void StaticBonus(Player player, bool firstSet)
     {
-        
+        if (CountMaterial(player) >= 3 && player.velocity.LengthSquared() < 0.01f)
+            player.GetDamage(DamageClass.Generic) += 1;
     }
 
-    // Needs 3-Set, 5-Set
+    // Needs 5-Set
 }
