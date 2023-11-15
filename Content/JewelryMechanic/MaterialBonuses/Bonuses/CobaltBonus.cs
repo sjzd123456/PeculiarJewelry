@@ -1,5 +1,6 @@
 ﻿using PeculiarJewelry.Content.JewelryMechanic.Items.JewelryItems;
 using PeculiarJewelry.Content.JewelryMechanic.Stats;
+using System.Collections.Generic;
 using System.Linq;
 using Terraria;
 using Terraria.DataStructures;
@@ -38,6 +39,7 @@ internal class CobaltBonus : BaseMaterialBonus
     {
         internal bool threeSet = false;
         internal bool oldThree = false;
+        internal int lastMaxMinions = 0;
 
         public override void ResetEffects()
         {
@@ -49,20 +51,36 @@ internal class CobaltBonus : BaseMaterialBonus
     private class CobaltBonusProjectile : GlobalProjectile
     {
         private static readonly int[] ExceptionIDs = new int[] { ProjectileID.StardustDragon1, ProjectileID.StardustDragon2, ProjectileID.StardustDragon3, 
-            ProjectileID.StardustDragon4, ProjectileID.StormTigerTier1, ProjectileID.StormTigerTier2, ProjectileID.StormTigerTier3, ProjectileID.StormTigerGem };
+            ProjectileID.StardustDragon4, ProjectileID.StormTigerTier1, ProjectileID.StormTigerTier2, ProjectileID.StormTigerTier3, ProjectileID.StormTigerGem, 
+            ProjectileID.AbigailMinion, ProjectileID.AbigailCounter };
 
         public override bool InstancePerEntity => true;
 
         private bool _shadow = false;
+        private int _shadowOwner = -1;
+        private int _ownsShadow = -1;
+        private bool _shouldOwnShadow = false;
+
+        public override bool AppliesToEntity(Projectile entity, bool lateInstantiation) => entity.minion || entity.sentry || ExceptionIDs.Contains(entity.type);
+
+        private static bool IsRealShadow(Projectile projectile)
+        {
+            var cobalt = projectile.GetGlobalProjectile<CobaltBonusProjectile>();
+            return cobalt._shadow && !ExceptionIDs.Contains(projectile.type);
+        }
 
         public override void OnSpawn(Projectile projectile, IEntitySource source)
         {
-            bool tiger = source is EntitySource_Misc { Context: "StormTigerTierSwap" } && Main.player[projectile.owner].GetModPlayer<CobaltBonusPlayer>().oldThree;
+            bool ownerThreeSet = Main.player[projectile.owner].GetModPlayer<CobaltBonusPlayer>().oldThree;
+            bool switching = source is EntitySource_Misc { Context: "StormTigerTierSwap" or "AbigailTierSwap" } && ownerThreeSet;
             bool normal = source is EntitySource_ItemUse_WithAmmo itemUse && itemUse.Player.GetModPlayer<CobaltBonusPlayer>().threeSet;
 
-            if (tiger || normal)
+            if (normal || switching) // Normal is most projectiles, switching is the projectiles that spawn from a spawner proj
             {
-                if (!projectile.minion)
+                if (!projectile.minion && !projectile.sentry)
+                    return;
+
+                if (projectile.damage <= 0)
                     return;
 
                 if (projectile.GetGlobalProjectile<CobaltBonusProjectile>()._shadow)
@@ -75,16 +93,72 @@ internal class CobaltBonus : BaseMaterialBonus
                     return;
                 }
 
-                int newProj = Projectile.NewProjectile(new EntitySource_Parent(projectile, "ShadowClone"), projectile.Center, projectile.velocity * -0.5f, 
-                    projectile.type, projectile.damage / 2, projectile.knockBack, projectile.owner);
-                Main.projectile[newProj].GetGlobalProjectile<CobaltBonusProjectile>()._shadow = true;
-                Main.projectile[newProj].minionSlots = 0;
-                Main.projectile[newProj].Opacity = 0.5f;
+                int shadowCount = 0;
+                int maxCount = Main.player[projectile.owner].maxMinions;
+                
+                if (projectile.sentry)
+                    maxCount = Main.player[projectile.owner].maxTurretsOld;
+
+                for (int i = 0; i < Main.maxProjectiles; i++) // Cap shadow minions
+                {
+                    Projectile p = Main.projectile[i];
+                    bool check = projectile.sentry ? p.sentry : p.minion;
+
+                    if (p.active && check && p.owner == projectile.owner && p.GetGlobalProjectile<CobaltBonusProjectile>()._shadow)
+                    {
+                        shadowCount++;
+
+                        if (shadowCount > maxCount)
+                            return;
+                    }
+                }
+
+                projectile.GetGlobalProjectile<CobaltBonusProjectile>()._shouldOwnShadow = true;
             }
+        }
+
+        private static int SpawnShadow(Projectile parent)
+        {
+            int newProj = Projectile.NewProjectile(new EntitySource_Parent(parent, "ShadowClone"), parent.Center, parent.velocity * 0.5f,
+                parent.type, parent.damage / 2, parent.knockBack, parent.owner);
+
+            if (parent.sentry)
+                Main.projectile[newProj].position -= new Vector2(0, 16);
+
+            Main.projectile[newProj].GetGlobalProjectile<CobaltBonusProjectile>()._shadow = true;
+            Main.projectile[newProj].GetGlobalProjectile<CobaltBonusProjectile>()._shadowOwner = parent.whoAmI;
+            Main.projectile[newProj].minionSlots = 0; // Don't take up extra slots
+            Main.projectile[newProj].Opacity = 0.5f;
+            Main.projectile[newProj].minion = Main.projectile[newProj].sentry = false;
+
+            parent.GetGlobalProjectile<CobaltBonusProjectile>()._ownsShadow = newProj;
+            parent.GetGlobalProjectile<CobaltBonusProjectile>()._shouldOwnShadow = false;
+            return newProj;
+        }
+
+        public override void DrawBehind(Projectile projectile, int index, List<int> bT, List<int> b, List<int> behindProjectiles, List<int> oP, List<int> oW)
+        {
+            if (projectile.GetGlobalProjectile<CobaltBonusProjectile>()._shadow)
+                behindProjectiles.Add(index);
         }
 
         public override bool PreAI(Projectile projectile)
         {
+            var selfCobalt = projectile.GetGlobalProjectile<CobaltBonusProjectile>();
+
+            if (selfCobalt._shouldOwnShadow)
+                SpawnShadow(projectile);
+
+            if (!IsRealShadow(projectile))
+                return true;
+
+            int shadowOwner = selfCobalt._shadowOwner;
+            if (Main.projectile[shadowOwner].type != projectile.type)
+            {
+                projectile.Kill();
+                return false;
+            }
+
             if (projectile.TryGetOwner(out Player owner) && !owner.GetModPlayer<CobaltBonusPlayer>().threeSet)
             {
                 projectile.Kill();
@@ -92,6 +166,23 @@ internal class CobaltBonus : BaseMaterialBonus
             }
 
             return true;
+        }
+
+        public override void OnKill(Projectile projectile, int timeLeft)
+        {
+            int owns = projectile.GetGlobalProjectile<CobaltBonusProjectile>()._ownsShadow;
+
+            if (owns >= 0)
+                Main.projectile[owns].Kill();
+
+            int owner = projectile.GetGlobalProjectile<CobaltBonusProjectile>()._shadowOwner;
+
+            if (owner >= 0)
+            {
+                var ownerCobaltProj = Main.projectile[owner].GetGlobalProjectile<CobaltBonusProjectile>();
+                ownerCobaltProj._ownsShadow = -1;
+                ownerCobaltProj._shouldOwnShadow = false;
+            }
         }
 
         public override bool PreDraw(Projectile projectile, ref Color lightColor)

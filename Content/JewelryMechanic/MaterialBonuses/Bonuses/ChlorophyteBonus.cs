@@ -54,7 +54,7 @@ internal class ChlorophyteBonus : BaseMaterialBonus
 
     // Needs 5-Set
 
-    class ChlorophyteBonusPlayer : ModPlayer
+    private class ChlorophyteBonusPlayer : ModPlayer
     {
         internal bool threeSet = false;
         internal int lastNumMinions = 0;
