@@ -372,255 +372,468 @@ ShroomiteTiara: {
 
 GoldEarring: {
 	DisplayName: Gold Earring
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Gold.1Set}
+		'''
 }
 
 HellstoneTiara: {
 	DisplayName: Hellstone Tiara
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Hellstone.1Set}
+		'''
 }
 
 ChlorophyteEarring: {
 	DisplayName: Chlorophyte Earring
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Chlorophyte.1Set}
+		'''
 }
 
 CopperEarring: {
 	DisplayName: Copper Earring
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Copper.1Set}
+		'''
 }
 
 LeadEarring: {
 	DisplayName: Lead Earring
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Lead.1Set}
+		'''
 }
 
 SilverEarring: {
 	DisplayName: Silver Earring
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Silver.1Set}
+		'''
 }
 
 TinEarring: {
 	DisplayName: Tin Earring
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Tin.1Set}
+		'''
 }
 
 TungstenEarring: {
 	DisplayName: Tungsten Earring
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Tungsten.1Set}
+		'''
 }
 
 AdamantiteEarring: {
 	DisplayName: Adamantite Earring
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Adamantite.1Set}
+		'''
 }
 
 CobaltEarring: {
 	DisplayName: Cobalt Earring
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Cobalt.1Set}
+		'''
 }
 
 CrimtaneEarring: {
 	DisplayName: Crimtane Earring
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Crimtane.1Set}
+		'''
 }
 
 DemoniteEarring: {
 	DisplayName: Demonite Earring
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Demonite.1Set}
+		'''
 }
 
 HallowedEarring: {
 	DisplayName: Hallowed Earring
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Hallowed.1Set}
+		'''
 }
 
 HellstoneEarring: {
 	DisplayName: Hellstone Earring
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Hellstone.1Set}
+		'''
 }
 
 IronEarring: {
 	DisplayName: Iron Earring
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Iron.1Set}
+		'''
 }
 
 LuminiteEarring: {
 	DisplayName: Luminite Earring
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Luminite.1Set}
+		'''
 }
 
 MeteoriteEarring: {
 	DisplayName: Meteorite Earring
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Meteorite.1Set}
+		'''
 }
 
 MythrilEarring: {
 	DisplayName: Mythril Earring
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Mythril.1Set}
+		'''
 }
 
 OrichalcumEarring: {
 	DisplayName: Orichalcum Earring
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Orichalcum.1Set}
+		'''
 }
 
 PalladiumEarring: {
 	DisplayName: Palladium Earring
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Palladium.1Set}
+		'''
 }
 
 PlatinumEarring: {
 	DisplayName: Platinum Earring
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Platinum.1Set}
+		'''
 }
 
 ShroomiteEarring: {
 	DisplayName: Shroomite Earring
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Shroomite.1Set}
+		'''
 }
 
 SpectreEarring: {
 	DisplayName: Spectre Earring
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Spectre.1Set}
+		'''
 }
 
 SpookyEarring: {
 	DisplayName: Spooky Earring
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Spooky.1Set}
+		'''
 }
 
 TitaniumEarring: {
 	DisplayName: Titanium Earring
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Titanium.1Set}
+		'''
 }
 
 SilverNecklace: {
 	DisplayName: Silver Necklace
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Silver.1Set}
+		'''
 }
 
 CopperNecklace: {
 	DisplayName: Copper Necklace
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Copper.1Set}
+		'''
 }
 
 GoldNecklace: {
 	DisplayName: Gold Necklace
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Gold.1Set}
+		'''
 }
 
 IronNecklace: {
 	DisplayName: Iron Necklace
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Iron.1Set}
+		'''
 }
 
 TinNecklace: {
 	DisplayName: Tin Necklace
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Tin.1Set}
+		'''
 }
 
 CrimtaneNecklace: {
 	DisplayName: Crimtane Necklace
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Crimtane.1Set}
+		'''
 }
 
 DemoniteNecklace: {
 	DisplayName: Demonite Necklace
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Demonite.1Set}
+		'''
 }
 
 HellstoneNecklace: {
 	DisplayName: Hellstone Necklace
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Hellstone.1Set}
+		'''
 }
 
 LeadNecklace: {
 	DisplayName: Lead Necklace
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Lead.1Set}
+		'''
 }
 
 PlatinumNecklace: {
 	DisplayName: Platinum Necklace
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Platinum.1Set}
+		'''
 }
 
 TungstenNecklace: {
 	DisplayName: Tungsten Necklace
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Tungsten.1Set}
+		'''
 }
 
 MeteoriteNecklace: {
 	DisplayName: Meteorite Necklace
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Meteorite.1Set}
+		'''
 }
 
 PalladiumNecklace: {
 	DisplayName: Palladium Necklace
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Palladium.1Set}
+		'''
 }
 
 MythrilNecklace: {
 	DisplayName: Mythril Necklace
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Mythril.1Set}
+		'''
 }
 
 OrichalcumNecklace: {
 	DisplayName: Orichalcum Necklace
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Orichalcum.1Set}
+		'''
 }
 
 AdamantiteNecklace: {
 	DisplayName: Adamantite Necklace
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Adamantite.1Set}
+		'''
 }
 
 HallowedNecklace: {
 	DisplayName: Hallowed Necklace
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Hallowed.1Set}
+		'''
 }
 
 ChlorophyteNecklace: {
 	DisplayName: Chlorophyte Necklace
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Chlorophyte.1Set}
+		'''
 }
 
 ShroomiteNecklace: {
 	DisplayName: Shroomite Necklace
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Shroomite.1Set}
+		'''
 }
 
 SpectreNecklace: {
 	DisplayName: Spectre Necklace
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Spectre.1Set}
+		'''
 }
 
 SpectreTiara: {
 	DisplayName: Spectre Tiara
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Spectre.1Set}
+		'''
 }
 
 SpookyTiara: {
 	DisplayName: Spooky Tiara
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Spooky.1Set}
+		'''
 }
 
 BeetleNecklace: {
 	DisplayName: Beetle Necklace
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Beetle.1Set}
+		'''
 }
 
 SpookyNecklace: {
 	DisplayName: Spooky Necklace
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Spooky.1Set}
+		'''
 }
 
 LuminiteNecklace: {
 	DisplayName: Luminite Necklace
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Luminite.1Set}
+		'''
 }
 
 TitaniumNecklace: {
 	DisplayName: Titanium Necklace
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Titanium.1Set}
+		'''
+}
+
+CobaltNecklace: {
+	DisplayName: Cobalt Necklace
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Cobalt.1Set}
+		'''
 }
