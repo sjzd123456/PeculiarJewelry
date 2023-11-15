@@ -32,8 +32,8 @@ internal class JewelPlayer : ModPlayer
 
     public override void PostUpdateEquips()
     {
-        foreach (var item in MajorJewelInfos)
-            item.ConstantTrigger(Player);
+        foreach (var item in jewelry)
+            item.ApplyConstantTrigger(Player);
 
         Player.GetModPlayer<MaterialPlayer>().StaticMaterialEffects();
 

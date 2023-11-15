@@ -39,6 +39,8 @@ internal abstract class TriggerEffect : ModType
 
     public TriggerContext Context { get; protected set; }
 
+    private int _lingerTime = 0;
+
     public TriggerEffect()
     {
         Context = TriggerContext.OnHitEnemy;// (TriggerContext)Main.rand.Next((int)TriggerContext.Max);
@@ -71,6 +73,9 @@ internal abstract class TriggerEffect : ModType
                 float coefficient = ConditionCoefficients[context];
                 float bonus = player.GetModPlayer<MaterialPlayer>().CompoundCoefficientTriggerBonuses();
 
+                if (player.GetModPlayer<MaterialPlayer>().MaterialCount("Hellstone") >= 3 && Main.rand.NextBool(2))
+                    InternalInstantOtherEffect(context, player, coefficient * bonus, tier);
+
                 InternalInstantOtherEffect(context, player, coefficient * bonus, tier);
             }
         }
@@ -86,19 +91,29 @@ internal abstract class TriggerEffect : ModType
 
     protected virtual void InternalInstantOtherEffect(TriggerContext context, Player player, float coefficient, JewelTier tier) { }
 
-    public void ConstantTrigger(Player player, JewelTier tier)
+    public void ConstantTrigger(Player player, JewelTier tier, float bonus)
     {
         if (NeedsCooldown && player.HasBuff(CooldownBuffType))
             return;
+
+        _lingerTime--;
 
         bool condition = ConstantConditionMet(Context, player, tier);
         int meteoriteCount = player.GetModPlayer<MaterialPlayer>().MaterialCount("Meteorite");
         bool canRun = meteoriteCount >= 3 ? (condition || Main.rand.NextBool(4)) : condition;
 
-        if (canRun)
+        if (canRun || _lingerTime > 0)
         {
-            float coefficient = ConditionCoefficients[Context];
+            float coefficient = ConditionCoefficients[Context] + bonus;
+            int hellCount = player.GetModPlayer<MaterialPlayer>().MaterialCount("Hellstone");
+
+            if (hellCount >= 3)
+                coefficient *= 1.33f;
+
             InternalConditionalEffect(Context, player, coefficient);
+
+            if (meteoriteCount >= 1)
+                _lingerTime = 180;
         }
     }
 

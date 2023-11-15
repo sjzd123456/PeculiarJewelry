@@ -4,6 +4,7 @@ using PeculiarJewelry.Content.JewelryMechanic.MaterialBonuses.Bonuses;
 using PeculiarJewelry.Content.JewelryMechanic.Misc;
 using PeculiarJewelry.Content.JewelryMechanic.Stats;
 using PeculiarJewelry.Content.JewelryMechanic.Stats.IO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Terraria;
@@ -202,5 +203,19 @@ public abstract class BasicJewelry : ModItem
         jewel ??= Info.First();
 
         return jewel.Major.Get().Color;
+    }
+
+    internal void ApplyConstantTrigger(Player player)
+    {
+        foreach (var item in Info.Where(x => x is MajorJewelInfo))
+        {
+            var major = item as MajorJewelInfo;
+            float bonus = 0f;
+
+            if (MaterialCategory == "Hellstone")
+                bonus = 0.33f;
+
+            major.ConstantTrigger(player, bonus);
+        }
     }
 }

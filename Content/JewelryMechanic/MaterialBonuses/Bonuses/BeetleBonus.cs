@@ -16,10 +16,9 @@ internal class BeetleBonus : BaseMaterialBonus
 
     public override float EffectBonus(Player player, StatType type)
     {
-        int count = player.GetModPlayer<MaterialPlayer>().MaterialCount(MaterialKey);
         bool movement = type == StatType.Celerity || type == StatType.Dexterity;
 
-        if (count >= 1)
+        if (CountMaterial(player) >= 1)
             return movement ? bonus : 0.94f;
         return 1f;
     }

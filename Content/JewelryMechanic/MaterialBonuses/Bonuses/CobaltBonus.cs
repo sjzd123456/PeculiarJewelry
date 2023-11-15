@@ -1,5 +1,6 @@
 ﻿using PeculiarJewelry.Content.JewelryMechanic.Items.JewelryItems;
 using PeculiarJewelry.Content.JewelryMechanic.Stats;
+using Terraria.DataStructures;
 
 namespace PeculiarJewelry.Content.JewelryMechanic.MaterialBonuses.Bonuses;
 
@@ -24,8 +25,39 @@ internal class CobaltBonus : BaseMaterialBonus
 
     public override void StaticBonus(Player player, bool firstSet)
     {
-        
+        if (CountMaterial(player) >= 3)
+            player.GetModPlayer<CobaltBonusPlayer>().threeSet = true;
     }
 
     // Needs 3-Set, 5-Set
+
+    private class CobaltBonusPlayer : ModPlayer
+    {
+        internal bool threeSet = false;
+
+        public override void ResetEffects() => threeSet = false;
+    }
+
+    private class CobaltBonusProjectile : GlobalProjectile
+    {
+        public override bool InstancePerEntity => true;
+
+        private bool _shadow = false;
+
+        public override void OnSpawn(Projectile projectile, IEntitySource source)
+        {
+            if (source is EntitySource_ItemUse_WithAmmo itemUse && itemUse.Player.GetModPlayer<CobaltBonusPlayer>().threeSet)
+            {
+                if (!projectile.minion)
+                    return;
+
+                projectile.GetGlobalProjectile<CobaltBonusProjectile>()._shadow = true;
+            }
+        }
+
+        public override bool PreDraw(Projectile projectile, ref Color lightColor)
+        {
+            return base.PreDraw(projectile, ref lightColor);
+        }
+    }
 }

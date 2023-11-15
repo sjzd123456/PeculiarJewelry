@@ -604,3 +604,23 @@ SpookyTiara: {
 	DisplayName: Spooky Tiara
 	Tooltip: ""
 }
+
+BeetleNecklace: {
+	DisplayName: Beetle Necklace
+	Tooltip: ""
+}
+
+SpookyNecklace: {
+	DisplayName: Spooky Necklace
+	Tooltip: ""
+}
+
+LuminiteNecklace: {
+	DisplayName: Luminite Necklace
+	Tooltip: ""
+}
+
+TitaniumNecklace: {
+	DisplayName: Titanium Necklace
+	Tooltip: ""
+}

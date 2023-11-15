@@ -8,6 +8,11 @@ Buffs: {
 		DisplayName: Immune Frame Trigger Buff
 		Description: Mods.PeculiarJewelry.Buffs.ImmuneFrameTriggerBuff.Description
 	}
+
+	TitaniumDefenseDebuff: {
+		DisplayName: Titanium Defense Debuff
+		Description: Mods.PeculiarJewelry.Buffs.TitaniumDefenseDebuff.Description
+	}
 }
 
 NPCs: {

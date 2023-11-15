@@ -16,18 +16,36 @@ internal class SpookyBonus : BaseMaterialBonus
 
     public override float EffectBonus(Player player, StatType type)
     {
-        int count = player.GetModPlayer<MaterialPlayer>().MaterialCount(MaterialKey);
         bool movement = type == StatType.Exploitation || type == StatType.Exactitude;
 
-        if (count >= 1)
+        if (CountMaterial(player) >= 1)
             return movement ? bonus : 0.94f;
         return 1f;
     }
 
     public override void StaticBonus(Player player, bool firstSet)
     {
-        
+        if (CountMaterial(player) >= 3)
+            player.GetModPlayer<SpookyBonusPlayer>().threeSet = true;
     }
 
-    // Needs 3-Set, 5-Set
+    // Needs 5-Set
+
+    class SpookyBonusPlayer : ModPlayer 
+    {
+        internal bool threeSet = false;
+
+        public override void ResetEffects() => threeSet = true;
+
+        public override void UpdateBadLifeRegen()
+        {
+            if (threeSet)
+            {
+                if (Player.lifeRegen > 0)
+                    Player.lifeRegen = 0;
+
+                Player.lifeRegenCount += 50 + Player.lifeRegen;
+            }
+        }
+    }
 }
