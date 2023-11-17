@@ -1,4 +1,5 @@
 ﻿using PeculiarJewelry.Content.JewelryMechanic.UI;
+using PeculiarJewelry.Content.JewelryMechanic.UI.Superimposition;
 using ReLogic.Content;
 using Terraria.GameContent.UI.Elements;
 using Terraria.UI;
@@ -39,7 +40,7 @@ internal class ChooseJewelMechanicUIState : UIState
     {
         UIPanel panel = new() // Main back panel
         {
-            Width = StyleDimension.FromPixels(300),
+            Width = StyleDimension.FromPixels(310),
             Height = StyleDimension.FromPixels(60),
             HAlign = 0.5f,
             VAlign = 0.25f
@@ -79,7 +80,13 @@ internal class ChooseJewelMechanicUIState : UIState
             Top = StyleDimension.FromPixelsAndPercent(-30, 1),
             VAlign = 1f,
         };
-        setButton.OnLeftClick += (UIMouseEvent evt, UIElement listeningElement) => JewelUISystem.SwitchUI(new SetJewelUIState());
+        setButton.OnLeftClick += (UIMouseEvent evt, UIElement listeningElement) =>
+        {
+            Main.npcChatText = "You ready to set your jewels? Be sure of your choice, lest you waste some precious stones.";
+            Main.playerInventory = true;
+
+            JewelUISystem.SwitchUI(new SetJewelUIState());
+        };
         panel.Append(setButton);
 
         UIText setText = new("Set Jewels", 0.8f)
@@ -97,7 +104,13 @@ internal class ChooseJewelMechanicUIState : UIState
             Top = StyleDimension.FromPixelsAndPercent(-30, 1),
             VAlign = 1f,
         };
-        impositionButton.OnLeftClick += (UIMouseEvent evt, UIElement listeningElement) => JewelUISystem.SwitchUI(null);
+        impositionButton.OnLeftClick += (UIMouseEvent evt, UIElement listeningElement) =>
+        {
+            Main.npcChatText = "Superimposition...fun. Choose well!";
+            Main.playerInventory = true;
+
+            JewelUISystem.SwitchUI(new SuperimpositionUIState());
+        };
         panel.Append(impositionButton);
 
         UIText impositionText = new("Superimposition", 0.8f)

@@ -30,7 +30,7 @@ internal class ShroomiteBonus : BaseMaterialBonus
             player.GetModPlayer<ShroomiteBonusPlayer>().threeSet = true;
     }
 
-    // Needs 3-Set, 5-Set
+    // Needs 5-Set
 
     class ShroomiteBonusPlayer : ModPlayer
     {
@@ -40,6 +40,9 @@ internal class ShroomiteBonus : BaseMaterialBonus
 
         public override void ModifyHitNPCWithItem(Item item, NPC target, ref NPC.HitModifiers modifiers)
         {
+            if (!threeSet)
+                return;
+
             int chance = Player.GetWeaponCrit(item);
 
             if (chance > 100)
@@ -51,6 +54,9 @@ internal class ShroomiteBonus : BaseMaterialBonus
 
         public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref NPC.HitModifiers modifiers)
         {
+            if (!threeSet)
+                return;
+
             int chance = proj.CritChance;
 
             if (chance > 100)

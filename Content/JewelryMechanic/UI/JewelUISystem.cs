@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using FF6Mod.UI.Betting;
+using System.Collections.Generic;
 using Terraria.UI;
 
 namespace PeculiarJewelry.Content.JewelryMechanic.UI;
@@ -18,15 +19,29 @@ internal class JewelUISystem : ModSystem
         }
     }
 
-    public static void SwitchUI(UIState state)
+    public static void SwitchUI(UIState state, bool closeChat = true)
     {
         if (Instance.JewelInterface.CurrentState is IClosableUIState close)
             close.Close();
 
         Instance.JewelInterface.SetState(state);
+
+        if (closeChat)
+        {
+            string old = Main.npcChatText;
+            Main.npcChatText = string.Empty;
+            Main.CloseNPCChatOrSign(); // npcChatText needs to be nothing in order to close (??)
+            Main.npcChatText = old;
+        }
     }
 
-    public override void UpdateUI(GameTime gameTime) => JewelInterface.Update(gameTime);
+    public override void UpdateUI(GameTime gameTime)
+    {
+        if (Main.LocalPlayer.talkNPC >= 0 && JewelInterface.CurrentState is not null && JewelInterface.CurrentState is not ChooseJewelMechanicUIState)
+            SwitchUI(null, false);
+
+        JewelInterface.Update(gameTime);
+    }
 
     public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
     {

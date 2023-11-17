@@ -2,7 +2,6 @@
 using PeculiarJewelry.Content.JewelryMechanic.Stats;
 using System.Collections.Generic;
 using System.Linq;
-using Terraria;
 using Terraria.DataStructures;
 using Terraria.Graphics.Shaders;
 
@@ -33,13 +32,12 @@ internal class CobaltBonus : BaseMaterialBonus
             player.GetModPlayer<CobaltBonusPlayer>().threeSet = true;
     }
 
-    // Needs 3-Set, 5-Set
+    // Needs 5-Set
 
     private class CobaltBonusPlayer : ModPlayer
     {
         internal bool threeSet = false;
         internal bool oldThree = false;
-        internal int lastMaxMinions = 0;
 
         public override void ResetEffects()
         {

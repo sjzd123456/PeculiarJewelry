@@ -516,12 +516,12 @@ internal class CutJewelUIState : UIState, IClosableUIState
     public void Close()
     {
         if (_cutSlot.HasItem)
-            Main.LocalPlayer.QuickSpawnItem(new EntitySource_OverfullInventory(Main.LocalPlayer), _cutSlot.Item);
+            Main.LocalPlayer.QuickSpawnItem(new EntitySource_OverfullInventory(Main.LocalPlayer), _cutSlot.Item, _cutSlot.Item.stack);
 
         foreach (var slot in _supportItems)
         {
             if (slot.HasItem)
-                Main.LocalPlayer.QuickSpawnItem(new EntitySource_OverfullInventory(Main.LocalPlayer), slot.Item);
+                Main.LocalPlayer.QuickSpawnItem(new EntitySource_OverfullInventory(Main.LocalPlayer), slot.Item, slot.Item.stack);
         }
     }
 }

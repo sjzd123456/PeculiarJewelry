@@ -30,5 +30,5 @@ internal class TungstenBonus : BaseMaterialBonus
             player.frogLegJumpBoost = true;
     }
 
-    // Needs 3-Set, 5-Set
+    // Needs 5-Set
 }

@@ -31,7 +31,7 @@ internal class SilverBonus : BaseMaterialBonus
             player.GetModPlayer<SilverBonusPlayer>().threeSet = true;
     }
 
-    // Needs 3-Set, 5-Set
+    // Needs 5-Set
 
     class SilverBonusPlayer : ModPlayer
     {
@@ -52,9 +52,8 @@ internal class SilverBonus : BaseMaterialBonus
 
         public bool SilverRunEffect(int X, int Y)
         {
-            //IL_0054: Unknown result type (might be due to invalid IL or missing references)
-            //IL_0059: Unknown result type (might be due to invalid IL or missing references)
             Tile tile = Main.tile[X, Y + 1];
+
             if (tile == null || !tile.HasTile || tile.LiquidAmount > 0 || !WorldGen.SolidTileAllowBottomSlope(X, Y + 1))
                 return false;
 

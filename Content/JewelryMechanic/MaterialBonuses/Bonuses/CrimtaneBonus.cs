@@ -38,7 +38,7 @@ internal class CrimtaneBonus : BaseMaterialBonus
         }
     }
 
-    // Needs 3-Set, 5-Set
+    // Needs 5-Set
 
     class CrimtaneBonusPlayer : ModPlayer
     {
@@ -48,8 +48,11 @@ internal class CrimtaneBonus : BaseMaterialBonus
 
         public override void UpdateLifeRegen()
         {
-            Player.lifeRegen = 0;
-            Player.lifeSteal = 0;
+            if (threeSet)
+            {
+                Player.lifeRegen = 0;
+                Player.lifeSteal = 0;
+            }
         }
     }
 }

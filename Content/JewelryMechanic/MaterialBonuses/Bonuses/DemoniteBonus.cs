@@ -38,7 +38,7 @@ internal class DemoniteBonus : BaseMaterialBonus
         }
     }
 
-    // Needs 3-Set, 5-Set
+    // Needs 5-Set
 
     class DemoniteBonusPlayer : ModPlayer
     {
@@ -46,6 +46,10 @@ internal class DemoniteBonus : BaseMaterialBonus
 
         public override void ResetEffects() => threeSet = false;
 
-        public override void ModifyHurt(ref Player.HurtModifiers modifiers) => modifiers.FinalDamage *= 1.4f;
+        public override void ModifyHurt(ref Player.HurtModifiers modifiers)
+        {
+            if (threeSet)
+                modifiers.FinalDamage *= 1.4f;
+        }
     }
 }

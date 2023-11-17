@@ -31,7 +31,7 @@ internal class SpectreBonus : BaseMaterialBonus
         {
             player.waterWalk = player.waterWalk2 = true;
 
-            if (player.wings <= 0)
+            if (player.wings <= 0) // This is the 3 set bonus - mimic wings
             {
                 player.wings = ArmorIDs.Wing.JimsWings;
                 player.wingTimeMax = player.GetWingStats(ArmorIDs.Wing.FishronWings).FlyTime;
@@ -41,5 +41,5 @@ internal class SpectreBonus : BaseMaterialBonus
         }
     }
 
-    // Needs 3-Set, 5-Set
+    // Needs 5-Set
 }
