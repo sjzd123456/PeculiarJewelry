@@ -3,6 +3,7 @@ using PeculiarJewelry.Content.JewelryMechanic.Stats;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Terraria.GameContent.UI.Elements;
 using Terraria.ModLoader.UI;
 using Terraria.UI;
 
@@ -13,11 +14,13 @@ internal class JewelSubstatUI : UIElement
     public bool Showing { get; private set; }
 
     private readonly Action<JewelStat> _onClick;
-    private Dictionary<JewelStat, UIButton<string>> _buttonsByStat = new Dictionary<JewelStat, UIButton<string>>();
+    private Dictionary<JewelStat, UIButton<string>> _buttonsByStat = new();
+    private Dictionary<UIButton<string>, bool> _stupidIsClicked = new();
 
     public JewelSubstatUI(Action<JewelStat> onClick)
     {
         _onClick = onClick;
+        Hide(true);
     }
 
     public JewelSubstatUI(Jewel jewel, Action<JewelStat> onClick, bool show = false)
@@ -49,6 +52,7 @@ internal class JewelSubstatUI : UIElement
             Append(subButton);
 
             _buttonsByStat.Add(sub, subButton);
+            _stupidIsClicked.Add(subButton, false);
         }
 
         Showing = true;
@@ -59,17 +63,25 @@ internal class JewelSubstatUI : UIElement
         foreach (var pair in _buttonsByStat)
         {
             if (stats.Contains(pair.Key))
-                pair.Value.BackgroundColor = highlight;
+                pair.Value.AltPanelColor = pair.Value.AltHoverPanelColor = highlight;
             else
-                pair.Value.BackgroundColor = clear;
+                pair.Value.AltPanelColor = pair.Value.AltHoverPanelColor = clear;
 
+            _stupidIsClicked[pair.Value] = stats.Contains(pair.Key);
             pair.Value.OnActivate();
         }
     }
 
-    internal void Hide()
+    internal void Hide(bool showNoJewel = false)
     {
         RemoveAllChildren();
         Showing = false;
+
+        if (showNoJewel)
+            Append(new UIImage(ModContent.Request<Texture2D>("PeculiarJewelry/Content/JewelryMechanic/UI/Superimposition/MissingJewel"))
+            {
+                HAlign = 0.5f,
+                VAlign = 0.5f
+            });
     }
 }
