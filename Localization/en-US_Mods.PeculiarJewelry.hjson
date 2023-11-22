@@ -1,17 +1,17 @@
 Buffs: {
 	HealTriggerBuff: {
-		DisplayName: Heal Trigger Buff
-		Description: Mods.PeculiarJewelry.Buffs.HealTriggerBuff.Description
+		DisplayName: Lifesteal Cooldown
+		Description: Can't trigger lifesteal!
 	}
 
 	ImmuneFrameTriggerBuff: {
-		DisplayName: Immune Frame Trigger Buff
-		Description: Mods.PeculiarJewelry.Buffs.ImmuneFrameTriggerBuff.Description
+		DisplayName: Immunity Cooldown
+		Description: Can't trigger immunity frames!
 	}
 
 	TitaniumDefenseDebuff: {
 		DisplayName: Titanium Defense Debuff
-		Description: Mods.PeculiarJewelry.Buffs.TitaniumDefenseDebuff.Description
+		Description: You shouldn't be able to see this.
 	}
 }
 
@@ -20,14 +20,14 @@ NPCs: {
 		DisplayName: Lapidarist
 
 		TownNPCMood: {
-			Content: I am content.
-			NoHome: I hate not having a home.
-			FarFromHome: I am too far from home.
-			LoveSpace: I love having so much space.
-			DislikeCrowded: I dislike how crowded I am.
+			Content: My craft can be honed here.
+			NoHome: I've a tough time with my work out here. Spare a room?
+			FarFromHome: I'm way too far from my workspace! What if my jewelry gets ruined?
+			LoveSpace: The silence keeps the focus, and the focus keeps perfection.
+			DislikeCrowded: The rooms keep shaking! How am I supposed to work?
 			HateCrowded: I hate how crowded I am.
-			LikeBiome: I like {BiomeName}.
-			DislikeBiome: I dislike {BiomeName}.
+			LikeBiome: "{BiomeName} is the best place for my work!"
+			DislikeBiome: I'd prefer to work in an environnment more conducive than {BiomeName}.
 			HateBiome: I hate {BiomeName}.
 			LoveNPC: I love {NPCName}.
 			LikeNPC: I like {NPCName}.

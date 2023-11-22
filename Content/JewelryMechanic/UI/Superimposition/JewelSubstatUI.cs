@@ -14,8 +14,7 @@ internal class JewelSubstatUI : UIElement
     public bool Showing { get; private set; }
 
     private readonly Action<JewelStat> _onClick;
-    private Dictionary<JewelStat, UIButton<string>> _buttonsByStat = new();
-    private Dictionary<UIButton<string>, bool> _stupidIsClicked = new();
+    private readonly Dictionary<JewelStat, UIButton<string>> _buttonsByStat = new();
 
     public JewelSubstatUI(Action<JewelStat> onClick)
     {
@@ -52,7 +51,6 @@ internal class JewelSubstatUI : UIElement
             Append(subButton);
 
             _buttonsByStat.Add(sub, subButton);
-            _stupidIsClicked.Add(subButton, false);
         }
 
         Showing = true;
@@ -67,7 +65,6 @@ internal class JewelSubstatUI : UIElement
             else
                 pair.Value.AltPanelColor = pair.Value.AltHoverPanelColor = clear;
 
-            _stupidIsClicked[pair.Value] = stats.Contains(pair.Key);
             pair.Value.OnActivate();
         }
     }

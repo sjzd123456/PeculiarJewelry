@@ -57,12 +57,6 @@ TriggerContexts: {
 
 TriggerEffects: {
 	HealTrigger: heal {0} health.
-
-	HealTriggerBuff: {
-		BuffName: Jewel Lifesteal Cooldown
-		BuffDescription: Can't trigger lifesteal!
-	}
-
 	ManaTrigger: heal {0} mana.
 	ImmuneFrameTrigger: gain {0} immune frames.
 }
