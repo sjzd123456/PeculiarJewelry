@@ -837,3 +837,18 @@ CobaltNecklace: {
 		{$Material.Bonuses.Cobalt.1Set}
 		'''
 }
+
+GoldenRing: {
+	DisplayName: Golden Ring
+	Tooltip: ""
+}
+
+LeadRing: {
+	DisplayName: Lead Ring
+	Tooltip: ""
+}
+
+IronRing: {
+	DisplayName: Iron Ring
+	Tooltip: ""
+}
