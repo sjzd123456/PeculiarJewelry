@@ -8,6 +8,7 @@ namespace PeculiarJewelry.Content.JewelryMechanic.Items.JewelryItems.Rings;
 public abstract class BaseRing : BasicJewelry
 {
     protected abstract int Material { get; }
+    protected virtual bool Hardmode => false;
 
     static Asset<Texture2D> _jewels;
     static Asset<Texture2D> _jewelsEquip;
@@ -49,7 +50,7 @@ public abstract class BaseRing : BasicJewelry
     {
         CreateRecipe()
             .AddIngredient(Material, 2)
-            .AddTile(TileID.Anvils)
+            .AddTile(Hardmode ? TileID.MythrilAnvil : TileID.Anvils)
             .Register();
     }
 }

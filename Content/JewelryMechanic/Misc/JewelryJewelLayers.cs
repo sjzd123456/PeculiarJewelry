@@ -60,7 +60,10 @@ internal class JewelNeckLayer : PlayerDrawLayer
             var effect = player.direction == 1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
             Vector2 basePosition = new(-player.bodyFrame.Width / 2 + player.width / 2, player.height - player.bodyFrame.Height + 4);
             Vector2 position = (drawInfo.Position - Main.screenPosition + basePosition).Floor() + player.headPosition;
-            var data = new DrawData(info.Texture, position, player.bodyFrame, color, 0f, Vector2.Zero, 1f, effect);
+            var data = new DrawData(info.Texture, position, player.bodyFrame, color, 0f, Vector2.Zero, 1f, effect)
+            {
+                shader = player.cNeck
+            };
             drawInfo.DrawDataCache.Add(data);
         }
     }
@@ -84,7 +87,10 @@ internal class JewelHandsOnLayer : PlayerDrawLayer
         var effect = player.direction == 1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
         Vector2 basePosition = new(-player.bodyFrame.Width / 2 + player.width / 2, player.height - player.bodyFrame.Height + 4);
         Vector2 position = (drawInfo.Position - Main.screenPosition + basePosition).Floor() + player.headPosition;
-        var data = new DrawData(info.Texture, position, player.bodyFrame, color, 0f, Vector2.Zero, 1f, effect);
+        var data = new DrawData(info.Texture, position, player.bodyFrame, color, 0f, Vector2.Zero, 1f, effect)
+        {
+            shader = player.cHandOn
+        };
         drawInfo.DrawDataCache.Add(data);
     }
 }
