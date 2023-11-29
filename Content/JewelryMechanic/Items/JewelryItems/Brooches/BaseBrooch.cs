@@ -44,8 +44,8 @@ public class BaseBrooch : BasicJewelry
 
     public override void SetStaticDefaults()
     {
-        _jewels ??= Mod.Assets.Request<Texture2D>("Content/JewelryMechanic/Items/JewelryItems/Hairpins/HairpinJewels");
-        _jewelsEquip ??= Mod.Assets.Request<Texture2D>("Content/JewelryMechanic/Items/JewelryItems/Hairpins/HairpinJewels_Face");
+        _jewels ??= Mod.Assets.Request<Texture2D>("Content/JewelryMechanic/Items/JewelryItems/Brooches/BroochJewel");
+        _jewelsEquip ??= Mod.Assets.Request<Texture2D>("Content/JewelryMechanic/Items/JewelryItems/Brooches/BroochJewel_Front");
     }
 
     public override void Unload() => _jewels = null;
@@ -66,7 +66,7 @@ public class BaseBrooch : BasicJewelry
     }
 
     public override bool PreDrawInInventory(SpriteBatch s, Vector2 p, Rectangle frame, Color d, Color itemColor, Vector2 o, float sc) => VariantDraw(s, p, d, o, sc);
-    public override bool PreDrawInWorld(SpriteBatch s, Color d, Color a, ref float r, ref float sc, int w) => 
+    public override bool PreDrawInWorld(SpriteBatch s, Color d, Color a, ref float r, ref float sc, int w) =>
         VariantDraw(s, Item.Center - Main.screenPosition, d, null, sc / 3f, r);
 
     private bool VariantDraw(SpriteBatch spriteBatch, Vector2 position, Color drawColor, Vector2? origin, float scale, float rotation = 0f)
@@ -83,7 +83,7 @@ public class BaseBrooch : BasicJewelry
     public override void PostDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color i, Vector2 origin, float scale)
     {
         if (Info.Any())
-            spriteBatch.Draw(_jewels.Value, position, frame, GetDisplayColor(), 0f, origin, scale, SpriteEffects.None, 0);
+            spriteBatch.Draw(_jewels.Value, position, frame, GetDisplayColor(), 0f, origin / new Vector2(1, 3), scale * 3, SpriteEffects.None, 0);
     }
 
     public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
@@ -98,6 +98,14 @@ public class BaseBrooch : BasicJewelry
             .AddIngredient(_material, 6)
             .AddTile(_isHardmode ? TileID.MythrilAnvil : TileID.Anvils)
             .Register();
+    }
+
+    public override bool CanAccessoryBeEquippedWith(Item equippedItem, Item incomingItem, Player player)
+    {
+        if (equippedItem.ModItem is BaseBrooch)
+            return incomingItem.ModItem is not BaseBrooch;
+
+        return true;
     }
 }
 

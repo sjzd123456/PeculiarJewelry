@@ -1,3 +1,5 @@
+using PeculiarJewelry.Content.JewelryMechanic.Items.JewelryItems.Brooches;
+using PeculiarJewelry.Content.JewelryMechanic.Items.JewelryItems.Earrings;
 using PeculiarJewelry.Content.JewelryMechanic.MaterialBonuses;
 using ReLogic.Content;
 using System.Linq;
@@ -41,5 +43,13 @@ public abstract class BaseHairpin : BasicJewelry
     {
         if (Info.Any())
             spriteBatch.Draw(_jewels.Value, Item.Center - Main.screenPosition, null, GetDisplayColor(), rotation, _jewels.Size() / 2f, scale, SpriteEffects.None, 0);
+    }
+
+    public override bool CanAccessoryBeEquippedWith(Item equippedItem, Item incomingItem, Player player)
+    {
+        if (equippedItem.ModItem is BaseHairpin)
+            return incomingItem.ModItem is not BaseHairpin;
+
+        return true;
     }
 }

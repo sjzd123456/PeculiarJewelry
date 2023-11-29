@@ -9,15 +9,16 @@ Bonuses: {
 		3Set: "{$3Bonus} Your defense is added to your max health"
 		5Set:
 			'''
-			{$5Bonus} You may consume a life crystal to heal 50% of your max health, which induces a 2 minutes crystal sickness
-			Life fruits are the same, but the sickness lasts 1 minute and it heals 10% of your max health
+			{$5Bonus} You may consume a life crystal to heal 50% of your max health,
+			which induces a 2 minutes crystal sickness
+			Life fruits are the same, but heal only 10% of your max health
 			'''
 	}
 
 	Tin: {
 		1Set: "{$1Bonus} {$JewelStatBonusLine} health regeneration"
 		3Set: "{$3Bonus} Getting hit triples your current regeneration until you've healed more than you were hit for"
-		5Set: "{$5Bonus} Damage scales with increased life regeneration"
+		5Set: "{$5Bonus} Damage increases with increased life regeneration"
 	}
 
 	Iron: {

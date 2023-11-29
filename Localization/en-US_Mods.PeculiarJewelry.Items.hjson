@@ -1098,3 +1098,174 @@ TungstenBrooch: {
 		{$Material.Bonuses.Tungsten.1Set}
 		'''
 }
+
+GoldBrooch: {
+	DisplayName: Gold Brooch
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Gold.1Set}
+		'''
+}
+
+PlatinumBrooch: {
+	DisplayName: Platinum Brooch
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Platinum.1Set}
+		'''
+}
+
+DemoniteBrooch: {
+	DisplayName: Demonite Brooch
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Demonite.1Set}
+		'''
+}
+
+CrimtaneBrooch: {
+	DisplayName: Crimtane Brooch
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Crimtane.1Set}
+		'''
+}
+
+MeteoriteBrooch: {
+	DisplayName: Meteorite Brooch
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Meteorite.1Set}
+		'''
+}
+
+HellstoneBrooch: {
+	DisplayName: Hellstone Brooch
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Hellstone.1Set}
+		'''
+}
+
+CobaltBrooch: {
+	DisplayName: Cobalt Brooch
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Cobalt.1Set}
+		'''
+}
+
+PalladiumBrooch: {
+	DisplayName: Palladium Brooch
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Palladium.1Set}
+		'''
+}
+
+MythrilBrooch: {
+	DisplayName: Mythril Brooch
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Mythril.1Set}
+		'''
+}
+
+OrichalcumBrooch: {
+	DisplayName: Orichalcum Brooch
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Orichalcum.1Set}
+		'''
+}
+
+AdamantiteBrooch: {
+	DisplayName: Adamantite Brooch
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Adamantite.1Set}
+		'''
+}
+
+TitaniumBrooch: {
+	DisplayName: Titanium Brooch
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Titanium.1Set}
+		'''
+}
+
+HallowedBrooch: {
+	DisplayName: Hallowed Brooch
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Hallowed.1Set}
+		'''
+}
+
+ChlorophyteBrooch: {
+	DisplayName: Chlorophyte Brooch
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Chlorophyte.1Set}
+		'''
+}
+
+BeetleBrooch: {
+	DisplayName: Beetle Brooch
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Beetle.1Set}
+		'''
+}
+
+ShroomiteBrooch: {
+	DisplayName: Shroomite Brooch
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Shroomite.1Set}
+		'''
+}
+
+SpectreBrooch: {
+	DisplayName: Spectre Brooch
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Spectre.1Set}
+		'''
+}
+
+SpookyBrooch: {
+	DisplayName: Spooky Brooch
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Spooky.1Set}
+		'''
+}
+
+LuminiteBrooch: {
+	DisplayName: Luminite Brooch
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Luminite.1Set}
+		'''
+}

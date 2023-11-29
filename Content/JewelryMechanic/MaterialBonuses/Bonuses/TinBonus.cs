@@ -27,15 +27,12 @@ internal class TinBonus : BaseMaterialBonus
         int count = player.GetModPlayer<MaterialPlayer>().MaterialCount(MaterialKey);
 
         if (count >= 5)
-        {
             player.GetModPlayer<TinMaterialPlayer>().state = TinMaterialPlayer.State.Set5;
-            return;
-        }
         else if (count >= 3)
             player.GetModPlayer<TinMaterialPlayer>().state = TinMaterialPlayer.State.Set3;
     }
 
-    class TinMaterialPlayer : ModPlayer
+    internal class TinMaterialPlayer : ModPlayer
     {
         public enum State
         {
@@ -50,16 +47,13 @@ internal class TinBonus : BaseMaterialBonus
 
         public override void ResetEffects() => state = State.None;
 
-        public override void PostUpdateEquips()
+        internal void TinBonuses()
         {
-            if (state == State.Set5)
-                Player.GetDamage(DamageClass.Generic) += Player.lifeRegen / 2;
-        }
-
-        public override void UpdateLifeRegen()
-        {
-            if ((state == State.Set3 || state == State.Set5) && Player.statLife < _lastHealthHit && Player.lifeRegen > 0)
+            if (state != State.None && Player.statLife < _lastHealthHit && Player.lifeRegen > 0)
                 Player.lifeRegen *= 3;
+
+            if (state == State.Set5)
+                Player.GetDamage(DamageClass.Generic) += Player.lifeRegen / 200f;
         }
 
         public override void OnHurt(Player.HurtInfo info) => _lastHealthHit = Player.statLife;

@@ -1,3 +1,5 @@
+using PeculiarJewelry.Content.JewelryMechanic.Items.JewelryItems.Brooches;
+using PeculiarJewelry.Content.JewelryMechanic.Items.JewelryItems.Earrings;
 using PeculiarJewelry.Content.JewelryMechanic.MaterialBonuses;
 using ReLogic.Content;
 using System.Linq;
@@ -52,5 +54,13 @@ public abstract class BaseRing : BasicJewelry
             .AddIngredient(Material, 2)
             .AddTile(Hardmode ? TileID.MythrilAnvil : TileID.Anvils)
             .Register();
+    }
+
+    public override bool CanAccessoryBeEquippedWith(Item equippedItem, Item incomingItem, Player player)
+    {
+        if (equippedItem.ModItem is BaseRing)
+            return incomingItem.ModItem is not BaseRing;
+
+        return true;
     }
 }

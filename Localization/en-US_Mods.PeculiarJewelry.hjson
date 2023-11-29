@@ -13,6 +13,21 @@ Buffs: {
 		DisplayName: Titanium Defense Debuff
 		Description: You shouldn't be able to see this.
 	}
+
+	LifeCrystalCopper5SetCooldown: {
+		DisplayName: Crystal Heal
+		Description: Can't heal with crystals!
+	}
+
+	LifeFruitCopper5SetCooldown: {
+		DisplayName: Fruit Heal
+		Description: Can't heal with fruit!
+	}
+
+	Iron5SetDefenseBonus: {
+		DisplayName: Counterdefense
+		Description: Gain {0} defense
+	}
 }
 
 NPCs: {

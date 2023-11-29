@@ -1,4 +1,5 @@
-﻿using PeculiarJewelry.Content.JewelryMechanic.Items.JewelryItems;
+﻿using PeculiarJewelry.Content.JewelryMechanic.Buffs;
+using PeculiarJewelry.Content.JewelryMechanic.Items.JewelryItems;
 using PeculiarJewelry.Content.JewelryMechanic.Stats;
 
 namespace PeculiarJewelry.Content.JewelryMechanic.MaterialBonuses.Bonuses;
@@ -30,13 +31,24 @@ internal class IronBonus : BaseMaterialBonus
             player.GetModPlayer<IronBonusPlayer>().threeSet = true;
     }
 
-    // Needs 5-Set
-
-    class IronBonusPlayer : ModPlayer
+    internal class IronBonusPlayer : ModPlayer
     {
         internal bool threeSet;
+        internal bool fiveSet;
+        internal int extraDefense;
+        internal int maxBuffTime;
+        internal int effectiveExtraDefense;
 
-        public override void ResetEffects() => threeSet = false;
+        public override void ResetEffects()
+        {
+            threeSet = fiveSet = false;
+
+            if (!Player.HasBuff<Iron5SetDefenseBonus>())
+            {
+                extraDefense = 0;
+                maxBuffTime = 0;
+            }
+        }
 
         public override void ModifyHurt(ref Player.HurtModifiers modifiers) => modifiers.ModifyHurtInfo += ModDamage;
 
@@ -44,6 +56,16 @@ internal class IronBonus : BaseMaterialBonus
         {
             if (threeSet && info.Damage <= Player.statDefense * 2)
                 info.Damage = (int)(info.Damage * 0.5f);
+        }
+
+        public override void OnHurt(Player.HurtInfo info)
+        {
+            if (!fiveSet || info.Damage < 5)
+                return;
+
+            extraDefense += info.Damage / 5;
+            maxBuffTime = 5 * 60; // Set it to 5 seconds as a default
+            Player.AddBuff(ModContent.BuffType<Iron5SetDefenseBonus>(), 5 * 60);
         }
     }
 }

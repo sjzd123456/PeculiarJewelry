@@ -1,3 +1,4 @@
+using PeculiarJewelry.Content.JewelryMechanic.Items.JewelryItems.Brooches;
 using PeculiarJewelry.Content.JewelryMechanic.MaterialBonuses;
 using ReLogic.Content;
 using System;
@@ -42,5 +43,13 @@ public abstract class BaseEarring : BasicJewelry
     {
         if (Info.Any())
             spriteBatch.Draw(_jewels.Value, Item.Center - Main.screenPosition, null, GetDisplayColor(), rotation, _jewels.Size() / 2f, scale, SpriteEffects.None, 0);
+    }
+
+    public override bool CanAccessoryBeEquippedWith(Item equippedItem, Item incomingItem, Player player)
+    {
+        if (equippedItem.ModItem is BaseEarring)
+            return incomingItem.ModItem is not BaseEarring;
+
+        return true;
     }
 }
