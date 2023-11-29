@@ -94,3 +94,26 @@ internal class JewelHandsOnLayer : PlayerDrawLayer
         drawInfo.DrawDataCache.Add(data);
     }
 }
+
+internal class JewelFrontLayer : PlayerDrawLayer
+{
+    public override Position GetDefaultPosition() => new AfterParent(PlayerDrawLayers.FrontAccFront);
+
+    protected override void Draw(ref PlayerDrawSet drawInfo)
+    {
+        var player = drawInfo.drawPlayer;
+
+        if (player.GetModPlayer<MaterialPlayer>().HasEquip(EquipType.Front, out var info))
+        {
+            var color = Lighting.GetColor(player.Center.ToTileCoordinates(), info.Color);
+            var effect = player.direction == 1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
+            Vector2 basePosition = new(-player.bodyFrame.Width / 2 + player.width / 2, player.height - player.bodyFrame.Height + 4);
+            Vector2 position = (drawInfo.Position - Main.screenPosition + basePosition).Floor() + player.headPosition;
+            var data = new DrawData(info.Texture, position, player.bodyFrame, color, 0f, Vector2.Zero, 1f, effect)
+            {
+                shader = player.cFront
+            };
+            drawInfo.DrawDataCache.Add(data);
+        }
+    }
+}

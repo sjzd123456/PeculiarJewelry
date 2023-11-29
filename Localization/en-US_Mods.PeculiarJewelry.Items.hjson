@@ -840,15 +840,261 @@ CobaltNecklace: {
 
 GoldenRing: {
 	DisplayName: Golden Ring
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Gold.1Set}
+		'''
 }
 
 LeadRing: {
 	DisplayName: Lead Ring
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Lead.1Set}
+		'''
 }
 
 IronRing: {
 	DisplayName: Iron Ring
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Iron.1Set}
+		'''
+}
+
+AdamantiteRing: {
+	DisplayName: Adamantite Ring
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Adamantite.1Set}
+		'''
+}
+
+ChlorophyteRing: {
+	DisplayName: Chlorophyte Ring
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Chlorophyte.1Set}
+		'''
+}
+
+CobaltRing: {
+	DisplayName: Cobalt Ring
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Cobalt.1Set}
+		'''
+}
+
+CopperRing: {
+	DisplayName: Copper Ring
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Copper.1Set}
+		'''
+}
+
+CrimtaneRing: {
+	DisplayName: Crimtane Ring
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Cobalt.1Set}
+		'''
+}
+
+DemoniteRing: {
+	DisplayName: Demonite Ring
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Demonite.1Set}
+		'''
+}
+
+HellstoneRing: {
+	DisplayName: Hellstone Ring
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Hellstone.1Set}
+		'''
+}
+
+LuminiteRing: {
+	DisplayName: Luminite Ring
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Luminite.1Set}
+		'''
+}
+
+MeteoriteRing: {
+	DisplayName: Meteorite Ring
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Meteorite.1Set}
+		'''
+}
+
+MythrilRing: {
+	DisplayName: Mythril Ring
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Mythril.1Set}
+		'''
+}
+
+OrichalcumRing: {
+	DisplayName: Orichalcum Ring
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Orichalcum.1Set}
+		'''
+}
+
+PalladiumRing: {
+	DisplayName: Palladium Ring
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Palladium.1Set}
+		'''
+}
+
+PlatinumRing: {
+	DisplayName: Platinum Ring
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Platinum.1Set}
+		'''
+}
+
+ShroomiteRing: {
+	DisplayName: Shroomite Ring
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Shroomite.1Set}
+		'''
+}
+
+SilverRing: {
+	DisplayName: Silver Ring
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Silver.1Set}
+		'''
+}
+
+SpectreRing: {
+	DisplayName: Spectre Ring
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Spectre.1Set}
+		'''
+}
+
+SpookyRing: {
+	DisplayName: Spooky Ring
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Spooky.1Set}
+		'''
+}
+
+TinRing: {
+	DisplayName: Tin Ring
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Tin.1Set}
+		'''
+}
+
+TitaniumRing: {
+	DisplayName: Titanium Ring
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Titanium.1Set}
+		'''
+}
+
+TungstenRing: {
+	DisplayName: Tungsten Ring
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Tungsten.1Set}
+		'''
+}
+
+CopperBrooch: {
+	DisplayName: Copper Brooch
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Copper.1Set}
+		'''
+}
+
+TinBrooch: {
+	DisplayName: Tin Brooch
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Tin.1Set}
+		'''
+}
+
+IronBrooch: {
+	DisplayName: Iron Brooch
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Iron.1Set}
+		'''
+}
+
+LeadBrooch: {
+	DisplayName: Lead Brooch
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Lead.1Set}
+		'''
+}
+
+SilverBrooch: {
+	DisplayName: Silver Brooch
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Silver.1Set}
+		'''
+}
+
+TungstenBrooch: {
+	DisplayName: Tungsten Brooch
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Tungsten.1Set}
+		'''
 }
