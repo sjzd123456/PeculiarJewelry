@@ -128,6 +128,11 @@ internal class BroochLoader : ILoadable
         AddBrooch("Titanium", ItemID.TitaniumBar);
         AddBrooch("Hallowed", ItemID.HallowedBar);
         AddBrooch("Chlorophyte", ItemID.ChlorophyteBar);
+        AddBrooch("Beetle", ItemID.BeetleHusk);
+        AddBrooch("Shroomite", ItemID.ShroomiteBar);
+        AddBrooch("Spectre", ItemID.SpectreBar);
+        AddBrooch("Spooky", ItemID.SpookyWood);
+        AddBrooch("Luminite", ItemID.LunarBar);
     }
 
     private static bool AddBrooch(string category, int material, bool isHardmode = false) 
