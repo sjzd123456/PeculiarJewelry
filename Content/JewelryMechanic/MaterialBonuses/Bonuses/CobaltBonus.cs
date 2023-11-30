@@ -1,5 +1,6 @@
 ﻿using PeculiarJewelry.Content.JewelryMechanic.Items.JewelryItems;
 using PeculiarJewelry.Content.JewelryMechanic.Stats;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Terraria.DataStructures;
@@ -28,21 +29,26 @@ internal class CobaltBonus : BaseMaterialBonus
 
     public override void StaticBonus(Player player, bool firstSet)
     {
-        if (CountMaterial(player) >= 3)
-            player.GetModPlayer<CobaltBonusPlayer>().threeSet = true;
-    }
+        int count = CountMaterial(player);
 
-    // Needs 5-Set
+        if (count >= 3)
+            player.GetModPlayer<CobaltBonusPlayer>().threeSet = true;
+
+        if (count >= 5)
+            player.GetModPlayer<CobaltBonusPlayer>().fiveSet = true;
+    }
 
     private class CobaltBonusPlayer : ModPlayer
     {
         internal bool threeSet = false;
         internal bool oldThree = false;
+        internal bool fiveSet = false;
 
         public override void ResetEffects()
         {
             oldThree = threeSet;
             threeSet = false;
+            fiveSet = false;
         }
     }
 
@@ -58,6 +64,7 @@ internal class CobaltBonus : BaseMaterialBonus
         private int _shadowOwner = -1;
         private int _ownsShadow = -1;
         private bool _shouldOwnShadow = false;
+        private int _speedUpTimer = 0;
 
         public override bool AppliesToEntity(Projectile entity, bool lateInstantiation) => entity.minion || entity.sentry || ExceptionIDs.Contains(entity.type);
 
@@ -144,6 +151,8 @@ internal class CobaltBonus : BaseMaterialBonus
         {
             var selfCobalt = projectile.GetGlobalProjectile<CobaltBonusProjectile>();
 
+            SpeedUpBehaviour(projectile);
+
             if (selfCobalt._shouldOwnShadow)
                 SpawnShadow(projectile);
 
@@ -164,6 +173,32 @@ internal class CobaltBonus : BaseMaterialBonus
             }
 
             return true;
+        }
+
+        private static void SpeedUpBehaviour(Projectile projectile)
+        {
+            if (projectile.TryGetOwner(out Player player) && player.GetModPlayer<CobaltBonusPlayer>().fiveSet && 
+                projectile.GetGlobalProjectile<CobaltBonusProjectile>()._speedUpTimer++ % 2 == 0)
+                RepeatAI(projectile, 1);
+        }
+
+        private static void RepeatAI(Projectile projectile, int repeats)
+        {
+            int type = projectile.type;
+            bool actType = projectile.ModProjectile != null && projectile.ModProjectile.AIType > 0;
+
+            for (int i = 0; i < repeats; ++i)
+            {
+                if (actType)
+                    projectile.type = projectile.ModProjectile.AIType;
+
+                projectile.VanillaAI();
+
+                if (actType)
+                    projectile.type = type;
+            }
+
+            ProjectileLoader.AI(projectile);
         }
 
         public override void OnKill(Projectile projectile, int timeLeft)

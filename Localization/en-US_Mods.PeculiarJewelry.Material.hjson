@@ -42,7 +42,7 @@ Bonuses: {
 	Tungsten: {
 		1Set: "{$1Bonus} {$JewelStatBonusLine} movement control"
 		3Set: "{$3Bonus} Significantly increased jump height"
-		5Set: "{$5Bonus} Double tapping down will instantly put the player at max falling speed"
+		5Set: "{$5Bonus} Hold UP to hover, hold DOWN to fall down way faster"
 	}
 
 	Gold: {

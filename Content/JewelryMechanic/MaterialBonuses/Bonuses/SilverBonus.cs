@@ -29,18 +29,26 @@ internal class SilverBonus : BaseMaterialBonus
 
         if (count >= 3)
             player.GetModPlayer<SilverBonusPlayer>().threeSet = true;
-    }
 
-    // Needs 5-Set
+        if (count >= 5)
+            player.GetModPlayer<SilverBonusPlayer>().fiveSet = true;
+    }
 
     class SilverBonusPlayer : ModPlayer
     {
         internal bool threeSet = false;
+        internal bool fiveSet = false;
 
-        public override void ResetEffects() => threeSet = false;
+        public override void ResetEffects() => threeSet = fiveSet = false;
 
         public override void PostUpdateRunSpeeds()
         {
+            if (fiveSet)
+            {
+                Player.dash = 1;
+                Player.dashType = 5;
+            }
+
             if (!threeSet)
                 return;
 
@@ -63,6 +71,5 @@ internal class SilverBonus : BaseMaterialBonus
             });
             return true;
         }
-
     }
 }

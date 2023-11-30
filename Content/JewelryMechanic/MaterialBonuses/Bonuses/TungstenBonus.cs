@@ -28,6 +28,15 @@ internal class TungstenBonus : BaseMaterialBonus
 
         if (count >= 3)
             player.frogLegJumpBoost = true;
+
+        if (count >= 5)
+        {
+            if (player.controlDown)
+                player.maxFallSpeed *= 2;
+
+            if (player.controlUp)
+                player.maxFallSpeed = 0.1f;
+        }
     }
 
     // Needs 5-Set
