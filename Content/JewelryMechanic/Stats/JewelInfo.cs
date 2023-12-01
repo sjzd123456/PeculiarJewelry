@@ -34,9 +34,9 @@ public abstract partial class JewelInfo
 
     public void Setup(JewelTier tier)
     {
-        this.tier = (JewelTier)Main.rand.Next((int)JewelTier.Mutated0, (int)JewelTier.Stellar2 + 1);
+        this.tier = tier;// (JewelTier)Main.rand.Next((int)JewelTier.Mutated0, (int)JewelTier.Stellar2 + 1);
 
-        Major = new JewelStat(StatType.Renewal);// JewelStat.Random;
+        Major = JewelStat.Random;
 
         InternalSetup();
 

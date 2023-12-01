@@ -1,5 +1,6 @@
 ﻿using PeculiarJewelry.Content.JewelryMechanic.Items.JewelryItems;
 using PeculiarJewelry.Content.JewelryMechanic.MaterialBonuses;
+using PeculiarJewelry.Content.JewelryMechanic.MaterialBonuses.Bonuses;
 using PeculiarJewelry.Content.JewelryMechanic.Stats.Triggers;
 using System.Collections.Generic;
 using Terraria;
@@ -36,11 +37,19 @@ internal class JewelPlayer : ModPlayer
             item.ApplyConstantTrigger(Player);
 
         Player.GetModPlayer<MaterialPlayer>().StaticMaterialEffects();
+        Player.GetModPlayer<HallowedBonus.HallowedBonusPlayer>().fiveSetPower = 1;
+
+        if (Player.GetModPlayer<HallowedBonus.HallowedBonusPlayer>().fiveSet)
+        {
+            foreach (var item in jewelry)
+                foreach (var info in item.Info)
+                    Player.GetModPlayer<HallowedBonus.HallowedBonusPlayer>().fiveSetPower += info is MajorJewelInfo ? 0.01f : 0.005f;
+        }
 
         foreach (var item in jewelry)
         {
             item.ApplySingleJewelBonus(Player);
-            item.ApplyTo(Player, -(1f - ((float)item.tier + 1f) / 5f));
+            item.ApplyTo(Player, -(1f - ((float)item.tier + 1f) / 5f), Player.GetModPlayer<HallowedBonus.HallowedBonusPlayer>().fiveSetPower);
             item.ResetSingleJewelBonus(Player);
         }
     }

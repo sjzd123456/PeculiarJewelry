@@ -144,10 +144,10 @@ public abstract class BasicJewelry : ModItem
             foreach (var stat in stats)
             {
                 if (strengthsByType.ContainsKey(stat.Type))
-                    strengthsByType[stat.Type] += stat.GetEffectValue(player);
+                    strengthsByType[stat.Type] += stat.GetEffectValue(player) * player.GetModPlayer<HallowedBonus.HallowedBonusPlayer>().fiveSetPower;
                 else
                 {
-                    strengthsByType.Add(stat.Type, stat.GetEffectValue(player));
+                    strengthsByType.Add(stat.Type, stat.GetEffectValue(player) * player.GetModPlayer<HallowedBonus.HallowedBonusPlayer>().fiveSetPower);
                     colorsByType.Add(stat.Type, stat.Get().Color);
                 }
             }

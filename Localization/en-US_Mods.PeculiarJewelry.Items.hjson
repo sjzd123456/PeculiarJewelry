@@ -1269,3 +1269,8 @@ LuminiteBrooch: {
 		{$Material.Bonuses.Luminite.1Set}
 		'''
 }
+
+HallowedRing: {
+	DisplayName: Hallowed Ring
+	Tooltip: ""
+}

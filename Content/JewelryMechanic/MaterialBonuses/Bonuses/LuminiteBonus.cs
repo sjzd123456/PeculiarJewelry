@@ -13,8 +13,13 @@ internal class LuminiteBonus : BaseMaterialBonus
 
     public override void StaticBonus(Player player, bool firstSet)
     {
-        if (firstSet && CountMaterial(player) >= 3)
-            AddCosmicBonus(player);            
+        int count = CountMaterial(player);
+
+        if (firstSet && count >= 3)
+            AddCosmicBonus(player);
+
+        if (count >= 5)
+            player.GetModPlayer<LuminiteBonusPlayer>().fiveSet = true;
     }
 
     public static void AddCosmicBonus(Player player)
@@ -73,18 +78,47 @@ internal class LuminiteBonus : BaseMaterialBonus
             player.statDefense += 20;
     }
 
-    //Needs 5-Set
-
     private class LuminiteBonusPlayer : ModPlayer 
     {
         internal float critDamageBonus = 0;
+        internal bool fiveSet = false;
 
-        public override void ResetEffects() => critDamageBonus = 0;
+        public override void ResetEffects()
+        {
+            critDamageBonus = 0;
+            fiveSet = false;
+        }
 
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
             if (critDamageBonus > 0)
                 modifiers.CritDamage += critDamageBonus;
+        }
+    }
+
+    private class LuminiteBonusProjectile : GlobalProjectile
+    {
+        public override bool PreAI(Projectile projectile)
+        {
+            if (projectile.hostile)
+            {
+                float reverse = 0;
+
+                for (int i = 0; i < Main.maxPlayers; ++i)
+                {
+                    Player p = Main.player[i];
+
+                    if (p.active && !p.dead && p.GetModPlayer<LuminiteBonusPlayer>().fiveSet && p.DistanceSQ(projectile.Center) < 600 * 600)
+                    {
+                        float dist = MathHelper.Clamp(p.Distance(projectile.Center), 120, 600);
+                        reverse = 1 - dist / 600f;
+                    }
+                }
+
+                if (reverse > 0)
+                    projectile.position -= projectile.velocity * reverse;
+            }
+            return true;
         }
     }
 }

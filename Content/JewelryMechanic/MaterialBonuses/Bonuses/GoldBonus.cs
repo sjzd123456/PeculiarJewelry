@@ -1,12 +1,17 @@
-﻿using PeculiarJewelry.Content.JewelryMechanic.MaterialBonuses;
-using PeculiarJewelry.Content.JewelryMechanic.Stats;
+﻿using PeculiarJewelry.Content.JewelryMechanic.Stats;
+using System;
 using System.Linq;
+using Terraria.Audio;
+using Terraria.DataStructures;
+using Terraria.ID;
 using Terraria.Utilities;
 
 namespace PeculiarJewelry.Content.JewelryMechanic.MaterialBonuses.Bonuses;
 
 internal class GoldBonus : BaseMaterialBonus
 {
+    private static SoundStyle Sound => SoundID.Tink;
+
     public override string MaterialKey => "Gold";
 
     public override float EffectBonus(Player player, StatType statType)
@@ -26,9 +31,10 @@ internal class GoldBonus : BaseMaterialBonus
 
         if (count >= 3)
             player.GetModPlayer<GoldBonusPlayer>().threeSet = true;
-    }
 
-    // Needs 5-Set
+        if (count >= 5)
+            player.GetModPlayer<GoldBonusPlayer>().fiveSet = true;
+    }
 
     class GoldBonusPlayer : ModPlayer
     {
@@ -38,9 +44,86 @@ internal class GoldBonus : BaseMaterialBonus
         private static readonly int[] Ore = new int[] { ItemID.GoldOre, ItemID.CopperOre, ItemID.TinOre, ItemID.IronOre, ItemID.LeadOre, ItemID.SilverOre,
             ItemID.TungstenOre, ItemID.PlatinumOre };
 
-        internal bool threeSet = false;
+        private static bool SkipCheck = false;
 
-        public override void ResetEffects() => threeSet = false;
+        internal bool threeSet = false;
+        internal bool fiveSet = false;
+
+        public override void Load()
+        {
+            On_Recipe.Create += HijackCreate;
+            On_NPC.GetWereThereAnyInteractions += HijackAnyInteractions;
+            On_Player.PayCurrency += HijackShopPricePayment;
+            On_NPC.NPCLoot_DropItems += RemoveDropsIfUnlucky;
+        }
+
+        private void RemoveDropsIfUnlucky(On_NPC.orig_NPCLoot_DropItems orig, NPC self, Player closestPlayer)
+        {
+            if (closestPlayer.GetModPlayer<GoldBonusPlayer>().fiveSet && Main.rand.NextFloat() < closestPlayer.luck * 0.03f)
+                return;
+
+            orig(self, closestPlayer);
+        }
+
+        private bool HijackShopPricePayment(On_Player.orig_PayCurrency orig, Player self, long price, int customCurrency)
+        {
+            if (!self.GetModPlayer<GoldBonusPlayer>().fiveSet)
+                return orig(self, price, customCurrency);
+
+            if (self.luck < 0 && Main.rand.NextFloat() < Math.Abs(self.luck) * 0.03f)
+                price *= 2;
+            else if (Main.rand.NextFloat() < self.luck * 0.03f)
+            {
+                price = 0;
+                SoundEngine.PlaySound(Sound, self.Center);
+            }
+
+            return orig(self, price, customCurrency);
+        }
+
+        private void HijackCreate(On_Recipe.orig_Create orig, Recipe self)
+        {
+            if (!Main.LocalPlayer.GetModPlayer<GoldBonusPlayer>().fiveSet)
+            {
+                orig(self);
+                return;
+            }
+
+            if (Main.LocalPlayer.luck < 0 && Main.rand.NextFloat() < -Main.LocalPlayer.luck * 0.03f)
+            {
+                orig(self); // Consume double material
+                orig(self);
+                return;
+            }
+
+            if (Main.rand.NextFloat() < Main.LocalPlayer.luck * 0.03f)
+            {
+                SoundEngine.PlaySound(Sound, Main.LocalPlayer.Center);
+                return;
+            }
+
+            orig(self);
+        }
+
+        public override void ResetEffects() => threeSet = fiveSet = false;
+
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+        {
+            if (!fiveSet)
+                return;
+
+            if (Player.luck < 0 && Main.rand.NextFloat() < Player.luck * 0.03f)
+            {
+                modifiers.FinalDamage *= 0;
+                return;
+            }
+
+            if (Main.rand.NextFloat() < Player.luck * 0.03f)
+            {
+                modifiers.FinalDamage *= 2;
+                SoundEngine.PlaySound(Sound, Main.LocalPlayer.Center);
+            }
+        }
 
         public override void OnHitNPCWithItem(Item item, NPC target, NPC.HitInfo hit, int damageDone)
         {
@@ -56,6 +139,9 @@ internal class GoldBonus : BaseMaterialBonus
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
+            if (fiveSet && Player.luck * 0.03f > Main.rand.NextFloat())
+                TryDoubleLoot(target);
+
             if (threeSet)
             {
                 if (!Main.rand.NextBool(10) || target.life > 0)
@@ -84,6 +170,90 @@ internal class GoldBonus : BaseMaterialBonus
                 if (type.elements.Any())
                     Item.NewItem(Player.GetSource_OnHit(target), target.Hitbox, type);
             }
+        }
+
+        private static void TryDoubleLoot(NPC target)
+        {
+            if (target.life > 0)
+                return;
+
+            SkipCheck = true;
+            target.NPCLoot();
+            SkipCheck = false;
+
+            SoundEngine.PlaySound(Sound, Main.LocalPlayer.Center);
+        }
+
+        private bool HijackAnyInteractions(On_NPC.orig_GetWereThereAnyInteractions orig, NPC self)
+        {
+            if (SkipCheck)
+                return false;
+
+            return orig(self);
+        }
+
+        public override bool PreKill(double damage, int hitDirection, bool pvp, ref bool playSound, ref bool genDust, ref PlayerDeathReason damageSource)
+        {
+            if (fiveSet)
+            {
+                bool survive = Main.rand.NextFloat() > Player.luck / 100f;
+
+                if (survive)
+                    SoundEngine.PlaySound(Sound, Main.LocalPlayer.Center);
+
+                return survive;
+            }
+            return true;
+        }
+
+        public override bool FreeDodge(Player.HurtInfo info)
+        {
+            bool dodge = fiveSet && Main.rand.NextFloat() < Player.luck * 0.02f;
+
+            if (dodge)
+            {
+                Player.AddImmuneTime(ImmunityCooldownID.General, 60);
+                Player.immune = true;
+                SoundEngine.PlaySound(Sound, Main.LocalPlayer.Center);
+            }
+
+            return dodge;
+        }
+
+        public override void ModifyHitByNPC(NPC npc, ref Player.HurtModifiers modifiers)
+        {
+            if (!Player.GetModPlayer<GoldBonusPlayer>().fiveSet)
+                return;
+
+            if (Player.luck < 0 && Main.rand.NextFloat() < -Player.luck * 0.02f)
+                modifiers.FinalDamage *= 2;
+        }
+
+        public override void ModifyHitByProjectile(Projectile projectile, ref Player.HurtModifiers modifiers)
+        {
+            if (!Player.GetModPlayer<GoldBonusPlayer>().fiveSet)
+                return;
+
+            if (Player.luck < 0 && Main.rand.NextFloat() < -Player.luck * 0.02f)
+                modifiers.FinalDamage *= 2;
+        }
+
+        public override void OnHitByNPC(NPC npc, Player.HurtInfo hurtInfo)
+        {
+            if (!Player.GetModPlayer<GoldBonusPlayer>().fiveSet)
+                return;
+
+            if (Player.luck < 0 && Main.rand.NextFloat() < -Player.luck * 0.01f)
+                Player.KillMe(hurtInfo.DamageSource, hurtInfo.Damage, hurtInfo.HitDirection, false);
+        }
+
+        public override void OnHitByProjectile(Projectile proj, Player.HurtInfo hurtInfo)
+        {
+            if (!Player.GetModPlayer<GoldBonusPlayer>().fiveSet)
+                return;
+
+            if (Player.luck < 0 && Main.rand.NextFloat() < -Player.luck * 0.01f)
+                Player.KillMe(hurtInfo.DamageSource, hurtInfo.Damage, hurtInfo.HitDirection, false);
         }
     }
 }

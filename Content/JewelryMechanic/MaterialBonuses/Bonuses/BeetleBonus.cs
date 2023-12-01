@@ -25,9 +25,25 @@ internal class BeetleBonus : BaseMaterialBonus
 
     public override void StaticBonus(Player player, bool firstSet)
     {
-        if (CountMaterial(player) >= 3 && player.velocity.LengthSquared() < 0.01f)
+        int count = CountMaterial(player);
+
+        if (count >= 3 && player.velocity.LengthSquared() < 0.01f)
             player.GetDamage(DamageClass.Generic) += 1;
+
+        if (count >= 5)
+            player.GetModPlayer<BeetleBonusPlayer>().fiveSet = true;
     }
 
-    // Needs 5-Set
+    class BeetleBonusPlayer : ModPlayer
+    {
+        public bool fiveSet = false;
+
+        public override void ResetEffects() => fiveSet = false;
+
+        public override void ModifyHitByNPC(NPC npc, ref Player.HurtModifiers modifiers)
+        {
+            if (fiveSet && Player.velocity.LengthSquared() < 0.01f)
+                modifiers.FinalDamage /= 2;
+        }
+    }
 }

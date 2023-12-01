@@ -1,5 +1,6 @@
 ﻿using PeculiarJewelry.Content.JewelryMechanic.Items.JewelryItems;
 using PeculiarJewelry.Content.JewelryMechanic.Stats;
+using SteelSeries.GameSense.DeviceZone;
 using Terraria;
 using Terraria.WorldBuilding;
 
@@ -30,19 +31,21 @@ internal class AdamantiteBonus : BaseMaterialBonus
 
         if (count >= 3)
             player.GetModPlayer<AdamantiteBonusPlayer>().threeSet = true;
-    }
 
-    // Needs 5-Set
+        if (count >= 5)
+            player.GetModPlayer<AdamantiteBonusPlayer>().fiveSet = true;
+    }
 
     class AdamantiteBonusPlayer : ModPlayer
     {
         internal bool threeSet = false;
+        internal bool fiveSet = false;
 
         private float _chance;
         private StatModifier _mods;
         private int _baseDamage;
 
-        public override void ResetEffects() => threeSet = false;
+        public override void ResetEffects() => threeSet = fiveSet = false;
 
         public override void ModifyHitNPCWithItem(Item item, NPC target, ref NPC.HitModifiers modifiers)
         {
@@ -70,15 +73,29 @@ internal class AdamantiteBonus : BaseMaterialBonus
 
         private void ModifyCritStack(ref NPC.HitInfo info)
         {
+            if (!info.Crit && fiveSet && Main.rand.NextFloat() < _chance)
+            {
+                info.Crit = true;
+                info.Damage = (int)_mods.ApplyTo(info.Damage);
+            }
+
             if (info.Crit)
             {
                 float critDamage = _mods.ApplyTo(_baseDamage);
+                bool safetyConsumed = false;
 
                 while (true)
                 {
                     _chance /= 2;
+                    bool success = Main.rand.NextFloat() < _chance;
 
-                    if (Main.rand.NextFloat() < _chance)
+                    if (fiveSet && !success && !safetyConsumed)
+                    {
+                        success = Main.rand.NextFloat() < _chance;
+                        safetyConsumed = true;
+                    }
+
+                    if (success)
                         info.Damage += (int)critDamage;
                     else
                         break;

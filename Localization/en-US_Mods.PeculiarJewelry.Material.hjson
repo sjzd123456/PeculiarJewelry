@@ -120,7 +120,7 @@ Bonuses: {
 	Hallowed: {
 		1Set: "{$1Bonus} All jewels on this jewelry give 5% more stats"
 		3Set: "{$3Bonus} When there are no bosses or events active, you are immortal"
-		5Set: "{$5Bonus} All jewels on this jewelry give an additional 1% more stats"
+		5Set: "{$5Bonus} You get an additional +1% to every stat for each jewel you are wearing"
 	}
 
 	Chlorophyte: {
@@ -167,8 +167,8 @@ Bonuses: {
 			{$1Bonus} All stats on this jewelry gives 15% less stats
 			An additional major jewel can be set on this jewelry
 			'''
-		3Set: "{$3Bonus} Cosmic interest"
-		5Set: "{$5Bonus} Cosmic favoritism"
+		3Set: "{$3Bonus} You get a bonus based on time of day and location in world"
+		5Set: "{$5Bonus} Projectiles slow down the closer they are to you"
 	}
 
 	Demonite: {

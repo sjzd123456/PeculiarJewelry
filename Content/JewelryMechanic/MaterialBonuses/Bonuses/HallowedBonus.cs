@@ -29,14 +29,19 @@ internal class HallowedBonus : BaseMaterialBonus
 
         if (count >= 3)
             player.GetModPlayer<HallowedBonusPlayer>().threeSet = true;
+
+        if (count >= 5)
+            player.GetModPlayer<HallowedBonusPlayer>().fiveSet = true;
     }
 
-    // Needs 5-Set
-
-    class HallowedBonusPlayer : ModPlayer
+    public class HallowedBonusPlayer : ModPlayer
     {
         internal bool IsImmune => threeSet && !Main.CurrentFrameFlags.AnyActiveBossNPC && Main.invasionType == InvasionID.None;
         internal bool threeSet = false;
+        internal bool fiveSet = false;
+        internal float fiveSetPower = 0;
+
+        public override void ResetEffects() => threeSet = fiveSet = false;
 
         public override bool PreKill(double damage, int hitDirection, bool pvp, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource)
         {
