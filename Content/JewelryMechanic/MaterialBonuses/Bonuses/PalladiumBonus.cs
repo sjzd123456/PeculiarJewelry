@@ -28,17 +28,19 @@ internal class PalladiumBonus : BaseMaterialBonus
 
         if (count >= 3)
             player.GetModPlayer<PalladiumBonusPlayer>().threeSet = true;
-    }
 
-    // Needs 5-Set
+        if (count >= 5)
+            player.GetModPlayer<PalladiumBonusPlayer>().fiveSet = true;
+    }
 
     class PalladiumBonusPlayer : ModPlayer
     {
         internal bool threeSet = false;
+        internal bool fiveSet = false;
 
         private bool _speedUpNextSwing = false;
 
-        public override void ResetEffects() => threeSet = false;
+        public override void ResetEffects() => threeSet = fiveSet = false;
 
         public override float UseSpeedMultiplier(Item item)
         {
@@ -54,6 +56,20 @@ internal class PalladiumBonus : BaseMaterialBonus
         {
             if (threeSet)
                 _speedUpNextSwing = true;
+        }
+
+        public override void MeleeEffects(Item item, Rectangle hitbox)
+        {
+            if (fiveSet && !item.noMelee)
+            {
+                for (int i = 0; i < Main.maxProjectiles; ++i)
+                {
+                    Projectile p = Main.projectile[i];
+
+                    if (p.active && p.hostile && p.Hitbox.Intersects(hitbox))
+                        p.Kill();
+                }
+            }
         }
     }
 }

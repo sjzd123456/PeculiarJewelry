@@ -1,7 +1,7 @@
 ﻿using PeculiarJewelry.Content.JewelryMechanic.Items.JewelryItems;
 using PeculiarJewelry.Content.JewelryMechanic.Stats;
+using System;
 using Terraria.DataStructures;
-using Terraria.GameContent.ItemDropRules;
 
 namespace PeculiarJewelry.Content.JewelryMechanic.MaterialBonuses.Bonuses;
 
@@ -26,20 +26,50 @@ internal class OrichalcumBonus : BaseMaterialBonus
 
     public override void StaticBonus(Player player, bool firstSet)
     {
-        int count = player.GetModPlayer<MaterialPlayer>().MaterialCount(MaterialKey);
+        int count = CountMaterial(player);
 
         if (count >= 3)
             player.GetModPlayer<OrichalcumBonusPlayer>().threeSet = true;
-    }
 
-    // Needs 5-Set
+        if (count >= 5)
+            player.GetModPlayer<OrichalcumBonusPlayer>().fiveSet = true;
+    }
 
     class OrichalcumBonusPlayer : ModPlayer
     {
         internal bool threeSet = false;
+        internal bool fiveSet = false;
         internal int projCount = 0;
+        internal float damageBonusForDisplay = 0;
 
-        public override void ResetEffects() => threeSet = false;
+        public override void ResetEffects() => threeSet = fiveSet = false;
+
+        public override bool OnPickup(Item item)
+        {
+            if (fiveSet && item.type == ItemID.Star)
+                Player.AddBuff(ModContent.BuffType<OrichalcumDamageBuff>(), 4 * 60);
+
+            return true;
+        }
+    }
+
+    class OrichalcumDamageBuff : ModBuff
+    {
+        public override void Update(Player player, ref int buffIndex)
+        {
+            float bonus = player.buffTime[buffIndex] / 3000f;
+            player.GetDamage(DamageClass.Generic) += bonus;
+            player.GetModPlayer<OrichalcumBonusPlayer>().damageBonusForDisplay = bonus;
+        }
+
+        public override bool ReApply(Player player, int time, int buffIndex)
+        {
+            player.buffTime[buffIndex] += time;
+            return true;
+        }
+
+        public override void ModifyBuffText(ref string buffName, ref string tip, ref int rare) 
+            => tip.Replace("{0}", Main.LocalPlayer.GetModPlayer<OrichalcumBonusPlayer>().damageBonusForDisplay.ToString());
     }
 
     class OrichalcumBonusProjectile : GlobalProjectile

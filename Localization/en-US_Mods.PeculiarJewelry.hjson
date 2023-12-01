@@ -28,6 +28,11 @@ Buffs: {
 		DisplayName: Counterdefense
 		Description: Gain {0} defense
 	}
+
+	OrichalcumDamageBuff: {
+		DisplayName: Orichalcum Damage Buff
+		Description: Gain {0}% damage
+	}
 }
 
 NPCs: {
