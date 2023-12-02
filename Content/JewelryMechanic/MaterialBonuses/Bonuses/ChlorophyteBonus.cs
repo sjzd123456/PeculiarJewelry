@@ -1,9 +1,8 @@
 ﻿using PeculiarJewelry.Content.JewelryMechanic.Items.JewelryItems;
 using PeculiarJewelry.Content.JewelryMechanic.Stats;
-using Steamworks;
 using System;
-using Terraria;
 using Terraria.GameContent;
+using Terraria.GameContent.ItemDropRules;
 
 namespace PeculiarJewelry.Content.JewelryMechanic.MaterialBonuses.Bonuses;
 
@@ -50,6 +49,9 @@ internal class ChlorophyteBonus : BaseMaterialBonus
             if (player.ownedProjectileCounts[ModContent.ProjectileType<TrapperMinion>()] < 3)
                 Projectile.NewProjectileDirect(source, player.Center, Vector2.Zero, ModContent.ProjectileType<TrapperMinion>(), 30, 1f, player.whoAmI);
         }
+
+        if (count >= 5)
+            player.GetModPlayer<ChlorophyteBonusPlayer>().fiveSet = true;
     }
 
     // Needs 5-Set
@@ -57,12 +59,25 @@ internal class ChlorophyteBonus : BaseMaterialBonus
     private class ChlorophyteBonusPlayer : ModPlayer
     {
         internal bool threeSet = false;
+        internal bool fiveSet = false;
         internal int lastNumMinions = 0;
 
         public override void ResetEffects()
         {
             lastNumMinions = Player.numMinions;
-            threeSet = false;
+            threeSet = fiveSet = false;
+        }
+
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            if (Main.netMode == NetmodeID.MultiplayerClient)
+                return;
+
+            if (target.CanBeChasedBy() && target.type != ModContent.NPCType<Chlorosprout>() && Main.rand.NextBool(1))
+            {
+                int npc = NPC.NewNPC(target.GetSource_OnHurt(Player), (int)target.Center.X, (int)target.Center.Y, ModContent.NPCType<Chlorosprout>(), 0, Player.whoAmI);
+                Main.npc[npc].velocity = new Vector2(0, Main.rand.Next(10, 16)).RotatedByRandom(MathHelper.TwoPi);
+            }
         }
     }
 
@@ -177,6 +192,69 @@ internal class ChlorophyteBonus : BaseMaterialBonus
             var drawPos = Projectile.Center - Main.screenPosition;
             Main.spriteBatch.Draw(TextureAssets.Projectile[Type].Value, drawPos, new(0, 0, 26, 30), lightColor, rot, new(13, 15), 1f, SpriteEffects.None, 0);
             return false;
+        }
+    }
+
+    class Chlorosprout : ModNPC
+    {
+        const int GrowTime = 80;
+
+        private ref float Owner => ref NPC.ai[0];
+        private ref float Timer => ref NPC.ai[1];
+
+        public override void SetStaticDefaults() => Main.npcFrameCount[Type] = 2;
+
+        public override void SetDefaults()
+        {
+            NPC.aiStyle = -1;
+            NPC.width = NPC.height = 32;
+            NPC.damage = 0;
+            NPC.lifeMax = 10;
+            NPC.knockBackResist = 0;
+            NPC.value = 0;
+            NPC.noGravity = true;
+        }
+
+        public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment) => NPC.lifeMax = 200;
+
+        public override void AI()
+        {
+            NPC.velocity *= 0.95f;
+            NPC.width = (int)(ContentSamples.NpcsByNetId[Type].width * NPC.scale);
+            NPC.height = (int)(ContentSamples.NpcsByNetId[Type].height * NPC.scale);
+            NPC.timeLeft++;
+            NPC.Opacity = NPC.scale;
+
+            if (Timer++ < GrowTime)
+            {
+                NPC.scale += 0.005f;
+                return;
+            }
+
+            if (Timer > GrowTime * 1.5f)
+                NPC.scale *= 0.99f;
+
+            if (NPC.scale <= 0.4f)
+                NPC.active = false;
+        }
+
+        public override void FindFrame(int frameHeight)
+        {
+            if (Timer < GrowTime)
+                NPC.frame.Y = frameHeight;
+            else
+                NPC.frame.Y = 0;
+        }
+
+        public override bool? CanBeHitByItem(Player player, Item item) => player.whoAmI == Owner ? null : false;
+        public override bool? CanBeHitByProjectile(Projectile projectile) => projectile.TryGetOwner(out var own) && own.whoAmI == Owner ? null : false;
+        public override void ModifyNPCLoot(NPCLoot npcLoot) => npcLoot.Add(ItemDropRule.ByCondition(new FirstFrameCondition(), ItemID.Heart));
+
+        internal class FirstFrameCondition : IItemDropRuleCondition
+        {
+            public bool CanDrop(DropAttemptInfo info) => info.npc.frame.Y == 0;
+            public bool CanShowItemDropInUI() => false;
+            public string GetConditionDescription() => "!";
         }
     }
 }
