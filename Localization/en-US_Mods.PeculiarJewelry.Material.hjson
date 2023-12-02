@@ -178,6 +178,6 @@ Bonuses: {
 			All defense and damage resistance bonuses are reduced by 6%
 			'''
 		3Set: "{$3Bonus} Gain an additional increase in offensive stats, but regeneration and life steal is disabled"
-		5Set: "{$5Bonus} Missing an attack will hurt the player, but damage is increased by a lot"
+		5Set: "{$5Bonus} Missing an attack will disable defense and damage resistance, but damage is increased by a lot"
 	}
 }

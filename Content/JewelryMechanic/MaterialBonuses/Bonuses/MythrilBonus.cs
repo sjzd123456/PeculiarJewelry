@@ -1,6 +1,7 @@
 ﻿using PeculiarJewelry.Content.JewelryMechanic.Items.JewelryItems;
 using PeculiarJewelry.Content.JewelryMechanic.Stats;
 using Terraria;
+using static Humanizer.In;
 
 namespace PeculiarJewelry.Content.JewelryMechanic.MaterialBonuses.Bonuses;
 
@@ -47,11 +48,8 @@ internal class MythrilBonus : BaseMaterialBonus
 
         public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (fiveSet)
-            {
-                unmissedHitsInARow++;
-                proj.GetGlobalProjectile<MythrilBonusProjectile>().hasMissed = false;
-            }
+            unmissedHitsInARow++;
+            proj.GetGlobalProjectile<MythrilBonusProjectile>().hasMissed = false;
         }
 
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
@@ -69,10 +67,19 @@ internal class MythrilBonus : BaseMaterialBonus
 
         public override void OnKill(Projectile projectile, int timeLeft)
         {
-            if (projectile.TryGetOwner(out var owner))
+            if (!projectile.TryGetOwner(out var owner))
+                return;
+
+            bool classSpecification = !projectile.DamageType.CountsAsClass(DamageClass.Summon) && !projectile.DamageType.CountsAsClass(DamageClass.SummonMeleeSpeed);
+
+            if (owner.GetModPlayer<MythrilBonusPlayer>().fiveSet) // Forced ranged check for Mythril set bonus
+                classSpecification = projectile.DamageType.CountsAsClass(DamageClass.Ranged);
+
+            if (projectile.damage > 0 && projectile.friendly && hasMissed && classSpecification)
             {
-                if (!owner.GetModPlayer<MythrilBonusPlayer>().fiveSet || (projectile.friendly && hasMissed))
-                    owner.GetModPlayer<MythrilBonusPlayer>().unmissedHitsInARow = 0;
+                owner.GetModPlayer<MythrilBonusPlayer>().unmissedHitsInARow = 0;
+                owner.GetModPlayer<DemoniteBonus.DemoniteBonusPlayer>().DoMissEffect();
+                owner.GetModPlayer<CrimtaneBonus.CrimtaneBonusPlayer>().DoMissEffect();
             }
         }
     }

@@ -1,5 +1,6 @@
 ﻿using PeculiarJewelry.Content.JewelryMechanic.Items.JewelryItems;
 using PeculiarJewelry.Content.JewelryMechanic.Stats;
+using Terraria.DataStructures;
 
 namespace PeculiarJewelry.Content.JewelryMechanic.MaterialBonuses.Bonuses;
 
@@ -36,15 +37,17 @@ internal class CrimtaneBonus : BaseMaterialBonus
             player.GetModPlayer<CrimtaneBonusPlayer>().threeSet = true;
             bonusStrength = 1.4f;
         }
+
+        if (count >= 5)
+            player.GetModPlayer<CrimtaneBonusPlayer>().fiveSet = true;
     }
 
-    // Needs 5-Set
-
-    class CrimtaneBonusPlayer : ModPlayer
+    public class CrimtaneBonusPlayer : ModPlayer
     {
         internal bool threeSet = false;
+        internal bool fiveSet = false;
 
-        public override void ResetEffects() => threeSet = false;
+        public override void ResetEffects() => threeSet = fiveSet = false;
 
         public override void UpdateLifeRegen()
         {
@@ -54,5 +57,28 @@ internal class CrimtaneBonus : BaseMaterialBonus
                 Player.lifeSteal = 0;
             }
         }
+
+        internal void DoMissEffect()
+        {
+            if (fiveSet && !Player.immune)
+            {
+                Player.Hurt(PlayerDeathReason.ByCustomReason($"{Player.name} forgot to aim."), Player.statLifeMax2 / 10, 0, false, false, -1, false, 
+                    Player.statLifeMax2 / 10);
+                Player.AddBuff(ModContent.BuffType<CrimtaneAggressionDebuff>(), 4 * 60);
+                Player.SetImmuneTimeForAllTypes(20);
+                Player.immune = true;
+            }
+        }
+    }
+
+    internal class CrimtaneAggressionDebuff : ModBuff
+    {
+        public override void SetStaticDefaults()
+        {
+            Main.debuff[Type] = true;
+            BuffID.Sets.NurseCannotRemoveDebuff[Type] = true;
+        }
+
+        public override void Update(Player player, ref int buffIndex) => player.GetDamage(DamageClass.Generic) += 3;
     }
 }

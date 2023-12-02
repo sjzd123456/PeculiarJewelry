@@ -27,19 +27,23 @@ internal class TitaniumBonus : BaseMaterialBonus
 
     public override void StaticBonus(Player player, bool firstSet)
     {
-        if (CountMaterial(player) >= 3)
-            player.GetModPlayer<TitaniumBonusPlayer>().threeSet = true;
-    }
+        int count = CountMaterial(player);
 
-    // Needs 5-Set
+        if (count >= 3)
+            player.GetModPlayer<TitaniumBonusPlayer>().threeSet = true;
+
+        if (count >= 5)
+            player.GetModPlayer<TitaniumBonusPlayer>().fiveSet = true;
+    }
 
     private class TitaniumBonusPlayer : ModPlayer
     {
         internal bool threeSet = false;
+        internal bool fiveSet = false;
 
         private int _lastNPCHit = -1;
 
-        public override void ResetEffects() => threeSet = false;
+        public override void ResetEffects() => threeSet = fiveSet = false;
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
@@ -50,6 +54,25 @@ internal class TitaniumBonus : BaseMaterialBonus
                 target.AddBuff(ModContent.BuffType<TitaniumDefenseDebuff>(), 2);
                 target.GetGlobalNPC<TitaniumGlobalNPC>().debuffStacks++;
             }
+        }
+
+        public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            if (fiveSet && proj.type != ModContent.ProjectileType<EchoProjectile>())
+                SpawnEcho(target, damageDone);
+        }
+
+        public override void OnHitNPCWithItem(Item item, NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            if (fiveSet)
+                SpawnEcho(target, damageDone);
+        }
+
+        private void SpawnEcho(NPC target, int damageDone)
+        {
+            Projectile.NewProjectileDirect(target.GetSource_OnHurt(Player), Player.Center,
+                new Vector2(0, Main.rand.NextFloat(5, 9)).RotatedByRandom(MathHelper.TwoPi), ModContent.ProjectileType<EchoProjectile>(),
+                damageDone, 1f, Player.whoAmI, 0, target.whoAmI);
         }
 
         private void UpdateHitNPC(NPC target)
@@ -115,6 +138,90 @@ internal class TitaniumBonus : BaseMaterialBonus
                 ChatManager.DrawColorCodedStringWithShadow(spriteBatch, FontAssets.DeathText.Value, val, 
                     new Vector2(npc.Center.X, npc.position.Y - 22) - Main.screenPosition, GetTint(npc, drawColor), 0f, origin, new(0.75f));
             }
+        }
+    }
+
+    private class EchoProjectile : ModProjectile
+    {
+        private ref float Timer => ref Projectile.ai[0];
+        private ref float TargetWhoAmI => ref Projectile.ai[1];
+        
+        private bool DeathThroes
+        {
+            get => Projectile.ai[2] == 1;
+            set => Projectile.ai[2] = value ? 1 : 0;
+        }
+
+        private NPC Target => Main.npc[(int)TargetWhoAmI];
+
+        public override void SetStaticDefaults()
+        {
+            ProjectileID.Sets.TrailCacheLength[Type] = 6;
+            ProjectileID.Sets.TrailingMode[Type] = 0;
+        }
+
+        public override void SetDefaults()
+        {
+            Projectile.CloneDefaults(ProjectileID.WoodenArrowFriendly);
+            Projectile.DamageType = DamageClass.Generic;
+            Projectile.width = Projectile.height = 10;
+            Projectile.aiStyle = -1;
+            Projectile.Opacity = 0.6f;
+            Projectile.tileCollide = false;
+            Projectile.penetrate = 3;
+        }
+
+        public override void AI()
+        {
+            Timer++;
+            Projectile.timeLeft = 2;
+
+            if (DeathThroes)
+            {
+                Projectile.velocity *= 0.7f;
+                Projectile.scale *= 1.05f;
+                Projectile.Opacity *= 0.9f;
+
+                if (Projectile.Opacity < 0.05f)
+                    Projectile.Kill();
+                return;
+            }
+
+            if (Timer < 30)
+                Projectile.velocity *= 0.99f;
+            else
+            {
+                if (!Target.active || Target.life < 0)
+                {
+                    DeathThroes = true;
+                    return;
+                }
+
+                Projectile.velocity = Vector2.Lerp(Projectile.velocity, Projectile.DirectionTo(Target.Center) * 12, 0.08f);
+            }
+        }
+
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            for (int i = 0; i < 6; ++i)
+                Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.FireworkFountain_Blue, Alpha: 80);
+
+            DeathThroes = true;
+        }
+
+        public override bool? CanHitNPC(NPC target) => DeathThroes ? false : null;
+
+        public override bool PreDraw(ref Color lightColor)
+        {
+            float alpha = Projectile.Opacity;
+
+            foreach (var item in Projectile.oldPos)
+            {
+                Vector2 pos = item - Main.screenPosition;
+                alpha = MathHelper.Lerp(alpha, 0f, 0.25f);
+                Main.spriteBatch.Draw(TextureAssets.Projectile[Type].Value, pos, null, lightColor * alpha, 0f, Projectile.Size / 2f, Projectile.scale, SpriteEffects.None, 0);
+            }
+            return false;
         }
     }
 }

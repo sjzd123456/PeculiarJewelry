@@ -33,6 +33,16 @@ Buffs: {
 		DisplayName: Orichalcum Damage Buff
 		Description: Gain {0}% damage
 	}
+
+	CrimtaneAggressionDebuff: {
+		DisplayName: Crimson Rage
+		Description: Pain is power
+	}
+
+	DemoniteAggressionDebuff: {
+		DisplayName: Demon's Rage
+		Description: Frailty is perfection
+	}
 }
 
 NPCs: {
@@ -62,4 +72,5 @@ NPCs: {
 Projectiles: {
 	StellarJadeProjectile.DisplayName: Stellar Jade Projectile
 	TrapperMinion.DisplayName: Trapper Minion
+	EchoProjectile.DisplayName: Echo Projectile
 }

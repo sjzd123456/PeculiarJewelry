@@ -69,7 +69,7 @@ internal class OrichalcumBonus : BaseMaterialBonus
         }
 
         public override void ModifyBuffText(ref string buffName, ref string tip, ref int rare) 
-            => tip.Replace("{0}", Main.LocalPlayer.GetModPlayer<OrichalcumBonusPlayer>().damageBonusForDisplay.ToString());
+            => tip = tip.Replace("{0}", Main.LocalPlayer.GetModPlayer<OrichalcumBonusPlayer>().damageBonusForDisplay.ToString());
     }
 
     class OrichalcumBonusProjectile : GlobalProjectile
