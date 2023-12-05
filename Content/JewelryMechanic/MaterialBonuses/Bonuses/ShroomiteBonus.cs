@@ -1,5 +1,6 @@
 ﻿using PeculiarJewelry.Content.JewelryMechanic.Items.JewelryItems;
 using PeculiarJewelry.Content.JewelryMechanic.Stats;
+using System;
 
 namespace PeculiarJewelry.Content.JewelryMechanic.MaterialBonuses.Bonuses;
 
@@ -26,8 +27,13 @@ internal class ShroomiteBonus : BaseMaterialBonus
 
     public override void StaticBonus(Player player, bool firstSet)
     {
-        if (player.GetModPlayer<MaterialPlayer>().MaterialCount(MaterialKey) >= 3)
+        int count = CountMaterial(player);
+
+        if (count >= 3)
             player.GetModPlayer<ShroomiteBonusPlayer>().threeSet = true;
+
+        if (count >= 5)
+            player.GetModPlayer<ShroomiteBonusPlayer>().fiveSet = true;
     }
 
     // Needs 5-Set
@@ -35,8 +41,9 @@ internal class ShroomiteBonus : BaseMaterialBonus
     class ShroomiteBonusPlayer : ModPlayer
     {
         internal bool threeSet = false;
+        internal bool fiveSet = false;
 
-        public override void ResetEffects() => threeSet = false;
+        public override void ResetEffects() => threeSet = fiveSet = false;
 
         public override void ModifyHitNPCWithItem(Item item, NPC target, ref NPC.HitModifiers modifiers)
         {
@@ -64,6 +71,20 @@ internal class ShroomiteBonus : BaseMaterialBonus
                 int add = (chance - 100) / 100;
                 modifiers.CritDamage += add;
             }
+        }
+
+        public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            if (fiveSet && hit.Crit && !proj.IsMinionOrSentryRelated && proj.whoAmI != Main.player[proj.owner].heldProj)
+                DuplicateProjectile(proj, target);
+        }
+
+        private static void DuplicateProjectile(Projectile proj, NPC target)
+        {
+            var owner = Main.player[proj.owner];
+            var magnitude = proj.velocity.Length();
+            Vector2 vel = owner.DirectionTo(target.Center + (target.velocity * magnitude)) * magnitude;
+            Projectile.NewProjectile(proj.GetSource_OnHit(target), owner.Center, vel, proj.type, proj.damage, proj.knockBack);
         }
     }
 }

@@ -1,5 +1,9 @@
 ﻿using PeculiarJewelry.Content.JewelryMechanic.Items.JewelryItems;
 using PeculiarJewelry.Content.JewelryMechanic.Stats;
+using ReLogic.Content;
+using System;
+using Terraria.DataStructures;
+using Terraria.GameContent;
 using Terraria.Initializers;
 
 namespace PeculiarJewelry.Content.JewelryMechanic.MaterialBonuses.Bonuses;
@@ -27,7 +31,9 @@ internal class SpectreBonus : BaseMaterialBonus
 
     public override void StaticBonus(Player player, bool firstSet)
     {
-        if (CountMaterial(player) >= 3)
+        int count = CountMaterial(player);
+
+        if (count >= 3)
         {
             player.waterWalk = player.waterWalk2 = true;
 
@@ -39,7 +45,120 @@ internal class SpectreBonus : BaseMaterialBonus
                 player.wingsLogic = ArmorIDs.Wing.FishronWings;
             }
         }
+
+        if (count >= 5)
+            player.GetModPlayer<SpectreBonusPlayer>().fiveSet = true;
     }
 
-    // Needs 5-Set
+    class SpectreBonusPlayer : ModPlayer
+    {
+        internal bool fiveSet;
+
+        private Vector2 _ghostVelocity;
+        private Vector2 _ghostPosition;
+        private bool _ghosting;
+        private int _ghostTime;
+        private float _ghostAlpha;
+
+        public override void ResetEffects() => fiveSet = false;
+
+        public override void PostUpdateRunSpeeds()
+        {
+            if (!fiveSet)
+                return;
+
+            if (!Player.controlSmart && !_ghosting)
+            {
+                _ghostPosition = Player.position;
+                _ghostVelocity = Player.velocity;
+                return;
+            }
+            else
+                _ghosting = true;
+
+            _ghostTime++;
+
+            if (Player.controlDown)
+                _ghostVelocity.Y += 0.2f;
+
+            if (Player.controlUp)
+                _ghostVelocity.Y -= 0.2f;
+
+            if (Player.controlLeft)
+                _ghostVelocity.X -= 0.2f;
+
+            if (Player.controlRight)
+                _ghostVelocity.X += 0.2f;
+
+            if (_ghostVelocity.LengthSquared() > 12 * 12)
+                _ghostVelocity = Vector2.Normalize(_ghostVelocity) * 12;
+
+            if (Vector2.DistanceSquared(Player.position, _ghostPosition + _ghostVelocity) <= Math.Pow(20 * 16, 2))
+                _ghostPosition += _ghostVelocity;
+            else
+                _ghostVelocity = Vector2.Zero;
+
+            if (Main.rand.NextBool(2))
+                Dust.NewDust(_ghostPosition + Player.Size / 2f, 1, 1, DustID.SpectreStaff, Scale: Main.rand.NextFloat(1.5f, 2f));
+
+            if (!Collision.SolidCollision(_ghostPosition, Player.width, Player.height) && !Player.controlSmart && Player.releaseSmart)
+                Teleport();
+        }
+
+        private void Teleport()
+        {
+            for (float i = 0; i < 1; i += 0.025f)
+                Dust.NewDust(Vector2.Lerp(Player.Center, _ghostPosition + Player.Size / 2f, i), 1, 1, DustID.SpectreStaff);
+
+            Player.Center = _ghostPosition;
+            _ghosting = false;
+        }
+
+        public override void PreUpdateMovement()
+        {
+            if (_ghosting)
+                Player.velocity = Vector2.Zero;
+        }
+
+        class CameraControl : ModSystem
+        {
+            public override void ModifyScreenPosition()
+            {
+                var spectre = Main.LocalPlayer.GetModPlayer<SpectreBonusPlayer>();
+
+                if (spectre.fiveSet && spectre._ghosting)
+                    Main.screenPosition = spectre._ghostPosition - (Main.ScreenSize.ToVector2() / 2f) + Main.LocalPlayer.Size / 2f;
+            }
+        }
+
+        class SpectreLayer : PlayerDrawLayer
+        {
+            private Asset<Texture2D> _wisp;
+
+            public override void Load() => _wisp = ModContent.Request<Texture2D>("PeculiarJewelry/Content/JewelryMechanic/MaterialBonuses/Bonuses/SpectreShadow");
+            public override void Unload() => _wisp = null;
+
+            public override Position GetDefaultPosition() => PlayerDrawLayers.BeforeFirstVanillaLayer;
+
+            protected override void Draw(ref PlayerDrawSet drawInfo)
+            {
+                if (drawInfo.shadow > 0)
+                    return;
+
+                var spectre = drawInfo.drawPlayer.GetModPlayer<SpectreBonusPlayer>();
+
+                if (!spectre.fiveSet)
+                    return;
+
+                spectre._ghostAlpha = MathHelper.Lerp(spectre._ghostAlpha, spectre._ghosting ? 0.6f : 0.1f, 0.05f);
+
+                Player plr = drawInfo.drawPlayer;
+                Color color = (!Collision.SolidCollision(spectre._ghostPosition, plr.width, plr.height) ? Color.White : Color.Red) * spectre._ghostAlpha;
+                Vector2 pos = spectre._ghostPosition - Main.screenPosition + plr.Size / 2f;
+                float rot = spectre._ghostVelocity.X * 0.02f;
+                Vector2 scale = new Vector2(1f, MathF.Sin(spectre._ghostTime * 0.02f) * 0.5f + 1f);
+                drawInfo.DrawDataCache.Add(new DrawData(_wisp.Value, pos, null, color, rot, _wisp.Value.Size() / 2f, scale, SpriteEffects.None, 0));
+            }
+        }
+    }
 }

@@ -1,5 +1,8 @@
 ﻿using PeculiarJewelry.Content.JewelryMechanic.Items.JewelryItems;
 using PeculiarJewelry.Content.JewelryMechanic.Stats;
+using System.Collections.Generic;
+using Terraria;
+using Terraria.DataStructures;
 
 namespace PeculiarJewelry.Content.JewelryMechanic.MaterialBonuses.Bonuses;
 
@@ -25,8 +28,13 @@ internal class SpookyBonus : BaseMaterialBonus
 
     public override void StaticBonus(Player player, bool firstSet)
     {
-        if (CountMaterial(player) >= 3)
+        int count = CountMaterial(player);
+
+        if (count >= 3)
             player.GetModPlayer<SpookyBonusPlayer>().threeSet = true;
+
+        if (count >= 5)
+            player.GetModPlayer<SpookyBonusPlayer>().fiveSet = true;
     }
 
     // Needs 5-Set
@@ -34,8 +42,13 @@ internal class SpookyBonus : BaseMaterialBonus
     class SpookyBonusPlayer : ModPlayer 
     {
         internal bool threeSet = false;
+        internal bool fiveSet = false;
+        internal readonly List<DamageHolder> holders = new();
 
-        public override void ResetEffects() => threeSet = true;
+        private float doT = 0;
+        private float visualDoT = 0;
+
+        public override void ResetEffects() => fiveSet = threeSet = true;
 
         public override void UpdateBadLifeRegen()
         {
@@ -46,6 +59,89 @@ internal class SpookyBonus : BaseMaterialBonus
 
                 Player.lifeRegenCount += 50 + Player.lifeRegen;
             }
+        }
+
+        public override void PostUpdate()
+        {
+            if (holders.Count > 0)
+            {
+                for (int i = 0; i < holders.Count; i++)
+                {
+                    DamageHolder item = holders[i];
+                    item.time--;
+                    doT += item.damage / (10 * 60f);
+
+                    if (item.time <= 0)
+                        holders.RemoveAt(i--);
+                }
+
+                if (doT > 1)
+                    ManuallyHurtPlayer();
+            }
+        }
+
+        private void ManuallyHurtPlayer()
+        {
+            int damage = (int)doT;
+            doT -= damage;
+            visualDoT += damage;
+            Player.statLife -= damage;
+
+            if (Player.statLife <= 0)
+                Player.KillMe(PlayerDeathReason.ByCustomReason($"{Player.name} wasted away."), damage, 0);
+
+            if (visualDoT >= 5)
+            {
+                int vDoT = (int)visualDoT;
+                CombatText.NewText(new Rectangle((int)Player.position.X, (int)Player.position.Y, Player.width, 4), Color.Red, vDoT);
+                visualDoT -= vDoT;
+            }
+        }
+
+        public override void ModifyHurt(ref Player.HurtModifiers modifiers)
+        {
+            modifiers.ModifyHurtInfo += OverrideDefaultDamage;
+        }
+
+        private void OverrideDefaultDamage(ref Player.HurtInfo info)
+        {
+            holders.Add(new DamageHolder(info.Damage));
+            info.Damage = 1;
+        }
+
+        public override void Kill(double damage, int hitDirection, bool pvp, PlayerDeathReason damageSource) => holders.Clear();
+
+        internal class DamageHolder
+        {
+            public int damage;
+            public int time;
+
+            public DamageHolder(int damage)
+            {
+                this.damage = damage;
+                time = 10 * 60;
+            }
+        }
+    }
+
+    class SpookyGlobalItem : GlobalItem
+    {
+        public override bool? UseItem(Item item, Player player)
+        {
+            if (player.GetModPlayer<SpookyBonusPlayer>().fiveSet && item.healLife > 0)
+            {
+                player.GetModPlayer<SpookyBonusPlayer>().holders.Clear();
+                player.AddBuff(BuffID.PotionSickness, item.buffTime);
+                return true;
+            }
+
+            return null;
+        }
+
+        public override void GetHealLife(Item item, Player player, bool quickHeal, ref int healValue)
+        {
+            if (player.GetModPlayer<SpookyBonusPlayer>().fiveSet && healValue > 0)
+                healValue = 1;
         }
     }
 }

@@ -73,7 +73,7 @@ internal class ChlorophyteBonus : BaseMaterialBonus
             if (Main.netMode == NetmodeID.MultiplayerClient)
                 return;
 
-            if (target.CanBeChasedBy() && target.type != ModContent.NPCType<Chlorosprout>() && Main.rand.NextBool(1))
+            if (fiveSet && target.CanBeChasedBy() && target.type != ModContent.NPCType<Chlorosprout>() && Main.rand.NextBool(12))
             {
                 int npc = NPC.NewNPC(target.GetSource_OnHurt(Player), (int)target.Center.X, (int)target.Center.Y, ModContent.NPCType<Chlorosprout>(), 0, Player.whoAmI);
                 Main.npc[npc].velocity = new Vector2(0, Main.rand.Next(10, 16)).RotatedByRandom(MathHelper.TwoPi);
