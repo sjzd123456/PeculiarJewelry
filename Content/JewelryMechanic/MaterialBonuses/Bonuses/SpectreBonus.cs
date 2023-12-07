@@ -2,6 +2,7 @@
 using PeculiarJewelry.Content.JewelryMechanic.Stats;
 using ReLogic.Content;
 using System;
+using System.Collections.Generic;
 using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.Initializers;
@@ -52,6 +53,8 @@ internal class SpectreBonus : BaseMaterialBonus
 
     class SpectreBonusPlayer : ModPlayer
     {
+        const int MaxTeleportDistanceInTiles
+
         internal bool fiveSet;
 
         private Vector2 _ghostVelocity;
@@ -60,6 +63,8 @@ internal class SpectreBonus : BaseMaterialBonus
         private int _ghostTime;
         private float _ghostAlpha;
 
+        private int _holdDownTime = 0;
+
         public override void ResetEffects() => fiveSet = false;
 
         public override void PostUpdateRunSpeeds()
@@ -67,15 +72,25 @@ internal class SpectreBonus : BaseMaterialBonus
             if (!fiveSet)
                 return;
 
-            if (!Player.controlSmart && !_ghosting)
+            if (Player.controlDown && !Player.pulley)
+            {
+                _holdDownTime++;
+
+                if (_holdDownTime > 15)
+                {
+                    _ghosting = true;
+                    _holdDownTime = 0;
+                }
+            }
+            else if (!_ghosting)
+                _holdDownTime = 0;
+
+            if (!_ghosting)
             {
                 _ghostPosition = Player.position;
-                _ghostVelocity = Player.velocity;
                 return;
             }
-            else
-                _ghosting = true;
-
+                
             _ghostTime++;
 
             if (Player.controlDown)
@@ -93,7 +108,7 @@ internal class SpectreBonus : BaseMaterialBonus
             if (_ghostVelocity.LengthSquared() > 12 * 12)
                 _ghostVelocity = Vector2.Normalize(_ghostVelocity) * 12;
 
-            if (Vector2.DistanceSquared(Player.position, _ghostPosition + _ghostVelocity) <= Math.Pow(20 * 16, 2))
+            if (Vector2.DistanceSquared(Player.position, _ghostPosition + _ghostVelocity) <= Math.Pow(MaxTeleportDistanceInTiles * 16, 2))
                 _ghostPosition += _ghostVelocity;
             else
                 _ghostVelocity = Vector2.Zero;
@@ -101,7 +116,12 @@ internal class SpectreBonus : BaseMaterialBonus
             if (Main.rand.NextBool(2))
                 Dust.NewDust(_ghostPosition + Player.Size / 2f, 1, 1, DustID.SpectreStaff, Scale: Main.rand.NextFloat(1.5f, 2f));
 
-            if (!Collision.SolidCollision(_ghostPosition, Player.width, Player.height) && !Player.controlSmart && Player.releaseSmart)
+            if (!Player.controlUp && !Player.controlDown && !Player.controlLeft && !Player.controlRight)
+                _holdDownTime++;
+            else
+                _holdDownTime = 0;
+
+            if (!Collision.SolidCollision(_ghostPosition, Player.width, Player.height) && (_holdDownTime > 5 || Player.controlJump))
                 Teleport();
         }
 
@@ -111,13 +131,18 @@ internal class SpectreBonus : BaseMaterialBonus
                 Dust.NewDust(Vector2.Lerp(Player.Center, _ghostPosition + Player.Size / 2f, i), 1, 1, DustID.SpectreStaff);
 
             Player.Center = _ghostPosition;
+
+            _ghostVelocity = Vector2.Zero;
             _ghosting = false;
         }
 
         public override void PreUpdateMovement()
         {
             if (_ghosting)
-                Player.velocity = Vector2.Zero;
+            {
+                Player.velocity.Y *= 0.8f;
+                Player.velocity.X *= 0.5f;
+            }
         }
 
         class CameraControl : ModSystem
@@ -156,7 +181,7 @@ internal class SpectreBonus : BaseMaterialBonus
                 Color color = (!Collision.SolidCollision(spectre._ghostPosition, plr.width, plr.height) ? Color.White : Color.Red) * spectre._ghostAlpha;
                 Vector2 pos = spectre._ghostPosition - Main.screenPosition + plr.Size / 2f;
                 float rot = spectre._ghostVelocity.X * 0.02f;
-                Vector2 scale = new Vector2(1f, MathF.Sin(spectre._ghostTime * 0.02f) * 0.5f + 1f);
+                Vector2 scale = new Vector2(1f, MathF.Sin(spectre._ghostTime * 0.02f) * 0.25f + 1f);
                 drawInfo.DrawDataCache.Add(new DrawData(_wisp.Value, pos, null, color, rot, _wisp.Value.Size() / 2f, scale, SpriteEffects.None, 0));
             }
         }
