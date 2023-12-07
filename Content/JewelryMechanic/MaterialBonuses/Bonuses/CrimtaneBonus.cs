@@ -1,4 +1,4 @@
-﻿using PeculiarJewelry.Content.JewelryMechanic.Items.JewelryItems;
+﻿using PeculiarJewelry.Content.Items.JewelryItems;
 using PeculiarJewelry.Content.JewelryMechanic.Stats;
 using Terraria.DataStructures;
 

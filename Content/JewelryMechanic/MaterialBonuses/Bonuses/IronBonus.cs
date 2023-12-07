@@ -1,5 +1,5 @@
-﻿using PeculiarJewelry.Content.JewelryMechanic.Buffs;
-using PeculiarJewelry.Content.JewelryMechanic.Items.JewelryItems;
+﻿using PeculiarJewelry.Content.Buffs;
+using PeculiarJewelry.Content.Items.JewelryItems;
 using PeculiarJewelry.Content.JewelryMechanic.Stats;
 
 namespace PeculiarJewelry.Content.JewelryMechanic.MaterialBonuses.Bonuses;

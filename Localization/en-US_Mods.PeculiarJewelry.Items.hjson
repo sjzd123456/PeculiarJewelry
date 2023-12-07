@@ -1274,3 +1274,128 @@ HallowedRing: {
 	DisplayName: Hallowed Ring
 	Tooltip: ""
 }
+
+CopperHairpin: {
+	DisplayName: Copper Hairpin
+	Tooltip: ""
+}
+
+TinHairpin: {
+	DisplayName: Tin Hairpin
+	Tooltip: ""
+}
+
+IronHairpin: {
+	DisplayName: Iron Hairpin
+	Tooltip: ""
+}
+
+LeadHairpin: {
+	DisplayName: Lead Hairpin
+	Tooltip: ""
+}
+
+SilverHairpin: {
+	DisplayName: Silver Hairpin
+	Tooltip: ""
+}
+
+TungstenHairpin: {
+	DisplayName: Tungsten Hairpin
+	Tooltip: ""
+}
+
+GoldHairpin: {
+	DisplayName: Gold Hairpin
+	Tooltip: ""
+}
+
+PlatinumHairpin: {
+	DisplayName: Platinum Hairpin
+	Tooltip: ""
+}
+
+DemoniteHairpin: {
+	DisplayName: Demonite Hairpin
+	Tooltip: ""
+}
+
+CrimtaneHairpin: {
+	DisplayName: Crimtane Hairpin
+	Tooltip: ""
+}
+
+MeteoriteHairpin: {
+	DisplayName: Meteorite Hairpin
+	Tooltip: ""
+}
+
+HellstoneHairpin: {
+	DisplayName: Hellstone Hairpin
+	Tooltip: ""
+}
+
+CobaltHairpin: {
+	DisplayName: Cobalt Hairpin
+	Tooltip: ""
+}
+
+PalladiumHairpin: {
+	DisplayName: Palladium Hairpin
+	Tooltip: ""
+}
+
+MythrilHairpin: {
+	DisplayName: Mythril Hairpin
+	Tooltip: ""
+}
+
+OrichalcumHairpin: {
+	DisplayName: Orichalcum Hairpin
+	Tooltip: ""
+}
+
+AdamantiteHairpin: {
+	DisplayName: Adamantite Hairpin
+	Tooltip: ""
+}
+
+TitaniumHairpin: {
+	DisplayName: Titanium Hairpin
+	Tooltip: ""
+}
+
+HallowedHairpin: {
+	DisplayName: Hallowed Hairpin
+	Tooltip: ""
+}
+
+ChlorophyteHairpin: {
+	DisplayName: Chlorophyte Hairpin
+	Tooltip: ""
+}
+
+BeetleHairpin: {
+	DisplayName: Beetle Hairpin
+	Tooltip: ""
+}
+
+ShroomiteHairpin: {
+	DisplayName: Shroomite Hairpin
+	Tooltip: ""
+}
+
+SpectreHairpin: {
+	DisplayName: Spectre Hairpin
+	Tooltip: ""
+}
+
+SpookyHairpin: {
+	DisplayName: Spooky Hairpin
+	Tooltip: ""
+}
+
+LuminiteHairpin: {
+	DisplayName: Luminite Hairpin
+	Tooltip: ""
+}

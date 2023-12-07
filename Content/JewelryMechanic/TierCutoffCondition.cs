@@ -1,4 +1,4 @@
-﻿using PeculiarJewelry.Content.JewelryMechanic.Items;
+﻿using PeculiarJewelry.Content.Items;
 using Terraria.GameContent.ItemDropRules;
 
 namespace PeculiarJewelry.Content.JewelryMechanic;

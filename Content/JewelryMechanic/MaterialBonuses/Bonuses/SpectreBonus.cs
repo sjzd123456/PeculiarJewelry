@@ -1,4 +1,4 @@
-﻿using PeculiarJewelry.Content.JewelryMechanic.Items.JewelryItems;
+﻿using PeculiarJewelry.Content.Items.JewelryItems;
 using PeculiarJewelry.Content.JewelryMechanic.Stats;
 using ReLogic.Content;
 using System;
@@ -53,7 +53,7 @@ internal class SpectreBonus : BaseMaterialBonus
 
     class SpectreBonusPlayer : ModPlayer
     {
-        const int MaxTeleportDistanceInTiles
+        const int MaxTeleportDistanceInTiles = 20;
 
         internal bool fiveSet;
 

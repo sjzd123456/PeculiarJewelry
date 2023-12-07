@@ -1,6 +1,6 @@
 ﻿using Mono.Cecil.Cil;
 using MonoMod.Cil;
-using PeculiarJewelry.Content.JewelryMechanic.Items.JewelryItems;
+using PeculiarJewelry.Content.Items.JewelryItems;
 using PeculiarJewelry.Content.JewelryMechanic.Stats;
 using Terraria.GameContent;
 

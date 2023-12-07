@@ -1,4 +1,4 @@
-﻿using PeculiarJewelry.Content.JewelryMechanic.Items.Jewels;
+﻿using PeculiarJewelry.Content.Items.Jewels;
 using System;
 using System.Collections.Generic;
 

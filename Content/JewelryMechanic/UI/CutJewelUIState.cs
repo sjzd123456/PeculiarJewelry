@@ -1,7 +1,7 @@
-﻿using PeculiarJewelry.Content.JewelryMechanic.Items;
-using PeculiarJewelry.Content.JewelryMechanic.Items.Jewels;
-using PeculiarJewelry.Content.JewelryMechanic.Items.JewelSupport;
-using PeculiarJewelry.Content.JewelryMechanic.Items.RadiantEchoes;
+﻿using PeculiarJewelry.Content.Items;
+using PeculiarJewelry.Content.Items.Jewels;
+using PeculiarJewelry.Content.Items.JewelSupport;
+using PeculiarJewelry.Content.Items.RadiantEchoes;
 using PeculiarJewelry.Content.JewelryMechanic.Stats;
 using System;
 using System.Collections.Generic;

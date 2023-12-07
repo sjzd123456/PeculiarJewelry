@@ -1,5 +1,4 @@
-﻿using PeculiarJewelry.Content.JewelryMechanic.Items.Jewels;
-using System.Linq;
+﻿using System.Linq;
 using Terraria.DataStructures;
 
 namespace PeculiarJewelry.Content.JewelryMechanic.Globals;

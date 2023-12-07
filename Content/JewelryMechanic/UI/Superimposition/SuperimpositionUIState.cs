@@ -1,5 +1,5 @@
 ﻿using FullSerializer;
-using PeculiarJewelry.Content.JewelryMechanic.Items.Jewels;
+using PeculiarJewelry.Content.Items.Jewels;
 using PeculiarJewelry.Content.JewelryMechanic.Stats;
 using PeculiarJewelry.Content.JewelryMechanic.Stats.Triggers;
 using System;

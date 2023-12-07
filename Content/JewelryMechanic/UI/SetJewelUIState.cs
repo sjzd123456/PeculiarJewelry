@@ -1,7 +1,7 @@
-﻿using PeculiarJewelry.Content.JewelryMechanic.Items.JewelryItems;
-using PeculiarJewelry.Content.JewelryMechanic.Items.Jewels;
-using PeculiarJewelry.Content.JewelryMechanic.Items.JewelSupport;
-using PeculiarJewelry.Content.JewelryMechanic.Items.Pliers;
+﻿using PeculiarJewelry.Content.Items.JewelryItems;
+using PeculiarJewelry.Content.Items.Jewels;
+using PeculiarJewelry.Content.Items.JewelSupport;
+using PeculiarJewelry.Content.Items.Pliers;
 using PeculiarJewelry.Content.JewelryMechanic.Stats;
 using ReLogic.Graphics;
 using System;
