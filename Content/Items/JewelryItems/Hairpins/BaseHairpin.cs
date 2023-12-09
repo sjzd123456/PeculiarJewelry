@@ -21,8 +21,6 @@ public class BaseHairpin : BasicJewelry
     protected string _name = string.Empty;
     protected bool _isHardmode = false;
 
-    private int _frame;
-
     public BaseHairpin(string name, string category, int mat, bool isHardmode)
     {
         _name = name;
@@ -36,7 +34,6 @@ public class BaseHairpin : BasicJewelry
         var clone = base.Clone(newEntity) as BaseHairpin;
         clone._material = _material;
         clone._category = _category;
-        clone._frame = _frame;
         clone._name = _name;
         return clone;
     }
@@ -54,8 +51,6 @@ public class BaseHairpin : BasicJewelry
         Item.width = 34;
         Item.height = 30;
         Item.accessory = true;
-
-        _frame = Main.rand.Next(3);
     }
 
     protected override void EquipEffect(Player player, bool isVanity = false)
