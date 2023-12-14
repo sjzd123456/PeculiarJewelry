@@ -75,7 +75,7 @@ public class BaseBracelet : BasicJewelry
     public override void AddRecipes()
     {
         CreateRecipe()
-            .AddIngredient(_material, 6)
+            .AddIngredient(_material, 2)
             .AddTile(_isHardmode ? TileID.MythrilAnvil : TileID.Anvils)
             .Register();
     }

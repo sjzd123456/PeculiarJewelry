@@ -1728,3 +1728,253 @@ LuminiteBracelet: {
 		{$Material.Bonuses.Luminite.1Set}
 		'''
 }
+
+CopperChoker: {
+	DisplayName: Copper Choker
+	Tooltip: ""
+}
+
+TinChoker: {
+	DisplayName: Tin Choker
+	Tooltip: ""
+}
+
+IronChoker: {
+	DisplayName: Iron Choker
+	Tooltip: ""
+}
+
+LeadChoker: {
+	DisplayName: Lead Choker
+	Tooltip: ""
+}
+
+SilverChoker: {
+	DisplayName: Silver Choker
+	Tooltip: ""
+}
+
+TungstenChoker: {
+	DisplayName: Tungsten Choker
+	Tooltip: ""
+}
+
+GoldChoker: {
+	DisplayName: Gold Choker
+	Tooltip: ""
+}
+
+PlatinumChoker: {
+	DisplayName: Platinum Choker
+	Tooltip: ""
+}
+
+DemoniteChoker: {
+	DisplayName: Demonite Choker
+	Tooltip: ""
+}
+
+CrimtaneChoker: {
+	DisplayName: Crimtane Choker
+	Tooltip: ""
+}
+
+MeteoriteChoker: {
+	DisplayName: Meteorite Choker
+	Tooltip: ""
+}
+
+HellstoneChoker: {
+	DisplayName: Hellstone Choker
+	Tooltip: ""
+}
+
+CobaltChoker: {
+	DisplayName: Cobalt Choker
+	Tooltip: ""
+}
+
+PalladiumChoker: {
+	DisplayName: Palladium Choker
+	Tooltip: ""
+}
+
+MythrilChoker: {
+	DisplayName: Mythril Choker
+	Tooltip: ""
+}
+
+OrichalcumChoker: {
+	DisplayName: Orichalcum Choker
+	Tooltip: ""
+}
+
+AdamantiteChoker: {
+	DisplayName: Adamantite Choker
+	Tooltip: ""
+}
+
+TitaniumChoker: {
+	DisplayName: Titanium Choker
+	Tooltip: ""
+}
+
+HallowedChoker: {
+	DisplayName: Hallowed Choker
+	Tooltip: ""
+}
+
+ChlorophyteChoker: {
+	DisplayName: Chlorophyte Choker
+	Tooltip: ""
+}
+
+BeetleChoker: {
+	DisplayName: Beetle Choker
+	Tooltip: ""
+}
+
+ShroomiteChoker: {
+	DisplayName: Shroomite Choker
+	Tooltip: ""
+}
+
+SpectreChoker: {
+	DisplayName: Spectre Choker
+	Tooltip: ""
+}
+
+SpookyChoker: {
+	DisplayName: Spooky Choker
+	Tooltip: ""
+}
+
+LuminiteChoker: {
+	DisplayName: Luminite Choker
+	Tooltip: ""
+}
+
+CopperAnklet: {
+	DisplayName: Copper Anklet
+	Tooltip: ""
+}
+
+TinAnklet: {
+	DisplayName: Tin Anklet
+	Tooltip: ""
+}
+
+IronAnklet: {
+	DisplayName: Iron Anklet
+	Tooltip: ""
+}
+
+LeadAnklet: {
+	DisplayName: Lead Anklet
+	Tooltip: ""
+}
+
+SilverAnklet: {
+	DisplayName: Silver Anklet
+	Tooltip: ""
+}
+
+TungstenAnklet: {
+	DisplayName: Tungsten Anklet
+	Tooltip: ""
+}
+
+GoldAnklet: {
+	DisplayName: Gold Anklet
+	Tooltip: ""
+}
+
+PlatinumAnklet: {
+	DisplayName: Platinum Anklet
+	Tooltip: ""
+}
+
+DemoniteAnklet: {
+	DisplayName: Demonite Anklet
+	Tooltip: ""
+}
+
+CrimtaneAnklet: {
+	DisplayName: Crimtane Anklet
+	Tooltip: ""
+}
+
+MeteoriteAnklet: {
+	DisplayName: Meteorite Anklet
+	Tooltip: ""
+}
+
+HellstoneAnklet: {
+	DisplayName: Hellstone Anklet
+	Tooltip: ""
+}
+
+CobaltAnklet: {
+	DisplayName: Cobalt Anklet
+	Tooltip: ""
+}
+
+PalladiumAnklet: {
+	DisplayName: Palladium Anklet
+	Tooltip: ""
+}
+
+MythrilAnklet: {
+	DisplayName: Mythril Anklet
+	Tooltip: ""
+}
+
+OrichalcumAnklet: {
+	DisplayName: Orichalcum Anklet
+	Tooltip: ""
+}
+
+AdamantiteAnklet: {
+	DisplayName: Adamantite Anklet
+	Tooltip: ""
+}
+
+TitaniumAnklet: {
+	DisplayName: Titanium Anklet
+	Tooltip: ""
+}
+
+HallowedAnklet: {
+	DisplayName: Hallowed Anklet
+	Tooltip: ""
+}
+
+ChlorophyteAnklet: {
+	DisplayName: Chlorophyte Anklet
+	Tooltip: ""
+}
+
+BeetleAnklet: {
+	DisplayName: Beetle Anklet
+	Tooltip: ""
+}
+
+ShroomiteAnklet: {
+	DisplayName: Shroomite Anklet
+	Tooltip: ""
+}
+
+SpectreAnklet: {
+	DisplayName: Spectre Anklet
+	Tooltip: ""
+}
+
+SpookyAnklet: {
+	DisplayName: Spooky Anklet
+	Tooltip: ""
+}
+
+LuminiteAnklet: {
+	DisplayName: Luminite Anklet
+	Tooltip: ""
+}
