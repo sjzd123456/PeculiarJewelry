@@ -4,7 +4,7 @@ internal class ManaTrigger : TriggerEffect
 {
     public override TriggerType Type => TriggerType.InstantOther;
 
-    protected override void InternalInstantOtherEffect(TriggerContext context, Player player, float coefficient, JewelTier tier)
+    protected override void InternalInstantEffect(TriggerContext context, Player player, float coefficient, JewelTier tier)
     {
         int mana = (int)TotalPower(player, coefficient, tier);
 
@@ -15,5 +15,5 @@ internal class ManaTrigger : TriggerEffect
         player.statMana += mana;
     }
 
-    public override float TriggerPower(JewelTier tier) => 20;
+    public override float TriggerPower() => 20;
 }

@@ -59,4 +59,12 @@ TriggerEffects: {
 	HealTrigger: heal {0} health.
 	ManaTrigger: heal {0} mana.
 	ImmuneFrameTrigger: gain {0} immune frames.
+	DamageTriggerConditional: gain {0}% damage
+	DamageTriggerInstant: "{$DamageTriggerConditional}"
+	DefenseTriggerConditional: gain {0} defense
+	DefenseTriggerInstant: "{$DefenseTriggerConditional}"
+	RegenTriggerConditional: gain {0} life regen
+	RegenTriggerInstant: "{$RegenTriggerConditional}"
+	CritTriggerConditional: gain {0}% critical strike chance
+	CritTriggerInstant: "{$CritTriggerConditional}"
 }

@@ -5,7 +5,7 @@ internal class HealTrigger : TriggerEffect
     public override TriggerType Type => TriggerType.InstantOther;
     public override bool NeedsCooldown => true;
 
-    protected override void InternalInstantOtherEffect(TriggerContext context, Player player, float coefficient, JewelTier tier)
+    protected override void InternalInstantEffect(TriggerContext context, Player player, float coefficient, JewelTier tier)
     {
         int hp = (int)TotalPower(player, coefficient, tier);
 
@@ -16,5 +16,5 @@ internal class HealTrigger : TriggerEffect
         player.AddBuff(CooldownBuffType, CooldownTime(tier));
     }
 
-    public override float TriggerPower(JewelTier tier) => 20;
+    public override float TriggerPower() => 20;
 }

@@ -1,0 +1,64 @@
+HealTriggerBuff: {
+	DisplayName: Lifesteal Cooldown
+	Description: Can't trigger lifesteal!
+}
+
+ImmuneFrameTriggerBuff: {
+	DisplayName: Immunity Cooldown
+	Description: Can't trigger immunity frames!
+}
+
+TitaniumDefenseDebuff: {
+	DisplayName: Titanium Defense Debuff
+	Description: You shouldn't be able to see this.
+}
+
+LifeCrystalCopper5SetCooldown: {
+	DisplayName: Crystal Heal
+	Description: Can't heal with crystals!
+}
+
+LifeFruitCopper5SetCooldown: {
+	DisplayName: Fruit Heal
+	Description: Can't heal with fruit!
+}
+
+Iron5SetDefenseBonus: {
+	DisplayName: Counterdefense
+	Description: Gain {0} defense
+}
+
+OrichalcumDamageBuff: {
+	DisplayName: Orichalcum Damage Buff
+	Description: Gain {0}% damage
+}
+
+CrimtaneAggressionDebuff: {
+	DisplayName: Crimson Rage
+	Description: Pain is power
+}
+
+DemoniteAggressionDebuff: {
+	DisplayName: Demon's Rage
+	Description: Frailty is perfection
+}
+
+DamageTriggerBuff: {
+	DisplayName: Damage Trigger Buff
+	Description: Mods.PeculiarJewelry.Buffs.DamageTriggerBuff.Description
+}
+
+CritTriggerBuff: {
+	DisplayName: Crit Trigger Buff
+	Description: Mods.PeculiarJewelry.Buffs.CritTriggerBuff.Description
+}
+
+DefenseTriggerBuff: {
+	DisplayName: Defense Trigger Buff
+	Description: Mods.PeculiarJewelry.Buffs.DefenseTriggerBuff.Description
+}
+
+RegenTriggerBuff: {
+	DisplayName: Regen Trigger Buff
+	Description: Mods.PeculiarJewelry.Buffs.RegenTriggerBuff.Description
+}

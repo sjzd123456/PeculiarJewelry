@@ -41,7 +41,10 @@ public abstract class BaseEarring : BasicJewelry
     public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
     {
         if (Info.Any())
-            spriteBatch.Draw(_jewels.Value, Item.Center - Main.screenPosition, null, GetDisplayColor(), rotation, _jewels.Size() / 2f, scale, SpriteEffects.None, 0);
+        {
+            var pos = Item.Center - Main.screenPosition - new Vector2(0, Item.height / 2);
+            spriteBatch.Draw(_jewels.Value, pos, null, GetDisplayColor(), rotation, _jewels.Size() / 2f, scale, SpriteEffects.None, 0);
+        }
     }
 
     public override bool CanAccessoryBeEquippedWith(Item equippedItem, Item incomingItem, Player player)

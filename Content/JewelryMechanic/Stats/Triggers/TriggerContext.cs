@@ -3,6 +3,8 @@
 internal enum TriggerContext : byte
 {
     None = 0,
+
+    // Instant
     OnTakeDamage,
     OnHeal,
     OnUseMana,
@@ -10,6 +12,8 @@ internal enum TriggerContext : byte
     OnJump,
     OnHitEnemy,
     OnLand,
+
+    // Conditional
     WhenBelowHalfHealth,
     WhenAboveHalfHealth,
     WhenFullHealth,
@@ -23,5 +27,6 @@ internal enum TriggerContext : byte
     WhenIdle,
     WhenNotHitFor15Seconds,
     WhenHitWithinPast5Seconds,
+
     Max,
 }
