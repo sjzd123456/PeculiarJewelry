@@ -59,12 +59,16 @@ TriggerEffects: {
 	HealTrigger: heal {0} health.
 	ManaTrigger: heal {0} mana.
 	ImmuneFrameTrigger: gain {0} immune frames.
-	DamageTriggerConditional: gain {0}% damage
-	DamageTriggerInstant: "{$DamageTriggerConditional}"
-	DefenseTriggerConditional: gain {0} defense
-	DefenseTriggerInstant: "{$DefenseTriggerConditional}"
-	RegenTriggerConditional: gain {0} life regen
-	RegenTriggerInstant: "{$RegenTriggerConditional}"
-	CritTriggerConditional: gain {0}% critical strike chance
-	CritTriggerInstant: "{$CritTriggerConditional}"
+	DamageTriggerConditional: Gain {0}% damage
+	DamageTriggerInstant: gain {0}% damage
+	DefenseTriggerConditional: Gain {0} defense
+	DefenseTriggerInstant: gain {0} defense
+	RegenTriggerConditional: Gain {0} life regen
+	RegenTriggerInstant: gain {0} life regen
+	CritTriggerConditional: Gain {0}% critical strike chance
+	CritTriggerInstant: gain {0}% critical strike chance
+	SpeedTriggerConditional: Gain {0}% movement speed
+	SpeedTriggerInstant: gain {0}% movement speed
+	DodgeTrigger: "gain {0}% chance to dodge"
+	SpawnProjTrigger: spawn a projectile that deals {0} damage
 }

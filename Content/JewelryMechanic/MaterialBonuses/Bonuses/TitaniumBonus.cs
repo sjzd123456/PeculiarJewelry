@@ -141,7 +141,7 @@ internal class TitaniumBonus : BaseMaterialBonus
         }
     }
 
-    private class EchoProjectile : ModProjectile
+    internal class EchoProjectile : ModProjectile
     {
         private ref float Timer => ref Projectile.ai[0];
         private ref float TargetWhoAmI => ref Projectile.ai[1];

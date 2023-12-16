@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using PeculiarJewelry.Content.JewelryMechanic.MaterialBonuses;
+using PeculiarJewelry.Content.JewelryMechanic.MaterialBonuses.Bonuses;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace PeculiarJewelry.Content.JewelryMechanic.Stats.Triggers;
@@ -42,6 +44,9 @@ internal class StackableBuffTracker : ModPlayer
 
         foreach (var item in _stackedBuffs[name])
             strength += item.Strength;
+
+        if (Player.GetModPlayer<MaterialPlayer>().MaterialCount("Hellstone") >= 3)
+            strength *= 1.33f;
 
         return strength;
     }

@@ -148,7 +148,7 @@ internal abstract class TriggerEffect : ModType
         string condition = Language.GetText("Mods.PeculiarJewelry.Jewelry.TriggerContexts." + Context).Value;
         string chance = Language.GetText("Mods.PeculiarJewelry.Jewelry.ChanceTo").WithFormatArgs((ReportInstantChance(tier, player) * 100).ToString("#0.##")).Value;
         string effect = Language.GetText("Mods.PeculiarJewelry.Jewelry.TriggerEffects." + GetType().Name).WithFormatArgs(TriggerPower()).Value;
-        return condition + " " + chance + effect;
+        return condition + " " + (Type == TriggerType.Conditional ? "" : chance) + effect;
     }
 
     private static float ReportInstantChance(JewelTier jewelTier, Player player)

@@ -60,9 +60,22 @@ internal class JewelPlayer : ModPlayer
             item.InstantTrigger(TriggerContext.OnTakeDamage, Player);
     }
 
-    public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+    private void TriggerOnHit(NPC npc)
     {
+        if (npc.immortal)
+            return;
+
         foreach (var item in MajorJewelInfos)
             item.InstantTrigger(TriggerContext.OnHitEnemy, Player);
+    }
+
+    public override void OnHitNPCWithItem(Item item, NPC target, NPC.HitInfo hit, int damageDone) => TriggerOnHit(target);
+
+    public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
+    {
+        if (proj.GetGlobalProjectile<TriggerGlobalProjectile>().FromTrigger)
+            return;
+
+        TriggerOnHit(target);
     }
 }

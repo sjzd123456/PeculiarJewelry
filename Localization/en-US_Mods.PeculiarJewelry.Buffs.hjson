@@ -62,3 +62,13 @@ RegenTriggerBuff: {
 	DisplayName: Regen Trigger Buff
 	Description: Mods.PeculiarJewelry.Buffs.RegenTriggerBuff.Description
 }
+
+DodgeTriggerBuff: {
+	DisplayName: Dodge Trigger Buff
+	Description: Mods.PeculiarJewelry.Buffs.DodgeTriggerBuff.Description
+}
+
+SpeedTriggerBuff: {
+	DisplayName: Speed Trigger Buff
+	Description: Mods.PeculiarJewelry.Buffs.SpeedTriggerBuff.Description
+}

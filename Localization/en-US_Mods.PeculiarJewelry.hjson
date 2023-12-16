@@ -25,7 +25,7 @@ NPCs: {
 }
 
 Projectiles: {
-	StellarJadeProjectile.DisplayName: Stellar Jade Projectile
-	TrapperMinion.DisplayName: Trapper Minion
-	EchoProjectile.DisplayName: Echo Projectile
+	StellarJadeProjectile.DisplayName: Stellar Jade
+	TrapperMinion.DisplayName: Trapper
+	EchoProjectile.DisplayName: Echo
 }
