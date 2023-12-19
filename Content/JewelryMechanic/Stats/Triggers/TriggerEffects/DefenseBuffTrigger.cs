@@ -8,7 +8,7 @@ internal class DefenseTriggerConditional : TriggerEffect
 
     protected override void InternalConditionalEffect(TriggerContext context, Player player, float coefficient, JewelTier tier)
     {
-        player.GetModPlayer<StackableBuffTracker>().StackableBuff<DefenseTriggerBuff>("Defense", new(2, ConditionalStrength(coefficient, tier)));
+        player.GetModPlayer<StackableBuffTracker>().StackableBuff<DefenseTriggerBuff>("Defense", new(2, TotalConditionalStrength(coefficient, tier)));
     }
 
     public override float TriggerPower() => 1;

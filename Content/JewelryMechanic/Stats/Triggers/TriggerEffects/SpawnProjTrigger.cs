@@ -6,9 +6,9 @@ internal class SpawnProjTrigger : TriggerEffect
 
     protected override void InternalInstantEffect(TriggerContext context, Player player, float coefficient, JewelTier tier)
     {
-        int damage = (int)TotalPower(player, coefficient, tier);
+        int damage = (int)TotalTriggerPower(player, coefficient);
         var vel = player.DirectionTo(Main.MouseWorld) * 12;
-        Projectile.NewProjectile(player.GetSource_Misc("JewelryTrigger:" + context), player.Center, vel, ProjectileID.Bullet, damage, 2f, player.whoAmI);
+        Projectile.NewProjectile(player.GetSource_Misc("JewelryTrigger:" + context), player.Center, vel, ProjectileID.GoldCoin, damage, 2f, player.whoAmI);
     }
 
     public override float TriggerPower() => 40;

@@ -69,6 +69,8 @@ TriggerEffects: {
 	CritTriggerInstant: gain {0}% critical strike chance
 	SpeedTriggerConditional: Gain {0}% movement speed
 	SpeedTriggerInstant: gain {0}% movement speed
-	DodgeTrigger: "gain {0}% chance to dodge"
+	DodgeTrigger: gain {0}% chance to dodge
 	SpawnProjTrigger: spawn a projectile that deals {0} damage
+	KBAndClearTrigger: push back enemies and clear projectiles in a {0} tile radius
+	DebuffWaveTrigger: inflict debuffs to enemies in a {0} half tile range for {0} seconds
 }

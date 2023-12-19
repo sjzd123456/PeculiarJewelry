@@ -6,7 +6,7 @@ internal class ManaTrigger : TriggerEffect
 
     protected override void InternalInstantEffect(TriggerContext context, Player player, float coefficient, JewelTier tier)
     {
-        int mana = (int)TotalPower(player, coefficient, tier);
+        int mana = (int)TotalTriggerPower(player, coefficient);
 
         if (player.statMana + mana > player.statManaMax2)
             mana = player.statMana + mana - player.statManaMax2;

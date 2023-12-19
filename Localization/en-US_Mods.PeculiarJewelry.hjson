@@ -28,4 +28,5 @@ Projectiles: {
 	StellarJadeProjectile.DisplayName: Stellar Jade
 	TrapperMinion.DisplayName: Trapper
 	EchoProjectile.DisplayName: Echo
+	AoEProjectile.DisplayName: Ao E Projectile
 }

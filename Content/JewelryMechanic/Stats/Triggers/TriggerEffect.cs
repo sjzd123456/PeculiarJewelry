@@ -1,9 +1,6 @@
 ﻿using PeculiarJewelry.Content.JewelryMechanic.MaterialBonuses;
 using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using static Humanizer.On;
-using Terraria;
 using System.Linq;
 
 namespace PeculiarJewelry.Content.JewelryMechanic.Stats.Triggers;
@@ -47,7 +44,7 @@ internal abstract class TriggerEffect : ModType
     public TriggerEffect()
     {
         if (Type != TriggerType.Conditional)
-            Context = TriggerContext.OnHitEnemy;// (TriggerContext)Main.rand.Next((int)TriggerContext.WhenBelowHalfHealth);
+            Context = (TriggerContext)Main.rand.Next((int)TriggerContext.WhenBelowHalfHealth);
         else
             Context = (TriggerContext)Main.rand.Next((int)TriggerContext.WhenBelowHalfHealth, (int)TriggerContext.Max);
     }
@@ -139,15 +136,17 @@ internal abstract class TriggerEffect : ModType
     /// <summary>
     /// How strong conditionals are using the formula (T/10)*C*E*0.1.
     /// </summary>
-    protected float ConditionalStrength(float coefficient, JewelTier tier) => coefficient * TriggerPower() * (((float)tier + 1) / 10) * 0.1f;
+    protected float TotalConditionalStrength(float coefficient, JewelTier tier) => coefficient * TriggerPower() * (((float)tier + 1) / 10) * 0.1f;
 
     protected virtual void InternalConditionalEffect(TriggerContext context, Player player, float coefficient, JewelTier tier) { }
 
     public virtual string Tooltip(JewelTier tier, Player player)
     {
-        string condition = Language.GetText("Mods.PeculiarJewelry.Jewelry.TriggerContexts." + Context).Value;
-        string chance = Language.GetText("Mods.PeculiarJewelry.Jewelry.ChanceTo").WithFormatArgs((ReportInstantChance(tier, player) * 100).ToString("#0.##")).Value;
-        string effect = Language.GetText("Mods.PeculiarJewelry.Jewelry.TriggerEffects." + GetType().Name).WithFormatArgs(TriggerPower()).Value;
+        const string Prefix = "Mods.PeculiarJewelry.Jewelry.";
+        string condition = Language.GetText(Prefix + "TriggerContexts." + Context).Value;
+        string chance = Language.GetText(Prefix + "ChanceTo").WithFormatArgs((ReportInstantChance(tier, player) * 100).ToString("#0.##")).Value;
+        string effect = Language.GetText(Prefix + "TriggerEffects." + GetType().Name).WithFormatArgs(TotalTriggerPower(player, ConditionCoefficients[Context])).Value;
+
         return condition + " " + (Type == TriggerType.Conditional ? "" : chance) + effect;
     }
 
@@ -168,7 +167,7 @@ internal abstract class TriggerEffect : ModType
     public virtual string TooltipArgumentFormat(float coefficient, JewelTier tier) => (TriggerPower() * coefficient).ToString("#0.##");
     public abstract float TriggerPower();
 
-    public float TotalPower(Player player, float coefficient, JewelTier tier) 
+    public float TotalTriggerPower(Player player, float coefficient)
     {
         float hellstoneMultiplier = player.GetModPlayer<MaterialPlayer>().MaterialCount("Hellstone") * 0.5f;
         return coefficient * TriggerPower() * (hellstoneMultiplier + 1);

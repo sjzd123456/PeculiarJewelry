@@ -44,31 +44,31 @@ DemoniteAggressionDebuff: {
 }
 
 DamageTriggerBuff: {
-	DisplayName: Damage Trigger Buff
-	Description: Mods.PeculiarJewelry.Buffs.DamageTriggerBuff.Description
+	DisplayName: Damage Boost
+	Description: Increased damage
 }
 
 CritTriggerBuff: {
-	DisplayName: Crit Trigger Buff
-	Description: Mods.PeculiarJewelry.Buffs.CritTriggerBuff.Description
+	DisplayName: Crit Boost
+	Description: Increased crit chance
 }
 
 DefenseTriggerBuff: {
-	DisplayName: Defense Trigger Buff
-	Description: Mods.PeculiarJewelry.Buffs.DefenseTriggerBuff.Description
+	DisplayName: Defense Boost
+	Description: Increased defense
 }
 
 RegenTriggerBuff: {
-	DisplayName: Regen Trigger Buff
-	Description: Mods.PeculiarJewelry.Buffs.RegenTriggerBuff.Description
+	DisplayName: Regen Boost
+	Description: Increased life regeneration
 }
 
 DodgeTriggerBuff: {
-	DisplayName: Dodge Trigger Buff
-	Description: Mods.PeculiarJewelry.Buffs.DodgeTriggerBuff.Description
+	DisplayName: Dodge Boost
+	Description: Increased dodge change
 }
 
 SpeedTriggerBuff: {
-	DisplayName: Speed Trigger Buff
-	Description: Mods.PeculiarJewelry.Buffs.SpeedTriggerBuff.Description
+	DisplayName: Speed Boost
+	Description: Increased movement speed
 }

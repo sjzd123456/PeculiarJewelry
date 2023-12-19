@@ -13,7 +13,6 @@ internal class MajorJewelInfo : JewelInfo
     internal override void InternalSetup()
     {
         SubStats = new System.Collections.Generic.List<JewelStat>(4);
-
         effect = Activator.CreateInstance(Main.rand.Next(ModContent.GetContent<TriggerEffect>().ToList()).GetType()) as TriggerEffect;
     }
 

@@ -100,7 +100,8 @@ internal class SpookyBonus : BaseMaterialBonus
 
         public override void ModifyHurt(ref Player.HurtModifiers modifiers)
         {
-            modifiers.ModifyHurtInfo += OverrideDefaultDamage;
+            if (fiveSet)
+                modifiers.ModifyHurtInfo += OverrideDefaultDamage;
         }
 
         private void OverrideDefaultDamage(ref Player.HurtInfo info)
