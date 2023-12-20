@@ -9,7 +9,7 @@ public class IronTiara : BaseTiara
     {
         CreateRecipe()
             .AddIngredient(ItemID.IronBar, 8)
-            .AddTile(TileID.Anvils)
+            .AddTile(TileID.Chairs).AddTile(TileID.Tables)
             .Register();
     }
 }

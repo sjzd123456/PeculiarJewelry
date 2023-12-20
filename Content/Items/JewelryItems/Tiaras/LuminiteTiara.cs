@@ -9,7 +9,7 @@ public class LuminiteTiara : BaseTiara
     {
         CreateRecipe()
             .AddIngredient(ItemID.LunarBar, 8)
-            .AddTile(TileID.MythrilAnvil)
+            .AddTile(TileID.Chairs).AddTile(TileID.Tables)
             .Register();
     }
 }

@@ -10,7 +10,8 @@ public class GoldEarring : BaseEarring
         CreateRecipe()
             .AddIngredient(ItemID.GoldBar, 4)
             .AddIngredient(ItemID.Chain)
-            .AddTile(TileID.Anvils)
+            .AddTile(TileID.Chairs)
+            .AddTile(TileID.Tables)
             .Register();
     }
 }

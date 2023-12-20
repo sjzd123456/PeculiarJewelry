@@ -9,7 +9,7 @@ public class ShroomiteNecklace : BaseNecklace
     {
         CreateRecipe()
             .AddIngredient(ItemID.ShroomiteBar, 6)
-            .AddTile(TileID.MythrilAnvil)
+            .AddTile(TileID.Chairs).AddTile(TileID.Tables)
             .Register();
     }
 }

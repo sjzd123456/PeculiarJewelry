@@ -9,7 +9,7 @@ public class DemoniteNecklace : BaseNecklace
     {
         CreateRecipe()
             .AddIngredient(ItemID.DemoniteBar, 6)
-            .AddTile(TileID.Anvils)
+            .AddTile(TileID.Chairs).AddTile(TileID.Tables)
             .Register();
     }
 }

@@ -9,7 +9,7 @@ public class ChlorophyteNecklace : BaseNecklace
     {
         CreateRecipe()
             .AddIngredient(ItemID.ChlorophyteBar, 6)
-            .AddTile(TileID.MythrilAnvil)
+            .AddTile(TileID.Chairs).AddTile(TileID.Tables)
             .Register();
     }
 }

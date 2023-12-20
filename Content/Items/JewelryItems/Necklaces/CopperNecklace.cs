@@ -9,7 +9,7 @@ public class CopperNecklace : BaseNecklace
     {
         CreateRecipe()
             .AddIngredient(ItemID.CopperBar, 6)
-            .AddTile(TileID.Anvils)
+            .AddTile(TileID.Chairs).AddTile(TileID.Tables)
             .Register();
     }
 }

@@ -10,7 +10,8 @@ public class CrimtaneEarring : BaseEarring
         CreateRecipe()
             .AddIngredient(ItemID.CrimtaneBar, 4)
             .AddIngredient(ItemID.Chain)
-            .AddTile(TileID.Anvils)
+            .AddTile(TileID.Chairs)
+            .AddTile(TileID.Tables)
             .Register();
     }
 }

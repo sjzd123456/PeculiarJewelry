@@ -10,7 +10,8 @@ public class CopperEarring : BaseEarring
         CreateRecipe()
             .AddIngredient(ItemID.CopperBar, 4)
             .AddIngredient(ItemID.Chain)
-            .AddTile(TileID.Anvils)
+            .AddTile(TileID.Chairs)
+            .AddTile(TileID.Tables)
             .Register();
     }
 }

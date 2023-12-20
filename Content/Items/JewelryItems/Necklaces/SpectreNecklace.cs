@@ -9,7 +9,7 @@ public class SpectreNecklace : BaseNecklace
     {
         CreateRecipe()
             .AddIngredient(ItemID.SpectreBar, 6)
-            .AddTile(TileID.MythrilAnvil)
+            .AddTile(TileID.Chairs).AddTile(TileID.Tables)
             .Register();
     }
 }

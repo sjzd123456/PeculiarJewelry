@@ -9,7 +9,7 @@ public class SpookyNecklace : BaseNecklace
     {
         CreateRecipe()
             .AddIngredient(ItemID.SpookyWood, 6)
-            .AddTile(TileID.MythrilAnvil)
+            .AddTile(TileID.Chairs).AddTile(TileID.Tables)
             .Register();
     }
 }

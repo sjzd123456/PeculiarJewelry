@@ -19,14 +19,12 @@ public class BaseAnklet : BasicJewelry
     protected int _material;
     protected string _category = string.Empty;
     protected string _name = string.Empty;
-    protected bool _isHardmode = false;
 
-    public BaseAnklet(string name, string category, int mat, bool isHardmode)
+    public BaseAnklet(string name, string category, int mat)
     {
         _name = name;
         _category = category;
         _material = mat;
-        _isHardmode = isHardmode;
     }
 
     public override ModItem Clone(Item newEntity)
@@ -75,7 +73,8 @@ public class BaseAnklet : BasicJewelry
     {
         CreateRecipe()
             .AddIngredient(_material, 4)
-            .AddTile(_isHardmode ? TileID.MythrilAnvil : TileID.Anvils)
+            .AddTile(TileID.Chairs)
+            .AddTile(TileID.Tables)
             .Register();
     }
 
@@ -93,37 +92,37 @@ internal class AnkletLoader : ILoadable
     public void Load(Mod mod)
     {
         // Prehardmode
-        AddChoker("Copper", ItemID.CopperBar);
-        AddChoker("Tin", ItemID.TinBar);
-        AddChoker("Iron", ItemID.IronBar);
-        AddChoker("Lead", ItemID.LeadBar);
-        AddChoker("Silver", ItemID.SilverBar);
-        AddChoker("Tungsten", ItemID.TungstenBar);
-        AddChoker("Gold", ItemID.GoldBar);
-        AddChoker("Platinum", ItemID.PlatinumBar);
-        AddChoker("Demonite", ItemID.DemoniteBar);
-        AddChoker("Crimtane", ItemID.CrimtaneBar);
-        AddChoker("Meteorite", ItemID.MeteoriteBar);
-        AddChoker("Hellstone", ItemID.HellstoneBar);
+        AddAnklet("Copper", ItemID.CopperBar);
+        AddAnklet("Tin", ItemID.TinBar);
+        AddAnklet("Iron", ItemID.IronBar);
+        AddAnklet("Lead", ItemID.LeadBar);
+        AddAnklet("Silver", ItemID.SilverBar);
+        AddAnklet("Tungsten", ItemID.TungstenBar);
+        AddAnklet("Gold", ItemID.GoldBar);
+        AddAnklet("Platinum", ItemID.PlatinumBar);
+        AddAnklet("Demonite", ItemID.DemoniteBar);
+        AddAnklet("Crimtane", ItemID.CrimtaneBar);
+        AddAnklet("Meteorite", ItemID.MeteoriteBar);
+        AddAnklet("Hellstone", ItemID.HellstoneBar);
 
         // Hardmode
-        AddChoker("Cobalt", ItemID.CobaltBar);
-        AddChoker("Palladium", ItemID.PalladiumBar);
-        AddChoker("Mythril", ItemID.MythrilBar);
-        AddChoker("Orichalcum", ItemID.OrichalcumBar);
-        AddChoker("Adamantite", ItemID.AdamantiteBar);
-        AddChoker("Titanium", ItemID.TitaniumBar);
-        AddChoker("Hallowed", ItemID.HallowedBar);
-        AddChoker("Chlorophyte", ItemID.ChlorophyteBar);
-        AddChoker("Beetle", ItemID.BeetleHusk);
-        AddChoker("Shroomite", ItemID.ShroomiteBar);
-        AddChoker("Spectre", ItemID.SpectreBar);
-        AddChoker("Spooky", ItemID.SpookyWood);
-        AddChoker("Luminite", ItemID.LunarBar);
+        AddAnklet("Cobalt", ItemID.CobaltBar);
+        AddAnklet("Palladium", ItemID.PalladiumBar);
+        AddAnklet("Mythril", ItemID.MythrilBar);
+        AddAnklet("Orichalcum", ItemID.OrichalcumBar);
+        AddAnklet("Adamantite", ItemID.AdamantiteBar);
+        AddAnklet("Titanium", ItemID.TitaniumBar);
+        AddAnklet("Hallowed", ItemID.HallowedBar);
+        AddAnklet("Chlorophyte", ItemID.ChlorophyteBar);
+        AddAnklet("Beetle", ItemID.BeetleHusk);
+        AddAnklet("Shroomite", ItemID.ShroomiteBar);
+        AddAnklet("Spectre", ItemID.SpectreBar);
+        AddAnklet("Spooky", ItemID.SpookyWood);
+        AddAnklet("Luminite", ItemID.LunarBar);
     }
 
-    private static bool AddChoker(string category, int material, bool isHardmode = false)
-        => ModContent.GetInstance<PeculiarJewelry>().AddContent(new BaseAnklet(category + "Anklet", category, material, isHardmode));
+    private static bool AddAnklet(string category, int material)
+        => ModContent.GetInstance<PeculiarJewelry>().AddContent(new BaseAnklet(category + "Anklet", category, material));
 
     public void Unload()
     {

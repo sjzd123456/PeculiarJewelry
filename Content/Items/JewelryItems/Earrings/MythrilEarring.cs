@@ -10,7 +10,8 @@ public class MythrilEarring : BaseEarring
         CreateRecipe()
             .AddIngredient(ItemID.MythrilBar, 4)
             .AddIngredient(ItemID.Chain)
-            .AddTile(TileID.MythrilAnvil)
+            .AddTile(TileID.Chairs)
+            .AddTile(TileID.Tables)
             .Register();
     }
 }

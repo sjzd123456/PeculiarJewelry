@@ -9,7 +9,7 @@ public class SpectreTiara : BaseTiara
     {
         CreateRecipe()
             .AddIngredient(ItemID.SpectreBar, 8)
-            .AddTile(TileID.MythrilAnvil)
+            .AddTile(TileID.Chairs).AddTile(TileID.Tables)
             .Register();
     }
 }

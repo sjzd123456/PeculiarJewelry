@@ -10,7 +10,8 @@ public class AdamantiteEarring : BaseEarring
         CreateRecipe()
             .AddIngredient(ItemID.AdamantiteBar, 4)
             .AddIngredient(ItemID.Chain)
-            .AddTile(TileID.MythrilAnvil)
+            .AddTile(TileID.Chairs)
+            .AddTile(TileID.Tables)
             .Register();
     }
 }

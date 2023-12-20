@@ -9,7 +9,7 @@ public class MythrilNecklace : BaseNecklace
     {
         CreateRecipe()
             .AddIngredient(ItemID.MythrilBar, 6)
-            .AddTile(TileID.MythrilAnvil)
+            .AddTile(TileID.Chairs).AddTile(TileID.Tables)
             .Register();
     }
 }

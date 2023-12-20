@@ -9,7 +9,7 @@ public class HellstoneNecklace : BaseNecklace
     {
         CreateRecipe()
             .AddIngredient(ItemID.HellstoneBar, 6)
-            .AddTile(TileID.Anvils)
+            .AddTile(TileID.Chairs).AddTile(TileID.Tables)
             .Register();
     }
 }

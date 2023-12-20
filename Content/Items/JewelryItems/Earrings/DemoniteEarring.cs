@@ -10,7 +10,8 @@ public class DemoniteEarring : BaseEarring
         CreateRecipe()
             .AddIngredient(ItemID.DemoniteBar, 4)
             .AddIngredient(ItemID.Chain)
-            .AddTile(TileID.Anvils)
+            .AddTile(TileID.Chairs)
+            .AddTile(TileID.Tables)
             .Register();
     }
 }

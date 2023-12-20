@@ -22,14 +22,12 @@ public class BaseChoker : BasicJewelry
     protected int _material;
     protected string _category = string.Empty;
     protected string _name = string.Empty;
-    protected bool _isHardmode = false;
 
-    public BaseChoker(string name, string category, int mat, bool isHardmode)
+    public BaseChoker(string name, string category, int mat)
     {
         _name = name;
         _category = category;
         _material = mat;
-        _isHardmode = isHardmode;
     }
 
     public override ModItem Clone(Item newEntity)
@@ -78,7 +76,8 @@ public class BaseChoker : BasicJewelry
     {
         CreateRecipe()
             .AddIngredient(_material, 6)
-            .AddTile(_isHardmode ? TileID.MythrilAnvil : TileID.Anvils)
+            .AddTile(TileID.Chairs)
+            .AddTile(TileID.Tables)
             .Register();
     }
 
@@ -125,8 +124,8 @@ internal class ChokerLoader : ILoadable
         AddChoker("Luminite", ItemID.LunarBar);
     }
 
-    private static bool AddChoker(string category, int material, bool isHardmode = false)
-        => ModContent.GetInstance<PeculiarJewelry>().AddContent(new BaseChoker(category + "Choker", category, material, isHardmode));
+    private static bool AddChoker(string category, int material)
+        => ModContent.GetInstance<PeculiarJewelry>().AddContent(new BaseChoker(category + "Choker", category, material));
 
     public void Unload()
     {

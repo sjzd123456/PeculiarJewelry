@@ -1978,3 +1978,8 @@ LuminiteAnklet: {
 	DisplayName: Luminite Anklet
 	Tooltip: ""
 }
+
+GoldRing: {
+	DisplayName: Gold Ring
+	Tooltip: ""
+}

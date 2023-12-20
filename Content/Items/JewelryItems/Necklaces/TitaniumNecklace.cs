@@ -9,7 +9,7 @@ public class TitaniumNecklace : BaseNecklace
     {
         CreateRecipe()
             .AddIngredient(ItemID.TitaniumBar, 6)
-            .AddTile(TileID.MythrilAnvil)
+            .AddTile(TileID.Chairs).AddTile(TileID.Tables)
             .Register();
     }
 }

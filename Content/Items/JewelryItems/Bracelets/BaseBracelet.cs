@@ -20,14 +20,12 @@ public class BaseBracelet : BasicJewelry
     protected int _material;
     protected string _category = string.Empty;
     protected string _name = string.Empty;
-    protected bool _isHardmode = false;
 
-    public BaseBracelet(string name, string category, int mat, bool isHardmode)
+    public BaseBracelet(string name, string category, int mat)
     {
         _name = name;
         _category = category;
         _material = mat;
-        _isHardmode = isHardmode;
     }
 
     public override ModItem Clone(Item newEntity)
@@ -76,7 +74,8 @@ public class BaseBracelet : BasicJewelry
     {
         CreateRecipe()
             .AddIngredient(_material, 2)
-            .AddTile(_isHardmode ? TileID.MythrilAnvil : TileID.Anvils)
+            .AddTile(TileID.Chairs)
+            .AddTile(TileID.Tables)
             .Register();
     }
 
@@ -94,37 +93,37 @@ internal class BraceletLoader : ILoadable
     public void Load(Mod mod)
     {
         // Prehardmode
-        AddBrooch("Copper", ItemID.CopperBar);
-        AddBrooch("Tin", ItemID.TinBar);
-        AddBrooch("Iron", ItemID.IronBar);
-        AddBrooch("Lead", ItemID.LeadBar);
-        AddBrooch("Silver", ItemID.SilverBar);
-        AddBrooch("Tungsten", ItemID.TungstenBar);
-        AddBrooch("Gold", ItemID.GoldBar);
-        AddBrooch("Platinum", ItemID.PlatinumBar);
-        AddBrooch("Demonite", ItemID.DemoniteBar);
-        AddBrooch("Crimtane", ItemID.CrimtaneBar);
-        AddBrooch("Meteorite", ItemID.MeteoriteBar);
-        AddBrooch("Hellstone", ItemID.HellstoneBar);
+        AddBracelet("Copper", ItemID.CopperBar);
+        AddBracelet("Tin", ItemID.TinBar);
+        AddBracelet("Iron", ItemID.IronBar);
+        AddBracelet("Lead", ItemID.LeadBar);
+        AddBracelet("Silver", ItemID.SilverBar);
+        AddBracelet("Tungsten", ItemID.TungstenBar);
+        AddBracelet("Gold", ItemID.GoldBar);
+        AddBracelet("Platinum", ItemID.PlatinumBar);
+        AddBracelet("Demonite", ItemID.DemoniteBar);
+        AddBracelet("Crimtane", ItemID.CrimtaneBar);
+        AddBracelet("Meteorite", ItemID.MeteoriteBar);
+        AddBracelet("Hellstone", ItemID.HellstoneBar);
 
         //// Hardmode
-        AddBrooch("Cobalt", ItemID.CobaltBar);
-        AddBrooch("Palladium", ItemID.PalladiumBar);
-        AddBrooch("Mythril", ItemID.MythrilBar);
-        AddBrooch("Orichalcum", ItemID.OrichalcumBar);
-        AddBrooch("Adamantite", ItemID.AdamantiteBar);
-        AddBrooch("Titanium", ItemID.TitaniumBar);
-        AddBrooch("Hallowed", ItemID.HallowedBar);
-        AddBrooch("Chlorophyte", ItemID.ChlorophyteBar);
-        AddBrooch("Beetle", ItemID.BeetleHusk);
-        AddBrooch("Shroomite", ItemID.ShroomiteBar);
-        AddBrooch("Spectre", ItemID.SpectreBar);
-        AddBrooch("Spooky", ItemID.SpookyWood);
-        AddBrooch("Luminite", ItemID.LunarBar);
+        AddBracelet("Cobalt", ItemID.CobaltBar);
+        AddBracelet("Palladium", ItemID.PalladiumBar);
+        AddBracelet("Mythril", ItemID.MythrilBar);
+        AddBracelet("Orichalcum", ItemID.OrichalcumBar);
+        AddBracelet("Adamantite", ItemID.AdamantiteBar);
+        AddBracelet("Titanium", ItemID.TitaniumBar);
+        AddBracelet("Hallowed", ItemID.HallowedBar);
+        AddBracelet("Chlorophyte", ItemID.ChlorophyteBar);
+        AddBracelet("Beetle", ItemID.BeetleHusk);
+        AddBracelet("Shroomite", ItemID.ShroomiteBar);
+        AddBracelet("Spectre", ItemID.SpectreBar);
+        AddBracelet("Spooky", ItemID.SpookyWood);
+        AddBracelet("Luminite", ItemID.LunarBar);
     }
 
-    private static bool AddBrooch(string category, int material, bool isHardmode = false)
-        => ModContent.GetInstance<PeculiarJewelry>().AddContent(new BaseBracelet(category + "Bracelet", category, material, isHardmode));
+    private static bool AddBracelet(string category, int material)
+        => ModContent.GetInstance<PeculiarJewelry>().AddContent(new BaseBracelet(category + "Bracelet", category, material));
 
     public void Unload()
     {

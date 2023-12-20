@@ -9,7 +9,7 @@ public class IronNecklace : BaseNecklace
     {
         CreateRecipe()
             .AddIngredient(ItemID.IronBar, 6)
-            .AddTile(TileID.Anvils)
+            .AddTile(TileID.Chairs).AddTile(TileID.Tables)
             .Register();
     }
 }

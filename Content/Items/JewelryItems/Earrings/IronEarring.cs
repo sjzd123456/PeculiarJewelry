@@ -10,7 +10,8 @@ public class IronEarring : BaseEarring
         CreateRecipe()
             .AddIngredient(ItemID.IronBar, 4)
             .AddIngredient(ItemID.Chain)
-            .AddTile(TileID.Anvils)
+            .AddTile(TileID.Chairs)
+            .AddTile(TileID.Tables)
             .Register();
     }
 }

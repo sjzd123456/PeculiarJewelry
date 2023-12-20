@@ -9,7 +9,7 @@ public class HellstoneTiara : BaseTiara
     {
         CreateRecipe()
             .AddIngredient(ItemID.HellstoneBar, 8)
-            .AddTile(TileID.Anvils)
+            .AddTile(TileID.Chairs).AddTile(TileID.Tables)
             .Register();
     }
 }

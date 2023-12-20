@@ -9,7 +9,7 @@ public class OrichalcumTiara : BaseTiara
     {
         CreateRecipe()
             .AddIngredient(ItemID.OrichalcumBar, 8)
-            .AddTile(TileID.MythrilAnvil)
+            .AddTile(TileID.Chairs).AddTile(TileID.Tables)
             .Register();
     }
 }

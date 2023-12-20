@@ -21,16 +21,14 @@ public class BaseBrooch : BasicJewelry
     protected int _material;
     protected string _category = string.Empty;
     protected string _name = string.Empty;
-    protected bool _isHardmode = false;
 
     private int _frame;
 
-    public BaseBrooch(string name, string category, int mat, bool isHardmode)
+    public BaseBrooch(string name, string category, int mat)
     {
         _name = name;
         _category = category;
         _material = mat;
-        _isHardmode = isHardmode;
     }
 
     public override ModItem Clone(Item newEntity)
@@ -97,7 +95,8 @@ public class BaseBrooch : BasicJewelry
     {
         CreateRecipe()
             .AddIngredient(_material, 6)
-            .AddTile(_isHardmode ? TileID.MythrilAnvil : TileID.Anvils)
+            .AddTile(TileID.Chairs)
+            .AddTile(TileID.Tables)
             .Register();
     }
 
@@ -144,8 +143,8 @@ internal class BroochLoader : ILoadable
         AddBrooch("Luminite", ItemID.LunarBar);
     }
 
-    private static bool AddBrooch(string category, int material, bool isHardmode = false)
-        => ModContent.GetInstance<PeculiarJewelry>().AddContent(new BaseBrooch(category + "Brooch", category, material, isHardmode));
+    private static bool AddBrooch(string category, int material)
+        => ModContent.GetInstance<PeculiarJewelry>().AddContent(new BaseBrooch(category + "Brooch", category, material));
 
     public void Unload()
     {

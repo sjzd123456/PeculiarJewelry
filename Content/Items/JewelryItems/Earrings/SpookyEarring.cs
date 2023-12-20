@@ -10,7 +10,7 @@ public class SpookyEarring : BaseEarring
         CreateRecipe()
             .AddIngredient(ItemID.SpookyWood, 4)
             .AddIngredient(ItemID.Chain)
-            .AddTile(TileID.MythrilAnvil)
+            .AddTile(TileID.Chairs).AddTile(TileID.Tables)
             .Register();
     }
 }

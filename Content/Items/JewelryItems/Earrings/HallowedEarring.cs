@@ -10,7 +10,8 @@ public class HallowedEarring : BaseEarring
         CreateRecipe()
             .AddIngredient(ItemID.HallowedBar, 4)
             .AddIngredient(ItemID.Chain)
-            .AddTile(TileID.MythrilAnvil)
+            .AddTile(TileID.Chairs)
+            .AddTile(TileID.Tables)
             .Register();
     }
 }

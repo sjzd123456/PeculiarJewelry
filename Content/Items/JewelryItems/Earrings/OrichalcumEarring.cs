@@ -10,7 +10,8 @@ public class OrichalcumEarring : BaseEarring
         CreateRecipe()
             .AddIngredient(ItemID.OrichalcumBar, 4)
             .AddIngredient(ItemID.Chain)
-            .AddTile(TileID.MythrilAnvil)
+            .AddTile(TileID.Chairs)
+            .AddTile(TileID.Tables)
             .Register();
     }
 }

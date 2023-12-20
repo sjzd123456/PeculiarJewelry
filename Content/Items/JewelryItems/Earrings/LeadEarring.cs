@@ -10,7 +10,8 @@ public class LeadEarring : BaseEarring
         CreateRecipe()
             .AddIngredient(ItemID.LeadBar, 4)
             .AddIngredient(ItemID.Chain)
-            .AddTile(TileID.MythrilAnvil)
+            .AddTile(TileID.Chairs)
+            .AddTile(TileID.Tables)
             .Register();
     }
 }

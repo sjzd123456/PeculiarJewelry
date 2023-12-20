@@ -9,7 +9,7 @@ public class CrimtaneNecklace : BaseNecklace
     {
         CreateRecipe()
             .AddIngredient(ItemID.CrimtaneBar, 6)
-            .AddTile(TileID.Anvils)
+            .AddTile(TileID.Chairs).AddTile(TileID.Tables)
             .Register();
     }
 }

@@ -10,7 +10,8 @@ public class ChlorophyteEarring : BaseEarring
         CreateRecipe()
             .AddIngredient(ItemID.ChlorophyteBar, 4)
             .AddIngredient(ItemID.Chain)
-            .AddTile(TileID.MythrilAnvil)
+            .AddTile(TileID.Chairs)
+            .AddTile(TileID.Tables)
             .Register();
     }
 }

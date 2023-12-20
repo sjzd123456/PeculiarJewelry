@@ -9,7 +9,7 @@ public class CopperTiara : BaseTiara
     {
         CreateRecipe()
             .AddIngredient(ItemID.CopperBar, 8)
-            .AddTile(TileID.Anvils)
+            .AddTile(TileID.Chairs).AddTile(TileID.Tables)
             .Register();
     }
 }

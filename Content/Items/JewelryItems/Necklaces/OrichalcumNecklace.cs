@@ -9,7 +9,7 @@ public class OrichalcumNecklace : BaseNecklace
     {
         CreateRecipe()
             .AddIngredient(ItemID.OrichalcumBar, 6)
-            .AddTile(TileID.MythrilAnvil)
+            .AddTile(TileID.Chairs).AddTile(TileID.Tables)
             .Register();
     }
 }

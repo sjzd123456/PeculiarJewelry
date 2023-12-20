@@ -10,7 +10,7 @@ public class TitaniumEarring : BaseEarring
         CreateRecipe()
             .AddIngredient(ItemID.TitaniumBar, 4)
             .AddIngredient(ItemID.Chain)
-            .AddTile(TileID.MythrilAnvil)
+            .AddTile(TileID.Chairs).AddTile(TileID.Tables)
             .Register();
     }
 }

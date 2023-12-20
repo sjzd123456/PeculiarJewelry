@@ -10,7 +10,8 @@ public class HellstoneEarring : BaseEarring
         CreateRecipe()
             .AddIngredient(ItemID.HellstoneBar, 4)
             .AddIngredient(ItemID.Chain)
-            .AddTile(TileID.Anvils)
+            .AddTile(TileID.Chairs)
+            .AddTile(TileID.Tables)
             .Register();
     }
 }
