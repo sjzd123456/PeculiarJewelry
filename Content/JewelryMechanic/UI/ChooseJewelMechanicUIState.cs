@@ -4,7 +4,7 @@ using ReLogic.Content;
 using Terraria.GameContent.UI.Elements;
 using Terraria.UI;
 
-namespace FF6Mod.UI.Betting;
+namespace PeculiarJewelry.Content.JewelryMechanic.UI;
 
 internal class ChooseJewelMechanicUIState : UIState
 {

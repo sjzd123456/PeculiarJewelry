@@ -15,7 +15,7 @@ class SilkenPliers : Plier
         Item.damage = 8;
         Item.crit = -4;
         Item.rare = ItemRarityID.Blue;
-        Item.value = Item.buyPrice(platinum: 2);
+        Item.value = Item.buyPrice(platinum: 1);
     }
 
     public override bool SuccessfulAttempt() => true;

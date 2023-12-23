@@ -4,10 +4,9 @@ using PeculiarJewelry.Content.JewelryMechanic.MaterialBonuses.Bonuses;
 using PeculiarJewelry.Content.JewelryMechanic.Misc;
 using PeculiarJewelry.Content.JewelryMechanic.Stats;
 using PeculiarJewelry.Content.JewelryMechanic.Stats.IO;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using Terraria;
+using Terraria.DataStructures;
 using Terraria.ModLoader.IO;
 
 namespace PeculiarJewelry.Content.Items.JewelryItems;
@@ -163,6 +162,12 @@ public abstract class BasicJewelry : ModItem
         }
 
         jewelry.ResetSingleJewelBonus(player);
+    }
+
+    public override void OnCreated(ItemCreationContext context)
+    {
+        if (context is RecipeItemCreationContext recipe && Main.LocalPlayer.GetModPlayer<RichPlayer>().isRich)
+            tier = (JewelryTier)Main.rand.Next((int)JewelryTier.Extravagant + 1);
     }
 
     public override void SaveData(TagCompound tag)

@@ -1,5 +1,4 @@
-﻿using FF6Mod.UI.Betting;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Terraria.UI;
 
 namespace PeculiarJewelry.Content.JewelryMechanic.UI;

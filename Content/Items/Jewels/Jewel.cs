@@ -18,13 +18,6 @@ public abstract class Jewel : ModItem
 
     public JewelInfo info;
 
-    //public override ModItem Clone(Item newEntity)
-    //{
-    //    ModItem clone = base.Clone(newEntity);
-    //    Jewel jewelClone = clone as Jewel;
-    //    return clone;
-    //}
-
     public sealed override void SetDefaults()
     {
         info = Activator.CreateInstance(InfoType) as JewelInfo;

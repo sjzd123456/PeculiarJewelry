@@ -838,8 +838,8 @@ CobaltNecklace: {
 		'''
 }
 
-GoldenRing: {
-	DisplayName: Golden Ring
+GoldRing: {
+	DisplayName: Gold Ring
 	Tooltip:
 		'''
 		{$BasicJewelry.Tooltip}
@@ -1731,255 +1731,459 @@ LuminiteBracelet: {
 
 CopperChoker: {
 	DisplayName: Copper Choker
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Copper.1Set}
+		'''
 }
 
 TinChoker: {
 	DisplayName: Tin Choker
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Tin.1Set}
+		'''
 }
 
 IronChoker: {
 	DisplayName: Iron Choker
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Iron.1Set}
+		'''
 }
 
 LeadChoker: {
 	DisplayName: Lead Choker
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Lead.1Set}
+		'''
 }
 
 SilverChoker: {
 	DisplayName: Silver Choker
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Silver.1Set}
+		'''
 }
 
 TungstenChoker: {
 	DisplayName: Tungsten Choker
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Tungsten.1Set}
+		'''
 }
 
 GoldChoker: {
 	DisplayName: Gold Choker
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Gold.1Set}
+		'''
 }
 
 PlatinumChoker: {
 	DisplayName: Platinum Choker
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Platinum.1Set}
+		'''
 }
 
 DemoniteChoker: {
 	DisplayName: Demonite Choker
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Demonite.1Set}
+		'''
 }
 
 CrimtaneChoker: {
 	DisplayName: Crimtane Choker
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Crimtane.1Set}
+		'''
 }
 
 MeteoriteChoker: {
 	DisplayName: Meteorite Choker
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Meteorite.1Set}
+		'''
 }
 
 HellstoneChoker: {
 	DisplayName: Hellstone Choker
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Hellstone.1Set}
+		'''
 }
 
 CobaltChoker: {
 	DisplayName: Cobalt Choker
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Cobalt.1Set}
+		'''
 }
 
 PalladiumChoker: {
 	DisplayName: Palladium Choker
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Palladium.1Set}
+		'''
 }
 
 MythrilChoker: {
 	DisplayName: Mythril Choker
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Mythril.1Set}
+		'''
 }
 
 OrichalcumChoker: {
 	DisplayName: Orichalcum Choker
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Orichalcum.1Set}
+		'''
 }
 
 AdamantiteChoker: {
 	DisplayName: Adamantite Choker
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Adamantite.1Set}
+		'''
 }
 
 TitaniumChoker: {
 	DisplayName: Titanium Choker
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Titanium.1Set}
+		'''
 }
 
 HallowedChoker: {
 	DisplayName: Hallowed Choker
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Hallowed.1Set}
+		'''
 }
 
 ChlorophyteChoker: {
 	DisplayName: Chlorophyte Choker
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Chlorophyte.1Set}
+		'''
 }
 
 BeetleChoker: {
 	DisplayName: Beetle Choker
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Beetle.1Set}
+		'''
 }
 
 ShroomiteChoker: {
 	DisplayName: Shroomite Choker
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Shroomite.1Set}
+		'''
 }
 
 SpectreChoker: {
 	DisplayName: Spectre Choker
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Spectre.1Set}
+		'''
 }
 
 SpookyChoker: {
 	DisplayName: Spooky Choker
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Spooky.1Set}
+		'''
 }
 
 LuminiteChoker: {
 	DisplayName: Luminite Choker
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Luminite.1Set}
+		'''
 }
 
 CopperAnklet: {
 	DisplayName: Copper Anklet
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Copper.1Set}
+		'''
 }
 
 TinAnklet: {
 	DisplayName: Tin Anklet
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Tin.1Set}
+		'''
 }
 
 IronAnklet: {
 	DisplayName: Iron Anklet
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Iron.1Set}
+		'''
 }
 
 LeadAnklet: {
 	DisplayName: Lead Anklet
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Lead.1Set}
+		'''
 }
 
 SilverAnklet: {
 	DisplayName: Silver Anklet
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Silver.1Set}
+		'''
 }
 
 TungstenAnklet: {
 	DisplayName: Tungsten Anklet
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Tungsten.1Set}
+		'''
 }
 
 GoldAnklet: {
 	DisplayName: Gold Anklet
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Gold.1Set}
+		'''
 }
 
 PlatinumAnklet: {
 	DisplayName: Platinum Anklet
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Platinum.1Set}
+		'''
 }
 
 DemoniteAnklet: {
 	DisplayName: Demonite Anklet
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Demonite.1Set}
+		'''
 }
 
 CrimtaneAnklet: {
 	DisplayName: Crimtane Anklet
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Crimtane.1Set}
+		'''
 }
 
 MeteoriteAnklet: {
 	DisplayName: Meteorite Anklet
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Meteorite.1Set}
+		'''
 }
 
 HellstoneAnklet: {
 	DisplayName: Hellstone Anklet
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Hellstone.1Set}
+		'''
 }
 
 CobaltAnklet: {
 	DisplayName: Cobalt Anklet
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Cobalt.1Set}
+		'''
 }
 
 PalladiumAnklet: {
 	DisplayName: Palladium Anklet
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Palladium.1Set}
+		'''
 }
 
 MythrilAnklet: {
 	DisplayName: Mythril Anklet
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Mythril.1Set}
+		'''
 }
 
 OrichalcumAnklet: {
 	DisplayName: Orichalcum Anklet
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Orichalcum.1Set}
+		'''
 }
 
 AdamantiteAnklet: {
 	DisplayName: Adamantite Anklet
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Adamantite.1Set}
+		'''
 }
 
 TitaniumAnklet: {
 	DisplayName: Titanium Anklet
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Titanium.1Set}
+		'''
 }
 
 HallowedAnklet: {
 	DisplayName: Hallowed Anklet
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Hallowed.1Set}
+		'''
 }
 
 ChlorophyteAnklet: {
 	DisplayName: Chlorophyte Anklet
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Chlorophyte.1Set}
+		'''
 }
 
 BeetleAnklet: {
 	DisplayName: Beetle Anklet
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Beetle.1Set}
+		'''
 }
 
 ShroomiteAnklet: {
 	DisplayName: Shroomite Anklet
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Shroomite.1Set}
+		'''
 }
 
 SpectreAnklet: {
 	DisplayName: Spectre Anklet
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Spectre.1Set}
+		'''
 }
 
 SpookyAnklet: {
 	DisplayName: Spooky Anklet
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Spooky.1Set}
+		'''
 }
 
 LuminiteAnklet: {
 	DisplayName: Luminite Anklet
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Luminite.1Set}
+		'''
 }
 
-GoldRing: {
-	DisplayName: Gold Ring
-	Tooltip: ""
+How2GetRich: {
+	DisplayName: How 2 Get Rich Quick
+	Tooltip: 
+		'''
+		Allows you to hand craft any random quality of jewelry
+		'by Leff Rezos'
+		'''
 }

@@ -23,10 +23,7 @@ internal class JewelsInChestSystem : ModSystem
 
     private static Item GenerateJewelry()
     {
-        string[] materials = "Copper Tin Iron Lead Silver Tungsten Gold Platinum".Split(' ');
-        string[] types = "Anklet Bracelet Brooch Choker Earring Hairpin Ring Tiara".Split(' ');
-        string name = nameof(PeculiarJewelry) + "/" + Main.rand.Next(materials) + Main.rand.Next(types);
-        int jewelryType = ModContent.Find<ModItem>(name).Type;
+        int jewelryType = JewelryCommon.GetRandomJewelryType(JewelryCommon.PrehardmodeMetals);
         Item item = new Item(jewelryType);
         BasicJewelry jewelry = item.ModItem as BasicJewelry;
         bool hasMajor = false;
