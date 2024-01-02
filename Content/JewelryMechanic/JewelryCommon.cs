@@ -1,4 +1,5 @@
 ﻿using PeculiarJewelry.Content.Items.Jewels;
+using System.Collections.Generic;
 
 namespace PeculiarJewelry.Content.JewelryMechanic;
 
@@ -7,6 +8,8 @@ internal class JewelryCommon
     public static JewelryStatConfig Config => ModContent.GetInstance<JewelryStatConfig>();
 
     public static string[] PrehardmodeMetals = "Copper Tin Iron Lead Silver Tungsten Gold Platinum".Split(' ');
+    public static string[] AllMaterials = ("Copper Tin Iron Lead Silver Tungsten Gold Platinum Meteorite Crimtane Demonite Hellstone" +
+        "Cobalt Palladium Mythril Orichalcum Adamantite Titanium Chlorophyte Hallowed Spooky Spectre Shroomite Beetle Luminite").Split(' ');
 
     public static int MajorMinorType() => Main.rand.NextFloat() <= Config.ChanceForMajor ? ModContent.ItemType<MajorJewel>() : ModContent.ItemType<MinorJewel>();
 
@@ -26,5 +29,50 @@ internal class JewelryCommon
         string[] types = "Anklet Bracelet Brooch Choker Earring Hairpin Ring Tiara".Split(' ');
         string name = nameof(PeculiarJewelry) + "/" + Main.rand.Next(materials) + Main.rand.Next(types);
         return ModContent.Find<ModItem>(name).Type;
+    }
+
+    public static string[] GetAllUnlockedMaterials()
+    {
+        List<string> materials = new(PrehardmodeMetals);
+
+        if (NPC.downedBoss2)
+            materials.Add("Meteorite");
+
+        if (NPC.downedBoss3)
+        {
+            materials.Add("Crimtane");
+            materials.Add("Demonite");
+        }
+
+        if (Main.hardMode)
+            materials.Add("Hellstone");
+
+        if (NPC.downedMechBossAny)
+        {
+            materials.Add("Cobalt");
+            materials.Add("Palladium");
+            materials.Add("Mythril");
+            materials.Add("Orichalcum");
+            materials.Add("Adamantite");
+            materials.Add("Titanium");
+        }
+
+        if (NPC.downedPlantBoss)
+            materials.Add("Hallowed");
+
+        if (NPC.downedGolemBoss)
+            materials.Add("Chlorophyte");
+
+        if (NPC.downedAncientCultist)
+        {
+            materials.Add("Spectre");
+            materials.Add("Beetle");
+            materials.Add("Shroomite");
+        }
+
+        if (NPC.downedMoonlord)
+            materials.Add("Luminite");
+
+        return [..materials];
     }
 }

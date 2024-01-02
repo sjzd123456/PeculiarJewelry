@@ -47,8 +47,8 @@ public class BaseBracelet : BasicJewelry
 
     protected override void Defaults()
     {
-        Item.width = 34;
-        Item.height = 30;
+        Item.width = 28;
+        Item.height = 24;
         Item.accessory = true;
     }
 
@@ -67,7 +67,10 @@ public class BaseBracelet : BasicJewelry
     public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
     {
         if (Info.Any())
-            spriteBatch.Draw(_jewels.Value, Item.Center - Main.screenPosition, null, GetDisplayColor(), rotation, _jewels.Size() / 2f, scale, SpriteEffects.None, 0);
+        {
+            Color col = Lighting.GetColor(Item.Center.ToTileCoordinates(), GetDisplayColor());
+            spriteBatch.Draw(_jewels.Value, Item.Center - Main.screenPosition, null, col, rotation, _jewels.Size() / 2f, scale, SpriteEffects.None, 0);
+        }
     }
 
     public override void AddRecipes()

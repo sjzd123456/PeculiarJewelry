@@ -26,4 +26,9 @@
     <Folder Include="Assets\Sound\" />
     <Folder Include="Content\JewelryMechanic\Stats\Triggers\Textures\" />
   </ItemGroup>
+  <ItemGroup>
+    <Reference Include="StockableShops">
+      <HintPath>lib\StockableShops.dll</HintPath>
+    </Reference>
+  </ItemGroup>
 </Project>

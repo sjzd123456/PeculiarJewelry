@@ -2181,9 +2181,14 @@ LuminiteAnklet: {
 
 How2GetRich: {
 	DisplayName: How 2 Get Rich Quick
-	Tooltip: 
+	Tooltip:
 		'''
 		Allows you to hand craft any random quality of jewelry
 		'by Leff Rezos'
 		'''
+}
+
+DisplayCase: {
+	DisplayName: Display Case
+	Tooltip: ""
 }

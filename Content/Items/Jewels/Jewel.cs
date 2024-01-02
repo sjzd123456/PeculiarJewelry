@@ -1,4 +1,4 @@
-using PeculiarJewelry.Content.Items;
+using PeculiarJewelry.Content.Items.Tiles;
 using PeculiarJewelry.Content.JewelryMechanic.Stats;
 using PeculiarJewelry.Content.JewelryMechanic.Stats.IO;
 using PeculiarJewelry.Content.NPCs;

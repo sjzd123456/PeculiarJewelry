@@ -20,28 +20,28 @@ namespace PeculiarJewelry.Content.NPCs;
 [AutoloadHead]
 public class Lapidarist : ModNPC
 {
-    private WeightedRandom<(int type, int stack, int price)> MiscPool 
-    {
-        get
-        {
-            var pool = new WeightedRandom<(int type, int stack, int price)>();
-            pool.Add((ModContent.ItemType<CursedDollar>(), 10, Item.buyPrice(gold: 25)), 1);
-            pool.Add((ModContent.ItemType<IrradiatedPearl>(), 5, Item.buyPrice(gold: 10)), 2);
-            pool.Add((ModContent.ItemType<GoldenCarpScales>(), 5, Item.buyPrice(gold: 15)), 2);
-            pool.Add((ModContent.ItemType<CelestialEye>(), 5, Item.buyPrice(gold: 25)), 2);
-            pool.Add((ModContent.ItemType<BrokenStopwatch>(), 10, Item.buyPrice(gold: 25)), 4);
-            pool.Add((ModContent.ItemType<StellarJade>(), 1, Item.buyPrice(platinum: 1)), 1);
-            pool.Add((ModContent.ItemType<How2GetRich>(), 1, Item.buyPrice(platinum: 5)), 0.15f);
-            return pool;
-        }
-    }
+    //private WeightedRandom<(int type, int stack, int price)> MiscPool 
+    //{
+    //    get
+    //    {
+    //        var pool = new WeightedRandom<(int type, int stack, int price)>();
+    //        pool.Add((ModContent.ItemType<CursedDollar>(), 10, Item.buyPrice(gold: 25)), 1);
+    //        pool.Add((ModContent.ItemType<IrradiatedPearl>(), 5, Item.buyPrice(gold: 10)), 2);
+    //        pool.Add((ModContent.ItemType<GoldenCarpScales>(), 5, Item.buyPrice(gold: 15)), 2);
+    //        pool.Add((ModContent.ItemType<CelestialEye>(), 5, Item.buyPrice(gold: 25)), 2);
+    //        pool.Add((ModContent.ItemType<BrokenStopwatch>(), 10, Item.buyPrice(gold: 25)), 4);
+    //        pool.Add((ModContent.ItemType<StellarJade>(), 1, Item.buyPrice(platinum: 1)), 1);
+    //        pool.Add((ModContent.ItemType<How2GetRich>(), 1, Item.buyPrice(platinum: 5)), 0.15f);
+    //        return pool;
+    //    }
+    //}
 
-    private static readonly Dictionary<int, int> _shopItemStocks = new();
-    private static ReadOnlyDictionary<int, int> _originalStock;
-    private static Dictionary<StatType, Item> _jewelStocks = new();
-    private static (int type, int stack, int price) _miscItemInfo;
+    //private static readonly Dictionary<int, int> _shopItemStocks = new();
+    //private static ReadOnlyDictionary<int, int> _originalStock;
+    //private static Dictionary<StatType, Item> _jewelStocks = new();
+    //private static (int type, int stack, int price) _miscItemInfo;
 
-    private static bool _setVariableStocks = true;
+    //private static bool _setVariableStocks = true;
 
     private bool _daySwitch = false;
 
@@ -126,144 +126,144 @@ public class Lapidarist : ModNPC
 
     public override void AddShops()
     {
-        NPCShop shop = new(Type);
+        //NPCShop shop = new(Type);
 
-        SetupStockedItem<SparklyDust>(shop, 100);
-        SetupStockedItem<RoughPliers>(shop, 15);
-        SetupStockedItem<NicePliers>(shop, 10);
-        SetupStockedItem<GentlePliers>(shop, 5);
-        SetupStockedItem<SilkenPliers>(shop, 1);
-        shop.Register();
+        //SetupStockedItem<SparklyDust>(shop, 100);
+        //SetupStockedItem<RoughPliers>(shop, 15);
+        //SetupStockedItem<NicePliers>(shop, 10);
+        //SetupStockedItem<GentlePliers>(shop, 5);
+        //SetupStockedItem<SilkenPliers>(shop, 1);
+        //shop.Register();
 
-        Dictionary<int, int> copy = new();
+        //Dictionary<int, int> copy = new();
 
-        foreach (var pair in _shopItemStocks)
-            copy.Add(pair.Key, pair.Value);
+        //foreach (var pair in _shopItemStocks)
+        //    copy.Add(pair.Key, pair.Value);
 
-        _originalStock = new(copy);
-        _setVariableStocks = true;
+        //_originalStock = new(copy);
+        //_setVariableStocks = true;
     }
 
     private static void SetupStockedItem<T>(NPCShop shop, int stock) where T : ModItem
     {
-        shop.Add(new Item(ModContent.ItemType<T>())
-        {
-            stack = stock,
-            buyOnce = true,
-        });
+        //shop.Add(new Item(ModContent.ItemType<T>())
+        //{
+        //    stack = stock,
+        //    buyOnce = true,
+        //});
 
-        _shopItemStocks.Add(ModContent.ItemType<T>(), stock);
+        //_shopItemStocks.Add(ModContent.ItemType<T>(), stock);
     }
 
     public override void ModifyActiveShop(string shopName, Item[] items)
     {
-        if (!shopName.EndsWith("Shop"))
-            return;
+        //if (!shopName.EndsWith("Shop"))
+        //    return;
 
-        for (int i = 0; i < items.Length; ++i)
-        {
-            var item = items[i];
+        //for (int i = 0; i < items.Length; ++i)
+        //{
+        //    var item = items[i];
 
-            if (item is null) 
-                continue;
+        //    if (item is null) 
+        //        continue;
 
-            if (!_shopItemStocks.ContainsKey(item.type))
-                continue;
+        //    if (!_shopItemStocks.ContainsKey(item.type))
+        //        continue;
 
-            item.stack = _shopItemStocks[item.type];
+        //    item.stack = _shopItemStocks[item.type];
 
-            if (item.stack <= 0)
-                item.TurnToAir();
-        }
+        //    if (item.stack <= 0)
+        //        item.TurnToAir();
+        //}
 
-        AddJewelry(items);
-        AddMiscItem(items);
+        //AddJewelry(items);
+        //AddMiscItem(items);
 
-        _setVariableStocks = false;
+        //_setVariableStocks = false;
     }
 
     private void AddMiscItem(Item[] items)
     {
-        if (_setVariableStocks)
-        {
-            for (int i = _originalStock.Count; i < items.Length; ++i)
-            {
-                if (items[i] is null || items[i].IsAir)
-                {
-                    var (type, stack, price) = MiscPool.Get();
-                    items[i] = new(type)
-                    {
-                        buyOnce = true,
-                        stack = stack,
-                        shopCustomPrice = price
-                    };
+        //if (_setVariableStocks)
+        //{
+        //    for (int i = _originalStock.Count; i < items.Length; ++i)
+        //    {
+        //        if (items[i] is null || items[i].IsAir)
+        //        {
+        //            var (type, stack, price) = MiscPool.Get();
+        //            items[i] = new(type)
+        //            {
+        //                buyOnce = true,
+        //                stack = stack,
+        //                shopCustomPrice = price
+        //            };
 
-                    _miscItemInfo = (type, stack, price);
-                    break;
-                }
-            }
-        }
-        else
-        {
-            if (_miscItemInfo.type == -1)
-                return;
+        //            _miscItemInfo = (type, stack, price);
+        //            break;
+        //        }
+        //    }
+        //}
+        //else
+        //{
+        //    if (_miscItemInfo.type == -1)
+        //        return;
 
-            for (int i = _originalStock.Count; i < items.Length; ++i)
-            {
-                if (items[i] is null || items[i].IsAir)
-                {
-                    items[i] = new(_miscItemInfo.type) 
-                    { 
-                        stack = _miscItemInfo.stack, 
-                        buyOnce = true,
-                        shopCustomPrice = _miscItemInfo.price
-                    };
-                    break;
-                }
-            }
-        }
+        //    for (int i = _originalStock.Count; i < items.Length; ++i)
+        //    {
+        //        if (items[i] is null || items[i].IsAir)
+        //        {
+        //            items[i] = new(_miscItemInfo.type) 
+        //            { 
+        //                stack = _miscItemInfo.stack, 
+        //                buyOnce = true,
+        //                shopCustomPrice = _miscItemInfo.price
+        //            };
+        //            break;
+        //        }
+        //    }
+        //}
     }
 
-    private static void AddJewelry(Item[] items)
-    {
-        if (_setVariableStocks)
-        {
-            int count = 0;
+    //private static void AddJewelry(Item[] items)
+    //{
+    //    if (_setVariableStocks)
+    //    {
+    //        int count = 0;
 
-            for (int i = _originalStock.Count; i < items.Length; ++i)
-            {
-                if (items[i] is null || items[i].IsAir)
-                {
-                    items[i] = MakeJewel();
+    //        for (int i = _originalStock.Count; i < items.Length; ++i)
+    //        {
+    //            if (items[i] is null || items[i].IsAir)
+    //            {
+    //                items[i] = MakeJewel();
 
-                    while (_jewelStocks.ContainsKey((items[i].ModItem as Jewel).info.Major.Type))
-                        items[i] = MakeJewel();
+    //                while (_jewelStocks.ContainsKey((items[i].ModItem as Jewel).info.Major.Type))
+    //                    items[i] = MakeJewel();
 
-                    _jewelStocks.Add((items[i].ModItem as Jewel).info.Major.Type, items[i]);
+    //                _jewelStocks.Add((items[i].ModItem as Jewel).info.Major.Type, items[i]);
 
-                    if (++count >= 3)
-                        break;
-                }
-            }
-        }
-        else
-        {
-            int index = 0;
+    //                if (++count >= 3)
+    //                    break;
+    //            }
+    //        }
+    //    }
+    //    else
+    //    {
+    //        int index = 0;
 
-            for (int i = _originalStock.Count; i < items.Length; ++i)
-            {
-                if (index >= _jewelStocks.Count)
-                    break;
+    //        for (int i = _originalStock.Count; i < items.Length; ++i)
+    //        {
+    //            if (index >= _jewelStocks.Count)
+    //                break;
 
-                if (items[i] is null || items[i].IsAir)
-                {
-                    var pair = _jewelStocks.ElementAt(index++);
-                    var firstJewel = pair.Value;
-                    items[i] = firstJewel;
-                }
-            }
-        }
-    }
+    //            if (items[i] is null || items[i].IsAir)
+    //            {
+    //                var pair = _jewelStocks.ElementAt(index++);
+    //                var firstJewel = pair.Value;
+    //                items[i] = firstJewel;
+    //            }
+    //        }
+    //    }
+    //}
 
     private static Item MakeJewel()
     {
@@ -281,15 +281,15 @@ public class Lapidarist : ModNPC
         if (!Main.dayTime)
             _daySwitch = true;
 
-        if (_daySwitch && Main.dayTime)
-        {
-            _daySwitch = false;
+        //if (_daySwitch && Main.dayTime)
+        //{
+        //    _daySwitch = false;
 
-            foreach (var item in _shopItemStocks.Keys)
-                _shopItemStocks[item] = _originalStock[item];
+        //    foreach (var item in _shopItemStocks.Keys)
+        //        _shopItemStocks[item] = _originalStock[item];
 
-            _setVariableStocks = true;
-        }
+        //    _setVariableStocks = true;
+        //}
 
         var talkNPC = Main.LocalPlayer.TalkNPC;
 
@@ -301,46 +301,46 @@ public class Lapidarist : ModNPC
 
     private static void TrackItems()
     {
-        Dictionary<int, int> clone = new();
-        List<StatType> foundTypes = new(_jewelStocks.Keys);
-        bool hasMisc = false;
+        //Dictionary<int, int> clone = new();
+        //List<StatType> foundTypes = new(_jewelStocks.Keys);
+        //bool hasMisc = false;
 
-        foreach (var key in _shopItemStocks.Keys)
-            clone.Add(key, 0);
+        //foreach (var key in _shopItemStocks.Keys)
+        //    clone.Add(key, 0);
 
-        for (int i = 0; i < Chest.maxItems; ++i)
-        {
-            Item item = Main.instance.shop[Main.npcShop].item[i];
+        //for (int i = 0; i < Chest.maxItems; ++i)
+        //{
+        //    Item item = Main.instance.shop[Main.npcShop].item[i];
 
-            if (item is null || item.IsAir)
-                continue;
+        //    if (item is null || item.IsAir)
+        //        continue;
 
-            if (item.type == _miscItemInfo.type && !hasMisc)
-            {
-                hasMisc = true;
-                _miscItemInfo.stack = item.stack;
-            }
+        //    if (item.type == _miscItemInfo.type && !hasMisc)
+        //    {
+        //        hasMisc = true;
+        //        _miscItemInfo.stack = item.stack;
+        //    }
 
-            if (item.ModItem is Jewel jewel)
-            {
-                if (foundTypes.Contains(jewel.info.Major.Type))
-                    foundTypes.Remove(jewel.info.Major.Type);
-            }
+        //    if (item.ModItem is Jewel jewel)
+        //    {
+        //        if (foundTypes.Contains(jewel.info.Major.Type))
+        //            foundTypes.Remove(jewel.info.Major.Type);
+        //    }
 
-            if (!clone.ContainsKey(item.type))
-                continue;
+        //    if (!clone.ContainsKey(item.type))
+        //        continue;
 
-            clone[item.type] += item.stack;
-        }
+        //    clone[item.type] += item.stack;
+        //}
 
-        foreach (var key in clone.Keys)
-            _shopItemStocks[key] = clone[key];
+        //foreach (var key in clone.Keys)
+        //    _shopItemStocks[key] = clone[key];
 
-        foreach (var item in foundTypes)
-            _jewelStocks.Remove(item);
+        //foreach (var item in foundTypes)
+        //    _jewelStocks.Remove(item);
 
-        if (!hasMisc)
-            _miscItemInfo.type = -1;
+        //if (!hasMisc)
+        //    _miscItemInfo.type = -1;
     }
 
     public override void TownNPCAttackStrength(ref int damage, ref float knockback)

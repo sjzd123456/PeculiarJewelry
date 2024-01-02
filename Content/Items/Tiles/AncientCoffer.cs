@@ -7,7 +7,7 @@ using Terraria.DataStructures;
 using Terraria.ObjectData;
 using Verdant.Items;
 
-namespace PeculiarJewelry.Content.Items;
+namespace PeculiarJewelry.Content.Items.Tiles;
 
 public class AncientCoffer : BagOfShinies
 {
