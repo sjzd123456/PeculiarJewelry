@@ -42,8 +42,8 @@ public abstract class BaseEarring : BasicJewelry
     {
         if (Info.Any())
         {
-            var pos = Item.Center - Main.screenPosition - new Vector2(0, Item.height / 2);
-            Color col = Lighting.GetColor(Item.Center.ToTileCoordinates(), GetDisplayColor());
+            var pos = Item.Center - Main.screenPosition;
+            Color col = lightColor.MultiplyRGB(GetDisplayColor());
             spriteBatch.Draw(_jewels.Value, pos, null, col, rotation, _jewels.Size() / 2f, scale, SpriteEffects.None, 0);
         }
     }

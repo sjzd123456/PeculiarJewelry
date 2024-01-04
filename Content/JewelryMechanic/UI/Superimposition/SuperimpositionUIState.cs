@@ -335,7 +335,7 @@ internal class SuperimpositionUIState : UIState, IClosableUIState
         return isCompatible && ((item.ModItem is Jewel jewel && jewel.info.SubStats.Any()) || item.IsAir || !isMouseItem);
     }
 
-    private static string GetExistingJewelName(Jewel jewel)
+    internal static string GetExistingJewelName(Jewel jewel)
     {
         List<TooltipLine> lines = new() { new TooltipLine(ModLoader.GetMod("PeculiarJewelry"), "ItemName", "") };
         Jewel.PlainJewelTooltips(lines, jewel.info, jewel, true);

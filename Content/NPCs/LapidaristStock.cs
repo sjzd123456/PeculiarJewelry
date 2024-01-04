@@ -61,7 +61,7 @@ internal class LapidaristStock : StockedShop
         FullStock.Add(new ShopItem(new Item(ModContent.ItemType<NicePliers>(), 10) { shopCustomPrice = Item.buyPrice(gold: 10) }));
         FullStock.Add(new ShopItem(new Item(ModContent.ItemType<GentlePliers>(), 5) { shopCustomPrice = Item.buyPrice(gold: 33) }));
         FullStock.Add(new ShopItem(new Item(ModContent.ItemType<SilkenPliers>(), 1) { shopCustomPrice = Item.buyPrice(platinum: 1) }));
-        FullStock.Add(new ShopItem(new Item(ModContent.ItemType<DisplayCase>(), 1) { shopCustomPrice = Item.buyPrice(silver: 10) }));
+        FullStock.Add(new ShopItem(new Item(ModContent.ItemType<DisplayCase>(), 10) { shopCustomPrice = Item.buyPrice(silver: 10) }));
 
         // Misc, mutually exclusive items
         FullStock.Add(MiscShopItem<CursedDollar>(10, Item.buyPrice(gold: 25)));

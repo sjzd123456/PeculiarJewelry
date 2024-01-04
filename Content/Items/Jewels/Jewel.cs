@@ -101,7 +101,7 @@ public abstract class Jewel : ModItem
 
     public sealed override bool PreDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
     {
-        Color col = Lighting.GetColor(Item.Center.ToTileCoordinates(), info.Major.Get().Color);
+        Color col = lightColor.MultiplyRGB(info.Major.Get().Color);
         JewelDrawing.DrawJewel(TextureAssets.Item[Type], Item.Center - Main.screenPosition, Item.Size / 2f, col, rotation, scale, Item.width, Item.height + 2, info);
         return false;
     }

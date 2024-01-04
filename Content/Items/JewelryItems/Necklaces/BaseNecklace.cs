@@ -41,7 +41,7 @@ public abstract class BaseNecklace : BasicJewelry
     {
         if (Info.Any())
         {
-            Color col = Lighting.GetColor(Item.Center.ToTileCoordinates(), GetDisplayColor());
+            Color col = lightColor.MultiplyRGB(GetDisplayColor());
             spriteBatch.Draw(_jewels.Value, Item.Center - Main.screenPosition, null, col, rotation, _jewels.Size() / 2f, scale, SpriteEffects.None, 0);
         }
     }
