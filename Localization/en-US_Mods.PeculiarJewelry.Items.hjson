@@ -2211,3 +2211,8 @@ TranscendantEcho: {
 		'Contains thousands of words and thoughts simultaneously'
 		'''
 }
+
+LuckyCoin: {
+	DisplayName: Lucky Coin
+	Tooltip: ""
+}

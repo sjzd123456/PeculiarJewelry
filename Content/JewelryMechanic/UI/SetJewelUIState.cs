@@ -338,6 +338,7 @@ internal class SetJewelUIState : UIState, IClosableUIState
 
             bool hasJade = _supportSlots.Any(x => x.HasItem && x.Item.type == ModContent.ItemType<StellarJade>());
             bool hasStopwatch = _supportSlots.Any(x => x.HasItem && x.Item.type == ModContent.ItemType<BrokenStopwatch>());
+            bool hasLuckyCoin = _supportSlots.Any(x => x.HasItem && x.Item.type == ModContent.ItemType<LuckyCoin>());
 
             if (hasJade || plier.SuccessfulAttempt())
             {
@@ -346,12 +347,12 @@ internal class SetJewelUIState : UIState, IClosableUIState
                 Main.mouseItem = newJewel;
                 KillJewel();
 
-                if (hasJade)
+                if (hasJade && !hasLuckyCoin)
                     ConsumeSupportItem(ModContent.ItemType<StellarJade>());
             }
             else
             {
-                if (!hasStopwatch)
+                if (!hasStopwatch && !hasLuckyCoin)
                 {
                     if (Main.rand.NextBool()) // Kill pliers
                     {
@@ -363,8 +364,11 @@ internal class SetJewelUIState : UIState, IClosableUIState
                 }
             }
 
-            if (hasStopwatch)
+            if (hasStopwatch && !hasLuckyCoin)
                 ConsumeSupportItem(ModContent.ItemType<BrokenStopwatch>());
+
+            if (hasLuckyCoin)
+                ConsumeSupportItem(ModContent.ItemType<LuckyCoin>());
         }
 
         return false;
@@ -404,11 +408,11 @@ internal class SetJewelUIState : UIState, IClosableUIState
                     self.Item.TurnToAir();
             }
 
-            _displayJewelItems = new Item[JewelSlots] { null, null, null, null, null };
+            _displayJewelItems = [null, null, null, null, null];
         }
         else
         {
-            _displayJewel = new bool[JewelSlots] { false, false, false, false, false };
+            _displayJewel = [false, false, false, false, false];
 
             for (int i = 0; i < _jewelSlots.Length; i++)
             {
@@ -495,7 +499,7 @@ internal class SetJewelUIState : UIState, IClosableUIState
                 break;
         }
 
-        Main.npcChatText = "There you are! Proud of this one.";
+        Main.npcChatText = Language.GetTextValue("Mods.PeculiarJewelry.NPCs.Lapidarist.UIDialogue.SuccessfulSets" + Main.rand.Next(3));
     }
 
     private static bool CanJewelrySlotAcceptItem(Item item, ItemSlotUI _)

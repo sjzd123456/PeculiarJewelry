@@ -1,0 +1,57 @@
+Lapidarist: {
+	DisplayName: Lapidarist
+
+	TownNPCMood: {
+		Content: My craft can be honed here.
+		NoHome: I've a tough time with my work out here. Spare a room?
+		FarFromHome: I'm way too far from my workspace! What if my jewelry gets ruined?
+		LoveSpace: The silence keeps the focus, and the focus keeps perfection.
+		DislikeCrowded: The rooms keep shaking! How am I supposed to work?
+		HateCrowded: I hate how crowded I am.
+		LikeBiome: "{BiomeName} is the best place for my work!"
+		DislikeBiome: I'd prefer to work in an environnment more conducive than {BiomeName}.
+		HateBiome: I hate {BiomeName}.
+		LoveNPC: I love {NPCName}.
+		LikeNPC: I like {NPCName}.
+		DislikeNPC: I dislike {NPCName}.
+		HateNPC: I hate {NPCName}.
+		LikeNPC_Princess: I like {NPCName}.
+		Princess_LovesNPC: I like {NPCName}.
+	}
+
+	UIDialogue: {
+		SuccessfulSets: {
+			0: There you are! Proud of this one.
+			1: Another jewel well done. Enjoy!
+			2: Always lovely to see someone enjoy my art.
+		}
+
+		SuccessfulCuts: {
+			0: What a wonderful jewel, eh?
+			1: Polishing a stone in the rough is always a good time.
+			2: Always beautiful to see them improve.
+		}
+
+		FailedCuts: {
+			0: It can't work all the time, apologies.
+			1: Hm, couldn't make this one turn out right.
+			2: Sometimes my machinery is a bit unwieldy...
+		}
+
+		Help: {
+			Cut: Cutting improves jewels, both in fance and function.
+			Set: Setting allows you to use jewels in jewelry, unlocking their potential AND making you look good.
+			Imposition: By using two finished jewels of the same cut count, you can create a jewel that combines their strengths.
+		}
+
+		Open: {
+			Cut: Looking to improve your jewels? I'm the right guy.
+			Set: Finally, my specialty. Setting jewels is my favorite passtime.
+			Imposition: Just make sure you've got two finished jewels of the same cut count. That part always confuses people.
+		}
+	}
+
+	Census.SpawnCondition: Whenever you have at least 1 Jewel or Jewelry item
+}
+
+Chlorosprout.DisplayName: Chlorosprout

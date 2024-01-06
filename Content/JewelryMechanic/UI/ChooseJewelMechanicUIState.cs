@@ -58,11 +58,13 @@ internal class ChooseJewelMechanicUIState : UIState
 
         cutButton.OnLeftClick += (UIMouseEvent evt, UIElement listeningElement) =>
         {
-            Main.npcChatText = "You'd like a jewel cut? Give me the jewel and I can do it...for a nominal price.";
+            Main.npcChatText = Language.GetTextValue("Mods.PeculiarJewelry.NPCs.Lapidarist.UIDialogue.Open.Cut");
             Main.playerInventory = true;
 
             JewelUISystem.SwitchUI(new CutJewelUIState());
         };
+
+        cutButton.OnRightClick += CutHelp;
         panel.Append(cutButton);
 
         UIText cutJewelsText = new("Cut Jewels", 0.8f)
@@ -82,11 +84,13 @@ internal class ChooseJewelMechanicUIState : UIState
         };
         setButton.OnLeftClick += (UIMouseEvent evt, UIElement listeningElement) =>
         {
-            Main.npcChatText = "You ready to set your jewels? Be sure of your choice, lest you waste some precious stones.";
+            Main.npcChatText = Language.GetTextValue("Mods.PeculiarJewelry.NPCs.Lapidarist.UIDialogue.Open.Set");
             Main.playerInventory = true;
 
             JewelUISystem.SwitchUI(new SetJewelUIState());
         };
+
+        setButton.OnRightClick += SetHelp;
         panel.Append(setButton);
 
         UIText setText = new("Set Jewels", 0.8f)
@@ -104,13 +108,17 @@ internal class ChooseJewelMechanicUIState : UIState
             Top = StyleDimension.FromPixelsAndPercent(-30, 1),
             VAlign = 1f,
         };
+
         impositionButton.OnLeftClick += (UIMouseEvent evt, UIElement listeningElement) =>
         {
-            Main.npcChatText = "Superimposition...fun. Choose well!";
+            Main.npcChatText = Language.GetTextValue("Mods.PeculiarJewelry.NPCs.Lapidarist.UIDialogue.Open.Imposition");
             Main.playerInventory = true;
 
             JewelUISystem.SwitchUI(new SuperimpositionUIState());
         };
+
+        impositionButton.OnRightClick += ImposHelp;
+
         panel.Append(impositionButton);
 
         UIText impositionText = new("Superimposition", 0.8f)
@@ -120,4 +128,8 @@ internal class ChooseJewelMechanicUIState : UIState
         };
         impositionButton.Append(impositionText);
     }
+
+    private void ImposHelp(UIMouseEvent e, UIElement lE) => Main.npcChatText = Language.GetTextValue("Mods.PeculiarJewelry.NPCs.Lapidarist.UIDialogue.Help.Imposition");
+    private void SetHelp(UIMouseEvent e, UIElement lE) => Main.npcChatText = Language.GetTextValue("Mods.PeculiarJewelry.NPCs.Lapidarist.UIDialogue.Help.Set");
+    private void CutHelp(UIMouseEvent e, UIElement lE) => Main.npcChatText = Language.GetTextValue("Mods.PeculiarJewelry.NPCs.Lapidarist.UIDialogue.Help.Cut");
 }

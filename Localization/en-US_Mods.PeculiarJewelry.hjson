@@ -1,34 +1,6 @@
-NPCs: {
-	Lapidarist: {
-		DisplayName: Lapidarist
-
-		TownNPCMood: {
-			Content: My craft can be honed here.
-			NoHome: I've a tough time with my work out here. Spare a room?
-			FarFromHome: I'm way too far from my workspace! What if my jewelry gets ruined?
-			LoveSpace: The silence keeps the focus, and the focus keeps perfection.
-			DislikeCrowded: The rooms keep shaking! How am I supposed to work?
-			HateCrowded: I hate how crowded I am.
-			LikeBiome: "{BiomeName} is the best place for my work!"
-			DislikeBiome: I'd prefer to work in an environnment more conducive than {BiomeName}.
-			HateBiome: I hate {BiomeName}.
-			LoveNPC: I love {NPCName}.
-			LikeNPC: I like {NPCName}.
-			DislikeNPC: I dislike {NPCName}.
-			HateNPC: I hate {NPCName}.
-			LikeNPC_Princess: I like {NPCName}.
-			Princess_LovesNPC: I like {NPCName}.
-		}
-
-		Census.SpawnCondition: Conditions unknown
-	}
-
-	Chlorosprout.DisplayName: Chlorosprout
-}
-
 Projectiles: {
 	StellarJadeProjectile.DisplayName: Stellar Jade
 	TrapperMinion.DisplayName: Trapper
 	EchoProjectile.DisplayName: Echo
-	AoEProjectile.DisplayName: Ao E Projectile
+	AoEProjectile.DisplayName: Debuff Wave
 }

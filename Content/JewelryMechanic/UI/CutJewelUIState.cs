@@ -113,7 +113,7 @@ internal class CutJewelUIState : UIState, IClosableUIState
         _ => throw new ArgumentException("Uh oh! You aren't in a threshold but you are somehow."),
     };
 
-    private static float JewelCutChance(JewelInfo info, ItemSlotUI[] support, out float delta, bool onlyCheck = true)
+    private static float JewelCutChance(JewelInfo info, ItemSlotUI[] support, out float delta, bool consumeSupport = true)
     {
         delta = 0f;
         float originalChance = 1f - (info.successfulCuts * 0.05f);
@@ -143,7 +143,7 @@ internal class CutJewelUIState : UIState, IClosableUIState
 
         if (baseOverrideChance != -1)
         {
-            if (!onlyCheck)
+            if (!consumeSupport)
                 ClearSupportItems(support);
 
             delta = baseOverrideChance;
@@ -158,17 +158,23 @@ internal class CutJewelUIState : UIState, IClosableUIState
             baseChance = (item.Item.ModItem as JewelSupportItem).ModifyJewelCutChance(info, baseChance);
         }
 
-        if (!onlyCheck)
+        if (!consumeSupport)
             ClearSupportItems(support);
 
         delta = baseChance - originalChance;
         return baseChance;
     }
 
-    private static void ClearSupportItems(ItemSlotUI[] support)
+    private static void ClearSupportItems(ItemSlotUI[] support, int onlyType = -1)
     {
         foreach (var item in support)
         {
+            if (!item.HasItem)
+                continue;
+
+            if (onlyType != -1 && item.Item.type != onlyType)
+                continue;
+
             item.Item.stack--;
 
             if (item.Item.stack <= 0)
@@ -467,65 +473,80 @@ internal class CutJewelUIState : UIState, IClosableUIState
             return; // Too many cuts
         }
 
-        int coinPrice = JewelCutCoinPrice(info);
-        if (Utils.CoinsCount(out bool overflow, Main.LocalPlayer.inventory) < coinPrice || overflow)
-        {
-            UpdateInfo(Localize("NoCoins"));
-            return;
-        }
+        bool hasLuckyCoin = _supportItems.Any(x => !x.Item.IsAir && x.Item.type == ModContent.ItemType<LuckyCoin>());
 
-        int dustPrice = JewelCutDustPrice(info);
-        if (Main.LocalPlayer.CountItem(ModContent.ItemType<SparklyDust>()) < dustPrice)
+        if (!hasLuckyCoin) // Skip all price checks and consumption checks
         {
-            UpdateInfo(Language.GetText("Mods.PeculiarJewelry.UI.CutMenu.NoDust").WithFormatArgs(ModContent.ItemType<SparklyDust>()).Value);
-            return;
-        }
-
-        if (info.InThresholdCut())
-        {
-            int echoType = JewelCutEchoType(info.cuts);
-            int count = Main.LocalPlayer.CountItem(echoType, 2) + Main.LocalPlayer.CountItem(ModContent.ItemType<TranscendantEcho>(), 2);
-
-            if (count < 2)
+            int coinPrice = JewelCutCoinPrice(info);
+            if (Utils.CoinsCount(out bool overflow, Main.LocalPlayer.inventory) < coinPrice || overflow)
             {
-                UpdateInfo($"{Localize("NotEnough")} [i:{echoType}]\n[c/ff0000:({Lang.GetItemNameValue(echoType)})]!");
+                UpdateInfo(Localize("NoCoins"));
                 return;
             }
-        }
 
-        for (int i = 0; i < dustPrice; ++i)
-            Main.LocalPlayer.ConsumeItem(ModContent.ItemType<SparklyDust>(), true);
-
-        if (info.InThresholdCut())
-        {
-            int count = 2;
-            int transcendantCount = Main.LocalPlayer.CountItem(ModContent.ItemType<TranscendantEcho>(), 2);
-
-            if (transcendantCount > 0)
+            int dustPrice = JewelCutDustPrice(info);
+            if (Main.LocalPlayer.CountItem(ModContent.ItemType<SparklyDust>()) < dustPrice)
             {
-                for (int i = 0; i < transcendantCount; ++i)
-                    Main.LocalPlayer.ConsumeItem(ModContent.ItemType<TranscendantEcho>(), true);
+                UpdateInfo(Language.GetText("Mods.PeculiarJewelry.UI.CutMenu.NoDust").WithFormatArgs(ModContent.ItemType<SparklyDust>()).Value);
+                return;
             }
 
-            count -= transcendantCount;
-
-            if (count > 0)
+            if (info.InThresholdCut())
             {
                 int echoType = JewelCutEchoType(info.cuts);
+                int count = Main.LocalPlayer.CountItem(echoType, 2) + Main.LocalPlayer.CountItem(ModContent.ItemType<TranscendantEcho>(), 2);
 
-                for (int i = 0; i < count; ++i)
-                    Main.LocalPlayer.ConsumeItem(echoType, true);
+                if (count < 2)
+                {
+                    UpdateInfo($"{Localize("NotEnough")} [i:{echoType}]\n[c/ff0000:({Lang.GetItemNameValue(echoType)})]!");
+                    return;
+                }
             }
+
+            for (int i = 0; i < dustPrice; ++i) // Consume dust
+                Main.LocalPlayer.ConsumeItem(ModContent.ItemType<SparklyDust>(), true);
+
+            if (info.InThresholdCut()) // Consume echoes
+            {
+                int count = 2;
+                int transcendantCount = Main.LocalPlayer.CountItem(ModContent.ItemType<TranscendantEcho>(), 2);
+
+                if (transcendantCount > 0)
+                {
+                    for (int i = 0; i < transcendantCount; ++i)
+                        Main.LocalPlayer.ConsumeItem(ModContent.ItemType<TranscendantEcho>(), true);
+                }
+
+                count -= transcendantCount;
+
+                if (count > 0)
+                {
+                    int echoType = JewelCutEchoType(info.cuts);
+
+                    for (int i = 0; i < count; ++i)
+                        Main.LocalPlayer.ConsumeItem(echoType, true);
+                }
+            }
+
+            Main.LocalPlayer.BuyItem(coinPrice); // Consume coins
         }
 
-        Main.LocalPlayer.BuyItem(coinPrice);
+        bool success = info.TryAddCut(JewelCutChance(info, _supportItems, out _, !hasLuckyCoin));
         SoundEngine.PlaySound(SoundID.NPCHit4, Main.LocalPlayer.Center);
-        bool success = info.TryAddCut(JewelCutChance(info, _supportItems, out _, false));
+
+        if (hasLuckyCoin)
+            ClearSupportItems(_supportItems, ModContent.ItemType<LuckyCoin>());
 
         if (success)
+        {
             UpdateInfo(Localize("SuccessfulCut"));
+            Main.npcChatText = Language.GetTextValue("Mods.PeculiarJewelry.NPCs.Lapidarist.UIDialogue.SuccessfulCuts" + Main.rand.Next(3));
+        }
         else
+        {
             UpdateInfo(Localize("FailedCut"));
+            Main.npcChatText = Language.GetTextValue("Mods.PeculiarJewelry.NPCs.Lapidarist.UIDialogue.FailedCuts" + Main.rand.Next(3));
+        }
     }
 
     public void Close()
