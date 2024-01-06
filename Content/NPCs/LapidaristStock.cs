@@ -3,6 +3,7 @@ using PeculiarJewelry.Content.Items.JewelryItems;
 using PeculiarJewelry.Content.Items.Jewels;
 using PeculiarJewelry.Content.Items.JewelSupport;
 using PeculiarJewelry.Content.Items.Pliers;
+using PeculiarJewelry.Content.Items.RadiantEchoes;
 using PeculiarJewelry.Content.Items.Tiles;
 using PeculiarJewelry.Content.JewelryMechanic;
 using Steamworks;
@@ -28,6 +29,8 @@ internal class LapidaristStock : StockedShop
             pool.Add(ModContent.ItemType<BrokenStopwatch>(), 4);
             pool.Add(ModContent.ItemType<StellarJade>(), 1);
             pool.Add(ModContent.ItemType<How2GetRich>(), 0.15f);
+            pool.Add(ModContent.ItemType<HeavenlyRevelation>(), 1);
+            pool.Add(ModContent.ItemType<TranscendantEcho>(), 1);
             return pool;
         }
     }
@@ -40,7 +43,7 @@ internal class LapidaristStock : StockedShop
             pool.Add(BasicJewelry.JewelryTier.Ordinary, 5);
             pool.Add(BasicJewelry.JewelryTier.Pretty, 4);
             pool.Add(BasicJewelry.JewelryTier.Elegant, 3);
-            pool.Add(BasicJewelry.JewelryTier.Elaborant, 2);
+            pool.Add(BasicJewelry.JewelryTier.Elaborate, 2);
             pool.Add(BasicJewelry.JewelryTier.Extravagant, 1);
             return pool;
         }
@@ -49,9 +52,10 @@ internal class LapidaristStock : StockedShop
     public override int NPCType => ModContent.NPCType<Lapidarist>();
     public override string RestockCondition => "Once a day";
 
+    private readonly ShopItem[] _jewelItems = new ShopItem[JewelCount];
+    private readonly ShopItem[] _jewelryItems = new ShopItem[JewelryCount];
+
     private int _miscItemID = 0;
-    private ShopItem[] _jewelItems = new ShopItem[JewelCount];
-    private ShopItem[] _jewelryItems = new ShopItem[JewelryCount];
 
     public override void SetupStock(NPC npc)
     {
@@ -71,6 +75,8 @@ internal class LapidaristStock : StockedShop
         FullStock.Add(MiscShopItem<BrokenStopwatch>(10, Item.buyPrice(gold: 25)));
         FullStock.Add(MiscShopItem<StellarJade>(1, Item.buyPrice(platinum: 1)));
         FullStock.Add(MiscShopItem<How2GetRich>(1, Item.buyPrice(platinum: 5)));
+        FullStock.Add(MiscShopItem<HeavenlyRevelation>(1, Item.buyPrice(platinum: 1)));
+        FullStock.Add(MiscShopItem<TranscendantEcho>(1, Item.buyPrice(platinum: 1)));
 
         // Jewels (3)
         for (int i = 0; i < JewelCount; ++i)

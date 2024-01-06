@@ -484,8 +484,9 @@ internal class CutJewelUIState : UIState, IClosableUIState
         if (info.InThresholdCut())
         {
             int echoType = JewelCutEchoType(info.cuts);
+            int count = Main.LocalPlayer.CountItem(echoType, 2) + Main.LocalPlayer.CountItem(ModContent.ItemType<TranscendantEcho>(), 2);
 
-            if (Main.LocalPlayer.CountItem(echoType, 2) < 2)
+            if (count < 2)
             {
                 UpdateInfo($"{Localize("NotEnough")} [i:{echoType}]\n[c/ff0000:({Lang.GetItemNameValue(echoType)})]!");
                 return;
@@ -497,10 +498,24 @@ internal class CutJewelUIState : UIState, IClosableUIState
 
         if (info.InThresholdCut())
         {
-            int echoType = JewelCutEchoType(info.cuts);
+            int count = 2;
+            int transcendantCount = Main.LocalPlayer.CountItem(ModContent.ItemType<TranscendantEcho>(), 2);
 
-            for (int i = 0; i < 2; ++i)
-                Main.LocalPlayer.ConsumeItem(echoType, true);
+            if (transcendantCount > 0)
+            {
+                for (int i = 0; i < transcendantCount; ++i)
+                    Main.LocalPlayer.ConsumeItem(ModContent.ItemType<TranscendantEcho>(), true);
+            }
+
+            count -= transcendantCount;
+
+            if (count > 0)
+            {
+                int echoType = JewelCutEchoType(info.cuts);
+
+                for (int i = 0; i < count; ++i)
+                    Main.LocalPlayer.ConsumeItem(echoType, true);
+            }
         }
 
         Main.LocalPlayer.BuyItem(coinPrice);

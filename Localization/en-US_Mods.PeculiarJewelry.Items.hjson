@@ -2184,11 +2184,30 @@ How2GetRich: {
 	Tooltip:
 		'''
 		Allows you to hand craft any random quality of jewelry
-		'by Leff Rezos'
+		'by Mill. E. Onare'
 		'''
 }
 
 DisplayCase: {
 	DisplayName: Display Case
-	Tooltip: ""
+	Tooltip: Allows you to display one jewel or jewelry piece
+}
+
+HeavenlyRevelation: {
+	DisplayName: Heavenly Revelation
+	Tooltip:
+		'''
+		The next piece of jewelry you craft will be Extravagant
+		'Powerful things speak to you, bestowing strong but temporary knowledge'
+		'''
+}
+
+TranscendantEcho: {
+	DisplayName: True Transcendant Echo
+	Tooltip:
+		'''
+		Can be used as a substitute for any single Radiant Echo
+		Prioritized when using Echoes, so make sure to not use them by accident!
+		'Contains thousands of words and thoughts simultaneously'
+		'''
 }

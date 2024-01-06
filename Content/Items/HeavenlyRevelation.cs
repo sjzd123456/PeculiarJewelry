@@ -3,39 +3,39 @@ using Terraria.ModLoader.IO;
 
 namespace PeculiarJewelry.Content.Items;
 
-public class How2GetRich : ModItem
+public class HeavenlyRevelation : ModItem
 {
     public override void SetDefaults()
     {
         Item.CloneDefaults(ItemID.LifeCrystal);
-        Item.Size = new(36, 42);
+        Item.Size = new(44, 46);
         Item.rare = ModContent.RarityType<JewelRarity>();
         Item.noMelee = true;
         Item.value = Item.buyPrice(platinum: 5);
     }
 
-    public override bool CanUseItem(Player player) => !player.GetModPlayer<RichPlayer>().isRich;
+    public override bool CanUseItem(Player player) => !player.GetModPlayer<RevelationPlayer>().hasReveled;
 
     public override bool? UseItem(Player player)
     {
-        player.GetModPlayer<RichPlayer>().isRich = true;
+        player.GetModPlayer<RevelationPlayer>().hasReveled = true;
         return true;
     }
 }
 
-public class RichPlayer : ModPlayer
+public class RevelationPlayer : ModPlayer
 {
-    public bool isRich = false;
+    public bool hasReveled = false;
 
     public override void SaveData(TagCompound tag)
     {
-        if (isRich)
-            tag.Add("isRich", true);
+        if (hasReveled)
+            tag.Add(nameof(hasReveled), true);
     }
 
     public override void LoadData(TagCompound tag)
     {
-        if (tag.ContainsKey("isRich"))
-            isRich = true;
+        if (tag.ContainsKey(nameof(hasReveled)))
+            hasReveled = true;
     }
 }

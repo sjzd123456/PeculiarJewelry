@@ -18,7 +18,7 @@ public abstract class BasicJewelry : ModItem
         Ordinary,
         Pretty,
         Elegant,
-        Elaborant,
+        Elaborate,
         Extravagant,
     }
 
@@ -166,7 +166,17 @@ public abstract class BasicJewelry : ModItem
 
     public override void OnCreated(ItemCreationContext context)
     {
-        if (context is RecipeItemCreationContext recipe && Main.LocalPlayer.GetModPlayer<RichPlayer>().isRich)
+        if (context is not RecipeItemCreationContext)
+            return;
+
+        if (Main.LocalPlayer.GetModPlayer<RevelationPlayer>().hasReveled)
+        {
+            Main.LocalPlayer.GetModPlayer<RevelationPlayer>().hasReveled = false;
+            tier = JewelryTier.Extravagant;
+            return;
+        }
+
+        if (Main.LocalPlayer.GetModPlayer<RichPlayer>().isRich)
             tier = (JewelryTier)Main.rand.Next((int)JewelryTier.Extravagant + 1);
     }
 

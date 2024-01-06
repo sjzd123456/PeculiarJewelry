@@ -56,3 +56,14 @@ public class QuintRadiantEcho : ModItem
         Item.maxStack = Item.CommonMaxStack;
     }
 }
+
+public class TranscendantEcho : ModItem
+{
+    public override void SetDefaults()
+    {
+        Item.rare = ModContent.RarityType<JewelRarity>();
+        Item.value = Item.buyPrice(platinum: 1);
+        Item.Size = new(40, 42);
+        Item.maxStack = Item.CommonMaxStack;
+    }
+}
