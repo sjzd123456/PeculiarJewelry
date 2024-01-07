@@ -8,7 +8,7 @@ public class LuckyCoin : JewelSupportItem
     {
         Item.rare = ModContent.RarityType<JewelRarity>();
         Item.value = Item.sellPrice(gold: 15);
-        Item.Size = new(22);
+        Item.Size = new(28);
         Item.maxStack = Item.CommonMaxStack;
     }
 }

@@ -51,7 +51,7 @@ StellarJade: {
 }
 
 CursedDollar: {
-	DisplayName: Cursed Dollar
+	DisplayName: Cursed Coin
 	Tooltip:
 		'''
 		Sets the chance of any jewel cut attempt to 50/50
@@ -2213,6 +2213,6 @@ TranscendantEcho: {
 }
 
 LuckyCoin: {
-	DisplayName: Lucky Coin
-	Tooltip: ""
+	DisplayName: Lucky Penny
+	Tooltip: Stops anything but itself from being consumed when setting or cutting jewels
 }

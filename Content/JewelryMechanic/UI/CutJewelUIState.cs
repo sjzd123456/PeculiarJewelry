@@ -505,31 +505,11 @@ internal class CutJewelUIState : UIState, IClosableUIState
 
             for (int i = 0; i < dustPrice; ++i) // Consume dust
                 Main.LocalPlayer.ConsumeItem(ModContent.ItemType<SparklyDust>(), true);
-
-            if (info.InThresholdCut()) // Consume echoes
-            {
-                int count = 2;
-                int transcendantCount = Main.LocalPlayer.CountItem(ModContent.ItemType<TranscendantEcho>(), 2);
-
-                if (transcendantCount > 0)
-                {
-                    for (int i = 0; i < transcendantCount; ++i)
-                        Main.LocalPlayer.ConsumeItem(ModContent.ItemType<TranscendantEcho>(), true);
-                }
-
-                count -= transcendantCount;
-
-                if (count > 0)
-                {
-                    int echoType = JewelCutEchoType(info.cuts);
-
-                    for (int i = 0; i < count; ++i)
-                        Main.LocalPlayer.ConsumeItem(echoType, true);
-                }
-            }
-
+            
             Main.LocalPlayer.BuyItem(coinPrice); // Consume coins
         }
+
+        TryConsumeEchoes(info);
 
         bool success = info.TryAddCut(JewelCutChance(info, _supportItems, out _, !hasLuckyCoin));
         SoundEngine.PlaySound(SoundID.NPCHit4, Main.LocalPlayer.Center);
@@ -546,6 +526,31 @@ internal class CutJewelUIState : UIState, IClosableUIState
         {
             UpdateInfo(Localize("FailedCut"));
             Main.npcChatText = Language.GetTextValue("Mods.PeculiarJewelry.NPCs.Lapidarist.UIDialogue.FailedCuts" + Main.rand.Next(3));
+        }
+    }
+
+    private static void TryConsumeEchoes(JewelInfo info)
+    {
+        if (info.InThresholdCut())
+        {
+            int count = 2;
+            int transcendantCount = Main.LocalPlayer.CountItem(ModContent.ItemType<TranscendantEcho>(), 2);
+
+            if (transcendantCount > 0)
+            {
+                for (int i = 0; i < transcendantCount; ++i)
+                    Main.LocalPlayer.ConsumeItem(ModContent.ItemType<TranscendantEcho>(), true);
+            }
+
+            count -= transcendantCount;
+
+            if (count > 0)
+            {
+                int echoType = JewelCutEchoType(info.cuts);
+
+                for (int i = 0; i < count; ++i)
+                    Main.LocalPlayer.ConsumeItem(echoType, true);
+            }
         }
     }
 
