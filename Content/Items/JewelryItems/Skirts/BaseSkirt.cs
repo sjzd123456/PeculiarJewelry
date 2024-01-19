@@ -90,32 +90,32 @@ internal class SkirtLoader : ILoadable
     {
         // Prehardmode
         AddSkirt("Copper", ItemID.CopperBar);
-        //AddChoker("Tin", ItemID.TinBar);
-        //AddChoker("Iron", ItemID.IronBar);
-        //AddChoker("Lead", ItemID.LeadBar);
-        //AddChoker("Silver", ItemID.SilverBar);
-        //AddChoker("Tungsten", ItemID.TungstenBar);
-        //AddChoker("Gold", ItemID.GoldBar);
-        //AddChoker("Platinum", ItemID.PlatinumBar);
-        //AddChoker("Demonite", ItemID.DemoniteBar);
-        //AddChoker("Crimtane", ItemID.CrimtaneBar);
-        //AddChoker("Meteorite", ItemID.MeteoriteBar);
-        //AddChoker("Hellstone", ItemID.HellstoneBar);
+        AddSkirt("Tin", ItemID.TinBar);
+        AddSkirt("Iron", ItemID.IronBar);
+        AddSkirt("Lead", ItemID.LeadBar);
+        AddSkirt("Silver", ItemID.SilverBar);
+        AddSkirt("Tungsten", ItemID.TungstenBar);
+        AddSkirt("Gold", ItemID.GoldBar);
+        AddSkirt("Platinum", ItemID.PlatinumBar);
+        AddSkirt("Demonite", ItemID.DemoniteBar);
+        AddSkirt("Crimtane", ItemID.CrimtaneBar);
+        AddSkirt("Meteorite", ItemID.MeteoriteBar);
+        AddSkirt("Hellstone", ItemID.HellstoneBar);
 
         //// Hardmode
-        //AddChoker("Cobalt", ItemID.CobaltBar);
-        //AddChoker("Palladium", ItemID.PalladiumBar);
-        //AddChoker("Mythril", ItemID.MythrilBar);
-        //AddChoker("Orichalcum", ItemID.OrichalcumBar);
-        //AddChoker("Adamantite", ItemID.AdamantiteBar);
-        //AddChoker("Titanium", ItemID.TitaniumBar);
-        //AddChoker("Hallowed", ItemID.HallowedBar);
-        //AddChoker("Chlorophyte", ItemID.ChlorophyteBar);
-        //AddChoker("Beetle", ItemID.BeetleHusk);
-        //AddChoker("Shroomite", ItemID.ShroomiteBar);
-        //AddChoker("Spectre", ItemID.SpectreBar);
-        //AddChoker("Spooky", ItemID.SpookyWood);
-        //AddChoker("Luminite", ItemID.LunarBar);
+        //AddSkirt("Cobalt", ItemID.CobaltBar);
+        //AddSkirt("Palladium", ItemID.PalladiumBar);
+        //AddSkirt("Mythril", ItemID.MythrilBar);
+        //AddSkirt("Orichalcum", ItemID.OrichalcumBar);
+        //AddSkirt("Adamantite", ItemID.AdamantiteBar);
+        //AddSkirt("Titanium", ItemID.TitaniumBar);
+        //AddSkirt("Hallowed", ItemID.HallowedBar);
+        //AddSkirt("Chlorophyte", ItemID.ChlorophyteBar);
+        //AddSkirt("Beetle", ItemID.BeetleHusk);
+        //AddSkirt("Shroomite", ItemID.ShroomiteBar);
+        //AddSkirt("Spectre", ItemID.SpectreBar);
+        //AddSkirt("Spooky", ItemID.SpookyWood);
+        //AddSkirt("Luminite", ItemID.LunarBar);
     }
 
     private static bool AddSkirt(string category, int material)

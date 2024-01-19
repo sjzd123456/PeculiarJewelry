@@ -2233,5 +2233,108 @@ Grindstone: {
 
 CopperSkirt: {
 	DisplayName: Copper Skirt
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Copper.1Set}
+		'''
+}
+
+TinSkirt: {
+	DisplayName: Tin Skirt
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Tin.1Set}
+		'''
+}
+
+IronSkirt: {
+	DisplayName: Iron Skirt
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Iron.1Set}
+		'''
+}
+
+LeadSkirt: {
+	DisplayName: Lead Skirt
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Lead.1Set}
+		'''
+}
+
+SilverSkirt: {
+	DisplayName: Silver Skirt
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Silver.1Set}
+		'''
+}
+
+TungstenSkirt: {
+	DisplayName: Tungsten Skirt
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Tungsten.1Set}
+		'''
+}
+
+GoldSkirt: {
+	DisplayName: Gold Skirt
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Gold.1Set}
+		'''
+}
+
+PlatinumSkirt: {
+	DisplayName: Platinum Skirt
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Platinum.1Set}
+		'''
+}
+
+DemoniteSkirt: {
+	DisplayName: Demonite Skirt
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Demonite.1Set}
+		'''
+}
+
+CrimtaneSkirt: {
+	DisplayName: Crimtane Skirt
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Crimtane.1Set}
+		'''
+}
+
+MeteoriteSkirt: {
+	DisplayName: Meteorite Skirt
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Meteorite.1Set}
+		'''
+}
+
+HellstoneSkirt: {
+	DisplayName: Hellstone Skirt
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Hellstone.1Set}
+		'''
 }
