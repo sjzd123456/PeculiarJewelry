@@ -1,18 +1,23 @@
+using Mono.Cecil;
+using PeculiarJewelry.Content.Items.JewelSupport;
 using PeculiarJewelry.Content.Items.Tiles;
+using PeculiarJewelry.Content.JewelryMechanic.GrindstoneSystem;
 using PeculiarJewelry.Content.JewelryMechanic.Stats;
 using PeculiarJewelry.Content.JewelryMechanic.Stats.IO;
+using PeculiarJewelry.Content.JewelryMechanic.UI;
 using PeculiarJewelry.Content.NPCs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent;
-using Terraria.GameInput;
 using Terraria.ModLoader.IO;
+using Terraria.Utilities;
 
 namespace PeculiarJewelry.Content.Items.Jewels;
 
-public abstract class Jewel : ModItem
+public abstract class Jewel : ModItem, IGrindableItem
 {
     protected abstract Type InfoType { get; }
 
@@ -20,6 +25,11 @@ public abstract class Jewel : ModItem
 
     public sealed override void SetDefaults()
     {
+        Item.useStyle = ItemUseStyleID.Swing;
+        Item.useTime = Item.useAnimation = 8;
+        Item.noUseGraphic = true;
+        Item.autoReuse = true;
+
         info = Activator.CreateInstance(InfoType) as JewelInfo;
         info.Setup(JewelTier.Natural); //Info is tier 0 by default 
 
@@ -112,5 +122,55 @@ public abstract class Jewel : ModItem
     {
         TagCompound infoCompound = tag.GetCompound("info");
         info = JewelIO.LoadInfo(infoCompound);
+    }
+
+    public bool GrindstoneUse(int i, int j, IEntitySource source)
+    {
+        int totalDustCount = 0;
+
+        for (int x = 0; x < info.cuts; ++x)
+            totalDustCount += CutJewelUIState.JewelCutDustPrice(info.tier, x);
+
+        Item.NewItem(source, Main.MouseWorld, ModContent.ItemType<SparklyDust>(), (int)(totalDustCount * 0.2f), noGrabDelay: true);
+        ExtractSubStats(1f, source);
+
+        if (info.cuts > 10)
+            ExtractSupportItems(source);
+
+        if (--Item.stack < 0)
+            Item.TurnToAir();
+
+        return true;
+    }
+
+    private void ExtractSupportItems(IEntitySource source)
+    {
+        float chance = (info.cuts - 9f) / 100f;
+
+        if (Main.rand.NextFloat() < chance)
+        {
+            var pool = new WeightedRandom<int>();
+            pool.Add(ModContent.ItemType<CursedDollar>(), 1);
+            pool.Add(ModContent.ItemType<IrradiatedPearl>(), 2);
+            pool.Add(ModContent.ItemType<GoldenCarpScales>(), 2);
+            pool.Add(ModContent.ItemType<CelestialEye>(), 2);
+            pool.Add(ModContent.ItemType<BrokenStopwatch>(), 4);
+            pool.Add(ModContent.ItemType<StellarJade>(), 1);
+            Item.NewItem(source, Main.MouseWorld, new Item(pool), false, true);
+        }
+    }
+
+    private void ExtractSubStats(float ratio, IEntitySource source)
+    {
+        foreach (var stat in info.SubStats)
+        {
+            if (Main.rand.NextFloat() * ratio > 0.025f * stat.Strength)
+                continue;
+
+            Item item = new(ModContent.ItemType<SubShard>());
+            SubShard shard = item.ModItem as SubShard;
+            shard.stat = stat;
+            Item.NewItem(source, Main.MouseWorld, item, false, true);
+        }
     }
 }

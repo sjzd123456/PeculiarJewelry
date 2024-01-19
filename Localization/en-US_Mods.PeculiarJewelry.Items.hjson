@@ -2216,3 +2216,22 @@ LuckyCoin: {
 	DisplayName: Lucky Penny
 	Tooltip: Stops anything but itself from being consumed when setting or cutting jewels
 }
+
+SubShard: {
+	DisplayName: Sub Shard
+	Tooltip: Contains a small amount of power, which can be used for jewels
+}
+
+Grindstone: {
+	DisplayName: Grindstone
+	Tooltip:
+		'''
+		Can be used to grind jewels into [i:PeculiarJewelry/SparklyDust] and [i:PeculiarJewelry/SubShard]
+		'Covered in flecks and spots'
+		'''
+}
+
+CopperSkirt: {
+	DisplayName: Copper Skirt
+	Tooltip: ""
+}

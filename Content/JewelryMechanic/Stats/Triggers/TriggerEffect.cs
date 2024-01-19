@@ -44,7 +44,7 @@ internal abstract class TriggerEffect : ModType
     public TriggerEffect()
     {
         if (Type != TriggerType.Conditional)
-            Context = (TriggerContext)Main.rand.Next((int)TriggerContext.WhenBelowHalfHealth);
+            Context = (TriggerContext)Main.rand.Next((int)TriggerContext.OnTakeDamage, (int)TriggerContext.WhenBelowHalfHealth);
         else
             Context = (TriggerContext)Main.rand.Next((int)TriggerContext.WhenBelowHalfHealth, (int)TriggerContext.Max);
     }

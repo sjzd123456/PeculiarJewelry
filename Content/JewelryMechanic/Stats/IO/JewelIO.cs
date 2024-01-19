@@ -76,7 +76,7 @@ internal static class JewelIO
         return tag;
     }
 
-    private static JewelStat LoadStat(TagCompound tag)
+    public static JewelStat LoadStat(TagCompound tag)
     {
         JewelStat stat = new((StatType)tag.GetByte("statType"))
         {

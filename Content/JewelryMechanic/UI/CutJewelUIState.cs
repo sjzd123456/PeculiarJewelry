@@ -5,7 +5,6 @@ using PeculiarJewelry.Content.Items.RadiantEchoes;
 using PeculiarJewelry.Content.JewelryMechanic.Stats;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -101,7 +100,9 @@ internal class CutJewelUIState : UIState, IClosableUIState
     }
 
     private static int JewelCutCoinPrice(JewelInfo info) => Item.buyPrice(0, 1) * ((int)info.tier + info.successfulCuts + 1);
-    private static int JewelCutDustPrice(JewelInfo info) => ((int)info.tier + 1) * (info.successfulCuts + 1);
+    private static int JewelCutDustPrice(JewelInfo info) => JewelCutDustPrice(info.tier, info.successfulCuts);
+
+    public static int JewelCutDustPrice(JewelTier tier, int successfulCuts) => ((int)tier+ 1) * (successfulCuts + 1);
 
     private static int JewelCutEchoType(int cuts) => cuts switch
     {
