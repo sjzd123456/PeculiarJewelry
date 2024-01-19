@@ -48,7 +48,7 @@ internal class SpookyBonus : BaseMaterialBonus
         private float doT = 0;
         private float visualDoT = 0;
 
-        public override void ResetEffects() => fiveSet = threeSet = true;
+        public override void ResetEffects() => fiveSet = threeSet = false;
 
         public override void UpdateBadLifeRegen()
         {
