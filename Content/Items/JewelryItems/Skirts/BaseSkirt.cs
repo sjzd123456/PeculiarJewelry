@@ -69,7 +69,7 @@ public class BaseSkirt(string name, string category, int mat) : BasicJewelry
     public override void AddRecipes()
     {
         CreateRecipe()
-            .AddIngredient(_material, 6)
+            .AddIngredient(_material, 4)
             .AddIngredient(ItemID.Silk, 6)
             .AddTile(TileID.Loom)
             .Register();
@@ -103,19 +103,19 @@ internal class SkirtLoader : ILoadable
         AddSkirt("Hellstone", ItemID.HellstoneBar);
 
         //// Hardmode
-        //AddSkirt("Cobalt", ItemID.CobaltBar);
-        //AddSkirt("Palladium", ItemID.PalladiumBar);
-        //AddSkirt("Mythril", ItemID.MythrilBar);
-        //AddSkirt("Orichalcum", ItemID.OrichalcumBar);
-        //AddSkirt("Adamantite", ItemID.AdamantiteBar);
-        //AddSkirt("Titanium", ItemID.TitaniumBar);
-        //AddSkirt("Hallowed", ItemID.HallowedBar);
-        //AddSkirt("Chlorophyte", ItemID.ChlorophyteBar);
-        //AddSkirt("Beetle", ItemID.BeetleHusk);
-        //AddSkirt("Shroomite", ItemID.ShroomiteBar);
-        //AddSkirt("Spectre", ItemID.SpectreBar);
-        //AddSkirt("Spooky", ItemID.SpookyWood);
-        //AddSkirt("Luminite", ItemID.LunarBar);
+        AddSkirt("Cobalt", ItemID.CobaltBar);
+        AddSkirt("Palladium", ItemID.PalladiumBar);
+        AddSkirt("Mythril", ItemID.MythrilBar);
+        AddSkirt("Orichalcum", ItemID.OrichalcumBar);
+        AddSkirt("Adamantite", ItemID.AdamantiteBar);
+        AddSkirt("Titanium", ItemID.TitaniumBar);
+        AddSkirt("Hallowed", ItemID.HallowedBar);
+        AddSkirt("Chlorophyte", ItemID.ChlorophyteBar);
+        AddSkirt("Beetle", ItemID.BeetleHusk);
+        AddSkirt("Shroomite", ItemID.ShroomiteBar);
+        AddSkirt("Spectre", ItemID.SpectreBar);
+        AddSkirt("Spooky", ItemID.SpookyWood);
+        AddSkirt("Luminite", ItemID.LunarBar);
     }
 
     private static bool AddSkirt(string category, int material)

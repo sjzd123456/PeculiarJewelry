@@ -2338,3 +2338,73 @@ HellstoneSkirt: {
 		{$Material.Bonuses.Hellstone.1Set}
 		'''
 }
+
+BeetleRing: {
+	DisplayName: Beetle Ring
+	Tooltip: ""
+}
+
+CobaltSkirt: {
+	DisplayName: Cobalt Skirt
+	Tooltip: ""
+}
+
+PalladiumSkirt: {
+	DisplayName: Palladium Skirt
+	Tooltip: ""
+}
+
+MythrilSkirt: {
+	DisplayName: Mythril Skirt
+	Tooltip: ""
+}
+
+OrichalcumSkirt: {
+	DisplayName: Orichalcum Skirt
+	Tooltip: ""
+}
+
+AdamantiteSkirt: {
+	DisplayName: Adamantite Skirt
+	Tooltip: ""
+}
+
+TitaniumSkirt: {
+	DisplayName: Titanium Skirt
+	Tooltip: ""
+}
+
+HallowedSkirt: {
+	DisplayName: Hallowed Skirt
+	Tooltip: ""
+}
+
+ChlorophyteSkirt: {
+	DisplayName: Chlorophyte Skirt
+	Tooltip: ""
+}
+
+BeetleSkirt: {
+	DisplayName: Beetle Skirt
+	Tooltip: ""
+}
+
+ShroomiteSkirt: {
+	DisplayName: Shroomite Skirt
+	Tooltip: ""
+}
+
+SpectreSkirt: {
+	DisplayName: Spectre Skirt
+	Tooltip: ""
+}
+
+SpookySkirt: {
+	DisplayName: Spooky Skirt
+	Tooltip: ""
+}
+
+LuminiteSkirt: {
+	DisplayName: Luminite Skirt
+	Tooltip: ""
+}
