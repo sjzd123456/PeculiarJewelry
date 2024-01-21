@@ -87,7 +87,7 @@ internal class JewelHandsOnLayer : PlayerDrawLayer
         var effect = player.direction == 1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
         Vector2 basePosition = new(-player.bodyFrame.Width / 2 + player.width / 2, player.height - player.bodyFrame.Height + 4);
         Vector2 position = (drawInfo.Position - Main.screenPosition + basePosition).Floor() + player.headPosition;
-        var data = new DrawData(info.Texture, position, player.bodyFrame, color, 0f, Vector2.Zero, 1f, effect)
+        var data = new DrawData(info.Texture, position, drawInfo.compFrontArmFrame, color, 0f, Vector2.Zero, 1f, effect)
         {
             shader = player.cHandOn
         };
@@ -135,6 +135,29 @@ internal class JewelShoesLayer : PlayerDrawLayer
             var data = new DrawData(info.Texture, position, player.bodyFrame, color, 0f, Vector2.Zero, 1f, effect)
             {
                 shader = player.cShoe
+            };
+            drawInfo.DrawDataCache.Add(data);
+        }
+    }
+}
+
+internal class JewelWaistLayer : PlayerDrawLayer
+{
+    public override Position GetDefaultPosition() => new AfterParent(PlayerDrawLayers.WaistAcc);
+
+    protected override void Draw(ref PlayerDrawSet drawInfo)
+    {
+        var player = drawInfo.drawPlayer;
+
+        if (player.GetModPlayer<MaterialPlayer>().HasEquip(EquipType.Waist, out var info))
+        {
+            var color = Lighting.GetColor(player.Center.ToTileCoordinates(), info.Color);
+            var effect = player.direction == 1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
+            Vector2 basePosition = new(-player.bodyFrame.Width / 2 + player.width / 2, player.height - player.bodyFrame.Height + 4);
+            Vector2 position = (drawInfo.Position - Main.screenPosition + basePosition).Floor() + player.headPosition;
+            var data = new DrawData(info.Texture, position, player.bodyFrame, color, 0f, Vector2.Zero, 1f, effect)
+            {
+                shader = player.cWaist
             };
             drawInfo.DrawDataCache.Add(data);
         }

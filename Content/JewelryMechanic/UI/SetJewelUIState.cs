@@ -222,11 +222,11 @@ internal class SetJewelUIState : UIState, IClosableUIState
         };
         panel.Append(cutText);
 
-        _displayJewel = new bool[JewelSlots] { false, false, false, false, false };
-        _displayJewelItems = new Item[JewelSlots] { null, null, null, null, null };
+        _displayJewel = [false, false, false, false, false];
+        _displayJewelItems = [null, null, null, null, null];
         Item air = new();
         air.TurnToAir();
-        _jewelrySlot = new(new Item[] { air }, 0, ItemSlot.Context.ChestItem, CanJewelrySlotAcceptItem)
+        _jewelrySlot = new([air], 0, ItemSlot.Context.ChestItem, CanJewelrySlotAcceptItem)
         {
             HAlign = 0.5f,
             Top = StyleDimension.FromPixels(110)
@@ -245,7 +245,7 @@ internal class SetJewelUIState : UIState, IClosableUIState
         for (int i = 0; i < JewelSlots; ++i)
         {
             int slot = i;
-            _jewelSlots[i] = new(new Item[] { air }, 0, ItemSlot.Context.ChestItem, (Item item, ItemSlotUI _) => CanJewelSlotAcceptItem(ref item, slot))
+            _jewelSlots[i] = new([air], 0, ItemSlot.Context.ChestItem, (Item item, ItemSlotUI _) => CanJewelSlotAcceptItem(ref item, slot))
             {
                 HAlign = 0.5f,
                 Left = StyleDimension.FromPixels((i - 2) * 52),
@@ -264,7 +264,7 @@ internal class SetJewelUIState : UIState, IClosableUIState
         _supportSlots = new ItemSlotUI[3];
         for (int i = 0; i < 3; ++i)
         {
-            _supportSlots[i] = new(new Item[] { air }, 0, ItemSlot.Context.ChestItem, CanSupportSlotAcceptItem)
+            _supportSlots[i] = new([air], 0, ItemSlot.Context.ChestItem, CanSupportSlotAcceptItem)
             {
                 HAlign = 0.5f,
                 Left = StyleDimension.FromPixels((i - 1) * 52),
@@ -499,7 +499,7 @@ internal class SetJewelUIState : UIState, IClosableUIState
                 break;
         }
 
-        Main.npcChatText = Language.GetTextValue("Mods.PeculiarJewelry.NPCs.Lapidarist.UIDialogue.SuccessfulSets" + Main.rand.Next(3));
+        Main.npcChatText = Language.GetTextValue("Mods.PeculiarJewelry.NPCs.Lapidarist.UIDialogue.SuccessfulSets." + Main.rand.Next(3));
     }
 
     private static bool CanJewelrySlotAcceptItem(Item item, ItemSlotUI _)

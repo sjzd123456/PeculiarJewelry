@@ -2341,70 +2341,351 @@ HellstoneSkirt: {
 
 BeetleRing: {
 	DisplayName: Beetle Ring
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Beetle.1Set}
+		'''
 }
 
 CobaltSkirt: {
 	DisplayName: Cobalt Skirt
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Cobalt.1Set}
+		'''
 }
 
 PalladiumSkirt: {
 	DisplayName: Palladium Skirt
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Palladium.1Set}
+		'''
 }
 
 MythrilSkirt: {
 	DisplayName: Mythril Skirt
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Mythril.1Set}
+		'''
 }
 
 OrichalcumSkirt: {
 	DisplayName: Orichalcum Skirt
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Orichalcum.1Set}
+		'''
 }
 
 AdamantiteSkirt: {
 	DisplayName: Adamantite Skirt
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Adamantite.1Set}
+		'''
 }
 
 TitaniumSkirt: {
 	DisplayName: Titanium Skirt
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Titanium.1Set}
+		'''
 }
 
 HallowedSkirt: {
 	DisplayName: Hallowed Skirt
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Hallowed.1Set}
+		'''
 }
 
 ChlorophyteSkirt: {
 	DisplayName: Chlorophyte Skirt
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Chlorophyte.1Set}
+		'''
 }
 
 BeetleSkirt: {
 	DisplayName: Beetle Skirt
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Beetle.1Set}
+		'''
 }
 
 ShroomiteSkirt: {
 	DisplayName: Shroomite Skirt
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Shroomite.1Set}
+		'''
 }
 
 SpectreSkirt: {
 	DisplayName: Spectre Skirt
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Spectre.1Set}
+		'''
 }
 
 SpookySkirt: {
 	DisplayName: Spooky Skirt
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Spooky.1Set}
+		'''
 }
 
 LuminiteSkirt: {
 	DisplayName: Luminite Skirt
-	Tooltip: ""
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Luminite.1Set}
+		'''
+}
+
+CopperChatelaine: {
+	DisplayName: Copper Chatelaine
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Copper.1Set}
+		'''
+}
+
+TinChatelaine: {
+	DisplayName: Tin Chatelaine
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Tin.1Set}
+		'''
+}
+
+IronChatelaine: {
+	DisplayName: Iron Chatelaine
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Iron.1Set}
+		'''
+}
+
+LeadChatelaine: {
+	DisplayName: Lead Chatelaine
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Lead.1Set}
+		'''
+}
+
+SilverChatelaine: {
+	DisplayName: Silver Chatelaine
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Silver.1Set}
+		'''
+}
+
+TungstenChatelaine: {
+	DisplayName: Tungsten Chatelaine
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Tungsten.1Set}
+		'''
+}
+
+GoldChatelaine: {
+	DisplayName: Gold Chatelaine
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Gold.1Set}
+		'''
+}
+
+PlatinumChatelaine: {
+	DisplayName: Platinum Chatelaine
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Platinum.1Set}
+		'''
+}
+
+DemoniteChatelaine: {
+	DisplayName: Demonite Chatelaine
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Demonite.1Set}
+		'''
+}
+
+CrimtaneChatelaine: {
+	DisplayName: Crimtane Chatelaine
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Crimtane.1Set}
+		'''
+}
+
+MeteoriteChatelaine: {
+	DisplayName: Meteorite Chatelaine
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Meteorite.1Set}
+		'''
+}
+
+HellstoneChatelaine: {
+	DisplayName: Hellstone Chatelaine
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Hellstone.1Set}
+		'''
+}
+
+CobaltChatelaine: {
+	DisplayName: Cobalt Chatelaine
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Cobalt.1Set}
+		'''
+}
+
+PalladiumChatelaine: {
+	DisplayName: Palladium Chatelaine
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Palladium.1Set}
+		'''
+}
+
+MythrilChatelaine: {
+	DisplayName: Mythril Chatelaine
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Mythril.1Set}
+		'''
+}
+
+OrichalcumChatelaine: {
+	DisplayName: Orichalcum Chatelaine
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Orichalcum.1Set}
+		'''
+}
+
+AdamantiteChatelaine: {
+	DisplayName: Adamantite Chatelaine
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Adamantite.1Set}
+		'''
+}
+
+TitaniumChatelaine: {
+	DisplayName: Titanium Chatelaine
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Titanium.1Set}
+		'''
+}
+
+HallowedChatelaine: {
+	DisplayName: Hallowed Chatelaine
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Hallowed.1Set}
+		'''
+}
+
+ChlorophyteChatelaine: {
+	DisplayName: Chlorophyte Chatelaine
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Chlorophyte.1Set}
+		'''
+}
+
+BeetleChatelaine: {
+	DisplayName: Beetle Chatelaine
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Beetle.1Set}
+		'''
+}
+
+ShroomiteChatelaine: {
+	DisplayName: Shroomite Chatelaine
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Shroomite.1Set}
+		'''
+}
+
+SpectreChatelaine: {
+	DisplayName: Spectre Chatelaine
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Spectre.1Set}
+		'''
+}
+
+SpookyChatelaine: {
+	DisplayName: Spooky Chatelaine
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Spooky.1Set}
+		'''
+}
+
+LuminiteChatelaine: {
+	DisplayName: Luminite Chatelaine
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Luminite.1Set}
+		'''
 }
