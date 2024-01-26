@@ -2689,3 +2689,13 @@ LuminiteChatelaine: {
 		{$Material.Bonuses.Luminite.1Set}
 		'''
 }
+
+CopperChains: {
+	DisplayName: Copper Chains
+	Tooltip: ""
+}
+
+CopperPauldrons: {
+	DisplayName: Copper Pauldrons
+	Tooltip: ""
+}

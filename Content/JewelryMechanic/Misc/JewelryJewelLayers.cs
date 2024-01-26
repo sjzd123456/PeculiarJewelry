@@ -163,3 +163,51 @@ internal class JewelWaistLayer : PlayerDrawLayer
         }
     }
 }
+
+internal class JewelBodyLayer : PlayerDrawLayer
+{
+    public override Position GetDefaultPosition() => new AfterParent(PlayerDrawLayers.Torso);
+
+    protected override void Draw(ref PlayerDrawSet drawInfo)
+    {
+        var player = drawInfo.drawPlayer;
+
+        if (player.GetModPlayer<MaterialPlayer>().HasEquip(EquipType.Body, out var info))
+        {
+            var color = Lighting.GetColor(player.Center.ToTileCoordinates(), info.Color);
+            var effect = player.direction == 1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
+            Vector2 basePosition = new(-player.bodyFrame.Width / 2 + player.width / 2, player.height - player.bodyFrame.Height + 4);
+            Vector2 position = (drawInfo.Position - Main.screenPosition + basePosition).Floor() + player.headPosition - new Vector2(0, 2);
+            Vector2 offset = Main.OffsetsPlayerHeadgear[drawInfo.drawPlayer.bodyFrame.Y / drawInfo.drawPlayer.bodyFrame.Height];
+            var data = new DrawData(info.Texture, position + offset, drawInfo.compTorsoFrame, color, 0f, Vector2.Zero, 1f, effect)
+            {
+                shader = player.cBody
+            };
+            drawInfo.DrawDataCache.Add(data);
+        }
+    }
+}
+
+internal class JewelPauldronLayer : PlayerDrawLayer
+{
+    public override Position GetDefaultPosition() => new BeforeParent(PlayerDrawLayers.Torso);
+
+    protected override void Draw(ref PlayerDrawSet drawInfo)
+    {
+        var player = drawInfo.drawPlayer;
+
+        if (player.GetModPlayer<MaterialPlayer>().HasEquip((EquipType)(-1), out var info) && !drawInfo.hideCompositeShoulders)
+        {
+            var color = Lighting.GetColor(player.Center.ToTileCoordinates(), info.Color);
+            var effect = player.direction == 1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
+            Vector2 basePosition = new(-player.bodyFrame.Width / 2 + player.width / 2, player.height - player.bodyFrame.Height + 4);
+            Vector2 position = (drawInfo.Position - Main.screenPosition + basePosition).Floor() + player.headPosition - new Vector2(0, 2);
+            Vector2 offset = Main.OffsetsPlayerHeadgear[drawInfo.drawPlayer.bodyFrame.Y / drawInfo.drawPlayer.bodyFrame.Height];
+            var data = new DrawData(info.Texture, position + offset, drawInfo.compFrontShoulderFrame, color, 0f, Vector2.Zero, 1f, effect)
+            {
+                shader = player.cBody
+            };
+            drawInfo.DrawDataCache.Add(data);
+        }
+    }
+}
