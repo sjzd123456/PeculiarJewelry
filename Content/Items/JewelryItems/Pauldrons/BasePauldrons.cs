@@ -107,38 +107,38 @@ public class BasePauldrons(string name, string category, int mat) : BasicJewelry
     }
 }
 
-internal class ChainsLoader : ILoadable
+internal class PauldronLoader : ILoadable
 {
     public void Load(Mod mod)
     {
         // Prehardmode
         AddPauldrons("Copper", ItemID.CopperBar);
-        //AddPauldrons("Tin", ItemID.TinBar);
-        //AddPauldrons("Iron", ItemID.IronBar);
-        //AddPauldrons("Lead", ItemID.LeadBar);
-        //AddPauldrons("Silver", ItemID.SilverBar);
-        //AddPauldrons("Tungsten", ItemID.TungstenBar);
-        //AddPauldrons("Gold", ItemID.GoldBar);
-        //AddPauldrons("Platinum", ItemID.PlatinumBar);
-        //AddPauldrons("Demonite", ItemID.DemoniteBar);
-        //AddPauldrons("Crimtane", ItemID.CrimtaneBar);
-        //AddPauldrons("Meteorite", ItemID.MeteoriteBar);
-        //AddPauldrons("Hellstone", ItemID.HellstoneBar);
+        AddPauldrons("Tin", ItemID.TinBar);
+        AddPauldrons("Iron", ItemID.IronBar);
+        AddPauldrons("Lead", ItemID.LeadBar);
+        AddPauldrons("Silver", ItemID.SilverBar);
+        AddPauldrons("Tungsten", ItemID.TungstenBar);
+        AddPauldrons("Gold", ItemID.GoldBar);
+        AddPauldrons("Platinum", ItemID.PlatinumBar);
+        AddPauldrons("Demonite", ItemID.DemoniteBar);
+        AddPauldrons("Crimtane", ItemID.CrimtaneBar);
+        AddPauldrons("Meteorite", ItemID.MeteoriteBar);
+        AddPauldrons("Hellstone", ItemID.HellstoneBar);
 
         //// Hardmode
-        //AddPauldrons("Cobalt", ItemID.CobaltBar);
-        //AddPauldrons("Palladium", ItemID.PalladiumBar);
-        //AddPauldrons("Mythril", ItemID.MythrilBar);
-        //AddPauldrons("Orichalcum", ItemID.OrichalcumBar);
-        //AddPauldrons("Adamantite", ItemID.AdamantiteBar);
-        //AddPauldrons("Titanium", ItemID.TitaniumBar);
-        //AddPauldrons("Hallowed", ItemID.HallowedBar);
-        //AddPauldrons("Chlorophyte", ItemID.ChlorophyteBar);
-        //AddPauldrons("Beetle", ItemID.BeetleHusk);
-        //AddPauldrons("Shroomite", ItemID.ShroomiteBar);
-        //AddPauldrons("Spectre", ItemID.SpectreBar);
-        //AddPauldrons("Spooky", ItemID.SpookyWood);
-        //AddPauldrons("Luminite", ItemID.LunarBar);
+        AddPauldrons("Cobalt", ItemID.CobaltBar);
+        AddPauldrons("Palladium", ItemID.PalladiumBar);
+        AddPauldrons("Mythril", ItemID.MythrilBar);
+        AddPauldrons("Orichalcum", ItemID.OrichalcumBar);
+        AddPauldrons("Adamantite", ItemID.AdamantiteBar);
+        AddPauldrons("Titanium", ItemID.TitaniumBar);
+        AddPauldrons("Hallowed", ItemID.HallowedBar);
+        AddPauldrons("Chlorophyte", ItemID.ChlorophyteBar);
+        AddPauldrons("Beetle", ItemID.BeetleHusk);
+        AddPauldrons("Shroomite", ItemID.ShroomiteBar);
+        AddPauldrons("Spectre", ItemID.SpectreBar);
+        AddPauldrons("Spooky", ItemID.SpookyWood);
+        AddPauldrons("Luminite", ItemID.LunarBar);
     }
 
     private static bool AddPauldrons(string category, int material)
