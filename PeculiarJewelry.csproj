@@ -11,6 +11,7 @@
     <None Remove="Content\Items\JewelryItems\BasicJewelry.png" />
     <None Remove="Localization\en-US_Mods.PeculiarJewelry.Buffs.hjson" />
     <None Remove="Localization\en-US_Mods.PeculiarJewelry.Configs.hjson" />
+    <None Remove="Localization\en-US_Mods.PeculiarJewelry.Desecrations.hjson" />
     <None Remove="Localization\en-US_Mods.PeculiarJewelry.hjson" />
     <None Remove="Localization\en-US_Mods.PeculiarJewelry.Jewelry.hjson" />
     <None Remove="Localization\en-US_Mods.PeculiarJewelry.Jewelry.StatTypes.hjson" />

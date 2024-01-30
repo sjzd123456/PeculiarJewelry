@@ -14,13 +14,22 @@ internal class UINPCDialoguePanel : UIElement
 
     UIPanel _panel;
     UIText _text;
+    float _width;
+
+    public UINPCDialoguePanel(float width = 200)
+    {
+        _width = width;
+    }
 
     public override void OnInitialize()
     {
+        Width = StyleDimension.FromPixels(_width);
+        Height = StyleDimension.FromPixels(40);
+
         _panel = new()
         {
-            Width = StyleDimension.FromPixels(200),
-            Height = StyleDimension.FromPixels(40),
+            Width = StyleDimension.FromPixels(_width),
+            Height = StyleDimension.Fill,
             HAlign = 0.5f,
             Top = Top
         };
@@ -29,8 +38,8 @@ internal class UINPCDialoguePanel : UIElement
         _text = new UIText(Main.npcChatText)
         {
             HAlign = 0.5f,
-            Width = StyleDimension.FromPixels(200),
-            Height = StyleDimension.FromPixels(40),
+            Width = StyleDimension.FromPixels(_width),
+            Height = StyleDimension.Fill,
             IsWrapped = true,
         };
         _panel.Append(_text);
@@ -44,7 +53,7 @@ internal class UINPCDialoguePanel : UIElement
         var size = ChatManager.GetStringSize(Font, Font.CreateWrappedText(_text.Text, _panel.GetInnerDimensions().Width), Vector2.One);
         size = !_text.IsWrapped ? new Vector2(size.X, 16f) : new Vector2(size.X, size.Y + _text.WrappedTextBottomPadding);
 
-        _text.Height = StyleDimension.FromPixels(size.Y);
-        _panel.Height = StyleDimension.FromPixels(size.Y);
+        Height = StyleDimension.FromPixels(size.Y);
+        //_panel.Height = StyleDimension.FromPixels(size.Y);
     }
 }

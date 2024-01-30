@@ -1,0 +1,14 @@
+HealthBoostDesecration: {
+	Name: Tankier enemies
+	Description: +50% enemy max life per stack
+}
+
+DamageDesecration: {
+	Name: More painful enemies
+	Description: +33% enemy damage per stack
+}
+
+MMBoostDesecration: {
+	Name: Powerful enemies
+	Description: +10% enemy damage, +10% enemy health, +2 defense, +5% enemy behaviour speed per stack
+}

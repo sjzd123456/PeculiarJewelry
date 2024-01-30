@@ -8,9 +8,10 @@ namespace PeculiarJewelry.Content.JewelryMechanic.UI;
 
 internal class ChooseJewelMechanicUIState : UIState
 {
-    private static Asset<Texture2D> _CutTexture;
-    private static Asset<Texture2D> _SetTexture;
-    private static Asset<Texture2D> _SuperimpositionTexture;
+    private static readonly Asset<Texture2D> _CutTexture;
+    private static readonly Asset<Texture2D> _SetTexture;
+    private static readonly Asset<Texture2D> _SuperimpositionTexture;
+    private static readonly Asset<Texture2D> _DesecrationTexture;
 
     private NPC _LapidaristOwner => Main.npc[_lapidaristWhoAmI];
 
@@ -21,6 +22,7 @@ internal class ChooseJewelMechanicUIState : UIState
         _CutTexture = ModContent.Request<Texture2D>("PeculiarJewelry/Content/JewelryMechanic/UI/JewelCut");
         _SetTexture = ModContent.Request<Texture2D>("PeculiarJewelry/Content/JewelryMechanic/UI/JewelSet");
         _SuperimpositionTexture = ModContent.Request<Texture2D>("PeculiarJewelry/Content/JewelryMechanic/UI/Superimposition");
+        _DesecrationTexture = ModContent.Request<Texture2D>("PeculiarJewelry/Content/JewelryMechanic/UI/Desecration");
     }
 
     public ChooseJewelMechanicUIState(int whoAmI)
@@ -40,7 +42,7 @@ internal class ChooseJewelMechanicUIState : UIState
     {
         UIPanel panel = new() // Main back panel
         {
-            Width = StyleDimension.FromPixels(310),
+            Width = StyleDimension.FromPixels(436),
             Height = StyleDimension.FromPixels(60),
             HAlign = 0.5f,
             VAlign = 0.25f
@@ -100,6 +102,8 @@ internal class ChooseJewelMechanicUIState : UIState
         };
         setButton.Append(setText);
 
+        // Superimposition
+
         UIImageButton impositionButton = new(_SuperimpositionTexture)
         {
             Width = StyleDimension.FromPixels(32),
@@ -127,9 +131,40 @@ internal class ChooseJewelMechanicUIState : UIState
             Top = StyleDimension.FromPixels(-10)
         };
         impositionButton.Append(impositionText);
+
+        // Desecration
+
+        UIImageButton desecrationButton = new(_DesecrationTexture)
+        {
+            Width = StyleDimension.FromPixels(32),
+            Height = StyleDimension.FromPixels(32),
+            Left = StyleDimension.FromPixels(340),
+            Top = StyleDimension.FromPixelsAndPercent(-30, 1),
+            VAlign = 1f,
+        };
+
+        desecrationButton.OnLeftClick += (UIMouseEvent evt, UIElement listeningElement) =>
+        {
+            Main.npcChatText = Language.GetTextValue("Mods.PeculiarJewelry.NPCs.Lapidarist.UIDialogue.Open.Desecration");
+            Main.playerInventory = true;
+
+            JewelUISystem.SwitchUI(new DesecrationUIState());
+        };
+
+        desecrationButton.OnRightClick += DeseHelp;
+
+        panel.Append(desecrationButton);
+
+        UIText desecrationText = new("Path of Desecration", 0.8f)
+        {
+            HAlign = 0.5f,
+            Top = StyleDimension.FromPixels(-10)
+        };
+        desecrationButton.Append(desecrationText);
     }
 
     private void ImposHelp(UIMouseEvent e, UIElement lE) => Main.npcChatText = Language.GetTextValue("Mods.PeculiarJewelry.NPCs.Lapidarist.UIDialogue.Help.Imposition");
     private void SetHelp(UIMouseEvent e, UIElement lE) => Main.npcChatText = Language.GetTextValue("Mods.PeculiarJewelry.NPCs.Lapidarist.UIDialogue.Help.Set");
     private void CutHelp(UIMouseEvent e, UIElement lE) => Main.npcChatText = Language.GetTextValue("Mods.PeculiarJewelry.NPCs.Lapidarist.UIDialogue.Help.Cut");
+    private void DeseHelp(UIMouseEvent e, UIElement lE) => Main.npcChatText = Language.GetTextValue("Mods.PeculiarJewelry.NPCs.Lapidarist.UIDialogue.Help.Desecration");
 }

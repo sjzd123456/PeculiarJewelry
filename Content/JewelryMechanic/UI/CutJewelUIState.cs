@@ -452,7 +452,7 @@ internal class CutJewelUIState : UIState, IClosableUIState
         Append(new UINPCDialoguePanel()
         {
             HAlign = 0.5f,
-            Top = StyleDimension.FromPixelsAndPercent(64, 0.15f),
+            Top = StyleDimension.FromPixelsAndPercent(100, 0.15f),
             Width = StyleDimension.FromPixels(320),
             Height = StyleDimension.FromPixels(600)
         });

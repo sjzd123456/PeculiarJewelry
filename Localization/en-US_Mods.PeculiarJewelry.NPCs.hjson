@@ -42,12 +42,14 @@ Lapidarist: {
 			Cut: Cutting improves jewels, both in fance and function.
 			Set: Setting allows you to use jewels in jewelry, unlocking their potential AND making you look good.
 			Imposition: By using two finished jewels of the same cut count, you can create a jewel that combines their strengths.
+			Desecration: A darker art. Allows you to hurt yourself and benefit your enemies for greater reward.
 		}
 
 		Open: {
 			Cut: Looking to improve your jewels? I'm the right guy.
 			Set: Finally, my specialty. Setting jewels is my favorite passtime.
 			Imposition: Just make sure you've got two finished jewels of the same cut count. That part always confuses people.
+			Desecration: Looking to make a couple'a deals, eh? Don't push yourself too hard.
 		}
 	}
 
