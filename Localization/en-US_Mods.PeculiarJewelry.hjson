@@ -3,4 +3,5 @@ Projectiles: {
 	TrapperMinion.DisplayName: Trapper
 	EchoProjectile.DisplayName: Echo
 	AoEProjectile.DisplayName: Debuff Wave
+	Smoke.DisplayName: Smoke
 }

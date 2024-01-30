@@ -88,5 +88,14 @@ public class DesecratedSystem : ModSystem
 
             return true;
         }
+
+        public override void ResetEffects(NPC npc)
+        {
+            if (!AppliesToEntity(npc, false))
+                return;
+
+            foreach (var item in System.Desecrations.Values)
+                item.ResetEffects(npc);
+        }
     }
 }

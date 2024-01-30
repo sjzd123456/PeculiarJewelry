@@ -22,7 +22,7 @@ internal class DesecrationUIState : UIState, IClosableUIState
         UIPanel panel = new()
         {
             Width = StyleDimension.FromPixels(500),
-            Height = StyleDimension.FromPixels(400),
+            Height = StyleDimension.FromPixels(360),
             HAlign = 0.5f,
             VAlign = 0.15f
         };
@@ -36,18 +36,33 @@ internal class DesecrationUIState : UIState, IClosableUIState
             Top = StyleDimension.FromPixels(180)
         };
 
-        Append(dialoguePanel);
+        panel.Append(dialoguePanel);
         BuildList(panel);
 
         UIButton<string> confirm = new("Confirm")
         {
             Width = StyleDimension.FromPixels(80),
             Height = StyleDimension.FromPixels(32),
-            VAlign = 1,
+            Top = StyleDimension.FromPixels(324),
+            VAlign = 0.15f,
+            HAlign = 0.45f,
         };
         confirm.OnLeftClick += ConfirmClick;
-        panel.Append(confirm);
+        Append(confirm);
+
+        UIButton<string> reset = new("Reset")
+        {
+            Width = StyleDimension.FromPixels(80),
+            Height = StyleDimension.FromPixels(32),
+            Top = StyleDimension.FromPixels(324),
+            VAlign = 0.15f,
+            HAlign = 0.55f,
+        };
+        reset.OnLeftClick += ResetClick;
+        Append(reset);
     }
+
+    private void ResetClick(UIMouseEvent evt, UIElement listeningElement) => TemporaryStrength.Clear();
 
     private void ConfirmClick(UIMouseEvent evt, UIElement listeningElement)
     {
@@ -62,13 +77,13 @@ internal class DesecrationUIState : UIState, IClosableUIState
         UIList desecrationsList = new()
         {
             Width = StyleDimension.Fill,
-            Height = StyleDimension.FromPixelsAndPercent(-40, 1f),
+            Height = StyleDimension.FromPixelsAndPercent(0, 1f),
         };
 
         UIScrollbar bar = new()
         {
             Width = StyleDimension.FromPixels(20),
-            Height = StyleDimension.FromPixelsAndPercent(-40, 1f),
+            Height = StyleDimension.FromPixelsAndPercent(0, 1f),
             Left = StyleDimension.FromPixelsAndPercent(-20, 1)
         };
 

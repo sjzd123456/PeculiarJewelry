@@ -1,10 +1,6 @@
-﻿
-namespace PeculiarJewelry.Content.JewelryMechanic.Desecration.Definitions;
+﻿namespace PeculiarJewelry.Content.JewelryMechanic.Desecration.Definitions;
 
-/// <summary>
-/// This is a reference and attack to Master Mode. Boring!
-/// </summary>
-internal class MMBoostDesecration : DesecrationModifier
+internal class FullBoostDesecration : DesecrationModifier
 {
     public override float StrengthCap => -1;
 
