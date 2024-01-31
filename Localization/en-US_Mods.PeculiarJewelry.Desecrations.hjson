@@ -44,6 +44,11 @@ TrapDoTBuffDesecration: {
 }
 
 DeathMineDesecration: {
-	Name: Mods.PeculiarJewelry.Desecrations.DeathMineDesecration.Name
-	Description: Mods.PeculiarJewelry.Desecrations.DeathMineDesecration.Description
+	Name: Exploding enemies and projectiles
+	Description: Enemies and the projectiles they fire explode on death
+}
+
+BossHealDesecration: {
+	Name: Boss heals
+	Description: Bosses heal for 25% of their max health when they reach 2/3rds health and 1/3rds health
 }
