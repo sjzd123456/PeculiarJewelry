@@ -26,8 +26,6 @@ public class GrindstoneTile : ModTile
         Main.tileFrameImportant[Type] = true;
         Main.tileNoAttach[Type] = true;
         Main.tileLavaDeath[Type] = true;
-        Main.tileSolidTop[Type] = true;
-        Main.tileTable[Type] = true;
 
         TileObjectData.newTile.CopyFrom(TileObjectData.Style3x3);
         TileObjectData.newTile.Origin = new Point16(2, 2);

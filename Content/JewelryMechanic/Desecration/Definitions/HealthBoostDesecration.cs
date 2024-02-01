@@ -1,5 +1,4 @@
-﻿
-namespace PeculiarJewelry.Content.JewelryMechanic.Desecration.Definitions;
+﻿namespace PeculiarJewelry.Content.JewelryMechanic.Desecration.Definitions;
 
 internal class HealthBoostDesecration : DesecrationModifier
 {

@@ -8,7 +8,7 @@ internal class DamageResistDesecration : DesecrationModifier
 
     public override void PreAI(NPC npc) => npc.GetGlobalNPC<ResistNPC>().damageResist = (int)(0.15f * strength);
 
-    private class ResistNPC : GlobalNPC
+    public class ResistNPC : GlobalNPC
     {
         public override bool InstancePerEntity => true;
 

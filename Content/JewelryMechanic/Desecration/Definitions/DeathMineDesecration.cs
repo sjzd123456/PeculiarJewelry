@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Composition;
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.GameContent;
@@ -15,7 +14,7 @@ internal class DeathMineDesecration : DesecrationModifier
 
     public static void Explode(Entity entity, bool clientSideEffects)
     {
-        if (Desecrations[nameof(DeathMineDesecration)].strength < 0)
+        if (Desecrations[nameof(DeathMineDesecration)].strength <= 0)
             return;
 
         float increase = MathF.Pow(ExplosionRadius / 80f, 1.2f);

@@ -39,7 +39,7 @@ LongerHealCooldownDesecration: {
 }
 
 TrapDoTBuffDesecration: {
-	Name: Stronger traps and more powerful debuffs
+	Name: Stronger traps and stronger debuffs
 	Description: Traps deal 150% more damage and damage over time debuffs are 150% more powerful
 }
 
@@ -51,4 +51,14 @@ DeathMineDesecration: {
 BossHealDesecration: {
 	Name: Boss heals
 	Description: Bosses heal for 25% of their max health when they reach 2/3rds health and 1/3rds health
+}
+
+DebuffNPCDesecration: {
+	Name: Afflicted enemies
+	Description: Enemies have a chance to apply a long-lasting debuff
+}
+
+BossEnragementDesecration: {
+	Name: Enraged bosses
+	Description: Bosses gain +100% damage, +75% defense, and +10% damage resistance per stack, and move either 100% or 150% faster
 }
