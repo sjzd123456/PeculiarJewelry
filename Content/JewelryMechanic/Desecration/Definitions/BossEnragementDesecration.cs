@@ -14,6 +14,8 @@ internal class BossEnragementDesecration : DesecrationModifier
         private int _enrageTimer = 0;
         private bool _enraged = false;
 
+        public override bool AppliesToEntity(NPC npc, bool lateInstantiation) => npc.boss;
+
         public override bool PreAI(NPC npc)
         {
             float str = Desecrations[nameof(BossEnragementDesecration)].strength;

@@ -1,4 +1,5 @@
 ﻿using PeculiarJewelry.Content.Items;
+using PeculiarJewelry.Content.JewelryMechanic.Desecration;
 using PeculiarJewelry.Content.JewelryMechanic.Stats;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,13 @@ internal class BossLootGlobal : GlobalNPC
             return (JewelTier)progression;
         else
             return (JewelTier)(Main.rand.NextFloat() < progression % 1 ? progression + 1 : progression);
+    }
+
+    public static JewelTier GetBossTierAdjustedByDesecration(NPC npc)
+    {
+        JewelTier baseTier = GetBossTier(npc);
+        baseTier = (JewelTier)(DesecratedSystem.AdditionalJewelTier + (int)baseTier);
+        return baseTier;
     }
 
     public override void ModifyGlobalLoot(GlobalLoot globalLoot) => globalLoot.Add(ItemDropRule.ByCondition(new Conditions.LegacyHack_IsABoss(), ModContent.ItemType<BagOfShinies>()));

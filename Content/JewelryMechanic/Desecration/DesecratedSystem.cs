@@ -1,13 +1,15 @@
-﻿using Steamworks;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using Terraria;
 
 namespace PeculiarJewelry.Content.JewelryMechanic.Desecration;
 
 public class DesecratedSystem : ModSystem
 {
     private readonly Dictionary<string, DesecrationModifier> Desecrations = [];
+
+    public static float TotalProfanity => ModContent.GetInstance<DesecratedSystem>()._totalProfanity;
+    public static float LootScaleFactor => ModContent.GetInstance<DesecratedSystem>()._totalProfanity * 20 / 100f;
+    public static int AdditionalJewelTier => (int)(ModContent.GetInstance<DesecratedSystem>()._totalProfanity / 2f);
 
     private float _totalProfanity = 0;
 
@@ -53,6 +55,16 @@ public class DesecratedSystem : ModSystem
             else
                 Desecrations.Add(key, DesecrationModifier.Desecrations[key]);
         }
+
+        GetTotalProfanity();
+    }
+
+    private void GetTotalProfanity()
+    {
+        _totalProfanity = 0;
+
+        foreach (var item in Desecrations.Values)
+            _totalProfanity += item.strength * item.Profanity;
     }
 
     public void ClearDesecrations()

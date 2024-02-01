@@ -4,4 +4,5 @@ Projectiles: {
 	EchoProjectile.DisplayName: Echo
 	AoEProjectile.DisplayName: Debuff Wave
 	Smoke.DisplayName: Smoke
+	SoulProjectile.DisplayName: Soul Projectile
 }

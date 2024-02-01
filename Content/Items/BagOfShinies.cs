@@ -98,7 +98,7 @@ public class BagOfShinies : ModItem
     public override void OnSpawn(IEntitySource source)
     {
         if (source is EntitySource_Loot loot && loot.Entity is NPC npc && npc.boss)
-            tier = BossLootGlobal.GetBossTier(npc);
+            tier = BossLootGlobal.GetBossTierAdjustedByDesecration(npc);
     }
 
     public override void SaveData(TagCompound tag) => tag.Add("tier", (byte)tier);

@@ -62,3 +62,8 @@ BossEnragementDesecration: {
 	Name: Enraged bosses
 	Description: Bosses gain +100% damage, +75% defense, and +10% damage resistance per stack, and move either 100% or 150% faster
 }
+
+EliteNPCDesecration: {
+	Name: Elite enemies
+	Description: Enemies have a chance to have +33% damage, defense, max life and behaviour speed per stack
+}

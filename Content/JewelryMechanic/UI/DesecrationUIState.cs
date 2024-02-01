@@ -1,6 +1,7 @@
 ﻿using PeculiarJewelry.Content.JewelryMechanic.Desecration;
 using System;
 using System.Collections.Generic;
+using Terraria.Audio;
 using Terraria.GameContent;
 using Terraria.GameContent.UI.Elements;
 using Terraria.ModLoader.UI;
@@ -43,7 +44,7 @@ internal class DesecrationUIState : UIState, IClosableUIState
         {
             Width = StyleDimension.FromPixels(80),
             Height = StyleDimension.FromPixels(32),
-            Top = StyleDimension.FromPixels(324),
+            Top = StyleDimension.FromPixels(322),
             VAlign = 0.15f,
             HAlign = 0.45f,
         };
@@ -54,15 +55,69 @@ internal class DesecrationUIState : UIState, IClosableUIState
         {
             Width = StyleDimension.FromPixels(80),
             Height = StyleDimension.FromPixels(32),
-            Top = StyleDimension.FromPixels(324),
+            Top = StyleDimension.FromPixels(322),
             VAlign = 0.15f,
             HAlign = 0.55f,
         };
-        reset.OnLeftClick += ResetClick;
+        reset.OnLeftClick += (UIMouseEvent evt, UIElement listeningElement) => TemporaryStrength.Clear();
         Append(reset);
+
+        UIButton<string> exit = new("Exit")
+        {
+            Width = StyleDimension.FromPixels(80),
+            Height = StyleDimension.FromPixels(32),
+            Top = StyleDimension.FromPixels(322),
+            VAlign = 0.15f,
+            HAlign = 0.5f,
+        };
+
+        exit.OnLeftClick += (UIMouseEvent evt, UIElement listeningElement) =>
+        {
+            JewelUISystem.SwitchUI(null);
+            SoundEngine.PlaySound(SoundID.MenuClose);
+        };
+
+        Append(exit);
+        InfoPanel();
     }
 
-    private void ResetClick(UIMouseEvent evt, UIElement listeningElement) => TemporaryStrength.Clear();
+    private void InfoPanel()
+    {
+        UIPanel panel = new()
+        {
+            Width = StyleDimension.FromPixels(250),
+            Height = StyleDimension.FromPixels(360),
+            Left = StyleDimension.FromPixels(380),
+            HAlign = 0.5f,
+            VAlign = 0.15f
+        };
+
+        Append(panel);
+
+        UIText profanity = new("Total Cosmic Profanity: " + DesecratedSystem.TotalProfanity)
+        {
+            HAlign = 0.5f,
+        };
+        profanity.OnUpdate += (self) => (self as UIText).SetText("Total Cosmic Profanity: " + DesecratedSystem.TotalProfanity);
+        panel.Append(profanity);
+
+        UIText lootBonus = new($"+{DesecratedSystem.LootScaleFactor * 100:#0.##}% enemy loot\n")
+        { 
+            VAlign = 0.5f,
+            HAlign = 0.5f
+        };
+        lootBonus.OnUpdate += (self) => (self as UIText).SetText($"+{DesecratedSystem.LootScaleFactor * 100:#0.##}% enemy loot");
+        panel.Append(lootBonus);
+
+        UIText tierBonus = new($"+{DesecratedSystem.AdditionalJewelTier} jewel tiers")
+        {
+            VAlign = 0.5f,
+            HAlign = 0.5f,
+            Top = StyleDimension.FromPixels(32)
+        };
+        tierBonus.OnUpdate += (self) => (self as UIText).SetText($"+{DesecratedSystem.AdditionalJewelTier} jewel tiers");
+        panel.Append(tierBonus);
+    }
 
     private void ConfirmClick(UIMouseEvent evt, UIElement listeningElement)
     {
