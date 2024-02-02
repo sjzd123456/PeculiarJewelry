@@ -33,16 +33,16 @@ public class NPCBehaviourBoostGlobal : GlobalNPC
         }
 
         _extraAITimer += extraAISpeed;
+        var oldPosition = npc.position;
 
         while (_extraAITimer >= 1f)
         {
             _boosting = true;
-
-            CollisionMethod.Invoke(npc, null); // Force collision check to try and keep npcs on the ground
-            npc.position += npc.velocity;
-            NPCLoader.AI(npc);
+            npc.AI();
             _boosting = false;
             _extraAITimer--;
         }
+
+        npc.position = oldPosition;
     }
 }
