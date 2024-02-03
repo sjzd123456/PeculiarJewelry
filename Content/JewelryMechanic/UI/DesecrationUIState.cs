@@ -2,10 +2,12 @@
 using System;
 using System.Collections.Generic;
 using Terraria.Audio;
+using Terraria.Chat;
 using Terraria.GameContent;
 using Terraria.GameContent.UI.Elements;
 using Terraria.ModLoader.UI;
 using Terraria.UI;
+using Terraria.UI.Chat;
 
 namespace PeculiarJewelry.Content.JewelryMechanic.UI;
 
@@ -13,9 +15,19 @@ internal class DesecrationUIState : UIState, IClosableUIState
 {
     private readonly Dictionary<string, float> TemporaryStrength = [];
 
+    private bool _confirmGiveUp = false;
+    private int _confirmGiveUpTime = 0;
+    private UIButton<string> _giveUpButton = null;
+
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
+
+        if (_confirmGiveUpTime-- <= 0)
+        {
+            _giveUpButton.SetText("Give Up");
+            _confirmGiveUp = false;
+        }
     }
 
     public override void OnInitialize()
@@ -78,6 +90,36 @@ internal class DesecrationUIState : UIState, IClosableUIState
         };
 
         Append(exit);
+
+        _giveUpButton = new("Give Up")
+        {
+            Width = StyleDimension.FromPixels(120),
+            Height = StyleDimension.FromPixels(32),
+            Top = StyleDimension.FromPixels(322),
+            Left = StyleDimension.FromPixels(380),
+            VAlign = 0.15f,
+            HAlign = 0.5f,
+        };
+
+        _giveUpButton.OnLeftClick += (UIMouseEvent evt, UIElement listeningElement) =>
+        {
+            if (!_confirmGiveUp)
+            {
+                _confirmGiveUp = true;
+                _confirmGiveUpTime = 360;
+                _giveUpButton.SetText("Are you sure?");
+            }
+            else
+            {
+                JewelUISystem.SwitchUI(null);
+                SoundEngine.PlaySound(SoundID.MenuClose);
+                ModContent.GetInstance<DesecratedSystem>().givenUp = true;
+                ModContent.GetInstance<DesecratedSystem>().ClearDesecrations();
+                ChatHelper.BroadcastChatMessage(NetworkText.FromKey("Mods.PeculiarJewelry.Desecrations.GiveUp"), Colors.Hardcore);
+            }
+        };
+
+        Append(_giveUpButton);
         InfoPanel();
     }
 
@@ -191,10 +233,13 @@ internal class DesecrationUIState : UIState, IClosableUIState
 
     private void ClickIncrease(string key)
     {
+        float cap = DesecrationModifier.Desecrations[key].StrengthCap;
+
+        if (DesecrationModifier.Desecrations[key].strength == cap)
+            return;
+
         if (!TemporaryStrength.ContainsKey(key))
             TemporaryStrength.Add(key, DesecrationModifier.Desecrations[key].strength);
-
-        float cap = DesecrationModifier.Desecrations[key].StrengthCap;
 
         if (cap != -1)
             TemporaryStrength[key] = MathHelper.Clamp(TemporaryStrength[key] + 1, 0, cap);

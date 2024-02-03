@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Terraria.ModLoader.IO;
 
 namespace PeculiarJewelry.Content.JewelryMechanic.Desecration;
 
@@ -8,8 +9,10 @@ public class DesecratedSystem : ModSystem
     private readonly Dictionary<string, DesecrationModifier> Desecrations = [];
 
     public static float TotalProfanity => ModContent.GetInstance<DesecratedSystem>()._totalProfanity;
-    public static float LootScaleFactor => ModContent.GetInstance<DesecratedSystem>()._totalProfanity * 20 / 100f;
+    public static float LootScaleFactor => ModContent.GetInstance<DesecratedSystem>()._totalProfanity * 5 / 100f;
     public static int AdditionalJewelTier => (int)(ModContent.GetInstance<DesecratedSystem>()._totalProfanity / 2f);
+
+    public bool givenUp = false;
 
     private float _totalProfanity = 0;
 
@@ -73,6 +76,40 @@ public class DesecratedSystem : ModSystem
             item.strength = 0;
 
         Desecrations.Clear();
+    }
+
+    public override void SaveWorldData(TagCompound tag)
+    {
+        if (givenUp)
+            tag.Add(nameof(givenUp), true);
+
+        tag.Add("desecrationsCount", Desecrations.Values.Count);
+        int index = 0;
+
+        foreach (var item in Desecrations.Values)
+        {
+            tag.Add("desecration" + index, item.Name);
+            tag.Add("desecrationValue" + index++, item.strength);
+        }
+    }
+
+    public override void LoadWorldData(TagCompound tag)
+    {
+        if (tag.ContainsKey(nameof(givenUp)))
+        {
+            givenUp = true;
+            return;
+        }
+
+        if (!tag.TryGet("desecrationsCount", out int count))
+            return;
+
+        for (int i = 0; i < count; i++)
+        {
+            string key = tag.GetString("desecration" + i);
+            float str = tag.GetFloat("desecrationValue" + i);
+            SetDesecration(key, str);
+        }
     }
 
     internal class DesecrationNPC : GlobalNPC

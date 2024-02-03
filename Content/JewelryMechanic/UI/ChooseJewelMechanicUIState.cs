@@ -1,4 +1,5 @@
-﻿using PeculiarJewelry.Content.JewelryMechanic.UI;
+﻿using PeculiarJewelry.Content.JewelryMechanic.Desecration;
+using PeculiarJewelry.Content.JewelryMechanic.UI;
 using PeculiarJewelry.Content.JewelryMechanic.UI.Superimposition;
 using ReLogic.Content;
 using Terraria.GameContent.UI.Elements;
@@ -145,6 +146,12 @@ internal class ChooseJewelMechanicUIState : UIState
 
         desecrationButton.OnLeftClick += (UIMouseEvent evt, UIElement listeningElement) =>
         {
+            if (ModContent.GetInstance<DesecratedSystem>().givenUp)
+            {
+                Main.npcChatText = Language.GetTextValue("Mods.PeculiarJewelry.NPCs.Lapidarist.UIDialogue.Open.NoDesecration");
+                return;
+            }
+
             Main.npcChatText = Language.GetTextValue("Mods.PeculiarJewelry.NPCs.Lapidarist.UIDialogue.Open.Desecration");
             Main.playerInventory = true;
 
@@ -152,6 +159,7 @@ internal class ChooseJewelMechanicUIState : UIState
         };
 
         desecrationButton.OnRightClick += DeseHelp;
+        desecrationButton.OnUpdate += GrayOut;
 
         panel.Append(desecrationButton);
 
@@ -161,6 +169,15 @@ internal class ChooseJewelMechanicUIState : UIState
             Top = StyleDimension.FromPixels(-10)
         };
         desecrationButton.Append(desecrationText);
+    }
+
+    private void GrayOut(UIElement affectedElement)
+    {
+        var button = affectedElement as UIImageButton;
+        button.SetVisibility(1f, 0.4f);
+
+        if (ModContent.GetInstance<DesecratedSystem>().givenUp)
+            button.SetVisibility(0.5f, 0.1f);
     }
 
     private void ImposHelp(UIMouseEvent e, UIElement lE) => Main.npcChatText = Language.GetTextValue("Mods.PeculiarJewelry.NPCs.Lapidarist.UIDialogue.Help.Imposition");
