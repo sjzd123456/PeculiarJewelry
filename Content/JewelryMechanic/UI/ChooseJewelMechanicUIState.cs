@@ -7,16 +7,16 @@ using Terraria.UI;
 
 namespace PeculiarJewelry.Content.JewelryMechanic.UI;
 
-internal class ChooseJewelMechanicUIState : UIState
+internal class ChooseJewelMechanicUIState(int whoAmI) : UIState
 {
     private static readonly Asset<Texture2D> _CutTexture;
     private static readonly Asset<Texture2D> _SetTexture;
     private static readonly Asset<Texture2D> _SuperimpositionTexture;
     private static readonly Asset<Texture2D> _DesecrationTexture;
 
-    private NPC _LapidaristOwner => Main.npc[_lapidaristWhoAmI];
+    private NPC LapidaristOwner => Main.npc[_lapidaristWhoAmI];
 
-    private int _lapidaristWhoAmI = 0;
+    private readonly int _lapidaristWhoAmI = whoAmI;
 
     static ChooseJewelMechanicUIState()
     {
@@ -26,17 +26,12 @@ internal class ChooseJewelMechanicUIState : UIState
         _DesecrationTexture = ModContent.Request<Texture2D>("PeculiarJewelry/Content/JewelryMechanic/UI/Desecration");
     }
 
-    public ChooseJewelMechanicUIState(int whoAmI)
-    {
-        _lapidaristWhoAmI = whoAmI;
-    }
-
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
 
-        //if (_LapidaristOwner.DistanceSQ(Main.LocalPlayer.Center) > 400 * 400)
-            //JewelUISystem.SwitchUI(null);
+        if (LapidaristOwner.DistanceSQ(Main.LocalPlayer.Center) > 400 * 400)
+            JewelUISystem.SwitchUI(null);
     }
 
     public override void OnInitialize()

@@ -34,12 +34,16 @@ public abstract class BaseEarring : BasicJewelry
 
     public override void PostDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale)
     {
+        base.PostDrawInInventory(spriteBatch, position, frame, drawColor, itemColor, origin, scale);
+
         if (Info.Any())
             spriteBatch.Draw(_jewels.Value, position, frame, GetDisplayColor(), 0f, origin, scale, SpriteEffects.None, 0);
     }
 
     public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
     {
+        base.PostDrawInWorld(spriteBatch, lightColor, alphaColor, rotation, scale, whoAmI);
+
         if (Info.Any())
         {
             var pos = Item.Center - Main.screenPosition;

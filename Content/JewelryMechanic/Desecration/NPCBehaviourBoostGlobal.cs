@@ -1,19 +1,13 @@
-﻿using System.Reflection;
-
-namespace PeculiarJewelry.Content.JewelryMechanic.Desecration;
+﻿namespace PeculiarJewelry.Content.JewelryMechanic.Desecration;
 
 public class NPCBehaviourBoostGlobal : GlobalNPC
 {
-    private static MethodInfo CollisionMethod;
-
     public override bool InstancePerEntity => true;
 
     public float extraAISpeed = 0f;
 
     private float _extraAITimer = 0;
     private bool _boosting = false;
-
-    public override void Load() => CollisionMethod = typeof(NPC).GetMethod("UpdateCollision", BindingFlags.Instance | BindingFlags.NonPublic);
 
     public override void ResetEffects(NPC npc)
     {

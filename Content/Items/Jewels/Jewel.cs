@@ -20,8 +20,10 @@ namespace PeculiarJewelry.Content.Items.Jewels;
 public abstract class Jewel : ModItem, IGrindableItem
 {
     protected abstract Type InfoType { get; }
+    protected virtual int MaxVariations => 1;
 
     public JewelInfo info;
+    public int variant;
 
     public sealed override void SetDefaults()
     {
@@ -32,6 +34,8 @@ public abstract class Jewel : ModItem, IGrindableItem
 
         info = Activator.CreateInstance(InfoType) as JewelInfo;
         info.Setup(JewelTier.Natural); //Info is tier 0 by default 
+
+        variant = Main.rand.Next(MaxVariations);
 
         Defaults();
     }
@@ -105,14 +109,16 @@ public abstract class Jewel : ModItem, IGrindableItem
 
     public sealed override bool PreDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale)
     {
-        JewelDrawing.DrawJewel(TextureAssets.Item[Type], position, Item.Size / 2f, info.Major.Get().Color, 0f, 32f / Item.width, Item.width, Item.height + 2, info);
+        JewelDrawing.DrawJewel(TextureAssets.Item[Type], position, Item.Size / 2f, info.Major.Get().Color, 0f, 32f / Item.width, 
+            Item.width, Item.height + 2, info, variant);
         return false;
     }
 
     public sealed override bool PreDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
     {
         Color col = lightColor.MultiplyRGB(info.Major.Get().Color);
-        JewelDrawing.DrawJewel(TextureAssets.Item[Type], Item.Center - Main.screenPosition, Item.Size / 2f, col, rotation, scale, Item.width, Item.height + 2, info);
+        JewelDrawing.DrawJewel(TextureAssets.Item[Type], Item.Center - Main.screenPosition, Item.Size / 2f, col, rotation, scale, Item.width, Item.height + 2, 
+            info, variant);
         return false;
     }
 

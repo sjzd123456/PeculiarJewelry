@@ -1,7 +1,6 @@
 using PeculiarJewelry.Content.JewelryMechanic.Desecration;
 using System;
 using Terraria.GameInput;
-using Terraria.ModLoader;
 
 namespace PeculiarJewelry;
 

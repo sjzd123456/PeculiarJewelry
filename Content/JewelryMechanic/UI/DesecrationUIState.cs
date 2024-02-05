@@ -1,5 +1,4 @@
 ﻿using PeculiarJewelry.Content.JewelryMechanic.Desecration;
-using System;
 using System.Collections.Generic;
 using Terraria.Audio;
 using Terraria.Chat;
@@ -7,7 +6,6 @@ using Terraria.GameContent;
 using Terraria.GameContent.UI.Elements;
 using Terraria.ModLoader.UI;
 using Terraria.UI;
-using Terraria.UI.Chat;
 
 namespace PeculiarJewelry.Content.JewelryMechanic.UI;
 

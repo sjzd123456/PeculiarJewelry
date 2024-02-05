@@ -202,6 +202,24 @@ public abstract class BasicJewelry : ModItem
         }
     }
 
+    public override void PostDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale)
+    {
+        if (tier == JewelryTier.Ordinary)
+            return;
+
+        Color color = Info.Count > 0 ? GetDisplayColor() : Color.White;
+        JewelDrawing.DrawSparks(position - (Item.Size / 2f) * scale, Item.Size * scale, (int)tier, color, 1f);
+    }
+
+    public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
+    {
+        if (tier == JewelryTier.Ordinary)
+            return;
+
+        Color color = Info.Count > 0 ? GetDisplayColor() : Color.White;
+        JewelDrawing.DrawSparks(Item.position - Main.screenPosition, Item.Size * scale, (int)tier, color, 1f);
+    }
+
     internal void ApplyTo(Player player, float add = 0, float multiplier = 1f)
     {
         foreach (var item in Info)
