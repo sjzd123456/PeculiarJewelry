@@ -4,5 +4,8 @@ Projectiles: {
 	EchoProjectile.DisplayName: Echo
 	AoEProjectile.DisplayName: Debuff Wave
 	Smoke.DisplayName: Smoke
-	SoulProjectile.DisplayName: Soul Projectile
+	SoulProjectile.DisplayName: Soul
 }
+
+TierCutoffCondition: Only from bags of tier {0} or higher.
+OnceADay: Once a day

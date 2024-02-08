@@ -16,35 +16,6 @@ public class DesecratedSystem : ModSystem
 
     private float _totalProfanity = 0;
 
-    /// <summary>
-    /// Adds strength to a desecration. Returns false if the cap is reached.
-    /// </summary>
-    /// <param name="key">Desecration to add to.</param>
-    /// <returns>False if the cap is reached.</returns>
-    /// <exception cref="ArgumentException"/>
-    public bool AddDesecration(string key)
-    {
-        if (!DesecrationModifier.Desecrations.ContainsKey(key))
-            throw new ArgumentException($"No desecration by the name of {key} exists.");
-
-        if (Desecrations.ContainsKey(key))
-            Desecrations[key].strength++;
-        else
-        {
-            DesecrationModifier.Desecrations[key].strength = 1;
-            Desecrations.Add(key, DesecrationModifier.Desecrations[key]);
-        }
-
-        if (Desecrations[key].StrengthCap != -1 && Desecrations[key].strength >= Desecrations[key].StrengthCap)
-        {
-            Desecrations[key].strength = Desecrations[key].StrengthCap;
-            return false;
-        }
-
-        _totalProfanity++;
-        return true;
-    }
-
     public void SetDesecration(string key, float strength)
     {
         DesecrationModifier.Desecrations[key].strength = strength;
@@ -67,7 +38,7 @@ public class DesecratedSystem : ModSystem
         _totalProfanity = 0;
 
         foreach (var item in Desecrations.Values)
-            _totalProfanity += item.strength * item.Profanity;
+            _totalProfanity += item.strength * item.Profanity * ModContent.GetInstance<JewelryStatConfig>().ProfanityStrength;
     }
 
     public void ClearDesecrations()

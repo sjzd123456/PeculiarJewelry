@@ -359,7 +359,7 @@ internal class CutJewelUIState : UIState, IClosableUIState
         };
         Append(panel);
 
-        UIImageButton close = new UIImageButton(ModContent.Request<Texture2D>("PeculiarJewelry/Content/JewelryMechanic/UI/Close"))
+        UIImageButton close = new(ModContent.Request<Texture2D>("PeculiarJewelry/Content/JewelryMechanic/UI/Close"))
         {
             Width = StyleDimension.FromPixels(32),
             Height = StyleDimension.FromPixels(32),
@@ -375,7 +375,7 @@ internal class CutJewelUIState : UIState, IClosableUIState
 
         Item air = new();
         air.TurnToAir();
-        _cutSlot = new(new Item[] { air }, 0, ItemSlot.Context.ChestItem, CanJewelSlotAcceptItem)
+        _cutSlot = new([air], 0, ItemSlot.Context.ChestItem, CanJewelSlotAcceptItem)
         {
             HAlign = 0.5f,
             Top = StyleDimension.FromPixels(14)
@@ -417,7 +417,7 @@ internal class CutJewelUIState : UIState, IClosableUIState
         int max = _supportItems.Length;
         for (int i = 0; i < max; ++i)
         {
-            _supportItems[i] = new ItemSlotUI(new Item[] { air }, 0, ItemSlot.Context.ChestItem, CanInputSupportItem)
+            _supportItems[i] = new ItemSlotUI([air], 0, ItemSlot.Context.ChestItem, CanInputSupportItem)
             {
                 HAlign = (float)i / (max - 1),
                 VAlign = 0.95f

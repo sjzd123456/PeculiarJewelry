@@ -9,7 +9,7 @@ using Terraria.UI;
 
 namespace PeculiarJewelry.Content.JewelryMechanic.UI;
 
-internal class DesecrationUIState : UIState, IClosableUIState
+internal class DesecrationUIState : UIState
 {
     private readonly Dictionary<string, float> TemporaryStrength = [];
 
@@ -17,13 +17,15 @@ internal class DesecrationUIState : UIState, IClosableUIState
     private int _confirmGiveUpTime = 0;
     private UIButton<string> _giveUpButton = null;
 
+    private static string Localize(string postfix) => Language.GetTextValue("Mods.PeculiarJewelry.UI.Misc." + postfix);
+
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
 
         if (_confirmGiveUpTime-- <= 0)
         {
-            _giveUpButton.SetText("Give Up");
+            _giveUpButton.SetText(Localize("GiveUp"));
             _confirmGiveUp = false;
         }
     }
@@ -50,7 +52,7 @@ internal class DesecrationUIState : UIState, IClosableUIState
         panel.Append(dialoguePanel);
         BuildList(panel);
 
-        UIButton<string> confirm = new("Confirm")
+        UIButton<string> confirm = new(Localize("Confirm"))
         {
             Width = StyleDimension.FromPixels(80),
             Height = StyleDimension.FromPixels(32),
@@ -61,7 +63,7 @@ internal class DesecrationUIState : UIState, IClosableUIState
         confirm.OnLeftClick += ConfirmClick;
         Append(confirm);
 
-        UIButton<string> reset = new("Reset")
+        UIButton<string> reset = new(Localize("Reset"))
         {
             Width = StyleDimension.FromPixels(80),
             Height = StyleDimension.FromPixels(32),
@@ -72,7 +74,7 @@ internal class DesecrationUIState : UIState, IClosableUIState
         reset.OnLeftClick += (UIMouseEvent evt, UIElement listeningElement) => TemporaryStrength.Clear();
         Append(reset);
 
-        UIButton<string> exit = new("Exit")
+        UIButton<string> exit = new(Localize("Exit"))
         {
             Width = StyleDimension.FromPixels(80),
             Height = StyleDimension.FromPixels(32),
@@ -89,7 +91,7 @@ internal class DesecrationUIState : UIState, IClosableUIState
 
         Append(exit);
 
-        _giveUpButton = new("Give Up")
+        _giveUpButton = new(Localize("GiveUp"))
         {
             Width = StyleDimension.FromPixels(120),
             Height = StyleDimension.FromPixels(32),
@@ -105,7 +107,7 @@ internal class DesecrationUIState : UIState, IClosableUIState
             {
                 _confirmGiveUp = true;
                 _confirmGiveUpTime = 360;
-                _giveUpButton.SetText("Are you sure?");
+                _giveUpButton.SetText(Localize("AreYouSure"));
             }
             else
             {
@@ -134,28 +136,28 @@ internal class DesecrationUIState : UIState, IClosableUIState
 
         Append(panel);
 
-        UIText profanity = new("Total Cosmic Profanity: " + DesecratedSystem.TotalProfanity)
+        UIText profanity = new(Localize("TotalProfanity") + " " + DesecratedSystem.TotalProfanity)
         {
             HAlign = 0.5f,
         };
-        profanity.OnUpdate += (self) => (self as UIText).SetText("Total Cosmic Profanity: " + DesecratedSystem.TotalProfanity);
+        profanity.OnUpdate += (self) => (self as UIText).SetText(Localize("TotalProfanity") + " " + DesecratedSystem.TotalProfanity);
         panel.Append(profanity);
 
-        UIText lootBonus = new($"+{DesecratedSystem.LootScaleFactor * 100:#0.##}% enemy loot\n")
+        UIText lootBonus = new($"+{DesecratedSystem.LootScaleFactor * 100:#0.##}% {Localize("EnemyLoot")}\n")
         { 
             VAlign = 0.5f,
             HAlign = 0.5f
         };
-        lootBonus.OnUpdate += (self) => (self as UIText).SetText($"+{DesecratedSystem.LootScaleFactor * 100:#0.##}% enemy loot");
+        lootBonus.OnUpdate += (self) => (self as UIText).SetText($"+{DesecratedSystem.LootScaleFactor * 100:#0.##}% {Localize("EnemyLoot")}");
         panel.Append(lootBonus);
 
-        UIText tierBonus = new($"+{DesecratedSystem.AdditionalJewelTier} jewel tiers")
+        UIText tierBonus = new($"+{DesecratedSystem.AdditionalJewelTier} {Localize("JewelTiers")}")
         {
             VAlign = 0.5f,
             HAlign = 0.5f,
             Top = StyleDimension.FromPixels(32)
         };
-        tierBonus.OnUpdate += (self) => (self as UIText).SetText($"+{DesecratedSystem.AdditionalJewelTier} jewel tiers");
+        tierBonus.OnUpdate += (self) => (self as UIText).SetText($"+{DesecratedSystem.AdditionalJewelTier} {Localize("JewelTiers")}");
         panel.Append(tierBonus);
     }
 
@@ -253,9 +255,5 @@ internal class DesecrationUIState : UIState, IClosableUIState
 
         uiText.SetText(str + "/" + (dese.StrengthCap != -1 ? dese.StrengthCap : "∞"));
         uiText.TextColor = hasTemp ? Color.Red : Color.White;
-    }
-
-    public void Close()
-    {
     }
 }

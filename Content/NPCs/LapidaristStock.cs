@@ -6,7 +6,6 @@ using PeculiarJewelry.Content.Items.Pliers;
 using PeculiarJewelry.Content.Items.RadiantEchoes;
 using PeculiarJewelry.Content.Items.Tiles;
 using PeculiarJewelry.Content.JewelryMechanic;
-using Steamworks;
 using StockableShops.Stock;
 using Terraria.Utilities;
 
@@ -50,7 +49,7 @@ internal class LapidaristStock : StockedShop
     }
 
     public override int NPCType => ModContent.NPCType<Lapidarist>();
-    public override string RestockCondition => "Once a day";
+    public override string RestockCondition => Language.GetTextValue("Mods.PeculiarJewelry.OnceADay");
 
     private readonly ShopItem[] _jewelItems = new ShopItem[JewelCount];
     private readonly ShopItem[] _jewelryItems = new ShopItem[JewelryCount];

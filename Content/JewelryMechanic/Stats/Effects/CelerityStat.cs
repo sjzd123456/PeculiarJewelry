@@ -5,8 +5,14 @@ internal class CelerityStat : JewelStatEffect
     public override StatType Type => StatType.Celerity;
     public override Color Color => Color.Lime;
 
-    public override void Apply(Player player, float strength) => player.GetModPlayer<CelerityPlayer>().bonus = GetEffectBonus(player, strength);
-    protected override float InternalEffectBonus(float multiplier, Player player) => PeculiarJewelry.StatConfig.DexterityStrength * multiplier;
+    public override void Apply(Player player, float strength)
+    {
+        var bonus = GetEffectBonus(player, strength) / 100f;
+        player.GetModPlayer<CelerityPlayer>().bonus = bonus;
+        player.wingTimeMax = (int)(player.wingTimeMax * (1 + bonus));
+    }
+
+    protected override float InternalEffectBonus(float multiplier, Player player) => PeculiarJewelry.StatConfig.DexterityStrength * multiplier * 1.5f;
 
     class CelerityPlayer : ModPlayer
     {
@@ -16,8 +22,8 @@ internal class CelerityStat : JewelStatEffect
 
         public override void PostUpdateRunSpeeds()
         {
+            Player.maxRunSpeed += bonus;
             Player.moveSpeed += bonus;
-            Player.jumpSpeedBoost += bonus;
-        }
+         }
     }
 }

@@ -29,7 +29,7 @@ internal class SuperimpositionUIState : UIState, IClosableUIState
     private (bool leftSide, bool isContext)? _triggerChoice = null;
     private string _triggerType;
 
-    internal static string Localize(string postfix) => Language.GetTextValue("Mods.PeculiarJewelry.UI.SuperimpositionMenu." + postfix);
+    internal static string Localize(string postfix) => Language.GetTextValue("Mods.PeculiarJewelry.UI.Superimposition." + postfix);
 
     public override void Update(GameTime gameTime)
     {
@@ -116,7 +116,7 @@ internal class SuperimpositionUIState : UIState, IClosableUIState
         };
         Append(panel);
 
-        panel.Append(new UIText("Superimposition")
+        panel.Append(new UIText(Localize("Superimposition"))
         {
             HAlign = 0.5f,
         });
@@ -135,7 +135,7 @@ internal class SuperimpositionUIState : UIState, IClosableUIState
         };
         panel.Append(_rightJewel);
 
-        panel.Append(new UIText("Stats")
+        panel.Append(new UIText(Localize("Stats"))
         {
             HAlign = 0.5f,
             Top = StyleDimension.FromPixels(40)
@@ -158,7 +158,7 @@ internal class SuperimpositionUIState : UIState, IClosableUIState
         };
         panel.Append(_rightStats);
 
-        panel.Append(new UIText("Effects")
+        panel.Append(new UIText(Localize("Effects"))
         {
             HAlign = 0.5f,
             Top = StyleDimension.FromPixels(226)
@@ -181,7 +181,7 @@ internal class SuperimpositionUIState : UIState, IClosableUIState
         };
         panel.Append(_rightTrigger);
 
-        panel.Append(new UIText("Result")
+        panel.Append(new UIText(Localize("Result"))
         {
             HAlign = 0.25f,
             Top = StyleDimension.FromPixels(344)
@@ -194,7 +194,7 @@ internal class SuperimpositionUIState : UIState, IClosableUIState
         };
         panel.Append(_resultJewel);
 
-        UIButton<string> generateButton = new("Combine!")
+        UIButton<string> generateButton = new(Localize("Combine!"))
         {
             HAlign = 0.2f,
             VAlign = 1f,
@@ -204,7 +204,7 @@ internal class SuperimpositionUIState : UIState, IClosableUIState
         generateButton.OnLeftClick += GenerateJewel;
         panel.Append(generateButton);
 
-        panel.Append(new UIText("Sub Shard")
+        panel.Append(new UIText(Localize("Shard"))
         {
             HAlign = 0.78f,
             Top = StyleDimension.FromPixels(344)

@@ -5,15 +5,6 @@ using Terraria.GameContent.Personalities;
 using Terraria.GameContent.Bestiary;
 using PeculiarJewelry.Content.JewelryMechanic.UI;
 using PeculiarJewelry.Content.Items.Jewels;
-using System;
-using PeculiarJewelry.Content.Items;
-using PeculiarJewelry.Content.Items.Pliers;
-using Terraria;
-using System.Collections.ObjectModel;
-using PeculiarJewelry.Content.JewelryMechanic.Stats;
-using PeculiarJewelry.Content.JewelryMechanic;
-using Terraria.Utilities;
-using PeculiarJewelry.Content.Items.JewelSupport;
 
 namespace PeculiarJewelry.Content.NPCs;
 
@@ -60,32 +51,28 @@ public class Lapidarist : ModNPC
     public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
     {
         bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[] {
-            new FlavorTextBestiaryInfoElement("Somewhat snobby, but incredibly helpful if you want your jewelry to go anywhere. This guy knows his stuff."),
+            new FlavorTextBestiaryInfoElement("Mods.PeculiarJewelry.NPCs.Lapidarist.Bestiary"),
         });
     }
 
     public override bool CanTownNPCSpawn(int numTownNPCs) => Main.player.Any(x => x.active && x.HasItem(ModContent.ItemType<MajorJewel>()));
 
-    public override List<string> SetNPCNameList() => new() { "Masha", "Madame Bovary", "Lynna", "Tayla", "June", "Tay", "Hastur", "H'aaztre", "Kaiwan", "Fenric" };
-
-    public override string GetChat()
+    public override List<string> SetNPCNameList()
     {
-        List<string> dialogue = new List<string>
-        {
-            "A jewel can turn anyone into a better killing machine!",
-            "You'd never catch me DEAD with anything below a Mystical jewel, absolutely not!",
-            "Sometimes I wonder, how come I can't put in as many jewels as I want? Then I realize - would be dreadful heavy, no?",
-            "I hope you're here to peruse my goods, hm?",
-            "\"What are Echoes?\", they ask. Don't worry about it! Buy jewels!"
-        };
+        List<string> names = [];
 
-        return Main.rand.Next(dialogue);
+        for (int i = 0; i < 10; ++i)
+            names.Add(Language.GetTextValue("Mods.PeculiarJewelry.NPCs.Lapidarist.Names." + i));
+
+        return names;
     }
+
+    public override string GetChat() => Language.GetTextValue("Mods.PeculiarJewelry.NPCs.Lapidarist.Dialogue." + Main.rand.Next(5));
 
     public override void SetChatButtons(ref string button, ref string button2)
     {
         button = Language.GetTextValue("LegacyInterface.28");
-        button2 = "Jewel Menu";
+        button2 = Language.GetTextValue("Mods.PeculiarJewelry.NPCs.Lapidarist.UIDialogue.MenuName");
     }
 
     public override void OnChatButtonClicked(bool firstButton, ref string shopName)
@@ -94,7 +81,7 @@ public class Lapidarist : ModNPC
             shopName = "Shop";
         else
         {
-            Main.npcChatText = "What would you like me to work on?";
+            Main.npcChatText = Language.GetTextValue("Mods.PeculiarJewelry.NPCs.Lapidarist.UIDialogue.OpenSelectionMenu");
             JewelUISystem.Instance.JewelInterface.SetState(new ChooseJewelMechanicUIState(NPC.whoAmI));
         }
     }

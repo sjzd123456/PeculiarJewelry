@@ -109,4 +109,9 @@ public class JewelryStatConfig : ModConfig
     [DefaultValue(BaseDamageBuff)]
     [Range(0f, 10f)]
     public float WillpowerStat { get; set; }
+
+    [Header("Mods.PeculiarJewelry.Config.DesecrationHeader")]
+    [DefaultValue(1)]
+    [Range(0.25f, 2f)]
+    public float ProfanityStrength { get; set; }
 }

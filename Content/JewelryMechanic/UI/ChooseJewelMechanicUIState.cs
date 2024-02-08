@@ -1,5 +1,4 @@
 ﻿using PeculiarJewelry.Content.JewelryMechanic.Desecration;
-using PeculiarJewelry.Content.JewelryMechanic.UI;
 using PeculiarJewelry.Content.JewelryMechanic.UI.Superimposition;
 using ReLogic.Content;
 using Terraria.GameContent.UI.Elements;
@@ -25,6 +24,8 @@ internal class ChooseJewelMechanicUIState(int whoAmI) : UIState
         _SuperimpositionTexture = ModContent.Request<Texture2D>("PeculiarJewelry/Content/JewelryMechanic/UI/Superimposition");
         _DesecrationTexture = ModContent.Request<Texture2D>("PeculiarJewelry/Content/JewelryMechanic/UI/Desecration");
     }
+
+    internal static string Localize(string postfix) => Language.GetTextValue("Mods.PeculiarJewelry.UI.Misc." + postfix);
 
     public override void Update(GameTime gameTime)
     {
@@ -65,7 +66,7 @@ internal class ChooseJewelMechanicUIState(int whoAmI) : UIState
         cutButton.OnRightClick += CutHelp;
         panel.Append(cutButton);
 
-        UIText cutJewelsText = new("Cut Jewels", 0.8f)
+        UIText cutJewelsText = new(Localize("CutJewels"), 0.8f)
         {
             HAlign = 0.5f,
             Top = StyleDimension.FromPixels(-10)
@@ -91,7 +92,7 @@ internal class ChooseJewelMechanicUIState(int whoAmI) : UIState
         setButton.OnRightClick += SetHelp;
         panel.Append(setButton);
 
-        UIText setText = new("Set Jewels", 0.8f)
+        UIText setText = new(Localize("SetJewels"), 0.8f)
         {
             HAlign = 0.5f,
             Top = StyleDimension.FromPixels(-10)
@@ -121,7 +122,7 @@ internal class ChooseJewelMechanicUIState(int whoAmI) : UIState
 
         panel.Append(impositionButton);
 
-        UIText impositionText = new("Superimposition", 0.8f)
+        UIText impositionText = new(Language.GetTextValue("Mods.PeculiarJewelry.UI.Superimposition.Superimposition"), 0.8f)
         {
             HAlign = 0.5f,
             Top = StyleDimension.FromPixels(-10)
@@ -158,7 +159,7 @@ internal class ChooseJewelMechanicUIState(int whoAmI) : UIState
 
         panel.Append(desecrationButton);
 
-        UIText desecrationText = new("Path of Desecration", 0.8f)
+        UIText desecrationText = new(Localize("Path"), 0.8f)
         {
             HAlign = 0.5f,
             Top = StyleDimension.FromPixels(-10)

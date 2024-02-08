@@ -1,22 +1,31 @@
 JewelryStatConfig: {
-	DisplayName: Jewelry Stat Config
+	DisplayName: "[i:PeculiarJewelry/MajorJewel] Jewelry Stat Config [i:PeculiarJewelry/MajorJewel]"
 
 	ChanceForMajor: {
-		Label: Major Jewel Chance
+		Label: "[i:PeculiarJewelry/MajorJewel] Major Jewel Chance"
 		Tooltip: Proportion of Major to Minor jewels spawned. A value of 0.33 is a 1/3 chance.
 	}
 
 	GlobalPowerScaleSteps: {
-		Label: Power Scale Range
+		Label: "[i:PeculiarJewelry/MajorJewel] Power Scale Range"
 		Tooltip: The range of strength that Jewels can spawn with. The range is calculated by (Power Scale - (Range * 2)) through (Power Scale).
 	}
 
 	GlobalPowerScale: {
-		Label: Power Scale
+		Label: "[i:PeculiarJewelry/MajorJewel] Power Scale"
 		Tooltip: How strong all stat effects are. A scale of 60 would mean all stats are 60% as powerful as default.
 	}
 
-	Headers.Mods.PeculiarJewelry.Config.StatConfigHeader: Specific stat configuration
+	Headers: {
+		Mods: {
+			PeculiarJewelry: {
+				Config: {
+					StatConfigHeader: "[i:PeculiarJewelry/MinorJewel] Specific stat configuration"
+					DesecrationHeader: "[i:1274] Path of Desecration configuration"
+				}
+			}
+		}
+	}
 
 	AbsolutionStrength: {
 		Label: Absolution Strength
@@ -35,12 +44,12 @@ JewelryStatConfig: {
 
 	CelerityStrength: {
 		Label: Celerity Strength
-		Tooltip: ""
+		Tooltip: Controls the increase in movement speed per upgrade.
 	}
 
 	DexterityStrength: {
 		Label: Dexterity Strength
-		Tooltip: ""
+		Tooltip: Controls the increase in movement control per upgrade.
 	}
 
 	ExactitudeStrength: {
@@ -115,7 +124,7 @@ JewelryStatConfig: {
 
 	LegionStrength: {
 		Label: Legion Strength
-		Tooltip: ""
+		Tooltip: Controls the increase in max minions per upgrade.
 	}
 
 	VigorStrength: {
@@ -130,7 +139,7 @@ JewelryStatConfig: {
 
 	PermenanceStrength: {
 		Label: Permenance Strength
-		Tooltip: ""
+		Tooltip: Controls the increase in defense per upgrade.
 	}
 
 	PowerScaleStepCount: {
@@ -141,5 +150,10 @@ JewelryStatConfig: {
 	GlobalPowerScaleMinimum: {
 		Label: Global Power Scale Minimum
 		Tooltip: ""
+	}
+
+	ProfanityStrength: {
+		Label: Profanity Strength
+		Tooltip: How much Profanity is gained per desecration.
 	}
 }

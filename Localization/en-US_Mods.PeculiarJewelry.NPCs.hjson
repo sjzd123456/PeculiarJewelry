@@ -19,7 +19,33 @@ Lapidarist: {
 		Princess_LovesNPC: I like {NPCName}.
 	}
 
+	Names: {
+		0: "Masha"
+		1: "Madame Bovary"
+		2: "Lynna"
+		3: "Tayla"
+		4: "June"
+		5: "Tay"
+		6: "Hastur"
+		7: "H'aaztre"
+		8: "Kaiwan"
+		9: "Fenric"
+	}
+
+	Bestiary: Somewhat snobby, but incredibly helpful if you want your jewelry to go anywhere. This guy knows his stuff.
+
+	Dialogue: {
+		0: A jewel can turn anyone into a better killing machine!
+		1: You'd never catch me DEAD with anything below a Mystical jewel, absolutely not!
+		2: Sometimes I wonder, how come I can't put in as many jewels as I want? Then I realize - would be dreadful heavy, no?
+		3: I hope you're here to peruse my goods, hm?
+		4: "'What are Echoes?', they ask. Don't worry about it! Buy jewels!"
+	}
+
 	UIDialogue: {
+		OpenSelectionMenu: What would you like me to work on?
+		MenuName: Jewel Menu
+
 		SuccessfulSets: {
 			0: There you are! Proud of this one.
 			1: Another jewel well done. Enjoy!

@@ -25,7 +25,7 @@ namespace Verdant.Items
         public LootPoolDrop((int min, int max)[] stacks, int amount, int chanceDenominator, int chanceNumerator, params int[] options)
 		{
 			if (amount > options.Length)
-				throw new ArgumentOutOfRangeException(nameof(amount), "amount must be less than the number of options");
+				throw new ArgumentOutOfRangeException(nameof(amount), "Amount must be less than the number of options.");
 
 			this.amount = amount;
 			this.chanceDenominator = chanceDenominator;

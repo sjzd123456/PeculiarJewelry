@@ -1,6 +1,4 @@
 ﻿using ReLogic.Graphics;
-using ReLogic.Text;
-using System.Threading;
 using Terraria.GameContent;
 using Terraria.GameContent.UI.Elements;
 using Terraria.UI;
@@ -54,6 +52,5 @@ internal class UINPCDialoguePanel : UIElement
         size = !_text.IsWrapped ? new Vector2(size.X, 16f) : new Vector2(size.X, size.Y + _text.WrappedTextBottomPadding);
 
         Height = StyleDimension.FromPixels(size.Y);
-        //_panel.Height = StyleDimension.FromPixels(size.Y);
     }
 }
