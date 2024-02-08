@@ -6,6 +6,7 @@ namespace PeculiarJewelry.Content.Items.Jewels;
 public class MinorJewel : Jewel
 {
     protected override Type InfoType => typeof(MinorJewelInfo);
+    protected override byte MaxVariations => 5;
 
     public sealed override void Defaults()
     {

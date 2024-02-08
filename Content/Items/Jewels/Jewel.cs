@@ -9,7 +9,6 @@ using PeculiarJewelry.Content.NPCs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.ModLoader.IO;
@@ -20,10 +19,10 @@ namespace PeculiarJewelry.Content.Items.Jewels;
 public abstract class Jewel : ModItem, IGrindableItem
 {
     protected abstract Type InfoType { get; }
-    protected virtual int MaxVariations => 1;
+    protected virtual byte MaxVariations => 1;
 
     public JewelInfo info;
-    public int variant;
+    public byte variant;
 
     public sealed override void SetDefaults()
     {
@@ -34,8 +33,7 @@ public abstract class Jewel : ModItem, IGrindableItem
 
         info = Activator.CreateInstance(InfoType) as JewelInfo;
         info.Setup(JewelTier.Natural); //Info is tier 0 by default 
-
-        variant = Main.rand.Next(MaxVariations);
+        variant = (byte)Main.rand.Next(MaxVariations);
 
         Defaults();
     }
@@ -122,12 +120,17 @@ public abstract class Jewel : ModItem, IGrindableItem
         return false;
     }
 
-    public override void SaveData(TagCompound tag) => tag.Add("info", info.SaveAs());
+    public override void SaveData(TagCompound tag)
+    {
+        tag.Add(nameof(info), info.SaveAs());
+        tag.Add(nameof(variant), variant);
+    }
 
     public override void LoadData(TagCompound tag)
     {
         TagCompound infoCompound = tag.GetCompound("info");
         info = JewelIO.LoadInfo(infoCompound);
+        variant = tag.GetByte(nameof(variant));
     }
 
     public bool GrindstoneUse(int i, int j, IEntitySource source)

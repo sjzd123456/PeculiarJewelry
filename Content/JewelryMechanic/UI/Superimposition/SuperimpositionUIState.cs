@@ -1,12 +1,10 @@
-﻿using FullSerializer;
+﻿using PeculiarJewelry.Content.Items;
 using PeculiarJewelry.Content.Items.Jewels;
 using PeculiarJewelry.Content.JewelryMechanic.Stats;
 using PeculiarJewelry.Content.JewelryMechanic.Stats.Triggers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
-using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent.UI.Elements;
 using Terraria.ModLoader.UI;
@@ -16,12 +14,13 @@ namespace PeculiarJewelry.Content.JewelryMechanic.UI.Superimposition;
 
 internal class SuperimpositionUIState : UIState, IClosableUIState
 {
-    private readonly List<JewelStat> _storedStats = new();
-    private readonly Dictionary<JewelStat, bool> _storedStatsSide = new();
+    private readonly List<JewelStat> _storedStats = [];
+    private readonly Dictionary<JewelStat, bool> _storedStatsSide = [];
 
     private ItemSlotUI _leftJewel;
     private ItemSlotUI _rightJewel;
     private ItemSlotUI _resultJewel;
+    private ItemSlotUI _subShardSlot;
     private JewelSubstatUI _leftStats;
     private JewelSubstatUI _rightStats;
     private JewelTriggerUI _leftTrigger;
@@ -110,7 +109,7 @@ internal class SuperimpositionUIState : UIState, IClosableUIState
     {
         UIPanel panel = new() // Main back panel
         {
-            Width = StyleDimension.FromPixels(300),
+            Width = StyleDimension.FromPixels(340),
             Height = StyleDimension.FromPixels(474),
             Top = StyleDimension.FromPixels(30),
             HAlign = 0.5f,
@@ -124,13 +123,13 @@ internal class SuperimpositionUIState : UIState, IClosableUIState
 
         Item air = new();
         air.TurnToAir();
-        _leftJewel = new ItemSlotUI(new Item[] { air }, 0, ItemSlot.Context.ChestItem, (item, ui) => CanJewelSlotAcceptItem(item, true))
+        _leftJewel = new ItemSlotUI([air], 0, ItemSlot.Context.ChestItem, (item, ui) => CanJewelSlotAcceptItem(item, true))
         {
             Left = StyleDimension.FromPixels(10)
         };
         panel.Append(_leftJewel);
 
-        _rightJewel = new ItemSlotUI(new Item[] { air }, 0, ItemSlot.Context.ChestItem, (item, ui) => CanJewelSlotAcceptItem(item, false))
+        _rightJewel = new ItemSlotUI([air], 0, ItemSlot.Context.ChestItem, (item, ui) => CanJewelSlotAcceptItem(item, false))
         {
             Left = StyleDimension.FromPixelsAndPercent(-54, 1)
         };
@@ -144,7 +143,7 @@ internal class SuperimpositionUIState : UIState, IClosableUIState
 
         _leftStats = new JewelSubstatUI((stat) => TryAddStat(stat, true))
         {
-            Width = StyleDimension.FromPixels(134),
+            Width = StyleDimension.FromPixels(154),
             Height = StyleDimension.FromPixels(150),
             Top = StyleDimension.FromPixels(70)
         };
@@ -152,7 +151,7 @@ internal class SuperimpositionUIState : UIState, IClosableUIState
 
         _rightStats = new JewelSubstatUI((stat) => TryAddStat(stat, false))
         {
-            Width = StyleDimension.FromPixels(134),
+            Width = StyleDimension.FromPixels(154),
             Height = StyleDimension.FromPixels(150),
             Top = StyleDimension.FromPixels(70),
             HAlign = 1f,
@@ -167,7 +166,7 @@ internal class SuperimpositionUIState : UIState, IClosableUIState
 
         _leftTrigger = new JewelTriggerUI((fx, isContext) => SetTrigger(fx, isContext, true))
         {
-            Width = StyleDimension.FromPixels(134),
+            Width = StyleDimension.FromPixels(154),
             Height = StyleDimension.FromPixels(90),
             Top = StyleDimension.FromPixels(250)
         };
@@ -175,7 +174,7 @@ internal class SuperimpositionUIState : UIState, IClosableUIState
 
         _rightTrigger = new JewelTriggerUI((fx, isContext) => SetTrigger(fx, isContext, false))
         {
-            Width = StyleDimension.FromPixels(134),
+            Width = StyleDimension.FromPixels(154),
             Height = StyleDimension.FromPixels(90),
             Top = StyleDimension.FromPixels(250),
             HAlign = 1f,
@@ -184,26 +183,39 @@ internal class SuperimpositionUIState : UIState, IClosableUIState
 
         panel.Append(new UIText("Result")
         {
-            HAlign = 0.5f,
+            HAlign = 0.25f,
             Top = StyleDimension.FromPixels(344)
         });
 
-        _resultJewel = new ItemSlotUI(new Item[] { air }, 0, ItemSlot.Context.ChestItem, (item, ui) => true)
+        _resultJewel = new ItemSlotUI([air], 0, ItemSlot.Context.ChestItem, (item, ui) => true)
         {
-            HAlign = 0.5f,
+            HAlign = 0.25f,
             Top = StyleDimension.FromPixels(366)
         };
         panel.Append(_resultJewel);
 
         UIButton<string> generateButton = new("Combine!")
         {
-            HAlign = 0.5f,
+            HAlign = 0.2f,
             VAlign = 1f,
             Width = StyleDimension.FromPixels(100),
             Height = StyleDimension.FromPixels(34)
         };
         generateButton.OnLeftClick += GenerateJewel;
         panel.Append(generateButton);
+
+        panel.Append(new UIText("Sub Shard")
+        {
+            HAlign = 0.78f,
+            Top = StyleDimension.FromPixels(344)
+        });
+
+        _subShardSlot = new ItemSlotUI([air], 0, ItemSlot.Context.ChestItem, (item, ui) => CanSubShardSlotAcceptItem(item))
+        {
+            HAlign = 0.75f,
+            Top = StyleDimension.FromPixels(366)
+        };
+        panel.Append(_subShardSlot);
     }
 
     private void GenerateJewel(UIMouseEvent evt, UIElement listeningElement)
@@ -225,6 +237,15 @@ internal class SuperimpositionUIState : UIState, IClosableUIState
         foreach (var item in _storedStats)
             jewel.info.SubStats.Add(item);
 
+        Item airItem = new(0);
+        airItem.TurnToAir();
+
+        if (_subShardSlot.HasItem)
+        {
+            jewel.info.SubStats.Add((_subShardSlot.Item.ModItem as SubShard).stat);
+            _subShardSlot.ForceItem(airItem);
+        }
+
         if (jewel is MajorJewel major)
         {
             var majorInfo = major.info as MajorJewelInfo;
@@ -238,8 +259,9 @@ internal class SuperimpositionUIState : UIState, IClosableUIState
             majorInfo.effect.ForceSetContext(context);
         }
 
-        Item airItem = new(0);
-        airItem.TurnToAir();
+        jewel.info.Major = (_leftJewel.Item.ModItem as Jewel).info.Major;
+        jewel.info.Major.Strength = JewelryCommon.StatStrengthRange();
+
         _leftJewel.ForceItem(airItem);
         _rightJewel.ForceItem(airItem);
         _resultJewel.ForceItem(jewelItem);
@@ -335,6 +357,12 @@ internal class SuperimpositionUIState : UIState, IClosableUIState
         return isCompatible && ((item.ModItem is Jewel jewel && jewel.info.SubStats.Any()) || item.IsAir || !isMouseItem);
     }
 
+    private bool CanSubShardSlotAcceptItem(Item item)
+    {
+        bool isMouseItem = Main.LocalPlayer.selectedItem == 58 && Main.LocalPlayer.HeldItem == item;
+        return (item.ModItem is SubShard shard && !_storedStats.Any(x => x.Type == shard.stat.Type)) || item.IsAir || !isMouseItem;
+    }
+
     internal static string GetExistingJewelName(Jewel jewel)
     {
         List<TooltipLine> lines = new() { new TooltipLine(ModLoader.GetMod("PeculiarJewelry"), "ItemName", "") };
@@ -361,6 +389,9 @@ internal class SuperimpositionUIState : UIState, IClosableUIState
 
         if (_rightJewel.HasItem)
             Main.LocalPlayer.QuickSpawnItem(new EntitySource_OverfullInventory(Main.LocalPlayer), _rightJewel.Item, _rightJewel.Item.stack);
+
+        if (_subShardSlot.HasItem)
+            Main.LocalPlayer.QuickSpawnItem(new EntitySource_OverfullInventory(Main.LocalPlayer), _subShardSlot.Item, _subShardSlot.Item.stack);
     }
 
     public override void Draw(SpriteBatch spriteBatch)

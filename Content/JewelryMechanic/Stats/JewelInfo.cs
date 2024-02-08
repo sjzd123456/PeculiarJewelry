@@ -24,7 +24,7 @@ public abstract partial class JewelInfo
         }
     }
 
-    public JewelStat Major { get; protected set; }
+    public JewelStat Major { get; internal set; }
     public List<JewelStat> SubStats { get; protected set; } = null;
 
     public JewelTier tier = JewelTier.Natural;
