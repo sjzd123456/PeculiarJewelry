@@ -1,6 +1,4 @@
-﻿using PeculiarJewelry.Content.JewelryMechanic.MaterialBonuses.Bonuses;
-
-namespace PeculiarJewelry.Content.JewelryMechanic.Stats.Effects;
+﻿namespace PeculiarJewelry.Content.JewelryMechanic.Stats.Effects;
 
 internal class DexterityStat : JewelStatEffect
 {
@@ -9,12 +7,12 @@ internal class DexterityStat : JewelStatEffect
 
     public override void Apply(Player player, float strength)
     {
-        var bonus = GetEffectBonus(player, strength) / 100f;
+        var bonus = GetEffectBonus(player, strength) / 200f;
         player.GetModPlayer<DexterityPlayer>().bonus = bonus;
         Player.jumpSpeed += bonus * 8;
     }
 
-    protected override float InternalEffectBonus(float multiplier, Player player) => PeculiarJewelry.StatConfig.DexterityStrength * multiplier / 2f;
+    protected override float InternalEffectBonus(float multiplier, Player player) => PeculiarJewelry.StatConfig.DexterityStrength * multiplier;
 
     class DexterityPlayer : ModPlayer
     {
@@ -26,6 +24,24 @@ internal class DexterityStat : JewelStatEffect
         {
             Player.runAcceleration += bonus;
             Player.wingRunAccelerationMult += bonus;
+            Player.maxFallSpeed += bonus;
+            Player.gravity += bonus / 2f;
+        }
+    }
+    
+    class DexterityItem : GlobalItem
+    {
+        public override void VerticalWingSpeeds(Item item, Player player, ref float ascentWhenFalling, ref float ascentWhenRising, ref float maxCanAscendMultiplier, ref float maxAscentMultiplier, ref float constantAscend)
+        {
+            var bonus = player.GetModPlayer<DexterityPlayer>().bonus;
+            constantAscend += bonus;
+        }
+
+        public override void HorizontalWingSpeeds(Item item, Player player, ref float speed, ref float acceleration)
+        {
+            var bonus = player.GetModPlayer<DexterityPlayer>().bonus;
+            acceleration += bonus;
+            speed += bonus;
         }
     }
 }
