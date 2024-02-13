@@ -36,21 +36,21 @@ public abstract class BaseRing : BasicJewelry
 
     public override void PostDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale)
     {
-        base.PostDrawInInventory(spriteBatch, position, frame, drawColor, itemColor, origin, scale);
-
         if (Info.Any())
             spriteBatch.Draw(_jewels.Value, position, frame, GetDisplayColor(), 0f, origin, scale, SpriteEffects.None, 0);
+
+        base.PostDrawInInventory(spriteBatch, position, frame, drawColor, itemColor, origin, scale);
     }
 
     public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
     {
-        base.PostDrawInWorld(spriteBatch, lightColor, alphaColor, rotation, scale, whoAmI);
-
         if (Info.Any())
         {
             Color col = lightColor.MultiplyRGB(GetDisplayColor());
             spriteBatch.Draw(_jewels.Value, Item.Center - Main.screenPosition, null, col, rotation, _jewels.Size() / 2f, scale, SpriteEffects.None, 0);
         }
+
+        base.PostDrawInWorld(spriteBatch, lightColor, alphaColor, rotation, scale, whoAmI);
     }
 
     public override void AddRecipes()

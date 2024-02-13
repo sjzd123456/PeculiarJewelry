@@ -205,6 +205,7 @@ public abstract class BasicJewelry : ModItem
 
     public override void NetSend(BinaryWriter writer)
     {
+        writer.Write((byte)tier);
         writer.Write(Info.Count);
 
         foreach (var item in Info)
@@ -213,6 +214,7 @@ public abstract class BasicJewelry : ModItem
 
     public override void NetReceive(BinaryReader reader)
     {
+        tier = (JewelryTier)reader.ReadByte();
         int count = reader.ReadInt32();
 
         for (int i = 0; i < count; ++i)

@@ -6,7 +6,7 @@ namespace PeculiarJewelry.Content.JewelryMechanic.Desecration;
 
 public class DesecratedSystem : ModSystem
 {
-    private readonly Dictionary<string, DesecrationModifier> Desecrations = [];
+    internal readonly Dictionary<string, DesecrationModifier> Desecrations = [];
 
     public static float TotalProfanity => ModContent.GetInstance<DesecratedSystem>()._totalProfanity;
     public static float LootScaleFactor => ModContent.GetInstance<DesecratedSystem>()._totalProfanity * 5 / 100f;

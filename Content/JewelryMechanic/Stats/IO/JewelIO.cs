@@ -103,6 +103,10 @@ internal static class JewelIO
             writer.Write(major.effect.GetType().AssemblyQualifiedName);
             writer.Write((byte)major.effect.Context);
         }
+
+        writer.Write((short)info.tier);
+        writer.Write((short)info.cuts);
+        writer.Write((short)info.successfulCuts);
     }
 
     private static void SendStat(JewelStat stat, BinaryWriter writer)
@@ -127,6 +131,9 @@ internal static class JewelIO
             major.effect.ForceSetContext((TriggerContext)reader.ReadByte());
         }
 
+        info.tier = (JewelTier)reader.ReadInt16();
+        info.cuts = reader.ReadInt16();
+        info.successfulCuts = reader.ReadInt16();
         return info;
     }
 

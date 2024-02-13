@@ -5,27 +5,25 @@ using Terraria.UI;
 
 namespace PeculiarJewelry.Content.JewelryMechanic.UI;
 
-internal class ItemSlotUI : UIItemSlot
+internal class ItemSlotUI(Item[] itemArray, int itemIndex, int itemSlotContext, Func<Item, ItemSlotUI, bool> handleItemFunc) : UIItemSlot(itemArray, itemIndex, itemSlotContext)
 {
     private static readonly FieldInfo _UIItemSlotItemArray = null;
 
     public Item Item => ItemSlots[0];
-
     public bool HasItem => !Item.IsAir && Item.type > ItemID.None;
 
     private Item[] ItemSlots => (Item[])_UIItemSlotItemArray.GetValue(this);
-    private int _context;
-    private Func<Item, ItemSlotUI, bool> _handleItem;
+
+    private readonly int _context = itemSlotContext;
+    private readonly Func<Item, ItemSlotUI, bool> _handleItem = handleItemFunc;
 
     static ItemSlotUI()
     {
         _UIItemSlotItemArray ??= typeof(UIItemSlot).GetField("_itemArray", BindingFlags.Instance | BindingFlags.NonPublic);
     }
 
-    public ItemSlotUI(Item[] itemArray, int itemIndex, int itemSlotContext, Func<Item, ItemSlotUI, bool> handleItemFunc) : base(itemArray, itemIndex, itemSlotContext)
+    public ItemSlotUI(Item[] itemArray, int itemIndex, Func<Item, ItemSlotUI, bool> handleItemFunc) : this(itemArray, itemIndex, ItemSlot.Context.BankItem, handleItemFunc)
     {
-        _context = itemSlotContext;
-        _handleItem = handleItemFunc;
     }
 
     public void ForceItem(Item newItem) => ItemSlots[0] = newItem;

@@ -375,7 +375,7 @@ internal class CutJewelUIState : UIState, IClosableUIState
 
         Item air = new();
         air.TurnToAir();
-        _cutSlot = new([air], 0, ItemSlot.Context.ChestItem, CanJewelSlotAcceptItem)
+        _cutSlot = new([air], 0, CanJewelSlotAcceptItem)
         {
             HAlign = 0.5f,
             Top = StyleDimension.FromPixels(14)
@@ -417,7 +417,7 @@ internal class CutJewelUIState : UIState, IClosableUIState
         int max = _supportItems.Length;
         for (int i = 0; i < max; ++i)
         {
-            _supportItems[i] = new ItemSlotUI([air], 0, ItemSlot.Context.ChestItem, CanInputSupportItem)
+            _supportItems[i] = new ItemSlotUI([air], 0, CanInputSupportItem)
             {
                 HAlign = (float)i / (max - 1),
                 VAlign = 0.95f
@@ -521,12 +521,12 @@ internal class CutJewelUIState : UIState, IClosableUIState
         if (success)
         {
             UpdateInfo(Localize("SuccessfulCut"));
-            Main.npcChatText = Language.GetTextValue("Mods.PeculiarJewelry.NPCs.Lapidarist.UIDialogue.SuccessfulCuts" + Main.rand.Next(3));
+            Main.npcChatText = Language.GetTextValue("Mods.PeculiarJewelry.NPCs.Lapidarist.UIDialogue.SuccessfulCuts." + Main.rand.Next(3));
         }
         else
         {
             UpdateInfo(Localize("FailedCut"));
-            Main.npcChatText = Language.GetTextValue("Mods.PeculiarJewelry.NPCs.Lapidarist.UIDialogue.FailedCuts" + Main.rand.Next(3));
+            Main.npcChatText = Language.GetTextValue("Mods.PeculiarJewelry.NPCs.Lapidarist.UIDialogue.FailedCuts." + Main.rand.Next(3));
         }
     }
 

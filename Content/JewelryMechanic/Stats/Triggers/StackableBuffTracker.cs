@@ -6,18 +6,12 @@ namespace PeculiarJewelry.Content.JewelryMechanic.Stats.Triggers;
 
 internal class StackableBuffTracker : ModPlayer
 {
-    internal class BuffData
+    internal class BuffData(int time, float strength)
     {
         public float Strength => time <= 1 ? 0 : strength;
 
-        public int time;
-        public float strength;
-
-        public BuffData(int time, float strength)
-        {
-            this.time = time;
-            this.strength = strength;
-        }
+        public int time = time;
+        public float strength = strength;
     }
 
     private readonly Dictionary<string, List<BuffData>> _stackedBuffs = new();

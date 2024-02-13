@@ -1,4 +1,5 @@
 ﻿using PeculiarJewelry.Content.JewelryMechanic.Desecration;
+using PeculiarJewelry.Content.JewelryMechanic.Syncing;
 using System.Collections.Generic;
 using Terraria.Audio;
 using Terraria.Chat;
@@ -164,8 +165,12 @@ internal class DesecrationUIState : UIState
     private void ConfirmClick(UIMouseEvent evt, UIElement listeningElement)
     {
         foreach (var (key, value) in TemporaryStrength)
+        {
             ModContent.GetInstance<DesecratedSystem>().SetDesecration(key, value);
 
+            if (Main.netMode != NetmodeID.SinglePlayer)
+                new DesecrationModule(key, value, Main.myPlayer).Send();
+        }
         TemporaryStrength.Clear();
     }
 

@@ -123,13 +123,13 @@ internal class SuperimpositionUIState : UIState, IClosableUIState
 
         Item air = new();
         air.TurnToAir();
-        _leftJewel = new ItemSlotUI([air], 0, ItemSlot.Context.ChestItem, (item, ui) => CanJewelSlotAcceptItem(item, true))
+        _leftJewel = new ItemSlotUI([air], 0, (item, ui) => CanJewelSlotAcceptItem(item, true))
         {
             Left = StyleDimension.FromPixels(10)
         };
         panel.Append(_leftJewel);
 
-        _rightJewel = new ItemSlotUI([air], 0, ItemSlot.Context.ChestItem, (item, ui) => CanJewelSlotAcceptItem(item, false))
+        _rightJewel = new ItemSlotUI([air], 0, (item, ui) => CanJewelSlotAcceptItem(item, false))
         {
             Left = StyleDimension.FromPixelsAndPercent(-54, 1)
         };
@@ -187,7 +187,7 @@ internal class SuperimpositionUIState : UIState, IClosableUIState
             Top = StyleDimension.FromPixels(344)
         });
 
-        _resultJewel = new ItemSlotUI([air], 0, ItemSlot.Context.ChestItem, (item, ui) => true)
+        _resultJewel = new ItemSlotUI([air], 0, (item, ui) => true)
         {
             HAlign = 0.25f,
             Top = StyleDimension.FromPixels(366)
@@ -210,7 +210,7 @@ internal class SuperimpositionUIState : UIState, IClosableUIState
             Top = StyleDimension.FromPixels(344)
         });
 
-        _subShardSlot = new ItemSlotUI([air], 0, ItemSlot.Context.ChestItem, (item, ui) => CanSubShardSlotAcceptItem(item))
+        _subShardSlot = new ItemSlotUI([air], 0, (item, ui) => CanSubShardSlotAcceptItem(item))
         {
             HAlign = 0.75f,
             Top = StyleDimension.FromPixels(366)

@@ -1,5 +1,6 @@
 using PeculiarJewelry.Content.JewelryMechanic.Desecration;
 using System;
+using System.IO;
 using Terraria.GameInput;
 
 namespace PeculiarJewelry;
@@ -31,4 +32,7 @@ public class PeculiarJewelry : Mod
 
         return true;
     }
+
+    public override void PostSetupContent() => NetEasy.NetEasy.Register(this);
+    public override void HandlePacket(BinaryReader reader, int whoAmI) => NetEasy.NetEasy.HandleModule(reader, whoAmI);
 }
