@@ -8,6 +8,7 @@ using PeculiarJewelry.Content.JewelryMechanic.UI;
 using PeculiarJewelry.Content.NPCs;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Terraria.DataStructures;
 using Terraria.GameContent;
@@ -131,6 +132,18 @@ public abstract class Jewel : ModItem, IGrindableItem
         TagCompound infoCompound = tag.GetCompound("info");
         info = JewelIO.LoadInfo(infoCompound);
         variant = tag.GetByte(nameof(variant));
+    }
+
+    public override void NetSend(BinaryWriter writer)
+    {
+        JewelIO.SendJewelInfo(info, writer);
+        writer.Write(variant);
+    }
+
+    public override void NetReceive(BinaryReader reader)
+    {
+        info = JewelIO.ReadJewelInfo(reader);
+        variant = reader.ReadByte();
     }
 
     public bool GrindstoneUse(int i, int j, IEntitySource source)

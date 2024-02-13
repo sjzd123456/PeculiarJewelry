@@ -5,6 +5,7 @@ using PeculiarJewelry.Content.JewelryMechanic.Misc;
 using PeculiarJewelry.Content.JewelryMechanic.Stats;
 using PeculiarJewelry.Content.JewelryMechanic.Stats.IO;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Terraria.DataStructures;
 using Terraria.ModLoader.IO;
@@ -199,6 +200,25 @@ public abstract class BasicJewelry : ModItem
         {
             JewelInfo newInfo = JewelIO.LoadInfo(tag.GetCompound("jewelryInfo" + i));
             Info.Add(newInfo);
+        }
+    }
+
+    public override void NetSend(BinaryWriter writer)
+    {
+        writer.Write(Info.Count);
+
+        foreach (var item in Info)
+            JewelIO.SendJewelInfo(item, writer);
+    }
+
+    public override void NetReceive(BinaryReader reader)
+    {
+        int count = reader.ReadInt32();
+
+        for (int i = 0; i < count; ++i)
+        {
+            JewelInfo info = JewelIO.ReadJewelInfo(reader);
+            Info.Add(info);
         }
     }
 

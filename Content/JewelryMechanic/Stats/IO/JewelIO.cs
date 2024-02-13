@@ -1,5 +1,6 @@
 ﻿using PeculiarJewelry.Content.JewelryMechanic.Stats.Triggers;
 using System;
+using System.IO;
 using Terraria.ModLoader.IO;
 
 namespace PeculiarJewelry.Content.JewelryMechanic.Stats.IO;
@@ -83,6 +84,58 @@ internal static class JewelIO
             Strength = tag.GetFloat("statStrength")
         };
 
+        return stat;
+    }
+
+    // Netcode
+
+    public static void SendJewelInfo(JewelInfo info, BinaryWriter writer)
+    {
+        writer.Write(info.GetType().AssemblyQualifiedName);
+        SendStat(info.Major, writer);
+        writer.Write((byte)(info.SubStats is null ? 0 : info.SubStats.Count));
+
+        foreach (var item in info.SubStats)
+            SendStat(item, writer);
+
+        if (info is MajorJewelInfo major)
+        {
+            writer.Write(major.effect.GetType().AssemblyQualifiedName);
+            writer.Write((byte)major.effect.Context);
+        }
+    }
+
+    private static void SendStat(JewelStat stat, BinaryWriter writer)
+    {
+        writer.Write((byte)stat.Type);
+        writer.Write((Half)stat.Strength);
+    }
+
+    public static JewelInfo ReadJewelInfo(BinaryReader reader)
+    {
+        string type = reader.ReadString();
+        JewelInfo info = Activator.CreateInstance(Type.GetType(type)) as JewelInfo;
+        info.SetupFromIO(ReadStat(reader));
+        int count = reader.ReadByte();
+
+        for (int i = 0; i < count; ++i)
+            info.SubStats.Add(ReadStat(reader));
+
+        if (info is MajorJewelInfo major)
+        {
+            major.effect = Activator.CreateInstance(Type.GetType(reader.ReadString())) as TriggerEffect;
+            major.effect.ForceSetContext((TriggerContext)reader.ReadByte());
+        }
+
+        return info;
+    }
+
+    private static JewelStat ReadStat(BinaryReader reader)
+    {
+        JewelStat stat = new((StatType)reader.ReadByte())
+        {
+            Strength = (float)reader.ReadHalf()
+        };
         return stat;
     }
 }
