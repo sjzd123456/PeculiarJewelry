@@ -52,7 +52,7 @@ internal class CobaltBonus : BaseMaterialBonus
         }
     }
 
-    private class CobaltBonusProjectile : GlobalProjectile
+    internal class CobaltBonusProjectile : GlobalProjectile
     {
         private static readonly int[] ExceptionIDs = new int[] { ProjectileID.StardustDragon1, ProjectileID.StardustDragon2, ProjectileID.StardustDragon3, 
             ProjectileID.StardustDragon4, ProjectileID.StormTigerTier1, ProjectileID.StormTigerTier2, ProjectileID.StormTigerTier3, ProjectileID.StormTigerGem, 
@@ -182,7 +182,7 @@ internal class CobaltBonus : BaseMaterialBonus
                 RepeatAI(projectile, 1);
         }
 
-        private static void RepeatAI(Projectile projectile, int repeats)
+        public static void RepeatAI(Projectile projectile, int repeats)
         {
             int type = projectile.type;
             bool actType = projectile.ModProjectile != null && projectile.ModProjectile.AIType > 0;

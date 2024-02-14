@@ -1,5 +1,8 @@
 ﻿namespace PeculiarJewelry.Content.JewelryMechanic.Stats.Effects;
 
+/// <summary>
+/// Ranged damage. MP safe.
+/// </summary>
 internal class PrecisionStat : JewelStatEffect
 {
     public override StatType Type => StatType.Precision;

@@ -1,5 +1,8 @@
 ﻿namespace PeculiarJewelry.Content.JewelryMechanic.Stats.Effects;
 
+/// <summary>
+/// Summon damage. MP safe.
+/// </summary>
 internal class OrderStat : JewelStatEffect
 {
     public override StatType Type => StatType.Order;

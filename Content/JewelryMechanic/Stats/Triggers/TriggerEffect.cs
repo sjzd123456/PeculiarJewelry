@@ -1,4 +1,5 @@
-﻿using PeculiarJewelry.Content.JewelryMechanic.MaterialBonuses;
+﻿using PeculiarJewelry.Content.Buffs;
+using PeculiarJewelry.Content.JewelryMechanic.MaterialBonuses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -88,8 +89,8 @@ internal abstract class TriggerEffect : ModType
 
     public void ConstantTrigger(Player player, JewelTier tier, float bonus)
     {
-        if (NeedsCooldown && player.HasBuff(CooldownBuffType))
-            return;
+        //if (NeedsCooldown && player.HasBuff(CooldownBuffType))
+        //    return;
 
         _lingerTime--;
 
@@ -125,7 +126,7 @@ internal abstract class TriggerEffect : ModType
             TriggerContext.WhenHaveDebuff => player.buffType.Any(x => x != 0 && Main.debuff[x]),
             TriggerContext.WhenOver10Buffs => player.buffType.Count(x => x != 0) > 10,
             TriggerContext.WhenPotionSick => player.HasBuff(BuffID.PotionSickness),
-            TriggerContext.WhenNoBuffs => player.buffType.Count(x => x != 0) == 0,
+            TriggerContext.WhenNoBuffs => !player.buffType.Any(x => x != 0 && !BuffSet.TriggerBuffs.Contains(x)),
             TriggerContext.WhenIdle => player.velocity.LengthSquared() <= 0.1f,
             TriggerContext.WhenNotHitFor15Seconds => false, // TBD
             TriggerContext.WhenHitWithinPast5Seconds => false, // TBD

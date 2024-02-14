@@ -6,7 +6,7 @@ namespace PeculiarJewelry.Content.JewelryMechanic.Stats.Effects;
 
 public abstract class JewelStatEffect : ModType
 {
-    public static readonly Dictionary<StatType, JewelStatEffect> StatsByType = new();
+    public static readonly Dictionary<StatType, JewelStatEffect> StatsByType = [];
 
     public abstract StatType Type { get; }
     public abstract Color Color { get; }

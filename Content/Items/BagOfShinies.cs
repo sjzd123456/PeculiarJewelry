@@ -6,6 +6,7 @@ using PeculiarJewelry.Content.JewelryMechanic.Stats;
 using PeculiarJewelry.Content.NPCs;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using Terraria.DataStructures;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ModLoader.IO;
@@ -103,6 +104,8 @@ public class BagOfShinies : ModItem
 
     public override void SaveData(TagCompound tag) => tag.Add("tier", (byte)tier);
     public override void LoadData(TagCompound tag) => tier = (JewelTier)tag.GetByte("tier");
+    public override void NetSend(BinaryWriter writer) => writer.Write((byte)tier);
+    public override void NetReceive(BinaryReader reader) => tier = (JewelTier)reader.ReadByte();
 }
 
 class StupidIdiotItemLootWorkaroundPlayer : ModPlayer

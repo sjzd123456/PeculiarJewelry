@@ -1,5 +1,8 @@
 ﻿namespace PeculiarJewelry.Content.JewelryMechanic.Stats.Effects;
 
+/// <summary>
+/// Defense piercing. MP safe.
+/// </summary>
 internal class AbsolutionStat : JewelStatEffect
 {
     public override StatType Type => StatType.Absolution;

@@ -1,5 +1,8 @@
 ﻿namespace PeculiarJewelry.Content.JewelryMechanic.Stats.Effects;
 
+/// <summary>
+/// Max mana. MP safe.
+/// </summary>
 internal class ArcaneStat : JewelStatEffect
 {
     public override StatType Type => StatType.Arcane;

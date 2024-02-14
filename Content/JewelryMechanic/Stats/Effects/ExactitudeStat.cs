@@ -1,5 +1,8 @@
 ﻿namespace PeculiarJewelry.Content.JewelryMechanic.Stats.Effects;
 
+/// <summary>
+/// Crit chance. MP safe.
+/// </summary>
 internal class ExactitudeStat : JewelStatEffect
 {
     public override StatType Type => StatType.Exactitude;

@@ -1,7 +1,8 @@
-﻿using PeculiarJewelry.Content.JewelryMechanic.MaterialBonuses.Bonuses;
+﻿namespace PeculiarJewelry.Content.JewelryMechanic.Stats.Effects;
 
-namespace PeculiarJewelry.Content.JewelryMechanic.Stats.Effects;
-
+/// <summary>
+/// Max life. MP safe.
+/// </summary>
 internal class VigorStat : JewelStatEffect
 {
     public override StatType Type => StatType.Vigor;

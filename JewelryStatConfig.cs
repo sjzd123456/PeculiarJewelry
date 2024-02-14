@@ -7,7 +7,7 @@ public class JewelryStatConfig : ModConfig
 {
     private const float BaseDamageBuff = 3f;
 
-    public override ConfigScope Mode => ConfigScope.ClientSide;
+    public override ConfigScope Mode => ConfigScope.ServerSide;
 
     [ReloadRequired]
     [DefaultValue(0.33f)]
@@ -98,8 +98,8 @@ public class JewelryStatConfig : ModConfig
     [Range(0f, 10f)]
     public float TensionStrength { get; set; }
 
-    [DefaultValue(2f)]
-    [Range(0f, 10f)]
+    [DefaultValue(1f)]
+    [Range(0.5f, 2f)]
     public float LegionStrength { get; set; }
 
     [DefaultValue(5)]
@@ -109,6 +109,18 @@ public class JewelryStatConfig : ModConfig
     [DefaultValue(BaseDamageBuff)]
     [Range(0f, 10f)]
     public float WillpowerStat { get; set; }
+
+    [DefaultValue(1f)]
+    [Range(0f, 10f)]
+    public float AllureStrength { get; set; }
+
+    [DefaultValue(1f)]
+    [Range(0f, 10f)]
+    public float DiligenceStrength { get; set; }
+
+    [DefaultValue(1f)]
+    [Range(0, 10f)]
+    public float ToleranceStrength { get; set; }
 
     [Header("Mods.PeculiarJewelry.Config.DesecrationHeader")]
     [DefaultValue(1)]

@@ -2,6 +2,9 @@
 
 namespace PeculiarJewelry.Content.JewelryMechanic.Stats.Effects;
 
+/// <summary>
+/// Defense. MP safe.
+/// </summary>
 internal class PermenanceStat : JewelStatEffect
 {
     public override StatType Type => StatType.Permenance;

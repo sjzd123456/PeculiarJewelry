@@ -1,5 +1,8 @@
 ﻿namespace PeculiarJewelry.Content.JewelryMechanic.Stats.Effects;
 
+/// <summary>
+/// Endurance. MP safe.
+/// </summary>
 internal class TenacityStat : JewelStatEffect
 {
     public override StatType Type => StatType.Tenacity;

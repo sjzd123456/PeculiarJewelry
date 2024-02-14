@@ -1,5 +1,8 @@
 ﻿namespace PeculiarJewelry.Content.JewelryMechanic.Stats.Effects;
 
+/// <summary>
+/// Mana regen. MP safe.
+/// </summary>
 internal class ResurgenceStat : JewelStatEffect
 {
     public override StatType Type => StatType.Resurgence;

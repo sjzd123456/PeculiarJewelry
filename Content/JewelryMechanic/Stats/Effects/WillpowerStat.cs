@@ -1,5 +1,8 @@
 ﻿namespace PeculiarJewelry.Content.JewelryMechanic.Stats.Effects;
 
+/// <summary>
+/// Magic damage. MP safe.
+/// </summary>
 internal class WillpowerStat : JewelStatEffect
 {
     public override StatType Type => StatType.Willpower;

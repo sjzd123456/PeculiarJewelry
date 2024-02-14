@@ -4,6 +4,8 @@ namespace PeculiarJewelry.Content.Buffs;
 
 internal class CritTriggerBuff : ModBuff
 {
+    public override void SetStaticDefaults() => BuffSet.TriggerBuffs.Add(Type);
+
     public override void Update(Player player, ref int buffIndex) 
         => player.GetCritChance(DamageClass.Generic) += player.GetModPlayer<StackableBuffTracker>().StackableStrength("Crit");
 

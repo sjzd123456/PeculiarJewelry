@@ -4,7 +4,6 @@ internal class DiligenceStat : JewelStatEffect
 {
     public override StatType Type => StatType.Diligence;
     public override Color Color => new(153, 102, 51);
-
     public override StatExclusivity Exclusivity => StatExclusivity.Utility;
 
     public override void Apply(Player player, float strength)
@@ -14,14 +13,14 @@ internal class DiligenceStat : JewelStatEffect
         player.GetModPlayer<DiligencePlayer>().diligenceBoost += bonus; // This benefits both pick range and pickup range
     }
 
-    protected override float InternalEffectBonus(float multiplier, Player player) => (int)(PeculiarJewelry.StatConfig.OrderStrength * multiplier);
+    protected override float InternalEffectBonus(float multiplier, Player player) => (int)(PeculiarJewelry.StatConfig.DiligenceStrength * multiplier);
 
     class DiligenceItem : GlobalItem
     {
         public override void GrabRange(Item item, Player player, ref int grabRange)
         {
             int boost = player.GetModPlayer<DiligencePlayer>().diligenceBoost;
-
+            
             if (boost > 0)
                 grabRange += boost;
         }

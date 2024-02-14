@@ -13,7 +13,7 @@ internal class ToleranceStat : JewelStatEffect
         player.breathMax += (int)GetEffectBonus(player, strength);
     }
 
-    protected override float InternalEffectBonus(float multiplier, Player player) => (int)(PeculiarJewelry.StatConfig.OrderStrength * multiplier);
+    protected override float InternalEffectBonus(float multiplier, Player player) => (int)(PeculiarJewelry.StatConfig.ToleranceStrength * multiplier);
 
     public override void Load()
     {

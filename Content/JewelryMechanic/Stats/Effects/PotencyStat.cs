@@ -1,5 +1,8 @@
 ﻿namespace PeculiarJewelry.Content.JewelryMechanic.Stats.Effects;
 
+/// <summary>
+/// All damage. MP safe.
+/// </summary>
 internal class PotencyStat : JewelStatEffect
 {
     public override StatType Type => StatType.Potency;

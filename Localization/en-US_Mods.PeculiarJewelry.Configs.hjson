@@ -156,4 +156,19 @@ JewelryStatConfig: {
 		Label: Profanity Strength
 		Tooltip: How much Profanity is gained per desecration.
 	}
+
+	AllureStrength: {
+		Label: Allure Strength
+		Tooltip: Controls the increase in fishing power per upgrade.
+	}
+
+	DiligenceStrength: {
+		Label: Diligence Strength
+		Tooltip: Controls the increase in mining speed, tile reach and item attraction range per upgrade.
+	}
+
+	ToleranceStrength: {
+		Label: Tolerance Strength
+		Tooltip: ""
+	}
 }

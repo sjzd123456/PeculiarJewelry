@@ -90,7 +90,7 @@ Bonuses: {
 	Crimtane: {
 		1Set:
 			'''
-			{$1Bonus} Jewels on this jewelry give 25% additional all damage buffs"
+			{$1Bonus} Jewels on this jewelry give 25% additional all damage buffs
 			All max health and health regeneration bonuses are reduced by 6%
 			'''
 		3Set: "{$3Bonus} Gain an additional increase in offensive stats, but regeneration and life steal is disabled"
@@ -212,5 +212,11 @@ Bonuses: {
 			'''
 		3Set: "{$3Bonus} Gain an additional increase in offensive stats, but regeneration and life steal is disabled"
 		5Set: "{$5Bonus} Missing an attack will disable defense and damage resistance, but damage is increased by a lot"
+	}
+
+	Hellstone: {
+		1Set: "{$1Bonus} Trigger effects on this jewel are stronger"
+		3Set: "{$3Bonus} Instant trigger effects have a chance to happen twice and conditional trigger effects are 33% stronger"
+		5Set: "{$5Bonus} Size of attacks and projectiles doubled"
 	}
 }

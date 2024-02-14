@@ -28,5 +28,6 @@ internal enum TriggerContext : byte
     WhenNotHitFor15Seconds,
     WhenHitWithinPast5Seconds,
 
+    // Misc
     Max,
 }
