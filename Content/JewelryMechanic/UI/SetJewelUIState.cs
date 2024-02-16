@@ -35,6 +35,8 @@ internal class SetJewelUIState : UIState, IClosableUIState
 
     public override void OnInitialize()
     {
+        Width = StyleDimension.Fill; Height = StyleDimension.Fill;
+
         SetDialoguePanel();
         SetSetPanel();
         SetCurrentStatPanel();
@@ -47,8 +49,7 @@ internal class SetJewelUIState : UIState, IClosableUIState
         {
             Width = StyleDimension.FromPixels(500),
             Height = StyleDimension.FromPixels(280),
-            HAlign = 0.5f,
-            Left = StyleDimension.FromPixels(396),
+            Left = StyleDimension.FromPixelsAndPercent(146, 0.5f),
             Top = StyleDimension.FromPixels(60)
         };
         Append(panel);
@@ -69,9 +70,10 @@ internal class SetJewelUIState : UIState, IClosableUIState
         self.SetText(GetStats(true));
 
         UIPanel parent = self.Parent as UIPanel;
-        var wrapped = Font.CreateWrappedText(self.Text, parent.GetInnerDimensions().Width);
+        var wrapped = Font.CreateWrappedText(self.Text, 6000);
         var size = ChatManager.GetStringSize(Font, wrapped, Vector2.One);
         size = !self.IsWrapped ? new Vector2(size.X, size.Y + 16) : new Vector2(size.X, size.Y + self.WrappedTextBottomPadding);
+        parent.Width = StyleDimension.FromPixels(size.X + 24);
         parent.Height = StyleDimension.FromPixels(size.Y);
         parent.Recalculate();
     }
@@ -513,9 +515,11 @@ internal class SetJewelUIState : UIState, IClosableUIState
         if (_jewelrySlot.HasItem)
             Main.LocalPlayer.QuickSpawnItem(new EntitySource_OverfullInventory(Main.LocalPlayer), _jewelrySlot.Item);
 
-        foreach (var slot in _jewelSlots)
+        for (int i = 0; i < _jewelSlots.Length; i++)
         {
-            if (slot.HasItem)
+            ItemSlotUI slot = _jewelSlots[i];
+
+            if (slot.HasItem && !_displayJewel[i])
                 Main.LocalPlayer.QuickSpawnItem(new EntitySource_OverfullInventory(Main.LocalPlayer), slot.Item);
         }
 
@@ -524,5 +528,13 @@ internal class SetJewelUIState : UIState, IClosableUIState
             if (slot.HasItem)
                 Main.LocalPlayer.QuickSpawnItem(new EntitySource_OverfullInventory(Main.LocalPlayer), slot.Item);
         }
+    }
+
+    public override void Draw(SpriteBatch spriteBatch)
+    {
+        float oldScale = Main.inventoryScale;
+        Main.inventoryScale = 0.9f;
+        base.Draw(spriteBatch);
+        Main.inventoryScale = oldScale;
     }
 }

@@ -178,14 +178,14 @@ internal class DesecrationUIState : UIState
     {
         UIList desecrationsList = new()
         {
-            Width = StyleDimension.Fill,
+            Width = StyleDimension.FromPixelsAndPercent(-20, 1),
             Height = StyleDimension.FromPixelsAndPercent(0, 1f),
         };
 
         UIScrollbar bar = new()
         {
             Width = StyleDimension.FromPixels(20),
-            Height = StyleDimension.FromPixelsAndPercent(0, 1f),
+            Height = StyleDimension.FromPercent(1f),
             Left = StyleDimension.FromPixelsAndPercent(-20, 1)
         };
 
@@ -202,7 +202,7 @@ internal class DesecrationUIState : UIState
         {
             UIPanel singleItemPanel = new()
             {
-                Width = StyleDimension.FromPixelsAndPercent(-24, 1f),
+                Width = StyleDimension.FromPixelsAndPercent(-4, 1f),
                 Height = StyleDimension.FromPixels(50),
             };
 

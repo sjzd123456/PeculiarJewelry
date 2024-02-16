@@ -1,6 +1,7 @@
 ﻿using PeculiarJewelry.Content.Items.Jewels;
 using System;
 using System.Collections.Generic;
+using System.Threading.Channels;
 
 namespace PeculiarJewelry.Content.JewelryMechanic.Stats;
 
@@ -18,7 +19,7 @@ public abstract partial class JewelInfo
             string text = $"{Prefix} {tier.Localize()} {Jewel.Localize("Jewelry.Jewel")} of {Major.GetName().Value}";
 
             if (Major.Strength > 1)
-                text += $" +{(int)Major.Strength}";
+                text += $" +{successfulCuts}";
 
             return text;
         }
@@ -36,7 +37,7 @@ public abstract partial class JewelInfo
     {
         this.tier = tier;// (JewelTier)Main.rand.Next((int)JewelTier.Mutated0, (int)JewelTier.Stellar2 + 1);
 
-        Major = new(StatType.Frenzy);// JewelStat.Random;
+        Major = JewelStat.Random;
 
         InternalSetup();
 
@@ -131,12 +132,10 @@ public abstract partial class JewelInfo
         return false;
     }
 
-    internal void SuccessfulCut(bool noAdd = false)
+    internal void SuccessfulCut()
     {
         successfulCuts++;
-
-        if (!noAdd)
-            Major.Strength += JewelryCommon.StatStrengthRange();
+        Major.Strength += JewelryCommon.StatStrengthRange();
 
         if (successfulCuts % 4 == 0)
         {
@@ -144,7 +143,7 @@ public abstract partial class JewelInfo
                 Main.rand.Next(SubStats).Strength += JewelryCommon.StatStrengthRange();
             else
             {
-                List<StatType> takenTypes = new() { Major.Type };
+                List<StatType> takenTypes = [Major.Type];
 
                 foreach (var item in SubStats)
                     takenTypes.Add(item.Type);

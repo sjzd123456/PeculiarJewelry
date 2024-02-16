@@ -6,7 +6,7 @@
 internal class PrecisionStat : JewelStatEffect
 {
     public override StatType Type => StatType.Precision;
-    public override Color Color => Color.DarkGreen;
+    public override Color Color => Color.DarkOliveGreen;
 
     public override StatExclusivity Exclusivity => StatExclusivity.Ranged;
 

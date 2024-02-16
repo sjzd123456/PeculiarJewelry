@@ -8,7 +8,7 @@ namespace PeculiarJewelry.Content.JewelryMechanic.Stats.Effects;
 internal class AllureStat : JewelStatEffect
 {
     public override StatType Type => StatType.Allure;
-    public override Color Color => Color.Turquoise;
+    public override Color Color => Color.PaleTurquoise;
 
     public override StatExclusivity Exclusivity => StatExclusivity.Utility;
 

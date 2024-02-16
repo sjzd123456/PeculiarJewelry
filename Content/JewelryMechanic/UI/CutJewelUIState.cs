@@ -409,7 +409,7 @@ internal class CutJewelUIState : UIState, IClosableUIState
 
         UIText supportText = new(Localize("Support"))
         {
-            Top = StyleDimension.FromPixels(CutPanelHeight - 60),
+            Top = StyleDimension.FromPixels(CutPanelHeight - 72),
             Left = StyleDimension.FromPixels(20),
         };
         panel.Append(supportText);
@@ -565,5 +565,13 @@ internal class CutJewelUIState : UIState, IClosableUIState
             if (slot.HasItem)
                 Main.LocalPlayer.QuickSpawnItem(new EntitySource_OverfullInventory(Main.LocalPlayer), slot.Item, slot.Item.stack);
         }
+    }
+
+    public override void Draw(SpriteBatch spriteBatch)
+    {
+        float oldScale = Main.inventoryScale;
+        Main.inventoryScale = 0.9f;
+        base.Draw(spriteBatch);
+        Main.inventoryScale = oldScale;
     }
 }
