@@ -30,7 +30,8 @@ internal class TensionStat : JewelStatEffect
                 if (bonus <= 0)
                     return;
 
-                projectile.velocity *= bonus;
+                projectile.velocity *= 1 + bonus;
+                projectile.netUpdate = true;
             }
         }
     }

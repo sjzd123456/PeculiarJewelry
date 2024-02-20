@@ -12,7 +12,7 @@ internal class LegionStat : JewelStatEffect
     public override StatExclusivity Exclusivity => StatExclusivity.Summon;
 
     public override void Apply(Player player, float strength) => player.GetModPlayer<LegionPlayer>().bonus += GetEffectBonus(player, strength) / 100f;
-    protected override float InternalEffectBonus(float multiplier, Player player) => PeculiarJewelry.StatConfig.LegionStrength * multiplier;
+    protected override float InternalEffectBonus(float multiplier, Player player) => PeculiarJewelry.StatConfig.LegionStrength * multiplier * 2;
 
     private class LegionPlayer : ModPlayer
     {
