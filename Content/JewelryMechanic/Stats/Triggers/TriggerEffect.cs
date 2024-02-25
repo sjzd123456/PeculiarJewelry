@@ -70,7 +70,7 @@ internal abstract class TriggerEffect : ModType
         if (NeedsCooldown && player.HasBuff(CooldownBuffType))
             return;
 
-        if (Type != TriggerType.Conditional)
+        if (Type != TriggerType.Conditional && Context == context)
         {
             if (ReportInstantChance(tier, player) > Main.rand.NextFloat())
             {

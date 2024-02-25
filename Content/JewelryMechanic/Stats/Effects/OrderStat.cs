@@ -10,6 +10,6 @@ internal class OrderStat : JewelStatEffect
 
     public override StatExclusivity Exclusivity => StatExclusivity.Summon;
 
-    public override void Apply(Player player, float strength) => player.GetDamage(DamageClass.Summon) += GetEffectBonus(player, strength);
+    public override void Apply(Player player, float strength) => player.GetDamage(DamageClass.Summon) += GetEffectBonus(player, strength) / 100f;
     protected override float InternalEffectBonus(float multiplier, Player player) => PeculiarJewelry.StatConfig.OrderStrength * multiplier;
 }

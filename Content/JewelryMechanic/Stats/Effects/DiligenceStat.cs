@@ -1,4 +1,6 @@
-﻿namespace PeculiarJewelry.Content.JewelryMechanic.Stats.Effects;
+﻿using System;
+
+namespace PeculiarJewelry.Content.JewelryMechanic.Stats.Effects;
 
 internal class DiligenceStat : JewelStatEffect
 {
@@ -9,11 +11,11 @@ internal class DiligenceStat : JewelStatEffect
     public override void Apply(Player player, float strength)
     {
         int bonus = (int)GetEffectBonus(player, strength);
-        player.pickSpeed += bonus;
+        player.pickSpeed -= bonus / 1000f;
         player.GetModPlayer<DiligencePlayer>().diligenceBoost += bonus; // This benefits both pick range and pickup range
     }
 
-    protected override float InternalEffectBonus(float multiplier, Player player) => (int)(PeculiarJewelry.StatConfig.DiligenceStrength * multiplier);
+    protected override float InternalEffectBonus(float multiplier, Player player) => (int)MathF.Ceiling(PeculiarJewelry.StatConfig.DiligenceStrength * multiplier * 4);
 
     class DiligenceItem : GlobalItem
     {
@@ -42,7 +44,7 @@ internal class DiligenceStat : JewelStatEffect
             if (diligenceBoost > 0 && Player.HeldItem.pick > 0)
             {
                 _oldTileBoost = Player.HeldItem.tileBoost;
-                Player.HeldItem.tileBoost = diligenceBoost;
+                Player.HeldItem.tileBoost = (int)(diligenceBoost / 20f);
             }
 
             return true;

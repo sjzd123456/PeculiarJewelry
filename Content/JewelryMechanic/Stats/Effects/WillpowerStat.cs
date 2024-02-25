@@ -10,6 +10,6 @@ internal class WillpowerStat : JewelStatEffect
 
     public override StatExclusivity Exclusivity => StatExclusivity.Magic;
 
-    public override void Apply(Player player, float strength) => player.GetDamage(DamageClass.Magic) += GetEffectBonus(player, strength);
+    public override void Apply(Player player, float strength) => player.GetDamage(DamageClass.Magic) += GetEffectBonus(player, strength) / 100f;
     protected override float InternalEffectBonus(float multiplier, Player player) => PeculiarJewelry.StatConfig.WillpowerStat * multiplier;
 }

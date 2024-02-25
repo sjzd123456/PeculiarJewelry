@@ -7,12 +7,12 @@ internal class CelerityStat : JewelStatEffect
 
     public override void Apply(Player player, float strength)
     {
-        var bonus = GetEffectBonus(player, strength) / 100f;
+        var bonus = GetEffectBonus(player, strength) / 50f;
         player.GetModPlayer<CelerityPlayer>().bonus = bonus;
         player.wingTimeMax = (int)(player.wingTimeMax * (1 + bonus));
     }
 
-    protected override float InternalEffectBonus(float multiplier, Player player) => PeculiarJewelry.StatConfig.CelerityStrength * multiplier * 1.5f;
+    protected override float InternalEffectBonus(float multiplier, Player player) => PeculiarJewelry.StatConfig.CelerityStrength * multiplier;
 
     class CelerityPlayer : ModPlayer
     {

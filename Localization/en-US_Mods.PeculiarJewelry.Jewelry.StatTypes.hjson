@@ -50,7 +50,7 @@ Gigantism: {
 
 Frenzy: {
 	DisplayName: Frenzy
-	Description: "{0}% use time"
+	Description: "{0}% reduced use time"
 }
 
 Precision: {
@@ -120,5 +120,5 @@ Diligence: {
 
 Tolerance: {
 	DisplayName: Tolerance
-	Description: "{0}% buff time and item pickup range, -{0}% debuff time"
+	Description: "{0}% buff time and max breath time, -{0}% debuff time"
 }

@@ -8,6 +8,6 @@ internal class TenacityStat : JewelStatEffect
     public override StatType Type => StatType.Tenacity;
     public override Color Color => new(100, 100, 100);
 
-    public override void Apply(Player player, float strength) => player.endurance += GetEffectBonus(player, strength);
+    public override void Apply(Player player, float strength) => player.endurance += GetEffectBonus(player, strength) / 100f;
     protected override float InternalEffectBonus(float multiplier, Player player) => PeculiarJewelry.StatConfig.TenacityStrength * multiplier;
 }

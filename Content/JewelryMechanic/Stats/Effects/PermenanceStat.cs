@@ -12,5 +12,5 @@ internal class PermenanceStat : JewelStatEffect
 
     public override void Apply(Player player, float strength) => player.statDefense += (int)GetEffectBonus(player, strength);
     protected override float InternalEffectBonus(float multiplier, Player player) 
-        => (int)(PeculiarJewelry.StatConfig.PermenanceStrength * multiplier * player.MaterialBonus("Iron", Type) * player.MaterialBonus("Demonite", Type));
+        => (int)(PeculiarJewelry.StatConfig.PermenanceStrength * multiplier * player.MaterialBonus("Iron", Type) * player.MaterialBonus("Demonite", Type)) * 0.8f;
 }
