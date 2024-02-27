@@ -1,7 +1,6 @@
 ﻿using PeculiarJewelry.Content.Items.Jewels;
 using System;
 using System.Collections.Generic;
-using System.Threading.Channels;
 
 namespace PeculiarJewelry.Content.JewelryMechanic.Stats;
 
@@ -37,7 +36,7 @@ public abstract partial class JewelInfo
     {
         this.tier = tier;// (JewelTier)Main.rand.Next((int)JewelTier.Mutated0, (int)JewelTier.Stellar2 + 1);
 
-        Major = new(StatType.Legion);// JewelStat.Random;
+        Major = new(StatType.Tolerance);// JewelStat.Random;
 
         InternalSetup();
 

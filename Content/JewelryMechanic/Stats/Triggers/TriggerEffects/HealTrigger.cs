@@ -7,7 +7,7 @@ internal class HealTrigger : TriggerEffect
 
     protected override void InternalInstantEffect(TriggerContext context, Player player, float coefficient, JewelTier tier)
     {
-        int hp = (int)TotalTriggerPower(player, coefficient);
+        int hp = (int)TotalTriggerPower(player, coefficient, tier);
 
         if (player.statLife + hp > player.statLifeMax2)
             hp = player.statLife + hp - player.statLifeMax2;

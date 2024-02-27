@@ -6,14 +6,22 @@ internal class KBAndClearTrigger : TriggerEffect
 
     protected override void InternalInstantEffect(TriggerContext context, Player player, float coefficient, JewelTier tier)
     {
-        float radius = TotalTriggerPower(player, coefficient) * 16 * 10;
+        float radius = TotalTriggerPower(player, coefficient, tier) * 16;
 
-        for (int i = 0; i < Main.maxNPCs; ++i)
+        if (player.whoAmI == Main.myPlayer)
         {
-            NPC npc = Main.npc[i];
+            for (int i = 0; i < Main.maxNPCs; ++i)
+            {
+                NPC npc = Main.npc[i];
 
-            if (npc.CanBeChasedBy() && npc.DistanceSQ(player.Center) < radius * radius)
-                npc.velocity = player.DirectionTo(npc.Center) * MathHelper.Lerp(npc.knockBackResist, 1f, 0.5f) * 8;
+                if (npc.CanBeChasedBy() && npc.DistanceSQ(player.Center) < radius * radius)
+                {
+                    npc.velocity = player.DirectionTo(npc.Center) * MathHelper.Lerp(npc.knockBackResist, 1f, 0.35f) * 8;
+
+                    if (Main.netMode == NetmodeID.MultiplayerClient)
+                        NetMessage.SendData(MessageID.SyncNPC, -1, -1, null, i);
+                }
+            }
         }
 
         for (int i = 0; i < Main.maxProjectiles; ++i)

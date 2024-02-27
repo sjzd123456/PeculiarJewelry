@@ -5,6 +5,7 @@ Projectiles: {
 	AoEProjectile.DisplayName: Debuff Wave
 	Smoke.DisplayName: Smoke
 	SoulProjectile.DisplayName: Soul
+	TriggerProj.DisplayName: Trigger Proj
 }
 
 TierCutoffCondition: Only from bags of tier {0} or higher.

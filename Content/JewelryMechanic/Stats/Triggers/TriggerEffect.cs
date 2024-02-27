@@ -63,7 +63,7 @@ internal abstract class TriggerEffect : ModType
 
     internal void ForceSetContext(TriggerContext context) => Context = context;
 
-    public static int CooldownTime(JewelTier tier) => (int)Math.Pow(2, 1 - ((float)tier / 10)) * 60;
+    public static int CooldownTime(JewelTier tier) => (int)MathHelper.Lerp(5 * 60 * (1 / (float)tier), 5 * 60, 0.1f);
 
     public void InstantTrigger(TriggerContext context, Player player, JewelTier tier)
     {
@@ -89,9 +89,6 @@ internal abstract class TriggerEffect : ModType
 
     public void ConstantTrigger(Player player, JewelTier tier, float bonus)
     {
-        //if (NeedsCooldown && player.HasBuff(CooldownBuffType))
-        //    return;
-
         _lingerTime--;
 
         bool condition = ConstantConditionMet(Context, player, tier);
@@ -123,7 +120,7 @@ internal abstract class TriggerEffect : ModType
             TriggerContext.WhenBelowHalfMana => player.statMana < player.statManaMax2 / 2,
             TriggerContext.WhenAboveHalfMana => player.statMana >= player.statManaMax2 / 2,
             TriggerContext.WhenFullMana => player.statMana == player.statManaMax2,
-            TriggerContext.WhenHaveDebuff => player.buffType.Any(x => x != 0 && Main.debuff[x]),
+            TriggerContext.WhenHaveDebuff => player.buffType.Any(x => x != 0 && Main.debuff[x] && BuffID.Sets.LongerExpertDebuff[x]),
             TriggerContext.WhenOver10Buffs => player.buffType.Count(x => x != 0) > 10,
             TriggerContext.WhenPotionSick => player.HasBuff(BuffID.PotionSickness),
             TriggerContext.WhenNoBuffs => !player.buffType.Any(x => x != 0 && !BuffSet.TriggerBuffs.Contains(x)),
@@ -146,7 +143,7 @@ internal abstract class TriggerEffect : ModType
         const string Prefix = "Mods.PeculiarJewelry.Jewelry.";
         string condition = Language.GetText(Prefix + "TriggerContexts." + Context).Value;
         string chance = Language.GetText(Prefix + "ChanceTo").WithFormatArgs((ReportInstantChance(tier, player) * 100).ToString("#0.##")).Value;
-        string effect = Language.GetText(Prefix + "TriggerEffects." + GetType().Name).WithFormatArgs(TotalTriggerPower(player, ConditionCoefficients[Context])).Value;
+        string effect = Language.GetText(Prefix + "TriggerEffects." + GetType().Name).WithFormatArgs($"{TotalTriggerPower(player, ConditionCoefficients[Context], tier):#0.##}").Value;
 
         return condition + " " + (Type == TriggerType.Conditional ? "" : chance) + effect;
     }
@@ -168,8 +165,11 @@ internal abstract class TriggerEffect : ModType
     public virtual string TooltipArgumentFormat(float coefficient, JewelTier tier) => (TriggerPower() * coefficient).ToString("#0.##");
     public abstract float TriggerPower();
 
-    public float TotalTriggerPower(Player player, float coefficient)
+    public float TotalTriggerPower(Player player, float coefficient, JewelTier tier)
     {
+        if (Type == TriggerType.Conditional)
+            return TotalConditionalStrength(coefficient, tier);
+
         float hellstoneMultiplier = player.GetModPlayer<MaterialPlayer>().MaterialCount("Hellstone") * 0.5f;
         return coefficient * TriggerPower() * (hellstoneMultiplier + 1);
     } 

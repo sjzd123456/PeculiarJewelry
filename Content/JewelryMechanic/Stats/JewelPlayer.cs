@@ -9,11 +9,11 @@ namespace PeculiarJewelry.Content.JewelryMechanic.Stats;
 
 internal class JewelPlayer : ModPlayer
 {
-    private List<MajorJewelInfo> MajorJewelInfos
+    public List<MajorJewelInfo> MajorJewelInfos
     {
         get
         {
-            List<MajorJewelInfo> infos = new();
+            List<MajorJewelInfo> infos = [];
 
             foreach (var item in jewelry)
                 foreach (var info in item.Info)
@@ -26,6 +26,8 @@ internal class JewelPlayer : ModPlayer
 
     public List<BasicJewelry> jewelry = new();
 
+    private bool _jumpFlag = false;
+
     public override void ResetEffects()
     {
         jewelry.Clear();
@@ -37,22 +39,41 @@ internal class JewelPlayer : ModPlayer
             item.ApplyConstantTrigger(Player);
 
         Player.GetModPlayer<MaterialPlayer>().StaticMaterialEffects();
-        Player.GetModPlayer<HallowedBonus.HallowedBonusPlayer>().fiveSetPower = 1;
+        var hallowedPlayer = Player.GetModPlayer<HallowedBonus.HallowedBonusPlayer>();
+        hallowedPlayer.fiveSetPower = 1;
 
-        if (Player.GetModPlayer<HallowedBonus.HallowedBonusPlayer>().fiveSet)
+        if (hallowedPlayer.fiveSet)
         {
             foreach (var item in jewelry)
                 foreach (var info in item.Info)
-                    Player.GetModPlayer<HallowedBonus.HallowedBonusPlayer>().fiveSetPower += info is MajorJewelInfo ? 0.01f : 0.005f;
+                    hallowedPlayer.fiveSetPower += info is MajorJewelInfo ? 0.01f : 0.005f;
         }
 
         foreach (var item in jewelry)
         {
             item.ApplySingleJewelBonus(Player);
-            item.ApplyTo(Player, -(1f - ((float)item.tier + 1f) / 5f), Player.GetModPlayer<HallowedBonus.HallowedBonusPlayer>().fiveSetPower);
+            item.ApplyTo(Player, -(1f - ((float)item.tier + 1f) / 5f), hallowedPlayer.fiveSetPower);
             item.ResetSingleJewelBonus(Player);
         }
+
+        if (Player.jump > 0)
+        {
+            if (!_jumpFlag)
+                JumpEffects();
+
+            _jumpFlag = true;
+        }
+        else
+            _jumpFlag = false;
     }
+
+    private void JumpEffects()
+    {
+        foreach (var item in MajorJewelInfos)
+            item.InstantTrigger(TriggerContext.OnJump, Player);
+    }
+
+    public override void OnExtraJumpStarted(ExtraJump jump, ref bool playSound) { }// => JumpEffects();
 
     public override void OnHurt(Player.HurtInfo info)
     {
@@ -77,5 +98,18 @@ internal class JewelPlayer : ModPlayer
             return;
 
         TriggerOnHit(target);
+    }
+
+    private class JewelPlayerItem : GlobalItem
+    {
+        public override void OnConsumeMana(Item item, Player player, int manaConsumed)
+        {
+            foreach (var trigger in player.GetModPlayer<JewelPlayer>().MajorJewelInfos)
+                trigger.InstantTrigger(TriggerContext.OnUseMana, player);
+
+            if (player.statMana - manaConsumed <= 0)
+                foreach (var trigger in player.GetModPlayer<JewelPlayer>().MajorJewelInfos)
+                    trigger.InstantTrigger(TriggerContext.OnRunOutOfMana, player);
+        }
     }
 }

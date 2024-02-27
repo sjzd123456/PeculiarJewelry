@@ -58,8 +58,9 @@ internal class DesecrationUIState : UIState
             Width = StyleDimension.FromPixels(80),
             Height = StyleDimension.FromPixels(32),
             Top = StyleDimension.FromPixels(322),
+            Left = StyleDimension.FromPixels(80),
             VAlign = 0.15f,
-            HAlign = 0.45f,
+            HAlign = 0.5f,
         };
         confirm.OnLeftClick += ConfirmClick;
         Append(confirm);
@@ -69,8 +70,9 @@ internal class DesecrationUIState : UIState
             Width = StyleDimension.FromPixels(80),
             Height = StyleDimension.FromPixels(32),
             Top = StyleDimension.FromPixels(322),
+            Left = StyleDimension.FromPixels(-80),
             VAlign = 0.15f,
-            HAlign = 0.55f,
+            HAlign = 0.5f,
         };
         reset.OnLeftClick += (UIMouseEvent evt, UIElement listeningElement) => TemporaryStrength.Clear();
         Append(reset);

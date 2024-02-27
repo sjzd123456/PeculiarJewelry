@@ -2914,3 +2914,13 @@ LuminitePauldrons: {
 		{$Material.Bonuses.Luminite.1Set}
 		'''
 }
+
+SeptRadiantEcho: {
+	DisplayName: Sept Radiant Echo
+	Tooltip: ""
+}
+
+SextupleRadiantEcho: {
+	DisplayName: Sextuple Radiant Echo
+	Tooltip: ""
+}

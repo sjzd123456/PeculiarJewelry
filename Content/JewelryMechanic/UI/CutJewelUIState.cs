@@ -111,6 +111,8 @@ internal class CutJewelUIState : UIState, IClosableUIState
         23 => ModContent.ItemType<TripleRadiantEcho>(),
         31 => ModContent.ItemType<QuadRadiantEcho>(),
         38 => ModContent.ItemType<QuintRadiantEcho>(),
+        45 => ModContent.ItemType<SextupleRadiantEcho>(),
+        52 => ModContent.ItemType<SeptRadiantEcho>(),
         _ => throw new ArgumentException("Uh oh! You aren't in a threshold but you are somehow."),
     };
 

@@ -7,7 +7,7 @@ internal class ImmuneFrameTrigger : TriggerEffect
 
     protected override void InternalInstantEffect(TriggerContext context, Player player, float coefficient, JewelTier tier)
     {
-        int time = (int)TotalTriggerPower(player, coefficient);
+        int time = (int)TotalTriggerPower(player, coefficient, tier) * 30;
         player.AddImmuneTime(ImmunityCooldownID.General, time);
         player.AddImmuneTime(ImmunityCooldownID.Bosses, time);
         player.immuneNoBlink = false;
@@ -15,5 +15,5 @@ internal class ImmuneFrameTrigger : TriggerEffect
         player.AddBuff(CooldownBuffType, CooldownTime(tier));
     }
 
-    public override float TriggerPower() => 30;
+    public override float TriggerPower() => 60;
 }

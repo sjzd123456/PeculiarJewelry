@@ -11,7 +11,7 @@ internal class DefenseTriggerConditional : TriggerEffect
         player.GetModPlayer<StackableBuffTracker>().StackableBuff<DefenseTriggerBuff>("Defense", new(2, TotalConditionalStrength(coefficient, tier)));
     }
 
-    public override float TriggerPower() => 1;
+    public override float TriggerPower() => 2;
 }
 
 
