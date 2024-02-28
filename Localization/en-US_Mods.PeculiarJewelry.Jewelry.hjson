@@ -33,7 +33,7 @@ StatExclusivities: {
 }
 
 TriggerContexts: {
-	OnTakeDamage: On hit:
+	OnTakeDamage: On being hit:
 	OnHeal: On using a healing potion:
 	OnUseMana: On using mana:
 	OnRunOutOfMana: On running out of mana:

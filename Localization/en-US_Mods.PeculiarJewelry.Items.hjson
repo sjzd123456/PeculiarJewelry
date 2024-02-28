@@ -2915,12 +2915,22 @@ LuminitePauldrons: {
 		'''
 }
 
-SeptRadiantEcho: {
-	DisplayName: Sept Radiant Echo
-	Tooltip: ""
+SextupleRadiantEcho: {
+	DisplayName: Sextuple-Forged Radiant Echo
+	Tooltip: Can be used to upgrade jewels from cut 47 to 48
 }
 
-SextupleRadiantEcho: {
-	DisplayName: Sextuple Radiant Echo
-	Tooltip: ""
+SeptRadiantEcho: {
+	DisplayName: Septuple-Forged Radiant Echo
+	Tooltip: Can be used to upgrade jewels from cut 55 to 56
+}
+
+OctoRadiantEcho: {
+	DisplayName: Octuple-Forged Radiant Echo
+	Tooltip: Can be used to upgrade jewels from cut 63 to 64
+}
+
+NonaRadiantEcho: {
+	DisplayName: Ennea-Forged Radiant Echo
+	Tooltip: Can be used to upgrade jewels from cut 71 to 72
 }

@@ -24,5 +24,5 @@ internal class DefenseTriggerInstant : TriggerEffect
         player.GetModPlayer<StackableBuffTracker>().StackableBuff<DefenseTriggerBuff>("Defense", new((int)(coefficient * 5 * 60), TriggerPower() / 10f));
     }
 
-    public override float TriggerPower() => 1.5f;
+    public override float TriggerPower() => 3f;
 }

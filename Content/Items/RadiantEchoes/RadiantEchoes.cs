@@ -81,6 +81,18 @@ public class SeptRadiantEcho : RadiantEchoBase
     protected override Color SparkleColor => new(117, 201, 239);
 }
 
+public class OctoRadiantEcho : RadiantEchoBase
+{
+    protected override Vector2 Size => new(32, 36);
+    protected override Color SparkleColor => new(117, 201, 239);
+}
+
+public class NonaRadiantEcho : RadiantEchoBase
+{
+    protected override Vector2 Size => new(32, 36);
+    protected override Color SparkleColor => new(117, 201, 239);
+}
+
 public class TranscendantEcho : ModItem
 {
     public override void SetDefaults()

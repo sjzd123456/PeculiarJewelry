@@ -19,7 +19,7 @@ internal class KBAndClearTrigger : TriggerEffect
                     npc.velocity = player.DirectionTo(npc.Center) * MathHelper.Lerp(npc.knockBackResist, 1f, 0.35f) * 8;
 
                     if (Main.netMode == NetmodeID.MultiplayerClient)
-                        NetMessage.SendData(MessageID.SyncNPC, -1, -1, null, i);
+                        NetMessage.SendData(MessageID.TamperWithNPC, -1, -1, null, i);
                 }
             }
         }

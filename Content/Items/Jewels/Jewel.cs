@@ -8,6 +8,7 @@ using PeculiarJewelry.Content.JewelryMechanic.UI;
 using PeculiarJewelry.Content.NPCs;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using Terraria.DataStructures;
@@ -158,6 +159,13 @@ public abstract class Jewel : ModItem, IGrindableItem
 
         if (info.cuts > 10)
             ExtractSupportItems(source);
+
+        if (info.cuts - 7 >= 0)
+        {
+            int echoTier = (int)((info.cuts - 7) / 8f) * 8 + 7;
+            int echoType = CutJewelUIState.JewelCutEchoType(echoTier);
+            Item.NewItem(source, Main.MouseWorld, echoType, 1, noGrabDelay: true);
+        }
 
         if (--Item.stack < 0)
             Item.TurnToAir();

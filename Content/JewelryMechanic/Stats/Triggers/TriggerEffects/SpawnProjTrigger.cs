@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Terraria.GameContent;
 
@@ -11,18 +12,24 @@ internal class SpawnProjTrigger : TriggerEffect
 
     protected override void InternalInstantEffect(TriggerContext context, Player player, float coefficient, JewelTier tier)
     {
-        int damage = (int)TotalTriggerPower(player, coefficient, tier);
-        var vel = new Vector2(0, 9).RotatedByRandom(MathHelper.TwoPi);
-        var source = player.GetSource_Misc("JewelryTrigger:" + context);
+        if (Main.myPlayer == player.whoAmI) // Run only on local client
+        {
+            int damage = (int)TotalTriggerPower(player, coefficient, tier);
+            var vel = new Vector2(0, 9).RotatedByRandom(MathHelper.TwoPi);
+            var source = player.GetSource_Misc("JewelryTrigger:" + context);
 
-        Color color = Color.White;
+            Color color = Color.White;
 
-        var majorJewels = player.GetModPlayer<JewelPlayer>().MajorJewelInfos.Where(i => i.effect is SpawnProjTrigger).ToList();
-        var jewel = Main.rand.Next(majorJewels);
-        color = jewel.Major.Get().Color;
+            var majorJewels = player.GetModPlayer<JewelPlayer>().MajorJewelInfos.Where(i => i.effect is SpawnProjTrigger).ToList();
+            var jewel = Main.rand.Next(majorJewels);
+            color = jewel.Major.Get().Color;
 
-        int proj = Projectile.NewProjectile(source, player.Center, vel, ModContent.ProjectileType<TriggerProj>(), damage, 2f, player.whoAmI);
-        (Main.projectile[proj].ModProjectile as TriggerProj).color = color;
+            int proj = Projectile.NewProjectile(source, player.Center, vel, ModContent.ProjectileType<TriggerProj>(), damage, 2f, player.whoAmI);
+            (Main.projectile[proj].ModProjectile as TriggerProj).color = color;
+
+            if (Main.netMode != NetmodeID.SinglePlayer)
+                NetMessage.SendData(MessageID.SyncProjectile, -1, -1, null, proj);
+        }
     }
 
     public override float TriggerPower() => 140;
@@ -110,6 +117,21 @@ internal class SpawnProjTrigger : TriggerEffect
             var col = Lighting.GetColor(Projectile.Center.ToTileCoordinates(), color) * Projectile.Opacity;
             Main.EntitySpriteDraw(tex, Projectile.Center - Main.screenPosition, src, col, Projectile.rotation, tex.Size() / new Vector2(6f, 2), 1f, SpriteEffects.None);
             return false;
+        }
+
+        public override void SendExtraAI(BinaryWriter writer)
+        {
+            writer.Write(color.R);
+            writer.Write(color.G);
+            writer.Write(color.B);
+        }
+
+        public override void ReceiveExtraAI(BinaryReader reader)
+        {
+            byte r = reader.ReadByte();
+            byte g = reader.ReadByte();
+            byte b = reader.ReadByte();
+            color = new(r, g, b);
         }
     }
 }

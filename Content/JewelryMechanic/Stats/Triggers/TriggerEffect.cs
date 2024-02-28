@@ -48,6 +48,8 @@ internal abstract class TriggerEffect : ModType
             Context = (TriggerContext)Main.rand.Next((int)TriggerContext.OnTakeDamage, (int)TriggerContext.WhenBelowHalfHealth);
         else
             Context = (TriggerContext)Main.rand.Next((int)TriggerContext.WhenBelowHalfHealth, (int)TriggerContext.Max);
+
+        Context = TriggerContext.OnTakeDamage;
     }
 
     protected sealed override void Register()

@@ -17,6 +17,7 @@ namespace PeculiarJewelry.Content.JewelryMechanic.UI;
 internal class CutJewelUIState : UIState, IClosableUIState
 {
     private const int CutPanelHeight = 180;
+    private const int RequiredEchosPerUpgrade = 1;
 
     private Jewel JewelItem => _storedItem.ModItem as Jewel;
 
@@ -59,7 +60,7 @@ internal class CutJewelUIState : UIState, IClosableUIState
         string coinPrice = !_hasJewel ? noJewel : HighlightStat(goldCoins, endCoins) + "/" + endCoins + $" {Localize("Gold")} [i:{ItemID.GoldCoin}]";
 
         int dustPriceNum = _hasJewel ? JewelCutDustPrice(JewelItem.info) : 0;
-        string dustPriceText = HighlightStat(Main.LocalPlayer.CountItem(ModContent.ItemType<SparklyDust>()), dustPriceNum);
+        string dustPriceText = HighlightStat(Main.LocalPlayer.CountItem(ModContent.ItemType<SparklyDust>(), dustPriceNum), dustPriceNum);
         string dustPrice = !_hasJewel ? "" : dustPriceText + "/" + dustPriceNum.ToString() + $" {Localize("Dust")} [i:{ModContent.ItemType<SparklyDust>()}]";
 
         float delta = -1;
@@ -75,7 +76,7 @@ internal class CutJewelUIState : UIState, IClosableUIState
         if (thresholdCut)
         {
             int itemID = JewelCutEchoType(JewelItem.info.cuts);
-            echoCost = $"0/2 [i:{itemID}]\n({Lang.GetItemNameValue(itemID)})";
+            echoCost = $"0/{RequiredEchosPerUpgrade} [i:{itemID}]\n({Lang.GetItemNameValue(itemID)})";
         }
 
         string hex;
@@ -104,15 +105,17 @@ internal class CutJewelUIState : UIState, IClosableUIState
 
     public static int JewelCutDustPrice(JewelTier tier, int successfulCuts) => ((int)tier+ 1) * (successfulCuts + 1);
 
-    private static int JewelCutEchoType(int cuts) => cuts switch
+    public static int JewelCutEchoType(int cuts) => cuts switch
     {
         7 => ModContent.ItemType<RadiantEcho>(),
         15 => ModContent.ItemType<DoubleRadiantEcho>(),
         23 => ModContent.ItemType<TripleRadiantEcho>(),
         31 => ModContent.ItemType<QuadRadiantEcho>(),
-        38 => ModContent.ItemType<QuintRadiantEcho>(),
-        45 => ModContent.ItemType<SextupleRadiantEcho>(),
-        52 => ModContent.ItemType<SeptRadiantEcho>(),
+        39 => ModContent.ItemType<QuintRadiantEcho>(),
+        47 => ModContent.ItemType<SextupleRadiantEcho>(),
+        55 => ModContent.ItemType<SeptRadiantEcho>(),
+        63 => ModContent.ItemType<OctoRadiantEcho>(),
+        71 => ModContent.ItemType<NonaRadiantEcho>(),
         _ => throw new ArgumentException("Uh oh! You aren't in a threshold but you are somehow."),
     };
 
@@ -488,7 +491,7 @@ internal class CutJewelUIState : UIState, IClosableUIState
             }
 
             int dustPrice = JewelCutDustPrice(info);
-            if (Main.LocalPlayer.CountItem(ModContent.ItemType<SparklyDust>()) < dustPrice)
+            if (Main.LocalPlayer.CountItem(ModContent.ItemType<SparklyDust>(), dustPrice) < dustPrice)
             {
                 UpdateInfo(Language.GetText("Mods.PeculiarJewelry.UI.CutMenu.NoDust").WithFormatArgs(ModContent.ItemType<SparklyDust>()).Value);
                 return;
@@ -497,9 +500,9 @@ internal class CutJewelUIState : UIState, IClosableUIState
             if (info.InThresholdCut())
             {
                 int echoType = JewelCutEchoType(info.cuts);
-                int count = Main.LocalPlayer.CountItem(echoType, 2) + Main.LocalPlayer.CountItem(ModContent.ItemType<TranscendantEcho>(), 2);
+                int count = Main.LocalPlayer.CountItem(echoType, RequiredEchosPerUpgrade) + Main.LocalPlayer.CountItem(ModContent.ItemType<TranscendantEcho>(), RequiredEchosPerUpgrade);
 
-                if (count < 2)
+                if (count < RequiredEchosPerUpgrade)
                 {
                     UpdateInfo($"{Localize("NotEnough")} [i:{echoType}]\n[c/ff0000:({Lang.GetItemNameValue(echoType)})]!");
                     return;
@@ -536,12 +539,14 @@ internal class CutJewelUIState : UIState, IClosableUIState
     {
         if (info.InThresholdCut())
         {
-            int count = 2;
+            int count = RequiredEchosPerUpgrade;
             int transcendantCount = Main.LocalPlayer.CountItem(ModContent.ItemType<TranscendantEcho>(), 2);
 
             if (transcendantCount > 0)
             {
-                for (int i = 0; i < transcendantCount; ++i)
+                int min = Math.Min(count, transcendantCount);
+
+                for (int i = 0; i < min; ++i)
                     Main.LocalPlayer.ConsumeItem(ModContent.ItemType<TranscendantEcho>(), true);
             }
 
