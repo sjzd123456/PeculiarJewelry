@@ -83,6 +83,11 @@ public class DesecratedSystem : ModSystem
         }
     }
 
+    public override void OnWorldLoad()
+    {
+        ClearDesecrations();
+    }
+
     internal class DesecrationNPC : GlobalNPC
     {
         private static DesecratedSystem System => ModContent.GetInstance<DesecratedSystem>();

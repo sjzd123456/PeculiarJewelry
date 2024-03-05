@@ -18,6 +18,8 @@ internal class JewelUISystem : ModSystem
         }
     }
 
+    public override void OnWorldUnload() => SwitchUI(null, false);
+
     public static void SwitchUI(UIState state, bool closeChat = true)
     {
         if (Instance.JewelInterface.CurrentState is IClosableUIState close)
