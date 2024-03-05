@@ -1,12 +1,17 @@
-﻿using PeculiarJewelry.Content.Items.JewelryItems;
+﻿using Mono.Cecil.Cil;
+using MonoMod.Cil;
+using PeculiarJewelry.Content.Items.JewelryItems;
 using PeculiarJewelry.Content.JewelryMechanic.MaterialBonuses;
 using PeculiarJewelry.Content.JewelryMechanic.MaterialBonuses.Bonuses;
 using PeculiarJewelry.Content.JewelryMechanic.Stats.Triggers;
+using PeculiarJewelry.Content.JewelryMechanic.Syncing;
 using System.Collections.Generic;
-using Terraria;
 
 namespace PeculiarJewelry.Content.JewelryMechanic.Stats;
 
+/// <summary>
+/// Contains logic for jewelry functionality alongside logic for trigger effects being run.
+/// </summary>
 internal class JewelPlayer : ModPlayer
 {
     public List<MajorJewelInfo> MajorJewelInfos
@@ -26,15 +31,67 @@ internal class JewelPlayer : ModPlayer
 
     public List<BasicJewelry> jewelry = new();
 
+    internal int timeSinceLastHit = 0;
+    internal int landCooldown = 0;
+
     private bool _jumpFlag = false;
+
+    public override void Load()
+    {
+        On_Player.DryCollision += CheckLanding;
+        IL_Player.ApplyLifeAndOrMana += AddHealHook;
+    }
+
+    private void CheckLanding(On_Player.orig_DryCollision orig, Player self, bool fallThrough, bool ignorePlats)
+    {
+        float velY = self.velocity.Y;
+
+        orig(self, fallThrough, ignorePlats);
+
+        if (self.GetModPlayer<JewelPlayer>().landCooldown <= 0 && velY != self.velocity.Y && self.velocity.Y == 0 && velY > 0.6f)
+        {
+            foreach (var item in self.GetModPlayer<JewelPlayer>().MajorJewelInfos)
+                item.InstantTrigger(TriggerContext.OnLand, self);
+
+            self.GetModPlayer<JewelPlayer>().landCooldown = 60;
+
+            if (Main.netMode != NetmodeID.SinglePlayer && Main.myPlayer == self.whoAmI)
+                new SyncLandModule(Main.myPlayer).Send();
+        }
+    }
+
+    private void AddHealHook(ILContext il)
+    {
+        ILCursor c = new(il);
+        
+        c.GotoNext(x => x.MatchRet());
+        c.GotoPrev(x => x.MatchCall<Player>(nameof(Player.SetImmuneTimeForAllTypes)));
+        c.GotoNext(MoveType.After, x => x.MatchStfld<Player>(nameof(Player.statMana)));
+
+        c.Emit(OpCodes.Ldarg_0);
+        c.Emit(OpCodes.Ldloc_0);
+        c.EmitDelegate(OnHeal);
+    }
+
+    public static void OnHeal(Player player, int healAmount)
+    {
+        if (healAmount <= 0)
+            return;
+
+        foreach (var item in player.GetModPlayer<JewelPlayer>().MajorJewelInfos)
+            item.InstantTrigger(TriggerContext.OnHeal, player);
+    }
 
     public override void ResetEffects()
     {
         jewelry.Clear();
+        timeSinceLastHit++;
     }
 
     public override void PostUpdateEquips()
     {
+        landCooldown--;
+
         foreach (var item in jewelry)
             item.ApplyConstantTrigger(Player);
 
@@ -59,7 +116,8 @@ internal class JewelPlayer : ModPlayer
         if (Player.jump > 0)
         {
             if (!_jumpFlag)
-                JumpEffects();
+                foreach (var item in MajorJewelInfos)
+                    item.InstantTrigger(TriggerContext.OnJump, Player);
 
             _jumpFlag = true;
         }
@@ -67,18 +125,12 @@ internal class JewelPlayer : ModPlayer
             _jumpFlag = false;
     }
 
-    private void JumpEffects()
-    {
-        foreach (var item in MajorJewelInfos)
-            item.InstantTrigger(TriggerContext.OnJump, Player);
-    }
-
-    public override void OnExtraJumpStarted(ExtraJump jump, ref bool playSound) { }// => JumpEffects();
-
     public override void OnHurt(Player.HurtInfo info)
     {
         foreach (var item in MajorJewelInfos)
             item.InstantTrigger(TriggerContext.OnTakeDamage, Player);
+
+        timeSinceLastHit = 0;
     }
 
     private void TriggerOnHit(NPC npc)

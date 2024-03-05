@@ -11,7 +11,7 @@ internal class SpeedTriggerConditional : TriggerEffect
         player.GetModPlayer<StackableBuffTracker>().StackableBuff<SpeedTriggerBuff>("Speed", new(2, TotalConditionalStrength(coefficient, tier)));
     }
 
-    public override float TriggerPower() => 10000;
+    public override float TriggerPower() => 500;
 }
 
 
@@ -24,5 +24,5 @@ internal class SpeedTriggerInstant : TriggerEffect
         player.GetModPlayer<StackableBuffTracker>().StackableBuff<SpeedTriggerBuff>("Speed", new((int)(coefficient * 5 * 60), TriggerPower()));
     }
 
-    public override float TriggerPower() => 15000;
+    public override float TriggerPower() => 750;
 }

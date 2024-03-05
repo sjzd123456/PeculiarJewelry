@@ -15,6 +15,18 @@ internal class DodgeTriggerBuff : ModBuff
 
         public override void ResetEffects() => chance = 0;
 
-        public override bool FreeDodge(Player.HurtInfo info) => Main.rand.NextFloat() < chance;
+        public override bool FreeDodge(Player.HurtInfo info)
+        {
+            bool dodge = Main.rand.NextFloat() < chance / 100f;
+
+            if (dodge)
+            {
+                Player.SetImmuneTimeForAllTypes(45);
+                Player.immune = true;
+                Player.immuneNoBlink = false;
+            }
+
+            return dodge;
+        }
     }
 }

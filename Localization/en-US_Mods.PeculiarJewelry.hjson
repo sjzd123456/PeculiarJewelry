@@ -10,3 +10,5 @@ Projectiles: {
 
 TierCutoffCondition: Only from bags of tier {0} or higher.
 OnceADay: Once a day
+# The below is formatted like "30.15s left".
+StackableBuffTimeLeft: s left

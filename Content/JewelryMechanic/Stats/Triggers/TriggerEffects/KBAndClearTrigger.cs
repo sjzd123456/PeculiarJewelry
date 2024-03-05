@@ -1,4 +1,6 @@
-﻿namespace PeculiarJewelry.Content.JewelryMechanic.Stats.Triggers.TriggerEffects;
+﻿using PeculiarJewelry.Content.JewelryMechanic.Syncing;
+
+namespace PeculiarJewelry.Content.JewelryMechanic.Stats.Triggers.TriggerEffects;
 
 internal class KBAndClearTrigger : TriggerEffect
 {
@@ -17,9 +19,7 @@ internal class KBAndClearTrigger : TriggerEffect
                 if (npc.CanBeChasedBy() && npc.DistanceSQ(player.Center) < radius * radius)
                 {
                     npc.velocity = player.DirectionTo(npc.Center) * MathHelper.Lerp(npc.knockBackResist, 1f, 0.35f) * 8;
-
-                    if (Main.netMode == NetmodeID.MultiplayerClient)
-                        NetMessage.SendData(MessageID.TamperWithNPC, -1, -1, null, i);
+                    new SyncNPCVelocityFromClientModule(i, npc.velocity).Send();
                 }
             }
         }

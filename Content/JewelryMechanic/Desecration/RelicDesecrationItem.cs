@@ -19,17 +19,10 @@ internal class RelicDesecrationItem : GlobalItem
         if (source is EntitySource_Loot loot && loot.Entity is NPC npc && npc.boss)
             profanity = DesecratedSystem.TotalProfanity;
 
-        if (source is EntitySource_TileBreak tile)
+        if (source is EntitySource_TileBreak && RelicTile.RelicTypes.Contains(item.createTile) && RelicTile.NextProfanity != -1)
         {
-            int x = tile.TileCoords.X, y = tile.TileCoords.Y;
-
-            if (!RelicTile.IsRelic(ref x, ref y))
-                return;
-
-            if (!TileEntity.ByPosition.TryGetValue(new(x, y), out var te) || te is not RelicDesecrationTE relic)
-                return;
-
-            profanity = relic.profanity;
+            profanity = RelicTile.NextProfanity;
+            RelicTile.NextProfanity = -1;
         }
     }
 }
@@ -51,6 +44,8 @@ internal class RelicDesecrationTE : ModTileEntity
 
 internal class RelicTile : GlobalTile
 {
+    public static float NextProfanity = -1;
+
     internal static HashSet<int> RelicTypes = null;
 
     private static Asset<Texture2D> SkullTex = null;
@@ -98,8 +93,11 @@ internal class RelicTile : GlobalTile
 
     public override void KillTile(int i, int j, int type, ref bool fail, ref bool effectOnly, ref bool noItem)
     {
-        if (IsRelic(ref i, ref j) && TileEntity.ByPosition.TryGetValue(new(i, j), out var te) && te is RelicDesecrationTE)
+        if (IsRelic(ref i, ref j) && TileEntity.ByPosition.TryGetValue(new(i, j), out var te) && te is RelicDesecrationTE dese && !noItem)
+        {
+            NextProfanity = dese.profanity;
             ModContent.GetInstance<RelicDesecrationTE>().Kill(i, j);
+        }
     }
 
     public override void PostDraw(int i, int j, int type, SpriteBatch spriteBatch)

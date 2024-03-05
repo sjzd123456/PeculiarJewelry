@@ -10,8 +10,14 @@ internal class DebuffWaveTrigger : TriggerEffect
 
     protected override void InternalInstantEffect(TriggerContext context, Player player, float coefficient, JewelTier tier)
     {
-        Projectile.NewProjectile(player.GetSource_Misc("JewelryTrigger"), player.Center, Vector2.Zero, ModContent.ProjectileType<AoEProjectile>(), 0, 0, 
-            player.whoAmI, TotalTriggerPower(player, 0.1f, tier));
+        if (Main.myPlayer == player.whoAmI) // Run only on local client
+        {
+            int proj = Projectile.NewProjectile(player.GetSource_Misc("JewelryTrigger"), player.Center, Vector2.Zero, ModContent.ProjectileType<AoEProjectile>(), 0, 0,
+                player.whoAmI, TotalTriggerPower(player, 0.1f, tier));
+
+            if (Main.netMode != NetmodeID.SinglePlayer)
+                NetMessage.SendData(MessageID.SyncProjectile, -1, -1, null, proj);
+        }
     }
 
     public override float TriggerPower() => 100;

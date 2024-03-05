@@ -17,6 +17,9 @@ internal class SpeedTriggerBuff : ModBuff
         {
             Player.runAcceleration += speed;
             Player.maxRunSpeed += speed;
+
+            if (Player.runAcceleration > Player.maxRunSpeed / 8f)
+                Player.runAcceleration = Player.maxRunSpeed / 8f;
         }
     }
 }

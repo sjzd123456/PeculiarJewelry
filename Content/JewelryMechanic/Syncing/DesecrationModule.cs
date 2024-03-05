@@ -5,7 +5,7 @@ using System;
 namespace PeculiarJewelry.Content.JewelryMechanic.Syncing;
 
 [Serializable]
-internal class DesecrationModule(string deseKey, float str, int from) : Module
+public class DesecrationModule(string deseKey, float str, int from) : Module
 {
     private readonly string key = deseKey;
     private readonly float strength = str;

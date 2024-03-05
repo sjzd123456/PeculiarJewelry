@@ -48,8 +48,6 @@ internal abstract class TriggerEffect : ModType
             Context = (TriggerContext)Main.rand.Next((int)TriggerContext.OnTakeDamage, (int)TriggerContext.WhenBelowHalfHealth);
         else
             Context = (TriggerContext)Main.rand.Next((int)TriggerContext.WhenBelowHalfHealth, (int)TriggerContext.Max);
-
-        Context = TriggerContext.OnTakeDamage;
     }
 
     protected sealed override void Register()
@@ -127,8 +125,8 @@ internal abstract class TriggerEffect : ModType
             TriggerContext.WhenPotionSick => player.HasBuff(BuffID.PotionSickness),
             TriggerContext.WhenNoBuffs => !player.buffType.Any(x => x != 0 && !BuffSet.TriggerBuffs.Contains(x)),
             TriggerContext.WhenIdle => player.velocity.LengthSquared() <= 0.1f,
-            TriggerContext.WhenNotHitFor15Seconds => false, // TBD
-            TriggerContext.WhenHitWithinPast5Seconds => false, // TBD
+            TriggerContext.WhenNotHitFor15Seconds => player.GetModPlayer<JewelPlayer>().timeSinceLastHit >= 15 * 60,
+            TriggerContext.WhenHitWithinPast5Seconds => player.GetModPlayer<JewelPlayer>().timeSinceLastHit <= 5 * 60,
             _ => false,
         };
     }

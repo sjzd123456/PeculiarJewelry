@@ -93,7 +93,7 @@ internal class StackableBuffTracker : ModPlayer
             ret += $"+{item.Strength * strengthBoost:#0.##}{postfix}";
 
             if (time != 0)
-                ret += $"({item.time / 60f:#0.#}s left)\n";
+                ret += $"({item.time / 60f:#0.#}{Language.GetTextValue("Mods.PeculiarJewelry.StackableBuffTimeLeft")})\n";
             else
                 ret += "\n";
         }
