@@ -56,18 +56,16 @@ public abstract partial class JewelInfo
     {
         exclusivity = Major.Get().Exclusivity;
 
-        List<StatType> takenTypes = new() { Major.Get().Type };
+        List<StatType> takenTypes = [Major.Get().Type];
 
-        int spawnStats = 4; //Different tiers start with different sub stats
-
-        if (tier == JewelTier.Natural)
-            spawnStats = 0;
-        else if (tier < JewelTier.Mythical0)
-            spawnStats = 1;
-        else if (tier < JewelTier.Celestial0)
-            spawnStats = 2;
-        else if (tier < JewelTier.Stellar0)
-            spawnStats = 3;
+        int spawnStats = tier switch
+        {
+            JewelTier.Natural => 0,
+            < JewelTier.Mythical0 => 1,
+            < JewelTier.Celestial0 => 2,
+            < JewelTier.Stellar0 => 3,
+            _ => 4
+        }; //Different tiers start with different sub stats
 
         for (int i = 0; i < spawnStats; i++)
             AddSubStat(takenTypes, i);

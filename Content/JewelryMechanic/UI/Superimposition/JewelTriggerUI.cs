@@ -18,8 +18,6 @@ internal class JewelTriggerUI : UIElement
     private UIButton<string> _context;
     private UIButton<string> _effect;
 
-    private bool _triggerClicked = false;
-
     public JewelTriggerUI(Action<TriggerEffect, bool> onClick)
     {
         _onClick = onClick;
