@@ -19,7 +19,7 @@ internal class EliteNPCDesecration : DesecrationModifier
         {
             float str = Desecrations[nameof(EliteNPCDesecration)].strength;
 
-            if (str <= 0)
+            if (str <= 0 || npc.friendly || npc.lifeMax < 5 || npc.damage < 0)
                 return;
 
             _isElite = Main.rand.NextFloat() < 0.125f * str;
