@@ -383,7 +383,7 @@ internal class CutJewelUIState : UIState, IClosableUIState
         _cutSlot = new([air], 0, CanJewelSlotAcceptItem)
         {
             HAlign = 0.5f,
-            Top = StyleDimension.FromPixels(14)
+            Top = StyleDimension.FromPixels(20)
         };
         panel.Append(_cutSlot);
 
@@ -397,7 +397,7 @@ internal class CutJewelUIState : UIState, IClosableUIState
         UIImageButton button = new(TextureAssets.Item[ItemID.IronAnvil])
         {
             HAlign = 0.5f,
-            Top = StyleDimension.FromPixels(80),
+            Top = StyleDimension.FromPixels(98),
             Width = StyleDimension.FromPixels(30),
             Height = StyleDimension.FromPixels(30),
         };
@@ -408,7 +408,7 @@ internal class CutJewelUIState : UIState, IClosableUIState
 
         UIText cutJewelText = new(Localize("Cut"))
         {
-            Top = StyleDimension.FromPixels(-18)
+            Top = StyleDimension.FromPixels(-22)
         };
         button.Append(cutJewelText);
 

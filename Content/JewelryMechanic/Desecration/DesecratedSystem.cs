@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Terraria.GameContent.Generation;
 using Terraria.ModLoader.IO;
+using Terraria.WorldBuilding;
 
 namespace PeculiarJewelry.Content.JewelryMechanic.Desecration;
 
@@ -83,10 +85,8 @@ public class DesecratedSystem : ModSystem
         }
     }
 
-    public override void OnWorldLoad()
-    {
-        ClearDesecrations();
-    }
+    public override void ModifyWorldGenTasks(List<GenPass> tasks, ref double totalWeight) => tasks.Insert(0, new PassLegacy("Peculiar Jewelry: Clear Desecrations", (_, _) => ClearDesecrations()));
+    public override void OnWorldLoad() => ClearDesecrations();
 
     internal class DesecrationNPC : GlobalNPC
     {
