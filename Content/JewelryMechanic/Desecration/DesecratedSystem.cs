@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Terraria.GameContent.Generation;
 using Terraria.ModLoader.IO;
 using Terraria.WorldBuilding;
