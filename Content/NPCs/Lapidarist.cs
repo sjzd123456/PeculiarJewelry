@@ -5,6 +5,8 @@ using Terraria.GameContent.Personalities;
 using Terraria.GameContent.Bestiary;
 using PeculiarJewelry.Content.JewelryMechanic.UI;
 using PeculiarJewelry.Content.Items.Jewels;
+using rail;
+using PeculiarJewelry.Content.Items.JewelryItems;
 
 namespace PeculiarJewelry.Content.NPCs;
 
@@ -55,7 +57,26 @@ public class Lapidarist : ModNPC
         });
     }
 
-    public override bool CanTownNPCSpawn(int numTownNPCs) => Main.player.Any(x => x.active && x.HasItem(ModContent.ItemType<MajorJewel>()));
+    public override bool CanTownNPCSpawn(int numTownNPCs)
+    {
+        for (int i = 0; i < Main.maxPlayers; ++i)
+        {
+            Player player = Main.player[i];
+
+            if (player.active)
+            {
+                for (int j = 0; j < player.inventory.Length; ++i)
+                {
+                    Item inv = player.inventory[j];
+
+                    if (!inv.IsAir && (inv.ModItem is Jewel || inv.ModItem is BasicJewelry))
+                        return true;
+                }
+            }
+        }
+
+        return false;
+    }
 
     public override List<string> SetNPCNameList()
     {
@@ -100,7 +121,7 @@ public class Lapidarist : ModNPC
 
     public override void TownNPCAttackProj(ref int projType, ref int attackDelay)
     {
-        projType = ProjectileID.RubyBolt;
+        projType = ProjectileID.DiamondBolt;
         attackDelay = 1;
     }
 

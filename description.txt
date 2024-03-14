@@ -1,1 +1,14 @@
-Peculiar Jewelry is a pretty cool mod, it does...this. Modify this file with a description of your mod.
+--- Peculiar Jewelry ---
+by GabeHasWon
+commissioned by and designed by SirBumpleton
+
+Peculiar Jewelry adds a ton of jewelry, which allow you to set in jewels. Each jewel has its own benefits, and can be upgraded for even more benefits.
+Furthermore, jewelry has material benefits (such as increased life regeneration bonuses) - so there's a ton more to mix and match.
+
+Alongside this, there's a system which allows you to gamble - fight significantly harder bosses for more powerful jewels? It's up to you.
+A mysterious and well dressed man called the Lapidarist will help you get through it.
+
+Discord: https://discord.com/invite/gVUw3W8ypD
+
+Personal patreon: https://www.patreon.com/gabehaswon
+If you could support me, it'd make making more projects like this possible! Either way, enjoy the mod.

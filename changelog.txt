@@ -1,0 +1,3 @@
+- Updated description
+- Lapidarist now moves in if you have any Jewel or Jewelry item in your inventory
+- Updated Lapidarist projectile type
