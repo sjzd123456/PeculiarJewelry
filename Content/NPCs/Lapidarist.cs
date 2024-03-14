@@ -65,7 +65,7 @@ public class Lapidarist : ModNPC
 
             if (player.active)
             {
-                for (int j = 0; j < player.inventory.Length; ++i)
+                for (int j = 0; j < player.inventory.Length; ++j)
                 {
                     Item inv = player.inventory[j];
 
