@@ -82,6 +82,7 @@ internal class LapidaristStock : StockedShop
         for (int i = 0; i < JewelCount; ++i)
         {
             Item item = new(JewelryCommon.MajorMinorType());
+            item.value = Item.buyPrice(0, item.type == ModContent.ItemType<MajorJewel>() ? 15 : 8, 0, 0);
             (item.ModItem as Jewel).info.Setup(BossLootGlobal.HighestBeatenTier);
             _jewelItems[i] = new(item);
             FullStock.Add(_jewelItems[i]);
@@ -104,6 +105,7 @@ internal class LapidaristStock : StockedShop
         for (int i = 0; i < JewelCount; ++i)
         {
             Item item = new(JewelryCommon.MajorMinorType());
+            item.value = Item.buyPrice(0, item.type == ModContent.ItemType<MajorJewel>() ? 15 : 8, 0, 0);
             (item.ModItem as Jewel).info.Setup(BossLootGlobal.HighestBeatenTier);
             _jewelItems[i] = new(item);
         }

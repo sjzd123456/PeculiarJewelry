@@ -275,6 +275,7 @@ internal class SetJewelUIState : UIState, IClosableUIState
             panel.Append(_supportSlots[i]);
         }
 
+        Main.instance.LoadItem(ItemID.IronAnvil);
         UIImageButton button = new(TextureAssets.Item[ItemID.IronAnvil])
         {
             HAlign = 0.5f,

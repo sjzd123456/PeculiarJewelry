@@ -32,9 +32,9 @@ public abstract class BasicJewelry : ModItem
     {
         Item.accessory = true;
         Item.rare = ModContent.RarityType<JewelRarity>();
-        Item.value = Item.sellPrice(silver: 10);
+        Item.value = Item.sellPrice(gold: 1);
 
-        tier = JewelryTier.Extravagant;
+        tier = JewelryTier.Ordinary;
         Info = new((int)tier + 1);
 
         Defaults();

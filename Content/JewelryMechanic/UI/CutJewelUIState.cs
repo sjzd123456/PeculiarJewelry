@@ -394,6 +394,7 @@ internal class CutJewelUIState : UIState, IClosableUIState
         };
         panel.Append(cutText);
 
+        Main.instance.LoadItem(ItemID.IronAnvil);
         UIImageButton button = new(TextureAssets.Item[ItemID.IronAnvil])
         {
             HAlign = 0.5f,

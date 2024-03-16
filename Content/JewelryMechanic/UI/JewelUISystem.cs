@@ -22,6 +22,9 @@ internal class JewelUISystem : ModSystem
 
     public static void SwitchUI(UIState state, bool closeChat = true)
     {
+        if (Instance.JewelInterface is null)
+            return;
+
         if (Instance.JewelInterface.CurrentState is IClosableUIState close)
             close.Close();
 

@@ -1,1 +1,6 @@
-- Fixed dumb mistake on my end lol
+- Updated Stockable Shops reference to use proper restock condition & fix value
+- Probably fixed Anvil sometimes not appearing in cut/set menu
+- Fixed Grindstone use for Jewels dropping stacks of 0 sparkly dust
+- Fixed all jewelry being Extravagant by default
+- Increased price of Major Jewels to 15 gold, Minor Jewels to 8
+- Increased price of all jewelry to 1 gold
