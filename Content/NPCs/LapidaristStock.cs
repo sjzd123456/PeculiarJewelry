@@ -7,6 +7,7 @@ using PeculiarJewelry.Content.Items.RadiantEchoes;
 using PeculiarJewelry.Content.Items.Tiles;
 using PeculiarJewelry.Content.JewelryMechanic;
 using StockableShops.Stock;
+using System;
 using Terraria.Utilities;
 
 namespace PeculiarJewelry.Content.NPCs;
@@ -38,7 +39,7 @@ internal class LapidaristStock : StockedShop
     {
         get
         {
-            var pool = new WeightedRandom<BasicJewelry.JewelryTier>();
+            var pool = new WeightedRandom<BasicJewelry.JewelryTier>(Main.rand);
             pool.Add(BasicJewelry.JewelryTier.Ordinary, 5);
             pool.Add(BasicJewelry.JewelryTier.Pretty, 4);
             pool.Add(BasicJewelry.JewelryTier.Elegant, 3);
@@ -94,8 +95,22 @@ internal class LapidaristStock : StockedShop
             Item item = new(JewelryCommon.GetRandomJewelryType(JewelryCommon.GetAllUnlockedMaterials()));
             (item.ModItem as BasicJewelry).tier = JewelryTierPool.Get();
             _jewelryItems[i] = new(item);
+
+            ScalePriceToTier(_jewelryItems[i]);
             FullStock.Add(_jewelryItems[i]);
         }
+    }
+
+    private static void ScalePriceToTier(ShopItem shopItem)
+    {
+        shopItem.Item.value = (shopItem.Item.ModItem as BasicJewelry).tier switch
+        {
+            BasicJewelry.JewelryTier.Pretty => Item.buyPrice(0, 5),
+            BasicJewelry.JewelryTier.Elegant => Item.buyPrice(0, 10),
+            BasicJewelry.JewelryTier.Elaborate => Item.buyPrice(0, 25),
+            BasicJewelry.JewelryTier.Extravagant => Item.buyPrice(1),
+            _ => Item.buyPrice(0, 1),
+        };
     }
 
     protected override void RestockShop(NPC npc, Item[] shop)

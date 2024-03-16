@@ -14,6 +14,6 @@ public class MinorJewel : Jewel
         Item.height = 22;
         Item.rare = ItemRarityID.Green;
         Item.maxStack = 1;
-        Item.value = Item.buyPrice(0, 2, 0, 0);
+        Item.value = Item.buyPrice(0, 10, 0, 0);
     }
 }
