@@ -1,7 +1,9 @@
-- Adjusted prices of Lapidarist sold jewelry to be based on tier
-	Ordinary: 1g
-	Pretty: 5g
-	Elegant: 10g
-	Elaborate: 25g
-	Extravagant: 1p
-- Fixed all generated jewelry from the Lapidarist sharing the same tier
+- Fixed all jewelry being Ordinary
+- Fixed jewelry not saving their tier
+- Fixed grindstone not working properly in multiplayer
+- Heavily adjusted how much sparkly dust grindstone rewards:
+	Total dust dropped: (total dust spent on jewel * 0.2) + (3 + (3 * jewel tier))
+	For example, a tier 5 uncut jewel will give 18 dust
+- Fixed issues caused by assuming jewelry tier
+- Added safety check for jewelry shine color
+- Added tink sound to jewel setting

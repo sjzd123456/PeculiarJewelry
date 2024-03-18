@@ -155,12 +155,12 @@ public abstract class Jewel : ModItem, IGrindableItem
         for (int x = 0; x < info.cuts; ++x)
             totalDustCount += CutJewelUIState.JewelCutDustPrice(info.tier, x);
 
-        int dustPayout = (int)(totalDustCount * 0.2f);
+        int dustPayout = (int)(totalDustCount * 0.2f) + (3 + 3 * (int)(info.tier + 1));
 
         if (dustPayout < 1)
             dustPayout = 1;
 
-        Item.NewItem(source, Main.MouseWorld, ModContent.ItemType<SparklyDust>(), dustPayout, noGrabDelay: true);
+        NewItem.SpawnSynced(source, Main.MouseWorld, ModContent.ItemType<SparklyDust>(), dustPayout, noGrabDelay: true);
         ExtractSubStats(1f, source);
 
         if (info.cuts > 10)
@@ -170,7 +170,7 @@ public abstract class Jewel : ModItem, IGrindableItem
         {
             int echoTier = (int)((info.cuts - 7) / 8f) * 8 + 7;
             int echoType = CutJewelUIState.JewelCutEchoType(echoTier);
-            Item.NewItem(source, Main.MouseWorld, echoType, 1, noGrabDelay: true);
+            NewItem.SpawnSynced(source, Main.MouseWorld, echoType, 1, noGrabDelay: true);
         }
 
         if (--Item.stack < 0)
@@ -192,7 +192,7 @@ public abstract class Jewel : ModItem, IGrindableItem
             pool.Add(ModContent.ItemType<CelestialEye>(), 2);
             pool.Add(ModContent.ItemType<BrokenStopwatch>(), 4);
             pool.Add(ModContent.ItemType<StellarJade>(), 1);
-            Item.NewItem(source, Main.MouseWorld, new Item(pool), false, true);
+            NewItem.SpawnSynced(source, Main.MouseWorld, pool, 1, true);
         }
     }
 
@@ -206,7 +206,7 @@ public abstract class Jewel : ModItem, IGrindableItem
             Item item = new(ModContent.ItemType<SubShard>());
             SubShard shard = item.ModItem as SubShard;
             shard.stat = stat;
-            Item.NewItem(source, Main.MouseWorld, item, false, true);
+            NewItem.SpawnSynced(source, Main.MouseWorld, item, true);
         }
     }
 }

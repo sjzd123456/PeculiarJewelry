@@ -503,6 +503,8 @@ internal class SetJewelUIState : UIState, IClosableUIState
         }
 
         Main.npcChatText = Language.GetTextValue("Mods.PeculiarJewelry.NPCs.Lapidarist.UIDialogue.SuccessfulSets." + Main.rand.Next(3));
+
+        SoundEngine.PlaySound(SoundID.Tink);
     }
 
     private static bool CanJewelrySlotAcceptItem(Item item, ItemSlotUI _)

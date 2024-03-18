@@ -34,9 +34,7 @@ public abstract class BasicJewelry : ModItem
         Item.rare = ModContent.RarityType<JewelRarity>();
         Item.value = Item.sellPrice(gold: 1);
 
-        tier = JewelryTier.Ordinary;
-        Info = new((int)tier + 1);
-
+        SetTier(JewelryTier.Ordinary);
         Defaults();
     }
 
@@ -173,16 +171,17 @@ public abstract class BasicJewelry : ModItem
         if (Main.LocalPlayer.GetModPlayer<RevelationPlayer>().hasReveled)
         {
             Main.LocalPlayer.GetModPlayer<RevelationPlayer>().hasReveled = false;
-            tier = JewelryTier.Extravagant;
+            SetTier(JewelryTier.Extravagant);
             return;
         }
 
         if (Main.LocalPlayer.GetModPlayer<RichPlayer>().isRich)
-            tier = (JewelryTier)Main.rand.Next((int)JewelryTier.Extravagant + 1);
+            SetTier((JewelryTier)Main.rand.Next((int)JewelryTier.Extravagant + 1));
     }
 
     public override void SaveData(TagCompound tag)
     {
+        tag.Add("jewelryTier", (byte)tier);
         tag.Add("jewelryJewelCount", (byte)Info.Count);
 
         for (int i = 0; i < Info.Count; ++i)
@@ -194,11 +193,19 @@ public abstract class BasicJewelry : ModItem
 
     public override void LoadData(TagCompound tag)
     {
+        JewelryTier tier = tag.TryGet("jewelryTier", out byte tierByte) ? (JewelryTier)tierByte : JewelryTier.Ordinary;
+        SetTier(tier);
+
         byte count = tag.GetByte("jewelryJewelCount");
 
         for (int i = 0; i < count; ++i)
         {
-            JewelInfo newInfo = JewelIO.LoadInfo(tag.GetCompound("jewelryInfo" + i));
+            var jewelTag = tag.GetCompound("jewelryInfo" + i);
+
+            if (!jewelTag.ContainsKey("infoType"))
+                continue;
+
+            JewelInfo newInfo = JewelIO.LoadInfo(jewelTag);
             Info.Add(newInfo);
         }
     }
@@ -214,7 +221,7 @@ public abstract class BasicJewelry : ModItem
 
     public override void NetReceive(BinaryReader reader)
     {
-        tier = (JewelryTier)reader.ReadByte();
+        SetTier((JewelryTier)reader.ReadByte());
         int count = reader.ReadInt32();
 
         for (int i = 0; i < count; ++i)
@@ -242,6 +249,12 @@ public abstract class BasicJewelry : ModItem
         JewelDrawing.DrawSparks(Item.position - Main.screenPosition, Item.Size * scale, (int)tier, color, 1f);
     }
 
+    internal void SetTier(JewelryTier tier)
+    {
+        this.tier = tier;
+        Info = new((int)tier + 1);
+    }
+
     internal void ApplyTo(Player player, float add = 0, float multiplier = 1f)
     {
         foreach (var item in Info)
@@ -255,8 +268,11 @@ public abstract class BasicJewelry : ModItem
     public Color GetDisplayColor()
     {
         var jewel = Info.FirstOrDefault(x => x is MajorJewelInfo);
-        jewel ??= Info.First();
 
+        if (jewel is null && Info.Count <= 0)
+            return Color.White;
+
+        jewel ??= Info.First();
         return jewel.Major.Get().Color;
     }
 

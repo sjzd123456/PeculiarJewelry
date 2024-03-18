@@ -93,7 +93,7 @@ internal class LapidaristStock : StockedShop
         for (int i = 0; i < JewelryCount; ++i)
         {
             Item item = new(JewelryCommon.GetRandomJewelryType(JewelryCommon.GetAllUnlockedMaterials()));
-            (item.ModItem as BasicJewelry).tier = JewelryTierPool.Get();
+            (item.ModItem as BasicJewelry).SetTier(JewelryTierPool.Get());
             _jewelryItems[i] = new(item);
 
             ScalePriceToTier(_jewelryItems[i]);
