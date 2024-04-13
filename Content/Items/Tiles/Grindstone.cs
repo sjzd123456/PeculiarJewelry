@@ -38,5 +38,5 @@ public class GrindstoneTile : ModTile
     }
 
     public override void MouseOver(int i, int j) => GrindstoneHandler.Input(i, j);
-    public override void NumDust(int i, int j, bool fail, ref int num) => num = fail ? 1 : 3;
+    public override void NumDust(int i, int j, bool fail, ref int num) => num = fail ? 1 : 4;
 }

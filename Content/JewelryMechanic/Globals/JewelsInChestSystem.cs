@@ -24,11 +24,12 @@ internal class JewelsInChestSystem : ModSystem
     private static Item GenerateJewelry()
     {
         int jewelryType = JewelryCommon.GetRandomJewelryType(JewelryCommon.PrehardmodeMetals);
-        Item item = new Item(jewelryType);
-        BasicJewelry jewelry = item.ModItem as BasicJewelry;
+        var item = new Item(jewelryType);
+        var jewelry = item.ModItem as BasicJewelry;
+        jewelry.tier = (BasicJewelry.JewelryTier)WorldGen.genRand.Next(5);
         bool hasMajor = false;
 
-        while (true && jewelry.Info.Count < 5)
+        while (jewelry.Info.Count < (int)jewelry.tier + 1)
         {
             if (Main.rand.NextFloat() < 0.25f)
                 break;
