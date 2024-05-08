@@ -1,1 +1,1 @@
-- Fixed chest-generated Jewelry being Ordinary despite having multiple jewels
+- Fixed OOB in JewelGlobalItem, hopefully fixed Infernum compatibility
