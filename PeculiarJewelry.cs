@@ -23,7 +23,7 @@ public class PeculiarJewelry : Mod
     public override object Call(params object[] args)
     {
         if (args[0] is not string method)
-            throw new ArgumentException("Invalid call method!");
+            throw new ArgumentException("Invalid call method! Valid calls are:\naddrelic");
 
         method = method.ToLower();
 

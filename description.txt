@@ -2,6 +2,8 @@
 by GabeHasWon
 commissioned by and designed by SirBumpleton
 
+Chinese localization by sjzd123456 on GitHub
+
 Peculiar Jewelry adds a ton of jewelry, which allow you to set in jewels. Each jewel has its own benefits, and can be upgraded for even more benefits.
 Furthermore, jewelry has material benefits (such as increased life regeneration bonuses) - so there's a ton more to mix and match.
 
