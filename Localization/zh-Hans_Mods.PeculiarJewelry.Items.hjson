@@ -1,0 +1,2932 @@
+MinorJewel: {
+	DisplayName: 次级宝石
+	Prefix: 次级
+	Tooltip: 带有一些力量的小宝石
+}
+
+MajorJewel: {
+	DisplayName: 主要宝石
+	Prefix: 主要
+	Tooltip: 体积大且潜力巨大
+}
+
+BasicJewelry: {
+	DisplayName: 基础首饰
+	Tooltip: 可以镶嵌宝石
+}
+
+SparklyDust: {
+	DisplayName: 闪粉
+	Tooltip: "'闪闪发光！'"
+}
+
+BagOfShinies: {
+	DisplayName: 闪亮包
+	Tooltip: 包含许多物品，包括宝石
+	Contains: 包含一个{0}级宝石
+}
+
+AncientCoffer: {
+	DisplayName: 古代宝箱
+	Tooltip:
+		'''
+		包含许多物品，包括宝石
+		放置后会永久损坏，请谨慎放置！
+		'''
+}
+
+BrokenAncientCoffer: {
+	DisplayName: 破损的古代宝箱
+	Tooltip: "'来自过往时代的装饰品'"
+}
+
+StellarJade: {
+	DisplayName: 星玉
+	Tooltip:
+		'''
+		保证有一次切割宝石的机会
+		使用后会消耗
+		'一种超凡脱俗、熠熠生辉的美丽'
+		'''
+}
+
+CursedDollar: {
+	DisplayName: 诅咒硬币
+	Tooltip:
+		'''
+		将任何宝石切割尝试的机会设为50/50
+		使用后会消耗
+		'携带着死亡与生命的双重气息'
+		'''
+}
+
+DoubleLayeredLens: {
+	DisplayName: 双层透镜
+	Tooltip:
+		'''
+		略微提高宝石切割尝试成功的几率
+		使用后会消耗
+		'''
+}
+
+CelestialEye: {
+	DisplayName: 天之眼
+	Tooltip:
+		'''
+		提高第24次及更高次尝试切割宝石的成功几率
+		'同时令人毛骨悚然而又壮丽'
+		'''
+}
+
+GoldenCarpScales: {
+	DisplayName: 金鲤鳞片
+	Tooltip:
+		'''
+		提高第16次及更高次尝试切割宝石的成功几率
+		'闪烁着某种魔法光辉'
+		'''
+}
+
+IrradiatedPearl: {
+	DisplayName: 辐射珍珠
+	Tooltip:
+		'''
+		提高第8次及更高次尝试切割宝石的成功几率
+		'内部弥漫着色彩的薄雾'
+		'''
+}
+
+RadiantEcho: {
+	DisplayName: 光辉回声
+	Tooltip: 可用于将宝石从切割等级7升级到8
+}
+
+DoubleRadiantEcho: {
+	DisplayName: 双锻光辉回声
+	Tooltip: 可用于将宝石从切割等级15升级到16
+}
+
+TripleRadiantEcho: {
+	DisplayName: 三锻光辉回声
+	Tooltip: 可用于将宝石从切割等级23升级到24
+}
+
+QuadRadiantEcho: {
+	DisplayName: 四锻光辉回声
+	Tooltip: 可用于将宝石从切割等级31升级到32
+}
+
+QuintRadiantEcho: {
+	DisplayName: 五锻光辉回声
+	Tooltip: 可用于将宝石从切割等级39升级到40
+}
+
+RoughPliers: {
+	DisplayName: 粗糙钳子
+	CommonTooltip:
+		'''
+		允许从首饰中提取镶嵌的宝石
+		成功提取会损坏钳子
+		'''
+	Tooltip:
+		'''
+		{$RoughPliers.CommonTooltip}
+		25%的成功几率
+		'''
+}
+
+NicePliers: {
+	DisplayName: 精美钳子
+	Tooltip:
+		'''
+		{$RoughPliers.CommonTooltip}
+		50%的成功几率
+		'''
+}
+
+GentlePliers: {
+	DisplayName: 轻柔钳子
+	Tooltip:
+		'''
+		{$RoughPliers.CommonTooltip}
+		75%的成功几率
+		'''
+}
+
+SilkenPliers: {
+	DisplayName: 丝质钳子
+	Tooltip:
+		'''
+		{$RoughPliers.CommonTooltip}
+		总是成功
+		'''
+}
+
+BrokenStopwatch: {
+	DisplayName: 破损的秒表
+	Tooltip:
+		'''
+		在宝石修改失败时阻止物品消耗
+		使用后会损坏
+		'从中心传来微妙而不连贯的滴答声'
+		'''
+}
+
+CopperTiara: {
+	DisplayName: 铜冠
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Copper.1Set}
+		'''
+}
+
+IronTiara: {
+	DisplayName: 铁冠
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Iron.1Set}
+		'''
+}
+
+LeadTiara: {
+	DisplayName: 铅冠
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Lead.1Set}
+		'''
+}
+
+TinTiara: {
+	DisplayName: 锡冠
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Tin.1Set}
+		'''
+}
+
+GoldTiara: {
+	DisplayName: 金冠
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Gold.1Set}
+		'''
+}
+
+PlatinumTiara: {
+	DisplayName: 铂金冠
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Platinum.1Set}
+		'''
+}
+
+SilverTiara: {
+	DisplayName: 银冠
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Silver.1Set}
+		'''
+}
+
+TungstenTiara: {
+	DisplayName: 钨冠
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Tungsten.1Set}
+		'''
+}
+
+CobaltTiara: {
+	DisplayName: 钴冠
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Cobalt.1Set}
+		'''
+}
+
+CrimtaneTiara: {
+	DisplayName: 猩红冠
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Crimtane.1Set}
+		'''
+}
+
+MeteoriteTiara: {
+	DisplayName: 陨石冠
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Meteorite.1Set}
+		'''
+}
+
+MythrilTiara: {
+	DisplayName: 秘银冠
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Mythril.1Set}
+		'''
+}
+
+OrichalcumTiara: {
+	DisplayName: 山铜冠
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Orichalcum.1Set}
+		'''
+}
+
+PalladiumTiara: {
+	DisplayName: 钯金冠
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Palladium.1Set}
+		'''
+}
+
+AdamantiteTiara: {
+	DisplayName: 精金冠
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Adamantite.1Set}
+		'''
+}
+
+TitaniumTiara: {
+	DisplayName: 钛金冠
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Titanium.1Set}
+		'''
+}
+
+BeetleTiara: {
+	DisplayName: 甲虫冠
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Beetle.1Set}
+		'''
+}
+
+ChlorophyteTiara: {
+	DisplayName: 叶绿冠
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Chlorophyte.1Set}
+		'''
+}
+
+DemoniteTiara: {
+	DisplayName: 魔矿冠
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Demonite.1Set}
+		'''
+}
+
+HallowedTiara: {
+	DisplayName: 圣神冠
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Hallowed.1Set}
+		'''
+}
+
+LuminiteTiara: {
+	DisplayName: 星旋冠
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Luminite.1Set}
+		'''
+}
+
+ShroomiteTiara: {
+	DisplayName: 蘑菇冠
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Shroomite.1Set}
+		'''
+}
+
+GoldEarring: {
+	DisplayName: 金耳环
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Gold.1Set}
+		'''
+}
+
+HellstoneTiara: {
+	DisplayName: 地狱石冠
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Hellstone.1Set}
+		'''
+}
+
+ChlorophyteEarring: {
+	DisplayName: 叶绿耳环
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Chlorophyte.1Set}
+		'''
+}
+
+CopperEarring: {
+	DisplayName: 铜耳环
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Copper.1Set}
+		'''
+}
+
+LeadEarring: {
+	DisplayName: 铅耳环
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Lead.1Set}
+		'''
+}
+
+SilverEarring: {
+	DisplayName: 银耳环
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Silver.1Set}
+		'''
+}
+
+TinEarring: {
+	DisplayName: 锡耳环
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Tin.1Set}
+		'''
+}
+
+TungstenEarring: {
+	DisplayName: 钨耳环
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Tungsten.1Set}
+		'''
+}
+
+AdamantiteEarring: {
+	DisplayName: 精金耳环
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Adamantite.1Set}
+		'''
+}
+
+CobaltEarring: {
+	DisplayName: 钴耳环
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Cobalt.1Set}
+		'''
+}
+
+CrimtaneEarring: {
+	DisplayName: 猩红耳环
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Crimtane.1Set}
+		'''
+}
+
+DemoniteEarring: {
+	DisplayName: 魔矿耳环
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Demonite.1Set}
+		'''
+}
+
+HallowedEarring: {
+	DisplayName: 圣神耳环
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Hallowed.1Set}
+		'''
+}
+
+HellstoneEarring: {
+	DisplayName: 地狱石耳环
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Hellstone.1Set}
+		'''
+}
+
+IronEarring: {
+	DisplayName: 铁耳环
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Iron.1Set}
+		'''
+}
+
+LuminiteEarring: {
+	DisplayName: 星旋耳环
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Luminite.1Set}
+		'''
+}
+
+MeteoriteEarring: {
+	DisplayName: 陨石耳环
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Meteorite.1Set}
+		'''
+}
+
+MythrilEarring: {
+	DisplayName: 秘银耳环
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Mythril.1Set}
+		'''
+}
+
+OrichalcumEarring: {
+	DisplayName: 山铜耳环
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Orichalcum.1Set}
+		'''
+}
+
+PalladiumEarring: {
+	DisplayName: 钯金耳环
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Palladium.1Set}
+		'''
+}
+
+PlatinumEarring: {
+	DisplayName: 铂金耳环
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Platinum.1Set}
+		'''
+}
+
+ShroomiteEarring: {
+	DisplayName: 蘑菇耳环
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Shroomite.1Set}
+		'''
+}
+
+SpectreEarring: {
+	DisplayName: 幽灵耳环
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Spectre.1Set}
+		'''
+}
+
+SpookyEarring: {
+	DisplayName: 阴森耳环
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Spooky.1Set}
+		'''
+}
+
+TitaniumEarring: {
+	DisplayName: 钛金耳环
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Titanium.1Set}
+		'''
+}
+
+SilverNecklace: {
+	DisplayName: 银项链
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Silver.1Set}
+		'''
+}
+
+CopperNecklace: {
+	DisplayName: 铜项链
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Copper.1Set}
+		'''
+}
+
+GoldNecklace: {
+	DisplayName: 金项链
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Gold.1Set}
+		'''
+}
+
+IronNecklace: {
+	DisplayName: 铁项链
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Iron.1Set}
+		'''
+}
+
+TinNecklace: {
+	DisplayName: 锡项链
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Tin.1Set}
+		'''
+}
+
+CrimtaneNecklace: {
+	DisplayName: 猩红项链
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Crimtane.1Set}
+		'''
+}
+
+DemoniteNecklace: {
+	DisplayName: 魔矿项链
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Demonite.1Set}
+		'''
+}
+
+HellstoneNecklace: {
+	DisplayName: 地狱石项链
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Hellstone.1Set}
+		'''
+}
+
+LeadNecklace: {
+	DisplayName: 铅项链
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Lead.1Set}
+		'''
+}
+
+PlatinumNecklace: {
+	DisplayName: 铂金项链
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Platinum.1Set}
+		'''
+}
+
+TungstenNecklace: {
+	DisplayName: 钨项链
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Tungsten.1Set}
+		'''
+}
+
+MeteoriteNecklace: {
+	DisplayName: 陨石项链
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Meteorite.1Set}
+		'''
+}
+
+PalladiumNecklace: {
+	DisplayName: 钯金项链
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Palladium.1Set}
+		'''
+}
+
+MythrilNecklace: {
+	DisplayName: 秘银项链
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Mythril.1Set}
+		'''
+}
+
+OrichalcumNecklace: {
+	DisplayName: 山铜项链
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Orichalcum.1Set}
+		'''
+}
+
+AdamantiteNecklace: {
+	DisplayName: 精金项链
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Adamantite.1Set}
+		'''
+}
+
+HallowedNecklace: {
+	DisplayName: 圣神项链
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Hallowed.1Set}
+		'''
+}
+
+ChlorophyteNecklace: {
+	DisplayName: 叶绿项链
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Chlorophyte.1Set}
+		'''
+}
+
+ShroomiteNecklace: {
+	DisplayName: 蘑菇项链
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Shroomite.1Set}
+		'''
+}
+
+SpectreNecklace: {
+	DisplayName: 幽灵项链
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Spectre.1Set}
+		'''
+}
+
+SpectreTiara: {
+	DisplayName: 幽灵冠
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Spectre.1Set}
+		'''
+}
+
+SpookyTiara: {
+	DisplayName: 阴森冠
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Spooky.1Set}
+		'''
+}
+
+BeetleNecklace: {
+	DisplayName: 甲虫项链
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Beetle.1Set}
+		'''
+}
+
+SpookyNecklace: {
+	DisplayName: 阴森项链
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Spooky.1Set}
+		'''
+}
+
+LuminiteNecklace: {
+	DisplayName: 星旋项链
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Luminite.1Set}
+		'''
+}
+
+TitaniumNecklace: {
+	DisplayName: 钛金项链
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Titanium.1Set}
+		'''
+}
+
+CobaltNecklace: {
+	DisplayName: 钴项链
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Cobalt.1Set}
+		'''
+}
+
+GoldRing: {
+	DisplayName: 金戒指
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Gold.1Set}
+		'''
+}
+
+LeadRing: {
+	DisplayName: 铅戒指
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Lead.1Set}
+		'''
+}
+
+IronRing: {
+	DisplayName: 铁戒指
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Iron.1Set}
+		'''
+}
+
+AdamantiteRing: {
+	DisplayName: 精金戒指
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Adamantite.1Set}
+		'''
+}
+
+ChlorophyteRing: {
+	DisplayName: 叶绿戒指
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Chlorophyte.1Set}
+		'''
+}
+
+CobaltRing: {
+	DisplayName: 钴戒指
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Cobalt.1Set}
+		'''
+}
+
+CopperRing: {
+	DisplayName: 铜戒指
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Copper.1Set}
+		'''
+}
+
+CrimtaneRing: {
+	DisplayName: 猩红戒指
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Cobalt.1Set}
+		'''
+}
+
+DemoniteRing: {
+	DisplayName: 魔矿戒指
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Demonite.1Set}
+		'''
+}
+
+HellstoneRing: {
+	DisplayName: 地狱石戒指
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Hellstone.1Set}
+		'''
+}
+
+LuminiteRing: {
+	DisplayName: 星旋戒指
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Luminite.1Set}
+		'''
+}
+
+MeteoriteRing: {
+	DisplayName: 陨石戒指
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Meteorite.1Set}
+		'''
+}
+
+MythrilRing: {
+	DisplayName: 秘银戒指
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Mythril.1Set}
+		'''
+}
+
+OrichalcumRing: {
+	DisplayName: 山铜戒指
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Orichalcum.1Set}
+		'''
+}
+
+PalladiumRing: {
+	DisplayName: 钯金戒指
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Palladium.1Set}
+		'''
+}
+
+PlatinumRing: {
+	DisplayName: 铂金戒指
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Platinum.1Set}
+		'''
+}
+
+ShroomiteRing: {
+	DisplayName: 蘑菇戒指
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Shroomite.1Set}
+		'''
+}
+
+SilverRing: {
+	DisplayName: 银戒指
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Silver.1Set}
+		'''
+}
+
+SpectreRing: {
+	DisplayName: 幽灵戒指
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Spectre.1Set}
+		'''
+}
+
+SpookyRing: {
+	DisplayName: 阴森戒指
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Spooky.1Set}
+		'''
+}
+
+TinRing: {
+	DisplayName: 锡戒指
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Tin.1Set}
+		'''
+}
+
+TitaniumRing: {
+	DisplayName: 钛金戒指
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Titanium.1Set}
+		'''
+}
+
+TungstenRing: {
+	DisplayName: 钨戒指
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Tungsten.1Set}
+		'''
+}
+
+CopperBrooch: {
+	DisplayName: 铜胸针
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Copper.1Set}
+		'''
+}
+
+TinBrooch: {
+	DisplayName: 锡胸针
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Tin.1Set}
+		'''
+}
+
+IronBrooch: {
+	DisplayName: 铁胸针
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Iron.1Set}
+		'''
+}
+
+LeadBrooch: {
+	DisplayName: 铅胸针
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Lead.1Set}
+		'''
+}
+
+SilverBrooch: {
+	DisplayName: 银胸针
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Silver.1Set}
+		'''
+}
+
+TungstenBrooch: {
+	DisplayName: 钨胸针
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Tungsten.1Set}
+		'''
+}
+
+GoldBrooch: {
+	DisplayName: 金胸针
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Gold.1Set}
+		'''
+}
+
+PlatinumBrooch: {
+	DisplayName: 铂金胸针
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Platinum.1Set}
+		'''
+}
+
+DemoniteBrooch: {
+	DisplayName: 魔矿胸针
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Demonite.1Set}
+		'''
+}
+
+CrimtaneBrooch: {
+	DisplayName: 猩红胸针
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Crimtane.1Set}
+		'''
+}
+
+MeteoriteBrooch: {
+	DisplayName: 陨石胸针
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Meteorite.1Set}
+		'''
+}
+
+HellstoneBrooch: {
+	DisplayName: 地狱石胸针
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Hellstone.1Set}
+		'''
+}
+
+CobaltBrooch: {
+	DisplayName: 钴胸针
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Cobalt.1Set}
+		'''
+}
+
+PalladiumBrooch: {
+	DisplayName: 钯金胸针
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Palladium.1Set}
+		'''
+}
+
+MythrilBrooch: {
+	DisplayName: 秘银胸针
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Mythril.1Set}
+		'''
+}
+
+OrichalcumBrooch: {
+	DisplayName: 山铜胸针
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Orichalcum.1Set}
+		'''
+}
+
+AdamantiteBrooch: {
+	DisplayName: 精金胸针
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Adamantite.1Set}
+		'''
+}
+
+TitaniumBrooch: {
+	DisplayName: 钛金胸针
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Titanium.1Set}
+		'''
+}
+
+HallowedBrooch: {
+	DisplayName: 圣神胸针
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Hallowed.1Set}
+		'''
+}
+
+ChlorophyteBrooch: {
+	DisplayName: 叶绿胸针
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Chlorophyte.1Set}
+		'''
+}
+
+BeetleBrooch: {
+	DisplayName: 甲虫胸针
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Beetle.1Set}
+		'''
+}
+
+ShroomiteBrooch: {
+	DisplayName: 蘑菇胸针
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Shroomite.1Set}
+		'''
+}
+
+SpectreBrooch: {
+	DisplayName: 幽灵胸针
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Spectre.1Set}
+		'''
+}
+
+SpookyBrooch: {
+	DisplayName: 阴森胸针
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Spooky.1Set}
+		'''
+}
+
+LuminiteBrooch: {
+	DisplayName: 星旋胸针
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Luminite.1Set}
+		'''
+}
+
+HallowedRing: {
+	DisplayName: 圣神戒指
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Hallowed.1Set}
+		'''
+}
+
+CopperHairpin: {
+	DisplayName: 铜发夹
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Copper.1Set}
+		'''
+}
+
+TinHairpin: {
+	DisplayName: 锡发夹
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Tin.1Set}
+		'''
+}
+
+IronHairpin: {
+	DisplayName: 铁发夹
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Iron.1Set}
+		'''
+}
+
+LeadHairpin: {
+	DisplayName: 铅发夹
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Lead.1Set}
+		'''
+}
+
+SilverHairpin: {
+	DisplayName: 银发夹
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Silver.1Set}
+		'''
+}
+
+TungstenHairpin: {
+	DisplayName: 钨发夹
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Tungsten.1Set}
+		'''
+}
+
+GoldHairpin: {
+	DisplayName: 金发夹
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Gold.1Set}
+		'''
+}
+
+PlatinumHairpin: {
+	DisplayName: 铂金发夹
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Platinum.1Set}
+		'''
+}
+
+DemoniteHairpin: {
+	DisplayName: 魔矿发夹
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Demonite.1Set}
+		'''
+}
+
+CrimtaneHairpin: {
+	DisplayName: 猩红发夹
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Crimtane.1Set}
+		'''
+}
+
+MeteoriteHairpin: {
+	DisplayName: 陨石发夹
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Meteorite.1Set}
+		'''
+}
+
+HellstoneHairpin: {
+	DisplayName: 地狱石发夹
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Hellstone.1Set}
+		'''
+}
+
+CobaltHairpin: {
+	DisplayName: 钴发夹
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Cobalt.1Set}
+		'''
+}
+
+PalladiumHairpin: {
+	DisplayName: 钯金发夹
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Palladium.1Set}
+		'''
+}
+
+MythrilHairpin: {
+	DisplayName: 秘银发夹
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Mythril.1Set}
+		'''
+}
+
+OrichalcumHairpin: {
+	DisplayName: 山铜发夹
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Orichalcum.1Set}
+		'''
+}
+
+AdamantiteHairpin: {
+	DisplayName: 精金发夹
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Adamantite.1Set}
+		'''
+}
+
+TitaniumHairpin: {
+	DisplayName: 钛金发夹
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Titanium.1Set}
+		'''
+}
+
+HallowedHairpin: {
+	DisplayName: 圣神发夹
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Hallowed.1Set}
+		'''
+}
+
+ChlorophyteHairpin: {
+	DisplayName: 叶绿发夹
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Chlorophyte.1Set}
+		'''
+}
+
+BeetleHairpin: {
+	DisplayName: 甲虫发夹
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Beetle.1Set}
+		'''
+}
+
+ShroomiteHairpin: {
+	DisplayName: 蘑菇发夹
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Shroomite.1Set}
+		'''
+}
+
+SpectreHairpin: {
+	DisplayName: 幽灵发夹
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Spectre.1Set}
+		'''
+}
+
+SpookyHairpin: {
+	DisplayName: 阴森发夹
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Spooky.1Set}
+		'''
+}
+
+LuminiteHairpin: {
+	DisplayName: 星旋发夹
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Luminite.1Set}
+		'''
+}
+
+CopperBracelet: {
+	DisplayName: 铜手镯
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Copper.1Set}
+		'''
+}
+
+GoldBracelet: {
+	DisplayName: 金手镯
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Gold.1Set}
+		'''
+}
+
+TinBracelet: {
+	DisplayName: 锡手镯
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Tin.1Set}
+		'''
+}
+
+IronBracelet: {
+	DisplayName: 铁手镯
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Iron.1Set}
+		'''
+}
+
+LeadBracelet: {
+	DisplayName: 铅手镯
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Lead.1Set}
+		'''
+}
+
+SilverBracelet: {
+	DisplayName: 银手镯
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Silver.1Set}
+		'''
+}
+
+TungstenBracelet: {
+	DisplayName: 钨手镯
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Tungsten.1Set}
+		'''
+}
+
+PlatinumBracelet: {
+	DisplayName: 铂金手镯
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Platinum.1Set}
+		'''
+}
+
+DemoniteBracelet: {
+	DisplayName: 魔矿手镯
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Demonite.1Set}
+		'''
+}
+
+CrimtaneBracelet: {
+	DisplayName: 猩红手镯
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Crimtane.1Set}
+		'''
+}
+
+MeteoriteBracelet: {
+	DisplayName: 陨石手镯
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Meteorite.1Set}
+		'''
+}
+
+HellstoneBracelet: {
+	DisplayName: 地狱石手镯
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Hellstone.1Set}
+		'''
+}
+
+CobaltBracelet: {
+	DisplayName: 钴手镯
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Cobalt.1Set}
+		'''
+}
+
+PalladiumBracelet: {
+	DisplayName: 钯金手镯
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Palladium.1Set}
+		'''
+}
+
+MythrilBracelet: {
+	DisplayName: 秘银手镯
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Mythril.1Set}
+		'''
+}
+
+OrichalcumBracelet: {
+	DisplayName: 山铜手镯
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Orichalcum.1Set}
+		'''
+}
+
+AdamantiteBracelet: {
+	DisplayName: 精金手镯
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Adamantite.1Set}
+		'''
+}
+
+TitaniumBracelet: {
+	DisplayName: 钛金手镯
+	Tooltip: "{BasicMaterialJew.elryBon.usesTooltip.}Titan {ium.1Set}"
+}
+
+HallowedBracelet: {
+	DisplayName: 圣神手镯
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Hallowed.1Set}
+		'''
+}
+
+ChlorophyteBracelet: {
+	DisplayName: 叶绿手镯
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Chlorophyte.1Set}
+		'''
+}
+
+BeetleBracelet: {
+	DisplayName: 甲虫手镯
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Beetle.1Set}
+		'''
+}
+
+ShroomiteBracelet: {
+	DisplayName: 蘑菇手镯
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Shroomite.1Set}
+		'''
+}
+
+SpectreBracelet: {
+	DisplayName: 幽灵手镯
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Spectre.1Set}
+		'''
+}
+
+SpookyBracelet: {
+	DisplayName: 阴森手镯
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Spooky.1Set}
+		'''
+}
+
+LuminiteBracelet: {
+	DisplayName: 星旋手镯
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Luminite.1Set}
+		'''
+}
+
+CopperChoker: {
+	DisplayName: 铜项圈
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Copper.1Set}
+		'''
+}
+
+TinChoker: {
+	DisplayName: 锡项圈
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Tin.1Set}
+		'''
+}
+
+IronChoker: {
+	DisplayName: 铁项圈
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Iron.1Set}
+		'''
+}
+
+LeadChoker: {
+	DisplayName: 铅项圈
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Lead.1Set}
+		'''
+}
+
+SilverChoker: {
+	DisplayName: 银项圈
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Silver.1Set}
+		'''
+}
+
+TungstenChoker: {
+	DisplayName: 钨项圈
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Tungsten.1Set}
+		'''
+}
+
+GoldChoker: {
+	DisplayName: 金项圈
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Gold.1Set}
+		'''
+}
+
+PlatinumChoker: {
+	DisplayName: 铂金项圈
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Platinum.1Set}
+		'''
+}
+
+DemoniteChoker: {
+	DisplayName: 魔矿项圈
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Demonite.1Set}
+		'''
+}
+
+CrimtaneChoker: {
+	DisplayName: 猩红项圈
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Crimtane.1Set}
+		'''
+}
+
+MeteoriteChoker: {
+	DisplayName: 陨石项圈
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Meteorite.1Set}
+		'''
+}
+
+HellstoneChoker: {
+	DisplayName: 地狱石项圈
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Hellstone.1Set}
+		'''
+}
+
+CobaltChoker: {
+	DisplayName: 钴项圈
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Cobalt.1Set}
+		'''
+}
+
+PalladiumChoker: {
+	DisplayName: 钯金项圈
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Palladium.1Set}
+		'''
+}
+
+MythrilChoker: {
+	DisplayName: 秘银项圈
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Mythril.1Set}
+		'''
+}
+
+OrichalcumChoker: {
+	DisplayName: 山铜项圈
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Orichalcum.1Set}
+		'''
+}
+
+AdamantiteChoker: {
+	DisplayName: 精金项圈
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Adamantite.1Set}
+		'''
+}
+
+TitaniumChoker: {
+	DisplayName: 钛金项圈
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Titanium.1Set}
+		'''
+}
+
+HallowedChoker: {
+	DisplayName: 圣神项圈
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Hallowed.1Set}
+		'''
+}
+
+ChlorophyteChoker: {
+	DisplayName: 叶绿项圈
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Chlorophyte.1Set}
+		'''
+}
+
+BeetleChoker: {
+	DisplayName: 甲虫项圈
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Beetle.1Set}
+		'''
+}
+
+ShroomiteChoker: {
+	DisplayName: 蘑菇项圈
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Shroomite.1Set}
+		'''
+}
+
+SpectreChoker: {
+	DisplayName: 幽灵项圈
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Spectre.1Set}
+		'''
+}
+
+SpookyChoker: {
+	DisplayName: 阴森项圈
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Spooky.1Set}
+		'''
+}
+
+LuminiteChoker: {
+	DisplayName: 星旋项圈
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Luminite.1Set}
+		'''
+}
+
+CopperAnklet: {
+	DisplayName: 铜脚链
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Copper.1Set}
+		'''
+}
+
+TinAnklet: {
+	DisplayName: 锡脚链
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Tin.1Set}
+		'''
+}
+
+IronAnklet: {
+	DisplayName: 铁脚链
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Iron.1Set}
+		'''
+}
+
+LeadAnklet: {
+	DisplayName: 铅脚链
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Lead.1Set}
+		'''
+}
+
+SilverAnklet: {
+	DisplayName: 银脚链
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Silver.1Set}
+		'''
+}
+
+TungstenAnklet: {
+	DisplayName: 钨脚链
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Tungsten.1Set}
+		'''
+}
+
+GoldAnklet: {
+	DisplayName: 金脚链
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Gold.1Set}
+		'''
+}
+
+PlatinumAnklet: {
+	DisplayName: 铂金脚链
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Platinum.1Set}
+		'''
+}
+
+DemoniteAnklet: {
+	DisplayName: 魔矿脚链
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Demonite.1Set}
+		'''
+}
+
+CrimtaneAnklet: {
+	DisplayName: 猩红脚链
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Crimtane.1Set}
+		'''
+}
+
+MeteoriteAnklet: {
+	DisplayName: 陨石脚链
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Meteorite.1Set}
+		'''
+}
+
+HellstoneAnklet: {
+	DisplayName: 地狱石脚链
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Hellstone.1Set}
+		'''
+}
+
+CobaltAnklet: {
+	DisplayName: 钴脚链
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Cobalt.1Set}
+		'''
+}
+
+PalladiumAnklet: {
+	DisplayName: 钯金脚链
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Palladium.1Set}
+		'''
+}
+
+MythrilAnklet: {
+	DisplayName: 秘银脚链
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Mythril.1Set}
+		'''
+}
+
+OrichalcumAnklet: {
+	DisplayName: 山铜脚链
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Orichalcum.1Set}
+		'''
+}
+
+AdamantiteAnklet: {
+	DisplayName: 精金脚链
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Adamantite.1Set}
+		'''
+}
+
+TitaniumAnklet: {
+	DisplayName: 钛金脚链
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Titanium.1Set}
+		'''
+}
+
+HallowedAnklet: {
+	DisplayName: 圣神脚链
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Hallowed.1Set}
+		'''
+}
+
+ChlorophyteAnklet: {
+	DisplayName: 叶绿脚链
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Chlorophyte.1Set}
+		'''
+}
+
+BeetleAnklet: {
+	DisplayName: 甲虫脚链
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Beetle.1Set}
+		'''
+}
+
+ShroomiteAnklet: {
+	DisplayName: 蘑菇脚链
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Shroomite.1Set}
+		'''
+}
+
+SpectreAnklet: {
+	DisplayName: 幽灵脚链
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Spectre.1Set}
+		'''
+}
+
+SpookyAnklet: {
+	DisplayName: 阴森脚链
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Spooky.1Set}
+		'''
+}
+
+LuminiteAnklet: {
+	DisplayName: 星旋脚链
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Luminite.1Set}
+		'''
+}
+
+How2GetRich: {
+	DisplayName: 快速致富手册
+	Tooltip:
+		'''
+		允许你手工制造任意品质的珠宝
+		'作者：Mill. E. Onare'
+		'''
+}
+
+DisplayCase: {
+	DisplayName: 展示柜
+	Tooltip: 允许你展示一颗宝石或一件珠宝
+}
+
+HeavenlyRevelation: {
+	DisplayName: 天启
+	Tooltip:
+		'''
+		你接下来制作的珠宝将是华贵的
+		'强大的事物向你低语，赐予你强大但短暂的知识'
+		'''
+}
+
+TranscendantEcho: {
+	DisplayName: 真·超越回响
+	Tooltip:
+		'''
+		可作为任何单一光辉回响的替代品
+		使用回响时优先使用，请确保不要误用！
+		'同时包含千言万语与万千思绪'
+		'''
+}
+
+LuckyCoin: {
+	DisplayName: 幸运硬币
+	Tooltip: 在镶嵌或切割宝石时，除了它自身外，阻止其他物品被消耗
+}
+
+SubShard: {
+	DisplayName: 碎片残片
+	Tooltip: 包含少量能量，可用于制作珠宝
+}
+
+Grindstone: {
+	DisplayName: 磨石
+	Tooltip:
+		'''
+		可用于将珠宝研磨成[i:PeculiarJewelry/SparklyDust]和[i:PeculiarJewelry/SubShard]
+		'布满斑点和痕迹'
+		'''
+}
+
+CopperSkirt: {
+	DisplayName: 铜裙
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Copper.1Set}
+		'''
+}
+
+TinSkirt: {
+	DisplayName: 锡裙
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Tin.1Set}
+		'''
+}
+
+IronSkirt: {
+	DisplayName: 铁裙
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Iron.1Set}
+		'''
+}
+
+LeadSkirt: {
+	DisplayName: 铅裙
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Lead.1Set}
+		'''
+}
+
+SilverSkirt: {
+	DisplayName: 银裙
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Silver.1Set}
+		'''
+}
+
+TungstenSkirt: {
+	DisplayName: 钨裙
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Tungsten.1Set}
+		'''
+}
+
+GoldSkirt: {
+	DisplayName: 金裙
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Gold.1Set}
+		'''
+}
+
+PlatinumSkirt: {
+	DisplayName: 铂金裙
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Platinum.1Set}
+		'''
+}
+
+DemoniteSkirt: {
+	DisplayName: 魔矿裙
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Demonite.1Set}
+		'''
+}
+
+CrimtaneSkirt: {
+	DisplayName: 猩红裙
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Crimtane.1Set}
+		'''
+}
+
+MeteoriteSkirt: {
+	DisplayName: 陨石裙
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Meteorite.1Set}
+		'''
+}
+
+HellstoneSkirt: {
+	DisplayName: 地狱石裙
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Hellstone.1Set}
+		'''
+}
+
+BeetleRing: {
+	DisplayName: 甲虫戒指
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Beetle.1Set}
+		'''
+}
+
+CobaltSkirt: {
+	DisplayName: 钴裙
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Cobalt.1Set}
+		'''
+}
+
+PalladiumSkirt: {
+	DisplayName: 钯金裙
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Palladium.1Set}
+		'''
+}
+
+MythrilSkirt: {
+	DisplayName: 秘银裙
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Mythril.1Set}
+		'''
+}
+
+OrichalcumSkirt: {
+	DisplayName: 山铜裙
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Orichalcum.1Set}
+		'''
+}
+
+AdamantiteSkirt: {
+	DisplayName: 精金裙
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Adamantite.1Set}
+		'''
+}
+
+TitaniumSkirt: {
+	DisplayName: 钛金裙
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Titanium.1Set}
+		'''
+}
+
+HallowedSkirt: {
+	DisplayName: 圣神裙
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Hallowed.1Set}
+		'''
+}
+
+ChlorophyteSkirt: {
+	DisplayName: 叶绿裙
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Chlorophyte.1Set}
+		'''
+}
+
+BeetleSkirt: {
+	DisplayName: 甲虫裙
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Beetle.1Set}
+		'''
+}
+
+ShroomiteSkirt: {
+	DisplayName: 蘑菇裙
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Shroomite.1Set}
+		'''
+}
+
+SpectreSkirt: {
+	DisplayName: 幽灵裙
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Spectre.1Set}
+		'''
+}
+
+SpookySkirt: {
+	DisplayName: 阴森裙
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Spooky.1Set}
+		'''
+}
+
+LuminiteSkirt: {
+	DisplayName: 星旋裙
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Luminite.1Set}
+		'''
+}
+
+CopperChatelaine: {
+	DisplayName: 铜挂饰
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Copper.1Set}
+		'''
+}
+
+TinChatelaine: {
+	DisplayName: 锡挂饰
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Tin.1Set}
+		'''
+}
+
+IronChatelaine: {
+	DisplayName: 铁挂饰
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Iron.1Set}
+		'''
+}
+
+LeadChatelaine: {
+	DisplayName: 铅挂饰
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Lead.1Set}
+		'''
+}
+
+SilverChatelaine: {
+	DisplayName: 银挂饰
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Silver.1Set}
+		'''
+}
+
+TungstenChatelaine: {
+	DisplayName: 钨挂饰
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Tungsten.1Set}
+		'''
+}
+
+GoldChatelaine: {
+	DisplayName: 金挂饰
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Gold.1Set}
+		'''
+}
+
+PlatinumChatelaine: {
+	DisplayName: 铂金挂饰
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Platinum.1Set}
+		'''
+}
+
+DemoniteChatelaine: {
+	DisplayName: 魔矿挂饰
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Demonite.1Set}
+		'''
+}
+
+CrimtaneChatelaine: {
+	DisplayName: 猩红挂饰
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Crimtane.1Set}
+		'''
+}
+
+MeteoriteChatelaine: {
+	DisplayName: 陨石挂饰
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Meteorite.1Set}
+		'''
+}
+
+HellstoneChatelaine: {
+	DisplayName: 地狱石挂饰
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Hellstone.1Set}
+		'''
+}
+
+CobaltChatelaine: {
+	DisplayName: 钴挂饰
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Cobalt.1Set}
+		'''
+}
+
+PalladiumChatelaine: {
+	DisplayName: 钯金挂饰
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Palladium.1Set}
+		'''
+}
+
+MythrilChatelaine: {
+	DisplayName: 秘银挂饰
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Mythril.1Set}
+		'''
+}
+
+OrichalcumChatelaine: {
+	DisplayName: 山铜挂饰
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Orichalcum.1Set}
+		'''
+}
+
+AdamantiteChatelaine: {
+	DisplayName: 精金挂饰
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Adamantite.1Set}
+		'''
+}
+
+TitaniumChatelaine: {
+	DisplayName: 钛金挂饰
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Titanium.1Set}
+		'''
+}
+
+HallowedChatelaine: {
+	DisplayName: 圣神挂饰
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Hallowed.1Set}
+		'''
+}
+
+ChlorophyteChatelaine: {
+	DisplayName: 叶绿挂饰
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Chlorophyte.1Set}
+		'''
+}
+
+BeetleChatelaine: {
+	DisplayName: 甲虫挂饰
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Beetle.1Set}
+		'''
+}
+
+ShroomiteChatelaine: {
+	DisplayName: 蘑菇挂饰
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Shroomite.1Set}
+		'''
+}
+
+SpectreChatelaine: {
+	DisplayName: 幽灵挂饰
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Spectre.1Set}
+		'''
+}
+
+SpookyChatelaine: {
+	DisplayName: 阴森挂饰
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Spooky.1Set}
+		'''
+}
+
+LuminiteChatelaine: {
+	DisplayName: 星旋挂饰
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Luminite.1Set}
+		'''
+}
+
+CopperPauldrons: {
+	DisplayName: 铜护肩
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Copper.1Set}
+		'''
+}
+
+TinPauldrons: {
+	DisplayName: 锡护肩
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Tin.1Set}
+		'''
+}
+
+IronPauldrons: {
+	DisplayName: 铁护肩
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Iron.1Set}
+		'''
+}
+
+LeadPauldrons: {
+	DisplayName: 铅护肩
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Lead.1Set}
+		'''
+}
+
+SilverPauldrons: {
+	DisplayName: 银护肩
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Silver.1Set}
+		'''
+}
+
+TungstenPauldrons: {
+	DisplayName: 钨护肩
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Tungsten.1Set}
+		'''
+}
+
+GoldPauldrons: {
+	DisplayName: 金护肩
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Gold.1Set}
+		'''
+}
+
+PlatinumPauldrons: {
+	DisplayName: 铂金护肩
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Platinum.1Set}
+		'''
+}
+
+DemonitePauldrons: {
+	DisplayName: 魔矿护肩
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Demonite.1Set}
+		'''
+}
+
+CrimtanePauldrons: {
+	DisplayName: 猩红护肩
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Crimtane.1Set}
+		'''
+}
+
+MeteoritePauldrons: {
+	DisplayName: 陨石护肩
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Meteorite.1Set}
+		'''
+}
+
+HellstonePauldrons: {
+	DisplayName: 地狱石护肩
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Hellstone.1Set}
+		'''
+}
+
+CobaltPauldrons: {
+	DisplayName: 钴护肩
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Cobalt.1Set}
+		'''
+}
+
+PalladiumPauldrons: {
+	DisplayName: 钯金护肩
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Palladium.1Set}
+		'''
+}
+
+MythrilPauldrons: {
+	DisplayName: 秘银护肩
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Mythril.1Set}
+		'''
+}
+
+OrichalcumPauldrons: {
+	DisplayName: 山铜护肩
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Orichalcum.1Set}
+		'''
+}
+
+AdamantitePauldrons: {
+	DisplayName: 精金护肩
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Adamantite.1Set}
+		'''
+}
+
+TitaniumPauldrons: {
+	DisplayName: 钛金护肩
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Titanium.1Set}
+		'''
+}
+
+HallowedPauldrons: {
+	DisplayName: 圣神护肩
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Hallowed.1Set}
+		'''
+}
+
+ChlorophytePauldrons: {
+	DisplayName: 叶绿护肩
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Chlorophyte.1Set}
+		'''
+}
+
+BeetlePauldrons: {
+	DisplayName: 甲虫护肩
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip} 
+		{$Material.Bonuses.Beetle.1Set}
+		'''
+}
+
+ShroomitePauldrons: {
+	DisplayName: 蘑菇护肩
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Shroomite.1Set}
+		'''
+}
+
+SpectrePauldrons: {
+	DisplayName: 幽灵护肩
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Spectre.1Set}
+		'''
+}
+
+SpookyPauldrons: {
+	DisplayName: 阴森护肩
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Spooky.1Set}
+		'''
+}
+
+LuminitePauldrons: {
+	DisplayName: 星旋护肩
+	Tooltip:
+		'''
+		{$BasicJewelry.Tooltip}
+		{$Material.Bonuses.Luminite.1Set}
+		'''
+}
+
+SextupleRadiantEcho: {
+	DisplayName: 六锻光辉回声
+	Tooltip: 可用于将宝石从切割等级47升级到48
+}
+
+SeptRadiantEcho: {
+	DisplayName: 七锻光辉回声
+	Tooltip: 可用于将宝石从切割等级55升级到56
+}
+
+OctoRadiantEcho: {
+	DisplayName: 八锻光辉回声
+	Tooltip: 可用于将宝石从切割等级63升级到64
+}
+
+NonaRadiantEcho: {
+	DisplayName: 九锻光辉回声
+	Tooltip: 可用于将宝石从切割等级71升级到72
+}
